@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; HiPerWalk 2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">HiPerWalk 2.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial/index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial/index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/plot.Animation.html#plot.Animation.__init__">__init__() (plot.Animation method)</a>
+
+      <ul>
+        <li><a href="reference/generated/qwalk.BaseWalk.html#qwalk.BaseWalk.__init__">(qwalk.BaseWalk method)</a>
+</li>
+        <li><a href="reference/generated/qwalk.coined.Coined.html#qwalk.coined.Coined.__init__">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/qwalk.coined.Cycle.html#qwalk.coined.Cycle.__init__">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/qwalk.coined.Line.html#qwalk.coined.Line.__init__">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/qwalk.coined.Segment.html#qwalk.coined.Segment.__init__">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/plot.Animation.add_frame.html#plot.Animation.add_frame">add_frame() (plot.Animation method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/plot.Animation.html#plot.Animation">Animation (class in plot)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/qwalk.BaseWalk.html#qwalk.BaseWalk">BaseWalk (class in qwalk)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.coined.Coined.coin_operator.html#qwalk.coined.Coined.coin_operator">coin_operator() (qwalk.coined.Coined method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.coin_operator.html#qwalk.coined.Cycle.coin_operator">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.coin_operator.html#qwalk.coined.Line.coin_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.coin_operator.html#qwalk.coined.Segment.coin_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/qwalk.coined.Coined.html#qwalk.coined.Coined">Coined (class in qwalk.coined)</a>
+</li>
+      <li><a href="reference/generated/generated/plot.Animation.create_animation.html#plot.Animation.create_animation">create_animation() (plot.Animation method)</a>
+</li>
+      <li><a href="reference/generated/qwalk.coined.Cycle.html#qwalk.coined.Cycle">Cycle (class in qwalk.coined)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.evolution_operator.html#qwalk.BaseWalk.evolution_operator">evolution_operator() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.evolution_operator.html#qwalk.coined.Coined.evolution_operator">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.evolution_operator.html#qwalk.coined.Cycle.evolution_operator">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.evolution_operator.html#qwalk.coined.Line.evolution_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.evolution_operator.html#qwalk.coined.Segment.evolution_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.coined.Coined.flip_flop_shift_operator.html#qwalk.coined.Coined.flip_flop_shift_operator">flip_flop_shift_operator() (qwalk.coined.Coined method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.flip_flop_shift_operator.html#qwalk.coined.Cycle.flip_flop_shift_operator">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.flip_flop_shift_operator.html#qwalk.coined.Line.flip_flop_shift_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.flip_flop_shift_operator.html#qwalk.coined.Segment.flip_flop_shift_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.coined.Coined.has_persistent_shift_operator.html#qwalk.coined.Coined.has_persistent_shift_operator">has_persistent_shift_operator() (qwalk.coined.Coined method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.has_persistent_shift_operator.html#qwalk.coined.Cycle.has_persistent_shift_operator">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.has_persistent_shift_operator.html#qwalk.coined.Line.has_persistent_shift_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.has_persistent_shift_operator.html#qwalk.coined.Segment.has_persistent_shift_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/qwalk.coined.Line.html#qwalk.coined.Line">Line (class in qwalk.coined)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="reference/plot.html#module-plot">plot</a>
+</li>
+        <li><a href="reference/qwalk.html#module-qwalk">qwalk</a>
+</li>
+        <li><a href="reference/coined.html#module-qwalk.coined">qwalk.coined</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.oracle.html#qwalk.BaseWalk.oracle">oracle() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.oracle.html#qwalk.coined.Coined.oracle">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.oracle.html#qwalk.coined.Cycle.oracle">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.oracle.html#qwalk.coined.Line.oracle">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.oracle.html#qwalk.coined.Segment.oracle">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.coined.Cycle.persistent_shift_operator.html#qwalk.coined.Cycle.persistent_shift_operator">persistent_shift_operator() (qwalk.coined.Cycle method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.persistent_shift_operator.html#qwalk.coined.Line.persistent_shift_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.persistent_shift_operator.html#qwalk.coined.Segment.persistent_shift_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+      <li>
+    plot
+
+      <ul>
+        <li><a href="reference/plot.html#module-plot">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/plot.plot_probability_distribution.html#plot.plot_probability_distribution">plot_probability_distribution() (in module plot)</a>
+</li>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.probability_distribution.html#qwalk.BaseWalk.probability_distribution">probability_distribution() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.probability_distribution.html#qwalk.coined.Coined.probability_distribution">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.probability_distribution.html#qwalk.coined.Cycle.probability_distribution">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.probability_distribution.html#qwalk.coined.Line.probability_distribution">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.probability_distribution.html#qwalk.coined.Segment.probability_distribution">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    qwalk
+
+      <ul>
+        <li><a href="reference/qwalk.html#module-qwalk">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    qwalk.coined
+
+      <ul>
+        <li><a href="reference/coined.html#module-qwalk.coined">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/plot.Animation.save_animation.html#plot.Animation.save_animation">save_animation() (plot.Animation method)</a>
+</li>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.search_evolution_operator.html#qwalk.BaseWalk.search_evolution_operator">search_evolution_operator() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.search_evolution_operator.html#qwalk.coined.Coined.search_evolution_operator">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.search_evolution_operator.html#qwalk.coined.Cycle.search_evolution_operator">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.search_evolution_operator.html#qwalk.coined.Line.search_evolution_operator">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.search_evolution_operator.html#qwalk.coined.Segment.search_evolution_operator">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/generated/qwalk.coined.Segment.html#qwalk.coined.Segment">Segment (class in qwalk.coined)</a>
+</li>
+      <li><a href="reference/generated/generated/plot.Animation.show_animation.html#plot.Animation.show_animation">show_animation() (plot.Animation method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.simulate_walk.html#qwalk.BaseWalk.simulate_walk">simulate_walk() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.simulate_walk.html#qwalk.coined.Coined.simulate_walk">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.simulate_walk.html#qwalk.coined.Cycle.simulate_walk">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.simulate_walk.html#qwalk.coined.Line.simulate_walk">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.simulate_walk.html#qwalk.coined.Segment.simulate_walk">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/generated/generated/qwalk.coined.Coined.state.html#qwalk.coined.Coined.state">state() (qwalk.coined.Coined method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.state.html#qwalk.coined.Cycle.state">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.state.html#qwalk.coined.Line.state">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.state.html#qwalk.coined.Segment.state">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.uniform_initial_condition.html#qwalk.BaseWalk.uniform_initial_condition">uniform_initial_condition() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.uniform_initial_condition.html#qwalk.coined.Coined.uniform_initial_condition">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.uniform_initial_condition.html#qwalk.coined.Cycle.uniform_initial_condition">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.uniform_initial_condition.html#qwalk.coined.Line.uniform_initial_condition">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.uniform_initial_condition.html#qwalk.coined.Segment.uniform_initial_condition">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/generated/qwalk.BaseWalk.uniform_state.html#qwalk.BaseWalk.uniform_state">uniform_state() (qwalk.BaseWalk method)</a>
+
+      <ul>
+        <li><a href="reference/generated/generated/qwalk.coined.Coined.uniform_state.html#qwalk.coined.Coined.uniform_state">(qwalk.coined.Coined method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Cycle.uniform_state.html#qwalk.coined.Cycle.uniform_state">(qwalk.coined.Cycle method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Line.uniform_state.html#qwalk.coined.Line.uniform_state">(qwalk.coined.Line method)</a>
+</li>
+        <li><a href="reference/generated/generated/qwalk.coined.Segment.uniform_state.html#qwalk.coined.Segment.uniform_state">(qwalk.coined.Segment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2022, Koruja.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
