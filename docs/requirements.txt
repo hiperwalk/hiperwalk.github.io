@@ -1,5 +1,0 @@
-sphinx
-numpydoc
-sphinx-autodoc-typehints
-pydata-sphinx-theme
-graphviz

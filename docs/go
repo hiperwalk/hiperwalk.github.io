@@ -1,3 +1,0 @@
-rm -rfv reference/generated
-make clean
-make html
