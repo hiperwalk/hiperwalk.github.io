@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hiperwalk</title>
+    <link>https://theme.scientific-python.org/</link>
+    <description>Recent content on Hiperwalk</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 31 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://theme.scientific-python.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hiperwalk project page released!</title>
+      <link>https://theme.scientific-python.org/news/project-page-released/</link>
+      <pubDate>Wed, 31 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/news/project-page-released/</guid>
+      <description>Based on the theme developed for numpy.org.</description>
+    </item>
+    
+    <item>
+      <title>YouTube: video from a page</title>
+      <link>https://theme.scientific-python.org/video-page/</link>
+      <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/video-page/</guid>
+      <description>This is the transcript from video-page.md.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://theme.scientific-python.org/example-markdown/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/example-markdown/</guid>
+      <description>This is some example markdown with bold!</description>
+    </item>
+    
+    <item>
+      <title>Features</title>
+      <link>https://theme.scientific-python.org/features/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/features/</guid>
+      <description>Partials The following partials are meant to be overridden:
+post_meta.html: Render meta-data under a post title. We have not yet defined this template, but you can use it to add author information, date, etc. footer_actions: This appears in the right-hand side of the footer. E.g., numpy.org uses it for mailing list subscriptions. Shortcut list The depths of the shortcut list on the left of each post can be controlled by setting the shortcutDepth parameter in the post preamble.</description>
+    </item>
+    
+    <item>
+      <title>Get Help</title>
+      <link>https://theme.scientific-python.org/gethelp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/gethelp/</guid>
+      <description>Please see our issue tracker.</description>
+    </item>
+    
+    <item>
+      <title>Get Started</title>
+      <link>https://theme.scientific-python.org/getstarted/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/getstarted/</guid>
+      <description>The Scientific Python theme for Hugo The Scientific Python Hugo Theme is a theme for the Hugo static site generator based on the Fresh theme.
+To use the theme, you will need to download hugo and place it on your path.
+Download and install Download the theme ZIP file and extract it.
+Copy the doc folder as a template of your new website:
+cp -r scientific-python-hugo-theme-main/doc ./my-website cd my-website Initialize git and add scientific-python-hugo-theme as a submodule:</description>
+    </item>
+    
+    <item>
+      <title>Shortcodes summary placeholder</title>
+      <link>https://theme.scientific-python.org/shortcodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://theme.scientific-python.org/shortcodes/</guid>
+      <description>Please refer to the theme shortcode description list.</description>
+    </item>
+    
+  </channel>
+</rss>
