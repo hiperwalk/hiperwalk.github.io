@@ -50,11 +50,13 @@ params:
       column1:
         title: ""
         links:
-          - text: About
+          - text: About Us
             link: /about/
       column2:
         links:
           - text: Documentation
             link: /docs/
+          - text: Tutorial
+            link: /docs/tutorial
       column3:
         links:
