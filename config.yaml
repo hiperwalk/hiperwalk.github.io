@@ -31,15 +31,10 @@ params:
       url: /shortcodes/
   keyfeatures:
     features:
-      - title: Documented
-        text: The theme is documented at https://theme.scientific-python.org.
-      - title: Reusable
-        text: "The theme is being used by
-          [scientific-python.org](https://github.com/scientific-python/scientific-python.org),
-          [numpy.org](https://github.com/numpy/numpy.org), and
-          [scipy.org](https://github.com/scipy/scipy.org)."
-      - title: Community Maintained
-        text: The theme is maintained by the [Theme Team](/about/).
+      - title: Quantum Walks
+        text: Hiperwalk simulates both continuous-time and discrete-time quantum walks, effectively modeling quantum systems on large graphs.
+      - title: Heterogeneous HPC
+        text: Hiperwalk facilitates quantum walk simulations, leveraging the power of heterogeneous HPC using CPUs, GPUs, and acceleration cards.
       - title: Open source
         text: Distributed under [LGPL3](https://github.com/hiperwalk/hiperwalk/blob/master/LICENSE), Hiperwalk is developed and maintained [publicly on GitHub](https://github.com/hiperwalk/hiperwalk).
   footer:
