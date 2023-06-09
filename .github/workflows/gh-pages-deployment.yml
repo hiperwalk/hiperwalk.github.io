@@ -20,8 +20,35 @@ jobs:
         hugo-version: '0.109.0'
         extended: true
 
-    - name: Build                                
+    - name: Build site
       run: hugo
+
+    - name: Checkout hiperwalk source code
+      uses: actions/checkout@v3
+      with:
+        repository: hiperwalk/hiperwalk
+        path: hiperwalk
+        ref: 2.0.x
+
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Build docs
+      run: |
+          pushd hiperwalk/docs/
+          pip3 install -r requirements.txt
+          ./go
+          popd
+
+    - name: Copy Sphinx generated HTML files
+      run: |
+          mkdir -p ./public/doc
+          cp -r hiperwalk/docs/build/html/* ./public/doc
+
+    - name: Prevent Jekyll processing
+      run: touch ./public/.nojekyll
 
     - name: Deploy                               
       uses: peaceiris/actions-gh-pages@v2
