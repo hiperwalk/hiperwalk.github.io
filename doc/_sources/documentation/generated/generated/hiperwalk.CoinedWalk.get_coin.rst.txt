@@ -1,0 +1,6 @@
+hiperwalk.CoinedWalk.get\_coin
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: CoinedWalk.get_coin

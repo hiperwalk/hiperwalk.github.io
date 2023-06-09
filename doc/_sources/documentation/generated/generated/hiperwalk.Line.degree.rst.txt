@@ -1,0 +1,6 @@
+hiperwalk.Line.degree
+=====================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Line.degree

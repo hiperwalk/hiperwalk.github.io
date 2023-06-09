@@ -1,0 +1,6 @@
+hiperwalk.Graph.number\_of\_vertices
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.number_of_vertices

@@ -1,0 +1,6 @@
+hiperwalk.Line.arc\_label
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Line.arc_label

@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.get\_evolution
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.get_evolution

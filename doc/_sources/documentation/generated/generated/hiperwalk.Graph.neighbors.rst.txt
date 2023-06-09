@@ -1,0 +1,6 @@
+hiperwalk.Graph.neighbors
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.neighbors

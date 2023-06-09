@@ -1,0 +1,6 @@
+hiperwalk.Cycle.default\_coin
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.default_coin

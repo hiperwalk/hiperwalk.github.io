@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.simulate
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.simulate

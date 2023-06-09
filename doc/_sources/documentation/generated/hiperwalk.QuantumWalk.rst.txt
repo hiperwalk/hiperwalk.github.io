@@ -1,0 +1,57 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.QuantumWalk
+=====================
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: QuantumWalk
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~QuantumWalk.get_evolution
+       
+       
+          ~QuantumWalk.get_marked
+       
+       
+          ~QuantumWalk.hilbert_space_dimension
+       
+       
+          ~QuantumWalk.ket
+       
+       
+          ~QuantumWalk.probability
+       
+       
+          ~QuantumWalk.probability_distribution
+       
+       
+          ~QuantumWalk.set_evolution
+       
+       
+          ~QuantumWalk.set_marked
+       
+       
+          ~QuantumWalk.simulate
+       
+       
+          ~QuantumWalk.state
+       
+       
+          ~QuantumWalk.uniform_state
+       
+
+   
+   

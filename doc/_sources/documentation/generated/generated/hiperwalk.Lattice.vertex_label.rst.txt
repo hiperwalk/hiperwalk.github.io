@@ -1,0 +1,6 @@
+hiperwalk.Lattice.vertex\_label
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.vertex_label

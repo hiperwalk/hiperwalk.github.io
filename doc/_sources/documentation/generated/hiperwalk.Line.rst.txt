@@ -1,0 +1,60 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.Line
+==============
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: Line
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~Line.arc
+       
+       
+          ~Line.arc_label
+       
+       
+          ~Line.arcs_with_tail
+       
+       
+          ~Line.default_coin
+       
+       
+          ~Line.degree
+       
+       
+          ~Line.embeddable
+       
+       
+          ~Line.neighbors
+       
+       
+          ~Line.next_arc
+       
+       
+          ~Line.number_of_arcs
+       
+       
+          ~Line.number_of_edges
+       
+       
+          ~Line.number_of_vertices
+       
+       
+          ~Line.previous_arc
+       
+
+   
+   

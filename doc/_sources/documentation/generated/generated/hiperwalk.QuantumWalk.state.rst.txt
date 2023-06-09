@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.state
+===========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.state

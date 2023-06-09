@@ -1,0 +1,6 @@
+hiperwalk.ContinuousWalk.simulate
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousWalk.simulate

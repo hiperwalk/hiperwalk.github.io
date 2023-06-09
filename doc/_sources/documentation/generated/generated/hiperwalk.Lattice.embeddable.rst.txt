@@ -1,0 +1,6 @@
+hiperwalk.Lattice.embeddable
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.embeddable

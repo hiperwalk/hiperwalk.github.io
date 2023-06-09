@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.ket
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.ket

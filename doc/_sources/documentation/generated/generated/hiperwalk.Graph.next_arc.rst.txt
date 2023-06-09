@@ -1,0 +1,6 @@
+hiperwalk.Graph.next\_arc
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.next_arc

@@ -1,0 +1,6 @@
+hiperwalk.Line.previous\_arc
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Line.previous_arc

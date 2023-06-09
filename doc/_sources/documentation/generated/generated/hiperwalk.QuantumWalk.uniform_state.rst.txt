@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.uniform\_state
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.uniform_state

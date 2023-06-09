@@ -1,0 +1,6 @@
+hiperwalk.Lattice.default\_coin
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.default_coin

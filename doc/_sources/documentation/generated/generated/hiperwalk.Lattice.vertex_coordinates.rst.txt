@@ -1,0 +1,6 @@
+hiperwalk.Lattice.vertex\_coordinates
+=====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.vertex_coordinates

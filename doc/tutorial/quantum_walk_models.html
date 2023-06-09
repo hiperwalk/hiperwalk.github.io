@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quantum Walk Models &#8212; Hiperwalk 2.0a4 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/quantum_walk_models';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.readthedocs.io/en/latest/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        </script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plotting Customization" href="plotting_customization.html" />
+    <link rel="prev" title="Graphs" href="graphs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Hiperwalk</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      stable  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install/index.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../documentation/index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install/index.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../documentation/index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quantum Walk Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_customization.html">Plotting Customization</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorial</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Quantum Walk Models</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="quantum-walk-models">
+<h1>Quantum Walk Models<a class="headerlink" href="#quantum-walk-models" title="Permalink to this heading">#</a></h1>
+<p>There is a plethora of Quantum Walk models.
+Hiperwalk offers a common interface for all quantum walks.
+This interface is the abstract class <a class="reference internal" href="../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk" title="hiperwalk.QuantumWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk</span></code></a> –
+a class that cannot be instantiated.
+It is possible, however to inherit from <a class="reference internal" href="../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk" title="hiperwalk.QuantumWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk</span></code></a>.
+All its methods and attributes will be available for the child class.
+Even though the abstract methods must be overriden by the child class
+since they are model dependent.</p>
+<p>Currently, there are two models available.
+The Coined model (<a class="reference internal" href="../documentation/generated/hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk</span></code></a>) and
+the Continuous model (<a class="reference internal" href="../documentation/generated/hiperwalk.ContinuousWalk.html#hiperwalk.ContinuousWalk" title="hiperwalk.ContinuousWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.ContinuousWalk</span></code></a>).
+The user is encouraged to implement a new model and
+add it to the Hiperwalk package
+(see <a class="reference internal" href="../development/index.html#docs-development"><span class="std std-ref">Development</span></a> Section).</p>
+<section id="creating-a-quantum-walk">
+<h2>Creating a Quantum Walk<a class="headerlink" href="#creating-a-quantum-walk" title="Permalink to this heading">#</a></h2>
+<p>For creating a Quantum Walk,
+we must define in which graph the Quantum Walk occurs.
+This can be done by passing a <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> object to
+the Quantum Walk constructor.</p>
+<p>For example, suppose that <code class="docutils literal notranslate"><span class="pre">cycle</span></code> is an instance of
+<a class="reference internal" href="../documentation/generated/hiperwalk.Cycle.html#hiperwalk.Cycle" title="hiperwalk.Cycle"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Cycle</span></code></a> with 11 vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span> 
+<span class="go">&lt;hiperwalk.graph.cycle.Cycle object at 0x7f657268c0d0&gt;</span>
+</pre></div>
+</div>
+<p>Since <a class="reference internal" href="../documentation/generated/hiperwalk.Cycle.html#hiperwalk.Cycle" title="hiperwalk.Cycle"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Cycle</span></code></a> is a child of <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>,
+we can also pass <code class="docutils literal notranslate"><span class="pre">cycle</span></code> to the quantum walk constructor.</p>
+<p>For creating the Coined Quantum Walk we execute</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span> 
+<span class="go">&lt;hiperwalk.quantum_walk.coined_walk.CoinedWalk object at 0x7f655b0cd900&gt;</span>
+</pre></div>
+</div>
+<p>The Hilbert space of the Coined Quantum Walk has dimension
+:math`2|E|`:, i.e. the number of arcs.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span> <span class="o">==</span> <span class="n">cycle</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>For creating the Continuous Walk,
+we must pass both the graph and the <code class="docutils literal notranslate"><span class="pre">gamma</span></code> parameter.
+The <code class="docutils literal notranslate"><span class="pre">gamma</span></code> is required because
+no default <code class="docutils literal notranslate"><span class="pre">gamma</span></code> value exists in the literature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">ContinuousWalk</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span> 
+<span class="go">&lt;hiperwalk.quantum_walk.continuous_walk.ContinuousWalk object at 0x7f655b0cd8d0&gt;</span>
+</pre></div>
+</div>
+<p>The Hilbert space of the Continuous Quantum Walk has dimension
+:math`|V|`:, i.e. the number of verties.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span> <span class="o">==</span> <span class="n">cycle</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-state">
+<h2>Creating a State<a class="headerlink" href="#creating-a-state" title="Permalink to this heading">#</a></h2>
+<p>Hiperwalk offers three easy ways of creating a state.
+The user can create a state of the computational basis
+(<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket" title="hiperwalk.QuantumWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.ket()</span></code></a>),
+a uniform superposition (<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.uniform_state()</span></code></a>,
+or a general superposition (<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.state()</span></code></a>).</p>
+<section id="state-of-the-computational-basis">
+<h3>State of the computational basis<a class="headerlink" href="#state-of-the-computational-basis" title="Permalink to this heading">#</a></h3>
+<p>Any state of the computational basis may be created using the
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket" title="hiperwalk.QuantumWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.ket()</span></code></a> method
+as long as the correct label is passed.</p>
+<p>For the Coined Quantum Walk model,
+the label of a computational basis state is given by its arc.
+We may use either the arc notation (passing the arc’s tail and head),
+or the arc label (refer to the Graph class for appropriate arc labelling).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
+<span class="go">array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0.,</span>
+<span class="go">       0., 0., 0., 0., 0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">state2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>An easy way to convert between arc notation and arc label is by using
+the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc" title="hiperwalk.Graph.arc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc()</span></code></a> and
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc_label.html#hiperwalk.Graph.arc_label" title="hiperwalk.Graph.arc_label"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_label()</span></code></a> methods.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arc</span> <span class="o">=</span> <span class="n">cycle</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arc</span>
+<span class="go">(5, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">(5, 6)</span>
+</pre></div>
+</div>
+<p>For the Continuous model,
+the label are the vertices labels.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">array([0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0.])</span>
+</pre></div>
+</div>
+</section>
+<section id="uniform-superposition">
+<h3>Uniform superposition<a class="headerlink" href="#uniform-superposition" title="Permalink to this heading">#</a></h3>
+<p>To greate the uniform superposition,
+the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.uniform_state()</span></code></a> method
+works for whichever model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">uniform_state</span><span class="p">()</span>
+<span class="go">array([0.21320072, 0.21320072, 0.21320072, 0.21320072, 0.21320072,</span>
+<span class="go">       0.21320072, 0.21320072, 0.21320072, 0.21320072, 0.21320072,</span>
+<span class="go">       0.21320072, 0.21320072, 0.21320072, 0.21320072, 0.21320072,</span>
+<span class="go">       0.21320072, 0.21320072, 0.21320072, 0.21320072, 0.21320072,</span>
+<span class="go">       0.21320072, 0.21320072])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">uniform_state</span><span class="p">()</span>
+<span class="go">array([0.30151134, 0.30151134, 0.30151134, 0.30151134, 0.30151134,</span>
+<span class="go">       0.30151134, 0.30151134, 0.30151134, 0.30151134, 0.30151134,</span>
+<span class="go">       0.30151134])</span>
+</pre></div>
+</div>
+</section>
+<section id="general-state">
+<h3>General state<a class="headerlink" href="#general-state" title="Permalink to this heading">#</a></h3>
+<p>Creating a general state with the
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.state()</span></code></a> method may be a bit tricky.
+A list of amplitudes and computational basis labels is expected,
+i.e. multiple <code class="docutils literal notranslate"><span class="pre">[amplitude,</span> <span class="pre">label]</span></code> entries.</p>
+<p>For the Coined model,
+the labels are either the arc label or the arc notation <code class="docutils literal notranslate"><span class="pre">(tail,</span> <span class="pre">head)</span></code>.
+Using the arc labels we obtain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">array([0.5, 0. , 0.5, 0. , 0.5, 0. , 0.5, 0. , 0. , 0. , 0. , 0. , 0. ,</span>
+<span class="go">       0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ])</span>
+</pre></div>
+</div>
+<p>While using the equivalent arc notation we obtain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
+<span class="go">array([0.5, 0. , 0.5, 0. , 0.5, 0. , 0.5, 0. , 0. , 0. , 0. , 0. , 0. ,</span>
+<span class="go">       0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not forget the parenthesis while using the arc notation
+for generating a state.</p>
+</div>
+<p>For the Continuous model,
+the labels are the vertices labels.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([0.5, 0.5, 0.5, 0.5, 0. , 0. , 0. , 0. , 0. , 0. , 0. ])</span>
+</pre></div>
+</div>
+<p>Since <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.state()</span></code></a> must return a valid state,
+the amplitudes are normalized if needed.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([0.5, 0.5, 0.5, 0.5, 0. , 0. , 0. , 0. , 0. , 0. , 0. ])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="simulating">
+<h2>Simulating<a class="headerlink" href="#simulating" title="Permalink to this heading">#</a></h2>
+<p>Once a quantum walk is created,
+a valid evolution operator is associated with it.
+The user may change the evolution operator
+upon the quantum walk creation or afterwards.
+After defining the evolution operator,
+the user invokes the simulation process,
+determining which intermediate states are of interest.</p>
+<section id="configuring-the-evolution-operator">
+<h3>Configuring the evolution operator<a class="headerlink" href="#configuring-the-evolution-operator" title="Permalink to this heading">#</a></h3>
+<p>To configure the evolution operator,
+check the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution" title="hiperwalk.QuantumWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.set_evolution()</span></code></a> method.
+This method parameters are model-dependent.</p>
+<p>Regardless of the method,
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution" title="hiperwalk.QuantumWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.set_evolution()</span></code></a> is invoked upon the
+Quantum Walk instantiation.
+Hence, the constructors accept any parameter valid for <code class="docutils literal notranslate"><span class="pre">set_evolution</span></code>.
+To illustrate this,
+let us analyze the explicit evolution operator of two Coined Walks
+(which can be obtained by <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution" title="hiperwalk.QuantumWalk.get_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.get_evolution()</span></code></a>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="s1">&#39;flipflop&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">U</span> <span class="o">!=</span> <span class="n">U2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span> <span class="c1"># efficient way of comparing sparse arrays</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined2</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;flipflop&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U3</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">U2</span> <span class="o">!=</span> <span class="n">U3</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<section id="coined-model">
+<h4>Coined Model<a class="headerlink" href="#coined-model" title="Permalink to this heading">#</a></h4>
+<p>The <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_evolution.html#hiperwalk.CoinedWalk.set_evolution" title="hiperwalk.CoinedWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_evolution()</span></code></a>
+accepts three key arguments:
+<code class="docutils literal notranslate"><span class="pre">shift</span></code>, <code class="docutils literal notranslate"><span class="pre">coin</span></code>, and <code class="docutils literal notranslate"><span class="pre">marked</span></code>.
+Respectively,
+they are the arguments of
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_shift.html#hiperwalk.CoinedWalk.set_shift" title="hiperwalk.CoinedWalk.set_shift"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_shift()</span></code></a>,
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_coin.html#hiperwalk.CoinedWalk.set_coin" title="hiperwalk.CoinedWalk.set_coin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_coin()</span></code></a>, and
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_marked.html#hiperwalk.CoinedWalk.set_marked" title="hiperwalk.CoinedWalk.set_marked"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_marked()</span></code></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">shift</span></code> key must have either a string value
+(<code class="docutils literal notranslate"><span class="pre">'persistent'</span></code> or <code class="docutils literal notranslate"><span class="pre">'flipflop'</span></code>) or
+the explicit operator.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">coin</span></code> key accepts four types of entries.</p>
+<ul class="simple">
+<li><p>The explicit coin.</p></li>
+<li><p>A string with the coin name to be applied to all vertices.</p></li>
+<li><p>A list of strings of size <span class="math notranslate nohighlight">\(|V|\)</span> with the coin names
+where the <span class="math notranslate nohighlight">\(i\)</span>-th coin will be applied to the <span class="math notranslate nohighlight">\(i\)</span>-th vertex.</p></li>
+<li><p>A dictionary with the coin name as key and
+the list of vertices as values.
+The coin depicted as key will be applied to
+the vertices depicted as values.
+If the list of vertices is the empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code>,
+that coin is going to be applied to all remaining vertices.</p></li>
+</ul>
+<p>There are eight possible coin names:
+<code class="docutils literal notranslate"><span class="pre">'fourier'</span></code>, <code class="docutils literal notranslate"><span class="pre">'grover'</span></code>, <code class="docutils literal notranslate"><span class="pre">'hadamard'</span></code>, <code class="docutils literal notranslate"><span class="pre">'identity'</span></code>, and
+its variants with the <code class="docutils literal notranslate"><span class="pre">'minus_'</span></code> prefix to it.</p>
+<p>The following are equivalent ways of generating a coin
+that applies Grover to all vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C1</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;grover&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grover&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">))})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">C1</span> <span class="o">!=</span> <span class="n">C2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">C2</span> <span class="o">!=</span> <span class="n">C3</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The following are valid ways of generating a con that applies
+Grover to even vertices and Hadamard to odd vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;grover&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;hadamard&#39;</span>
+<span class="gp">... </span>                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C1</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grover&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+<span class="gp">... </span>                      <span class="s1">&#39;hadamard&#39;</span><span class="p">:</span> <span class="p">[]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">C1</span> <span class="o">!=</span> <span class="n">C2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">marked</span></code> key accepts two types of entries.</p>
+<ul class="simple">
+<li><p>A list of the marked vertices.
+The vertices are just set as marked,
+but the coin operator remains unchanged.</p></li>
+<li><p>A dictionary with the coin name as key and
+the list of vertices as values.
+This is analogous to the dictionary accepted by
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_coin.html#hiperwalk.CoinedWalk.set_coin" title="hiperwalk.CoinedWalk.set_coin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_coin()</span></code></a>.
+The vertices are set as marked and
+<em>the coin operator is changed</em> accordingly.</p></li>
+</ul>
+<p>The following are two ways of generating the same evolution operator
+with the same set of marked vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;grover&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+<span class="gp">... </span>                      <span class="s1">&#39;minus_identity&#39;</span><span class="p">:</span> <span class="p">[]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C1</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_marked</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;minus_identity&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">))})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_marked</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">C1</span> <span class="o">!=</span> <span class="n">C2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">M1</span> <span class="o">==</span> <span class="n">M2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>We may combine all these keys in a single
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.set_evolution.html#hiperwalk.CoinedWalk.set_evolution" title="hiperwalk.CoinedWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.set_evolution()</span></code></a> call
+or object instantiation.</p>
+</section>
+<section id="continuous-model">
+<h4>Continuous Model<a class="headerlink" href="#continuous-model" title="Permalink to this heading">#</a></h4>
+<p>The dynamics of the Continuous Quantum Walk is
+completely described by the Hamiltonian.
+Hence, <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousWalk.set_evolution.html#hiperwalk.ContinuousWalk.set_evolution" title="hiperwalk.ContinuousWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousWalk.set_evolution()</span></code></a>
+is equivalent to <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousWalk.set_hamiltonian.html#hiperwalk.ContinuousWalk.set_hamiltonian" title="hiperwalk.ContinuousWalk.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousWalk.set_hamiltonian()</span></code></a>.
+The Hamiltonian is given by</p>
+<div class="math notranslate nohighlight">
+\[H = -\gamma A - \sum_{m \in M} \ket m \bra m\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is the graph adjacency matrix and
+<span class="math notranslate nohighlight">\(M\)</span> is the set of marked vertices.
+Hence <code class="docutils literal notranslate"><span class="pre">set_hamiltonian</span></code> accepts two arguments.
+* <code class="docutils literal notranslate"><span class="pre">gamma</span></code>: the value of gamma.
+* <code class="docutils literal notranslate"><span class="pre">marked</span></code>: the list of marked vertices.
+For example,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous2</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">ContinuousWalk</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous2</span> 
+<span class="go">&lt;hiperwalk.quantum_walk.continuous_walk.ContinuousWalk object at 0x7ffad2de9510&gt;</span>
+</pre></div>
+</div>
+<p>The evolution operator is calculated by</p>
+<div class="math notranslate nohighlight">
+\[U = e^{-\text{i} t H}.\]</div>
+<p>Since the Continuous Walk evolution operator is time-dependent,
+it must be generated by demand given the last timestamp.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U2</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">U</span> <span class="o">!=</span> <span class="n">U2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="simulation-invocation">
+<h3>Simulation Invocation<a class="headerlink" href="#simulation-invocation" title="Permalink to this heading">#</a></h3>
+<p>After setting the evolution operator,
+the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a> method must be invoked
+to perform the simulation.
+There are two key arguments for this method:
+<code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">initial_state</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">time</span></code> describes when the simulation stops
+and which intermediate states must be saved.
+The evolution operator will be applied to the <code class="docutils literal notranslate"><span class="pre">initial_state</span></code>
+as many times as needed.
+The simulation returns a list of states such that
+the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry corresponds to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th saved state.</p>
+<section id="id1">
+<h4>Coined Model<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p>In the Coined Walk model,
+the <code class="docutils literal notranslate"><span class="pre">time</span></code> is discrete.
+Thus, only integer entries are accepted.
+There are three argument types for <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p>
+<ul>
+<li><p>integer: <code class="docutils literal notranslate"><span class="pre">stop</span></code>.
+The final simulation time.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">@</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+<li><p>2-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(stop,</span> <span class="pre">step)</span></code>.
+Save every state from time <code class="docutils literal notranslate"><span class="pre">0</span></code> to time <code class="docutils literal notranslate"><span class="pre">stop</span></code>
+separated by <code class="docutils literal notranslate"><span class="pre">step</span></code> applications of the evolution operator.
+For example,
+if <code class="docutils literal notranslate"><span class="pre">time=(10,</span> <span class="pre">2)</span></code>, returns the states obtained at times
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+<li><p>3-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code>.
+Save every state from time <code class="docutils literal notranslate"><span class="pre">start</span></code> to time <code class="docutils literal notranslate"><span class="pre">stop</span></code>
+separated by <code class="docutils literal notranslate"><span class="pre">step</span></code> application of the evolution operator.
+For example,
+if <code class="docutils literal notranslate"><span class="pre">time=(1,</span> <span class="pre">10,</span> <span class="pre">2)</span></code>, returns the states at times
+<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">9]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h4>Continuous Model<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<p>In the Continuous Walk model,
+the <code class="docutils literal notranslate"><span class="pre">time</span></code> is continuous.
+Thus, float entries are accepted.
+It works analogous to the Coined Model,
+but <code class="docutils literal notranslate"><span class="pre">step</span></code> is used to rescale all values.</p>
+<ul class="simple">
+<li><p>float : <code class="docutils literal notranslate"><span class="pre">stop</span></code>. Unchanged.</p></li>
+<li><p>2-tuple of float : <code class="docutils literal notranslate"><span class="pre">(stop,</span> <span class="pre">step)</span></code>.
+The evolution operator <code class="docutils literal notranslate"><span class="pre">continuous.get_evolution(time=step)</span></code> is
+considered a single step and the <code class="docutils literal notranslate"><span class="pre">time</span></code> is converted to
+<code class="docutils literal notranslate"><span class="pre">(stop/step,</span> <span class="pre">1)</span></code>.
+The value <code class="docutils literal notranslate"><span class="pre">stop/step</span></code> is rounded up if it is within
+a <code class="docutils literal notranslate"><span class="pre">1e-05</span></code> value of the next integer
+and rounded down otherwise.</p></li>
+<li><p>3-tuple of float : <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code>.
+The evolution operator <code class="docutils literal notranslate"><span class="pre">continuous.get_evolution(time=step)</span></code> is
+considered a single step and the <code class="docutils literal notranslate"><span class="pre">time</span></code> is converted to
+<code class="docutils literal notranslate"><span class="pre">(start/step,</span> <span class="pre">stop/step,</span> <span class="pre">1)</span></code>.
+The values <code class="docutils literal notranslate"><span class="pre">start/step</span></code> and <code class="docutils literal notranslate"><span class="pre">stop/step</span></code> are rounded up
+if it is within a <code class="docutils literal notranslate"><span class="pre">1e-05</span></code> value of the next integer
+and rounded down otherwise.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="calculating-probability">
+<h2>Calculating Probability<a class="headerlink" href="#calculating-probability" title="Permalink to this heading">#</a></h2>
+<p>probability vs probability distribution</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="graphs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Graphs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plotting_customization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plotting Customization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-quantum-walk">Creating a Quantum Walk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-state">Creating a State</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-computational-basis">State of the computational basis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-superposition">Uniform superposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-state">General state</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating">Simulating</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-evolution-operator">Configuring the evolution operator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coined-model">Coined Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-model">Continuous Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-invocation">Simulation Invocation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Coined Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Continuous Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-probability">Calculating Probability</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutorial/quantum_walk_models.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

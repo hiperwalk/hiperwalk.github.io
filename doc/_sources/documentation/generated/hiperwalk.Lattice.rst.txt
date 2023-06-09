@@ -1,0 +1,75 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.Lattice
+=================
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: Lattice
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~Lattice.arc
+       
+       
+          ~Lattice.arc_direction
+       
+       
+          ~Lattice.arc_label
+       
+       
+          ~Lattice.arcs_with_tail
+       
+       
+          ~Lattice.default_coin
+       
+       
+          ~Lattice.degree
+       
+       
+          ~Lattice.dimensions
+       
+       
+          ~Lattice.embeddable
+       
+       
+          ~Lattice.get_central_vertex
+       
+       
+          ~Lattice.neighbors
+       
+       
+          ~Lattice.next_arc
+       
+       
+          ~Lattice.number_of_arcs
+       
+       
+          ~Lattice.number_of_edges
+       
+       
+          ~Lattice.number_of_vertices
+       
+       
+          ~Lattice.previous_arc
+       
+       
+          ~Lattice.vertex_coordinates
+       
+       
+          ~Lattice.vertex_label
+       
+
+   
+   

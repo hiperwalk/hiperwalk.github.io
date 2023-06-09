@@ -1,0 +1,6 @@
+hiperwalk.CoinedWalk.get\_shift
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: CoinedWalk.get_shift

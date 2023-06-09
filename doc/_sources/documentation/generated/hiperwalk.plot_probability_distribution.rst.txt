@@ -1,0 +1,6 @@
+﻿hiperwalk.plot\_probability\_distribution
+=========================================
+
+.. currentmodule:: hiperwalk
+
+.. autofunction:: plot_probability_distribution

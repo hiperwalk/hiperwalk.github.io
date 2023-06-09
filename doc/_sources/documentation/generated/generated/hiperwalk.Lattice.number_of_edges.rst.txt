@@ -1,0 +1,6 @@
+hiperwalk.Lattice.number\_of\_edges
+===================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.number_of_edges

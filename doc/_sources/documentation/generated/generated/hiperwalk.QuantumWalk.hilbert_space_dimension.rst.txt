@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.hilbert\_space\_dimension
+===============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.hilbert_space_dimension

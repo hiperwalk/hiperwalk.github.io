@@ -1,0 +1,6 @@
+hiperwalk.Lattice.dimensions
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.dimensions

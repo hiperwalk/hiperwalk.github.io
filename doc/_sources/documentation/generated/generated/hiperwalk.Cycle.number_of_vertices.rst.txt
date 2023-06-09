@@ -1,0 +1,6 @@
+hiperwalk.Cycle.number\_of\_vertices
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.number_of_vertices

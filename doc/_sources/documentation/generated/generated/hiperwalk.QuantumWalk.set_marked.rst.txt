@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.set\_marked
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.set_marked

@@ -1,0 +1,6 @@
+hiperwalk.Cycle.number\_of\_edges
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.number_of_edges
