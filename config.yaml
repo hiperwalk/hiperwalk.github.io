@@ -24,10 +24,10 @@ params:
     buttonlink: https://github.com/hiperwalk/hiperwalk/
     subtitle: Simulations of quantum walks on graphs using HPC
   navbar:
-    - title: Install
-      url: /docs/install
     - title: Get started
       url: /docs/
+    - title: Install
+      url: /docs/install
     - title: Documentation
       url: /docs/documentation/
     - title: Examples
