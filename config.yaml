@@ -20,13 +20,16 @@ params:
   hero:
     title: Hiperwalk
     image: logo.svg
-    buttontext: Latest release
+    buttontext: GitHub
     subtitle: Simulations of quantum walks on graphs using HPC
+    url: https://github.com/hiperwalk/hiperwalk/
   navbar:
+    - title: Install
+      url: /docs/install
     - title: Get started
-      url: /getstarted/
-    - title: Documentation
       url: /docs/
+    - title: Documentation
+      url: /docs/documentation/
     - title: Shortcodes
       url: /shortcodes/
   keyfeatures:
