@@ -12,14 +12,14 @@ markup:
 params:
   description: "Python package for simulations of quantum walks on graphs using HPC"
   images:
-    - /images/logo.svg
+    - /images/logo.png
   navbarlogo:
-    image: logo.svg
+    image: logo.png
     text: Hiperwalk
     link: /
   hero:
     title: Hiperwalk
-    image: logo.svg
+    image: logo.png
     buttontext: GitHub
     buttonlink: https://github.com/hiperwalk/hiperwalk/
     subtitle: Simulations of quantum walks on graphs using HPC
@@ -41,7 +41,7 @@ params:
       - title: Open source
         text: Distributed under [LGPL3](https://github.com/hiperwalk/hiperwalk/blob/master/LICENSE), Hiperwalk is developed and maintained [publicly on GitHub](https://github.com/hiperwalk/hiperwalk).
   footer:
-    logo: logo.svg
+    logo: logo.png
     socialmediatitle: ""
     socialmedia:
       - link: https://github.com/hiperwalk/
