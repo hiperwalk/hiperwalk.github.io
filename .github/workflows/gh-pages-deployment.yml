@@ -44,8 +44,8 @@ jobs:
 
     - name: Copy Sphinx generated HTML files
       run: |
-          mkdir -p ./public/doc
-          cp -r hiperwalk/docs/build/html/* ./public/doc
+          mkdir -p ./public/docs
+          cp -r hiperwalk/docs/build/html/* ./public/docs
 
     - name: Prevent Jekyll processing
       run: touch ./public/.nojekyll

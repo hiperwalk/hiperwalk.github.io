@@ -26,7 +26,7 @@ params:
     - title: Get started
       url: /getstarted/
     - title: Documentation
-      url: /doc/
+      url: /docs/
     - title: Shortcodes
       url: /shortcodes/
   keyfeatures:
