@@ -41,10 +41,6 @@ params:
     logo: logo.svg
     socialmediatitle: ""
     socialmedia:
-      - link: https://hiperwalk.org/
-        icon: scientific-python
-      - link: https://discuss.scientific-python.org/
-        icon: discourse
       - link: https://github.com/hiperwalk/
         icon: github
     quicklinks:
@@ -53,11 +49,9 @@ params:
         links:
           - text: About
             link: /about/
-          - text: Theme GitHub
-            link: https://github.com/scientific-python/scientific-python-hugo-theme
       column2:
         links:
-          - text: Scientific Python Forum
-            link: https://discuss.scientific-python.org
+          - text: Documentation
+            link: /docs/
       column3:
         links:
