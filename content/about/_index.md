@@ -1,10 +1,8 @@
 ---
-title: "About"
+title: "About Us"
 draft: false
 ---
 
-The **Scientific Python Hugo Theme** is a theme for the
-[Hugo](https://gohugo.io) static site generator built on the
-[Fresh](https://github.com/StefMa/hugo-fresh) theme.
+Hiperwalk is being developed by the [Quantum Computing Group](http://qubit.lncc.br/) at the National Laboratory of Scientific Computing (LNCC).
 
-{{< include-html "static/teams/theme-team.html" >}}
+<!-- {{< include-html "static/teams/theme-team.html" >}} -->
