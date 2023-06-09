@@ -50,6 +50,9 @@ jobs:
     - name: Prevent Jekyll processing
       run: touch ./public/.nojekyll
 
+    - name: Create CNAME
+      run: echo 'hiperwalk.org' >  ./public/CNAME
+
     - name: Deploy                               
       uses: peaceiris/actions-gh-pages@v2
       env:
