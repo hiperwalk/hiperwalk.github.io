@@ -26,8 +26,7 @@ params:
     - title: Get started
       url: /getstarted/
     - title: Documentation
-      url: https://hiperwalk.readthedocs.io/en/stable/
-      is_external: true
+      url: /doc/
     - title: Shortcodes
       url: /shortcodes/
   keyfeatures:
