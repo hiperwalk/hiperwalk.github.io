@@ -21,8 +21,8 @@ params:
     title: Hiperwalk
     image: logo.svg
     buttontext: GitHub
+    buttonlink: https://github.com/hiperwalk/hiperwalk/
     subtitle: Simulations of quantum walks on graphs using HPC
-    url: https://github.com/hiperwalk/hiperwalk/
   navbar:
     - title: Install
       url: /docs/install
@@ -30,8 +30,8 @@ params:
       url: /docs/
     - title: Documentation
       url: /docs/documentation/
-    - title: Shortcodes
-      url: /shortcodes/
+    - title: Examples
+      url: https://github.com/hiperwalk/hiperwalk/tree/master/examples
   keyfeatures:
     features:
       - title: Quantum Walks
