@@ -40,6 +40,8 @@ params:
           [scipy.org](https://github.com/scipy/scipy.org)."
       - title: Community Maintained
         text: The theme is maintained by the [Theme Team](/about/).
+      - title: Open source
+        text: Distributed under [LGPL3](https://github.com/hiperwalk/hiperwalk/blob/master/LICENSE), Hiperwalk is developed and maintained [publicly on GitHub](https://github.com/hiperwalk/hiperwalk).
   footer:
     logo: logo.svg
     socialmediatitle: ""
