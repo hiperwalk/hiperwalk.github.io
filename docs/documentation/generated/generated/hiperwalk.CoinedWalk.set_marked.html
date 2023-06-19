@@ -506,15 +506,20 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.CoinedWalk.set_marked">
 <span class="sig-prename descclassname"><span class="pre">CoinedWalk.</span></span><span class="sig-name descname"><span class="pre">set_marked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">marked</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#CoinedWalk.set_marked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CoinedWalk.set_marked" title="Permalink to this definition">#</a></dt>
-<dd><p>Set marked elements (vertices).</p>
-<p>If a list of vertices is received,
-those vertices are considered marked.
-The evolution operators remains unchanged.</p>
+<dd><p>Set marked vertices.</p>
+<p>If a list of vertices is provided, those vertices are
+deemed as marked. However, the associated evolution operator
+remains unaffected.</p>
 <p>If a dictionary is passed,
 the coin of those vertices are substituted
 only for generating the evolution operator.
 This can only be done if the set coin operator is
 not a explicit matrix.</p>
+<p>If a dictionary is provided,
+the coins associated with those vertices  are replaced,
+but only for generating the evolution operator.
+Note that this can only be done if the coin operator
+is not set as an explicit matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">

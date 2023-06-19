@@ -501,13 +501,13 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.QuantumWalk">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">QuantumWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjacency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk" title="Permalink to this definition">#</a></dt>
-<dd><p>Basic (abstract) class for Quantum Walks.</p>
+<dd><p>Abstract class for Quantum Walks.</p>
 <p>Basic methods and attributes used for implementing
-specific Quantum Walk models.</p>
+specific quantum walk models.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>graph</strong></dt><dd><p>Graph on which the quantum walk occurs.
+<dt><strong>graph</strong></dt><dd><p>Graph on which the quantum walk takes place.
 It can be the graph itself (<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code>) or
 its adjacency matrix (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>).</p>
 </dd>
@@ -549,7 +549,7 @@ Use <code class="docutils literal notranslate"><span class="pre">graph</span></c
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution" title="hiperwalk.QuantumWalk.get_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_evolution</span></code></a>()</p></td>
-<td><p>Returns the evolution operator in matricial form.</p></td>
+<td><p>Returns the evolution operator in matrix form.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked" title="hiperwalk.QuantumWalk.get_marked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marked</span></code></a>()</p></td>
 <td><p>Gets marked vertices.</p></td>
@@ -561,7 +561,7 @@ Use <code class="docutils literal notranslate"><span class="pre">graph</span></c
 <td><p>Create a computational basis state.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states)</p></td>
-<td><p>Compute the probability states.</p></td>
+<td><p>Computes the probability distribution of each state.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability_distribution</span></code></a>(states)</p></td>
 <td><p>Compute the probability distribution of given states.</p></td>
@@ -579,7 +579,7 @@ Use <code class="docutils literal notranslate"><span class="pre">graph</span></c
 <td><p>Generates a valid state.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>()</p></td>
-<td><p>Generate the uniform state.</p></td>
+<td><p>Creates a uniform state.</p></td>
 </tr>
 </tbody>
 </table>

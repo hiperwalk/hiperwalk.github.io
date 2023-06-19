@@ -349,7 +349,7 @@ document.write(`
 
 <div class="viewcode-block" id="Cycle"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Cycle.html#hiperwalk.Cycle">[docs]</a><span class="k">class</span> <span class="nc">Cycle</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cycle Graph.</span>
+<span class="sd">    Cycle graph.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -358,14 +358,15 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The cycle may be interpreted as being embedded on the line</span>
-<span class="sd">    with cyclic boundary condition.</span>
-<span class="sd">    Then, we assign 0 the right direction and 1 with the left direction.</span>
-<span class="sd">    This changes the arc order.</span>
-<span class="sd">    Any arc with tail :math:`v`</span>
-<span class="sd">    has label :math:`2v` if pointing rightwards,</span>
-<span class="sd">    and label :math:`2v + 1` if pointing leftwards.</span>
-<span class="sd">    Figure 1 illustrates the arc labels of a 3 vertices cycle.</span>
+<span class="sd">    The cycle can be interpreted as being embedded on the line</span>
+<span class="sd">    with a cyclic boundary condition.</span>
+<span class="sd">    In this context,</span>
+<span class="sd">    we assign the direction ``0`` to the right and ``1`` to the left.</span>
+<span class="sd">    This assignment alters the order of the arcs.</span>
+<span class="sd">    Any arc with a tail denoted by :math:`v`</span>
+<span class="sd">    has the label :math:`2v` if it points to the right,</span>
+<span class="sd">    and the label :math:`2v + 1` if it points to the left.</span>
+<span class="sd">    Figure 1 illustrates the arc labels of a cycle with 3 vertices.</span>
 
 <span class="sd">    .. graphviz:: ../../graphviz/cycle-arcs.dot</span>
 <span class="sd">        :align: center</span>

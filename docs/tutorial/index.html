@@ -305,7 +305,7 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_customization.html">Plotting Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
 </div>
 </nav></div>
@@ -362,27 +362,27 @@ document.write(`
                   
   <section id="tutorial">
 <span id="docs-tutorial"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">#</a></h1>
-<p>Every Hiperwalk-based code follows up to five steps.</p>
+<p>Every code based on Hiperwalk follows up to five distinct steps.</p>
 <ol class="arabic simple">
-<li><p>Import Hiperwalk.</p></li>
-<li><p>Create the graph.</p></li>
-<li><p>Create the quantum walk based on the previous graph.</p></li>
-<li><p>Simulate the walk.</p></li>
-<li><p>Exhibit the results.</p></li>
+<li><p>Import the Hiperwalk package.</p></li>
+<li><p>Define a graph.</p></li>
+<li><p>Construct the quantum walk using the previously defined graph.</p></li>
+<li><p>Run the simulation of the quantum walk.</p></li>
+<li><p>Display the results.</p></li>
 </ol>
-<p>A simple example is the coined walk on the line.
-Do not struggle with the details for now.
-We just illustrate the steps.</p>
-<section id="import-hiperwalk">
-<h2>Import Hiperwalk<a class="headerlink" href="#import-hiperwalk" title="Permalink to this heading">#</a></h2>
+<p>An easy-to-understand example is the coined walk on the line.
+Don’t worry about the specifics for the time being; we are
+merely illustrating the steps.</p>
+<section id="import-the-hiperwalk-package">
+<h2>Import the Hiperwalk package<a class="headerlink" href="#import-the-hiperwalk-package" title="Permalink to this heading">#</a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
 </pre></div>
 </div>
 </section>
-<section id="create-the-graph">
-<h2>Create the graph<a class="headerlink" href="#create-the-graph" title="Permalink to this heading">#</a></h2>
-<p>Here we create a line with 11 vertices.
-The result is an object of the <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
+<section id="define-a-graph">
+<h2>Define a graph<a class="headerlink" href="#define-a-graph" title="Permalink to this heading">#</a></h2>
+<p>n this step, we generate a line comprising 11 vertices.
+The output is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> 
@@ -390,25 +390,24 @@ The result is an object of the <a class="reference internal" href="../documentat
 </pre></div>
 </div>
 </section>
-<section id="create-the-quantum-walk-based-on-the-previous-graph">
-<h2>Create the quantum walk based on the previous graph<a class="headerlink" href="#create-the-quantum-walk-based-on-the-previous-graph" title="Permalink to this heading">#</a></h2>
-<p>We create a coined quantum walk on the line with
-11 vertices by passing the created graph as an
+<section id="construct-the-quantum-walk-using-the-previously-defined-graph">
+<h2>Construct the quantum walk using the previously defined graph<a class="headerlink" href="#construct-the-quantum-walk-using-the-previously-defined-graph" title="Permalink to this heading">#</a></h2>
+<p>We now create a coined quantum walk on the line with 11 vertices.
+We achieve this by passing the previously created graph as an
 argument to the quantum walk constructor.
-This results in an object of the <a class="reference internal" href="../documentation/generated/hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk</span></code></a> class.</p>
+The outcome is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk</span></code></a> class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> 
 <span class="go">&lt;hiperwalk.quantum_walk.coined_walk.CoinedWalk object at 0x7f2691de9840&gt;</span>
 </pre></div>
 </div>
 </section>
-<section id="simulate-the-walk">
-<h2>Simulate the walk<a class="headerlink" href="#simulate-the-walk" title="Permalink to this heading">#</a></h2>
-<p>Before simulating the walk,
-To simulate the walk we need to specify the initial state.
-One way to create the initial state is by using the
+<section id="simulate-the-quantum-walk">
+<h2>Simulate the quantum walk<a class="headerlink" href="#simulate-the-quantum-walk" title="Permalink to this heading">#</a></h2>
+<p>Before running the simulation, we need to specify the initial state.
+One way to accomplish this is by using the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.ket.html#hiperwalk.CoinedWalk.ket" title="hiperwalk.CoinedWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.ket()</span></code></a> method,
-which creates a valid state of the computational basis.</p>
+which generates a state of the computational basis.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vertex</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span>
@@ -416,25 +415,25 @@ which creates a valid state of the computational basis.</p>
 <span class="go">       0., 0., 0.])</span>
 </pre></div>
 </div>
-<p>This state corresponds to the walker being on
-vertex 5 pointing to vertex 6
-(the labels of the vertices go from 0 to 10).</p>
-<p>To simulate the walk we must specify the number of steps
-(number of applications of the evolution operator)
-and the initial state.
-By specifying only the final time,
-the result is the final state.
-If everything was installed properly,
-the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.simulate.html#hiperwalk.CoinedWalk.simulate" title="hiperwalk.CoinedWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.simulate()</span></code></a> method automatically uses
+<p>This state corresponds to the walker on
+vertex 5 with the coin pointing to vertex 6
+(keep in mind that the vertex labels range from 0 to 10).</p>
+<p>To run the simulation, we must specify the initial state and
+the number of steps
+(i.e., the number of applications of the evolution operator).
+When specifying only the final time,
+the output will be the final state.
+If everything was installed correctly,
+the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.simulate.html#hiperwalk.CoinedWalk.simulate" title="hiperwalk.CoinedWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.simulate()</span></code></a> method will automatically use
 high-performance computing to perform the matrix-vector multiplications.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">final_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="exhibit-the-results">
-<h2>Exhibit the results<a class="headerlink" href="#exhibit-the-results" title="Permalink to this heading">#</a></h2>
-<p>The results exhibition may be a simple print</p>
+<section id="display-the-results">
+<h2>Display the results<a class="headerlink" href="#display-the-results" title="Permalink to this heading">#</a></h2>
+<p>Presenting the results can be as straightforward as printing them.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">final_state</span>
 <span class="go">array([[ 0.1767767 ,  0.        ,  0.        , -0.1767767 ,  0.35355339,</span>
 <span class="go">         0.        ,  0.        ,  0.        , -0.35355339,  0.        ,</span>
@@ -442,24 +441,23 @@ high-performance computing to perform the matrix-vector multiplications.</p>
 <span class="go">         0.70710678,  0.1767767 ,  0.        ,  0.        ,  0.1767767 ]])</span>
 </pre></div>
 </div>
-<p>or a more sofisticated output.
-Frequently, we are interested in the probability of the walker being
-found on each vertex.
-This can be done via the
+<p>Or, the output could be more sophisticated. Often, we are interested
+in the probability of the walker being found at each vertex.
+This can be accomplished via the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.probability_distribution.html#hiperwalk.CoinedWalk.probability_distribution" title="hiperwalk.CoinedWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.probability_distribution()</span></code></a> method
-by passing the final state as argument.</p>
+by passing the final state as an argument.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probability</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">final_state</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">probability</span>
 <span class="go">array([[0.03125, 0.     , 0.15625, 0.     , 0.125  , 0.     , 0.125  ,</span>
 <span class="go">        0.     , 0.53125, 0.     , 0.03125]])</span>
 </pre></div>
 </div>
-<p>It is also possible to plot the probability distribution
-with a simple command.</p>
+<p>It’s also feasible to plot the probability distribution
+using a simple command.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span><span class="n">probability</span><span class="p">)</span> 
 </pre></div>
 </div>
-<p>Resulting in the following plot.</p>
+<p>This command generates the following plot:</p>
 <figure class="align-default" id="id1">
 <img alt="Plot of the probability distribution." src="../_images/probability_distribution.png" />
 <figcaption>
@@ -469,12 +467,12 @@ with a simple command.</p>
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
-<p>The remainder of the tutorial is subdivided into the following sections.</p>
+<p>The remainder of the tutorial is split into the following sections.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_customization.html">Plotting Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
 </div>
 </section>
@@ -527,11 +525,11 @@ with a simple command.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-hiperwalk">Import Hiperwalk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-graph">Create the graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-quantum-walk-based-on-the-previous-graph">Create the quantum walk based on the previous graph</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-the-walk">Simulate the walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exhibit-the-results">Exhibit the results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-hiperwalk-package">Import the Hiperwalk package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-graph">Define a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-the-quantum-walk-using-the-previously-defined-graph">Construct the quantum walk using the previously defined graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-the-quantum-walk">Simulate the quantum walk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-results">Display the results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
 </ul>
   </nav></div>

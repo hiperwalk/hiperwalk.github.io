@@ -509,8 +509,8 @@ document.write(`
 <dd><p>Generates a valid state.</p>
 <p>The state corresponds to the walker being in a superposition
 of the <code class="docutils literal notranslate"><span class="pre">entries</span></code>.
-for instance, click on <code class="xref py py-meth docutils literal notranslate"><span class="pre">qwalk.coined.Graph()</span></code>.
-The final state is normalized in order to be unitary.</p>
+For instance, click on <code class="xref py py-meth docutils literal notranslate"><span class="pre">qwalk.coined.Graph()</span></code>.
+The final state is normalized in order to be a unit vector.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -525,7 +525,7 @@ An entry can be specified in three different ways:
 <dt>vertex</dt><dd><p>The vertex corresponding to the position of the walker
 in the superposition.</p>
 </dd>
-<dt>dst_vertex </dt><dd><p>The vertex which the coin is pointing to.
+<dt>dst_vertex</dt><dd><p>The vertex to which the coin is pointing.
 In other words, the tuple
 <code class="docutils literal notranslate"><span class="pre">(vertex,</span> <span class="pre">dst_vertex)</span></code> must be a valid arc.</p>
 </dd>
@@ -533,7 +533,7 @@ In other words, the tuple
 given by the computational basis.</p>
 </dd>
 <dt>coin</dt><dd><p>The direction towards which the coin is pointing.
-It is dependabble on the Graph coloring.</p>
+It is dependable on the Graph coloring.</p>
 </dd>
 </dl>
 </dd>

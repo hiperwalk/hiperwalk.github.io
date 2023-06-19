@@ -503,53 +503,63 @@ document.write(`
 <dt class="sig sig-object py" id="hiperwalk.Lattice">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Lattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/lattice.html#Lattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Lattice" title="Permalink to this definition">#</a></dt>
 <dd><p>Two-dimensionsal lattice.</p>
-<p>The lattice may have boundary conditions or not.
-Its adjacency may be either natural or diagonal.</p>
+<p>The lattice can be designed with either
+cyclic boundary conditions or borders.
+Moreover, the lattice’s representation can be either
+<em>natural</em> or <em>diagonal</em>.
+In the <em>natural</em> representation,
+neighboring vertices lie along the X and Y axes,
+while in the <em>diagonal</em> representation,
+they lie along the diagonals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>dimensions</strong><span class="classifier">int or tuple of int</span></dt><dd><p>Lattice dimensions in <code class="docutils literal notranslate"><span class="pre">(x_dim,</span> <span class="pre">y_dim)</span></code> format.
 If <code class="docutils literal notranslate"><span class="pre">dimensions</span></code> is an integer, creates a square lattice.</p>
 </dd>
-<dt><strong>periodic</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether the lattice has boundary conditions or not.</p>
+<dt><strong>periodic</strong><span class="classifier">bool, default=True</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the lattice has cyclic boundary conditions,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> if it has borders.</p>
 </dd>
-<dt><strong>diagonal</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code> the natural adjacency is used.
-Otherwise, diagonal adjacency is used.</p>
+<dt><strong>diagonal</strong><span class="classifier">bool, default=False</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the lattice has the diagonal representation,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> if it has the natural representation.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>For defining the arc order, we must first define the vertices order.
-The vertices are sorted with respect to the Y-axis first,
-and then with respect to the X-axis.
-That is,
+<p>The order of the arcs is determined according to
+the order of the vertices.
+The order of the vertices is defined as follows:
 if <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and <span class="math notranslate nohighlight">\((x_2, y_2)\)</span> are two valid vertices,
 we say that <span class="math notranslate nohighlight">\((x_1, y_1) &lt; (x_2, y_2)\)</span> if <span class="math notranslate nohighlight">\(y_1 &lt; y_2\)</span> or
-if <span class="math notranslate nohighlight">\(y_1 = y_2\)</span> and <span class="math notranslate nohighlight">\(x_1 &lt; x_2\)</span>.</p>
+if <span class="math notranslate nohighlight">\(y_1 = y_2\)</span> and <span class="math notranslate nohighlight">\(x_1 &lt; x_2\)</span>.
+The order of the arcs also depends on the lattice representation
+(natural or diagonal).</p>
 <dl>
 <dt>Natural Lattice:</dt><dd><p>In the natural lattice,
-we have four directions possible.</p>
+the directions are described as follows:</p>
 <ul class="simple">
 <li><p>00 = 0: right;</p></li>
 <li><p>01 = 1: left;</p></li>
 <li><p>10 = 2: up;</p></li>
 <li><p>11 = 3: down.</p></li>
 </ul>
-<p>The most significant bit corresponds to the axis,
-0 for the X-axis and 1 for the Y-axis.
-The less significant bit indicates whether to
-move forward (0) or backward (1) in the given axis.</p>
-<p>The arcs order respect vertices order and these directions.
-For example, let <span class="math notranslate nohighlight">\((x, y)\)</span> be a vertex where
+<p>The most significant bit corresponds to the axis:
+0 represents the X-axis and 1 represents the Y-axis.
+The least significant bit indicates the direction of
+movement along the given axis, with 0 signifying
+forward movement and 1 signifying backward movement.</p>
+<p>The order of arcs corresponds with the order of vertices
+and their respective directions. For example,
+consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
 <span class="math notranslate nohighlight">\((x \pm 1, y)\)</span> and <span class="math notranslate nohighlight">\((x, y \pm 1)\)</span>
-are also valid vertices.
-The directions give</p>
+are adjacent vertices.
+The order of these arcs is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}((x, y), (x + 1, y)) &amp;&lt; ((x, y), (x - 1, y)) \\
                      &amp;&lt; ((x, y), (x, y + 1)) \\
                      &amp;&lt; ((x, y), (x, y - 1)).\end{split}\]</div>
-<p>The directions are depicted in <a class="reference internal" href="#fig-natural-dir"><span class="std std-ref">Figure: Natural lattice directions.</span></a>.</p>
+<p>The directions are depicted in <a class="reference internal" href="#fig-natural-dir"><span class="std std-ref">Figure: Directions in the natural representation.</span></a>.</p>
 <figure class="align-center" id="fig-natural-dir">
 digraph {
 	4 [pos=&quot;0,0!&quot; label=&quot;(x, y)&quot; width=1 height=1 fixedsize=True;]
@@ -564,12 +574,12 @@ digraph {
 	4 -&gt; 3 [headlabel=3 labeldistance=4 labelangle=-10];
 }
 <figcaption>
-<p><span class="caption-text">Figure: Natural lattice directions.</span><a class="headerlink" href="#fig-natural-dir" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: Directions in the natural representation.</span><a class="headerlink" href="#fig-natural-dir" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For example, the arcs labels for
-the periodic natural <span class="math notranslate nohighlight">\(3 \times 3\)</span>-lattice are
-illustrated in <a class="reference internal" href="#fig-periodic-natural-lattice"><span class="std std-ref">Figure: Periodic natural 3x3-lattice.</span></a>.</p>
+<p>For example, the labels of the arcs for
+the <span class="math notranslate nohighlight">\(3 \times 3\)</span>-lattice with periodic boundary
+conditions are depicted in <a class="reference internal" href="#fig-periodic-natural-lattice"><span class="std std-ref">Figure: 3x3-lattice with cyclic boundary conditions.</span></a>.</p>
 <figure class="align-center" id="fig-periodic-natural-lattice">
 digraph {
 	&quot;(0, -1)&quot; [pos=&quot;0.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 2)&quot;]
@@ -632,13 +642,14 @@ digraph {
 	 &quot;(2, 2)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=35 labeldistance=4 labelangle=-20];
 }
 <figcaption>
-<p><span class="caption-text">Figure: Periodic natural 3x3-lattice.</span><a class="headerlink" href="#fig-periodic-natural-lattice" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: 3x3-lattice with cyclic boundary conditions.</span><a class="headerlink" href="#fig-periodic-natural-lattice" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For the natural lattice with boundary condition,
-the arcs labels follow the same order.
-But the labels are shifted when a given arc does not exist.
-See <a class="reference internal" href="#fig-bounded-natural-lattice"><span class="std std-ref">Figure: Bounded natural 3x3-lattice.</span></a></p>
+<p>In the case of a natural lattice with borders, the labels of the
+arcs maintain the same sequence but with some modifications
+due to the presence of vertices with degrees 2 and 3.
+Figure :ref:fig-bounded-natural-Lattice provides an illustration
+of a bounded natural lattice.</p>
 <figure class="align-center" id="fig-bounded-natural-lattice">
 digraph {
 	&quot;(0, 0)&quot; [pos=&quot;0.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
@@ -682,26 +693,29 @@ digraph {
 </figure>
 </dd>
 <dt>Diagonal Lattice:</dt><dd><p>In the diagonal lattice,
-we have four directions possible.</p>
+the directions are described as follows:</p>
 <ul class="simple">
 <li><p>00 = 0: right, up;</p></li>
 <li><p>01 = 1: right, down;</p></li>
 <li><p>10 = 2: left, up;</p></li>
 <li><p>11 = 3: left, down.</p></li>
 </ul>
-<p>Each binary value describes whether to move
-forward (0) or backward (1).
-The most significant bit describes the X-axis movement and
-the less significant bit describes the Y-axis movement.</p>
-<p>The arcs order respect vertices order and these directions.
-For example, let <span class="math notranslate nohighlight">\((x, y)\)</span> be a vertex where
-<span class="math notranslate nohighlight">\((x \pm 1, y \pm 1)\)</span> are also valid vertices.
-The directions give</p>
+<p>Each binary value indicates the direction of movement,
+with 0 representing forward motion and 1 representing
+backward motion. The most significant bit corresponds to
+movement along the X-axis, while the least significant bit
+corresponds to movement along the Y-axis.</p>
+<p>The order of arcs corresponds with the order of vertices
+and their respective directions. For example,
+consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
+<span class="math notranslate nohighlight">\((x \pm 1, y)\)</span> and <span class="math notranslate nohighlight">\((x, y \pm 1)\)</span>
+are adjacent vertices.
+The order of these arcs is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}((x, y), (x + 1, y + 1)) &amp;&lt; ((x, y), (x + 1, y - 1)) \\
                          &amp;&lt; ((x, y), (x - 1, y + 1)) \\
                          &amp;&lt; ((x, y), (x - 1, y - 1)).\end{split}\]</div>
-<p>The directions are depicted in <a class="reference internal" href="#fig-diagonal-dir"><span class="std std-ref">Figure: Diagonal lattice directions.</span></a>.</p>
+<p>The directions are depicted in <a class="reference internal" href="#fig-diagonal-dir"><span class="std std-ref">Figure: Directions in the diagonal representation.</span></a>.</p>
 <figure class="align-center" id="fig-diagonal-dir">
 digraph {
 	4 [pos=&quot;0,0!&quot; label=&quot;(x, y)&quot; width=1.5 height=1.5 fixedsize=True]
@@ -716,12 +730,12 @@ digraph {
 	4 -&gt; 3 [headlabel=3 labeldistance=5 labelangle=10];
 }
 <figcaption>
-<p><span class="caption-text">Figure: Diagonal lattice directions.</span><a class="headerlink" href="#fig-diagonal-dir" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: Directions in the diagonal representation.</span><a class="headerlink" href="#fig-diagonal-dir" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For example, the arcs labels for
-the periodic diagonal <span class="math notranslate nohighlight">\(3 \times 3\)</span>-lattice are
-illustrated in <a class="reference internal" href="#fig-periodic-diagonal-lattice"><span class="std std-ref">Figure: Periodic diagonal 3x3-lattice.</span></a></p>
+<p>For example, the labels of the arcs for
+the <span class="math notranslate nohighlight">\(3 \times 3\)</span>-lattice with periodic boundary
+conditions are depicted in <a class="reference internal" href="#fig-periodic-diagonal-lattice"><span class="std std-ref">Figure: Periodic diagonal 3x3-lattice.</span></a></p>
 <figure class="align-center" id="fig-periodic-diagonal-lattice">
 digraph {
 	&quot;(-1, -1)&quot; [pos=&quot;-1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 2)&quot;]
@@ -791,10 +805,10 @@ digraph {
 <p><span class="caption-text">Figure: Periodic diagonal 3x3-lattice.</span><a class="headerlink" href="#fig-periodic-diagonal-lattice" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For the diagonal lattice with boundary condition,
-the arcs labels follow the same order.
-But the labels are shifted when a given arc does not exist.
-See <a class="reference internal" href="#fig-bounded-diagonal-lattice"><span class="std std-ref">Figure: Bounded diagonal 3x3-lattice.</span></a></p>
+<p>In the case of a diagonal lattice with borders, the labels of the
+arcs maintain the same sequence but with some modifications.
+Figure <a class="reference internal" href="#fig-bounded-diagonal-lattice"><span class="std std-ref">Figure: Bounded 3x3-lattice in the diagonal representation.</span></a> provides
+an illustration of a bounded diagonal lattice.</p>
 <figure class="align-center" id="fig-bounded-diagonal-lattice">
 digraph {
 	&quot;(0, 0)&quot; [pos=&quot;0.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
@@ -825,15 +839,17 @@ digraph {
 	 &quot;(2, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=15 labeldistance=2 labelangle=-50];
 }
 <figcaption>
-<p><span class="caption-text">Figure: Bounded diagonal 3x3-lattice.</span><a class="headerlink" href="#fig-bounded-diagonal-lattice" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: Bounded 3x3-lattice in the diagonal representation.</span><a class="headerlink" href="#fig-bounded-diagonal-lattice" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Note that in this case, there are two independent sublattices.
-That is, a vertex in one sublattice is not reacheable from
-a vertex in the other sublattice.
-This also occurs if the diagonal lattice is periodic and
-both dimensions are even.
-See <a class="reference internal" href="#fig-even-dim-diagonal"><span class="std std-ref">Figure: Periodic diagonal 4x4-lattice.</span></a></p>
+<p>Note that in this context,
+there exist two independent sublattices.
+In other words, a vertex in one sublattice is not accessible from
+a vertex in the other sublattice. This situation also arises
+if the diagonal lattice has periodic boundary conditions and both
+dimensions are even.
+Figure <a class="reference internal" href="#fig-even-dim-diagonal"><span class="std std-ref">Figure: 4x4-lattice with cyclic boundary conditions.</span></a> illustrates
+an example of this case.</p>
 <figure class="align-center" id="fig-even-dim-diagonal">
 digraph {
 	&quot;(-1, -1)&quot; [pos=&quot;-1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 3)&quot;]
@@ -939,13 +955,9 @@ digraph {
 	 &quot;(3, 3)&quot; -&gt; &quot;(2, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
 }
 <figcaption>
-<p><span class="caption-text">Figure: Periodic diagonal 4x4-lattice.</span><a class="headerlink" href="#fig-even-dim-diagonal" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Figure: 4x4-lattice with cyclic boundary conditions.</span><a class="headerlink" href="#fig-even-dim-diagonal" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the diagonal lattice</p>
-</div>
 </dd>
 </dl>
 <dl class="py method">
@@ -978,7 +990,7 @@ digraph {
 <td><p>Lattice dimensions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.embeddable.html#hiperwalk.Lattice.embeddable" title="hiperwalk.Lattice.embeddable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">embeddable</span></code></a>()</p></td>
-<td><p>Returns whether the graph can be embedded on the plane or not.</p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the graph can be embedded on the plane, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.get_central_vertex.html#hiperwalk.Lattice.get_central_vertex" title="hiperwalk.Lattice.get_central_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_central_vertex</span></code></a>()</p></td>
 <td><p>Vertex with label in the center of the graph as grid.</p></td>

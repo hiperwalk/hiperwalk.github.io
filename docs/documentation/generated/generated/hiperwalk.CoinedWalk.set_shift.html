@@ -508,11 +508,10 @@ document.write(`
 <dt class="sig sig-object py" id="hiperwalk.CoinedWalk.set_shift">
 <span class="sig-prename descclassname"><span class="pre">CoinedWalk.</span></span><span class="sig-name descname"><span class="pre">set_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#CoinedWalk.set_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CoinedWalk.set_shift" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the shift operator.</p>
-<p>Set either the flipflop or the persistent shift operator.</p>
-<p>The created shift operator is saved to be used
-for generating the evolution operator.
-If an evolution operator was set previously,
-it is unset for coherence.</p>
+<p>Sets either the flipflop or the persistent shift operator.</p>
+<p>The generated shift operator is stored for future use in
+creating the evolution operator. If an evolution operator
+had been previously set, it is unset to maintain coherence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -552,15 +551,15 @@ about the computational basis.</p>
 \end{align*}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(i\)</span> is the label of the edge <span class="math notranslate nohighlight">\((v, u)\)</span> and
 <span class="math notranslate nohighlight">\(j\)</span> is the label of the edge <span class="math notranslate nohighlight">\((u, v)\)</span>.</p>
-<p>For more information about the general flip-flop shift operator,
-check “Quantum Walks and Search Algorithms”
-Section 7.2: Coined Walks on Arbitrary Graphs <a class="reference internal" href="#r0c4d458d79e1-1" id="id1">[1]</a>.</p>
+<p>For a more comprehensive understanding of the flipflop
+shift operator, refer to Section 7.2: Coined Walks on Arbitrary
+Graphs in the book “Quantum Walks and Search Algorithms” <a class="reference internal" href="#r0c4d458d79e1-1" id="id1">[1]</a>.</p>
 <p class="rubric">References</p>
 <div role="list" class="citation-list">
 <div class="citation" id="r0c4d458d79e1-1" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Portugal, Renato. “Quantum walks and search algorithms”.
-Vol. 19. New York: Springer, 2013.</p>
+<p>R. Portugal. “Quantum walks and search algorithms”,
+2nd edition, Springer, 2018.</p>
 </div>
 </div>
 <p class="rubric">Examples</p>

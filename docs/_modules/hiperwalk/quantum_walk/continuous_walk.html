@@ -356,33 +356,33 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousWalk"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.ContinuousWalk.html#hiperwalk.ContinuousWalk">[docs]</a><span class="k">class</span> <span class="nc">ContinuousWalk</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Manage instance of the continuous time quantum walk model</span>
-<span class="sd">    on unweighted graphs.</span>
+<span class="sd">    Manage an instance of the continuous-time quantum walk</span>
+<span class="sd">    on an arbitrary simple graph.</span>
 
-<span class="sd">    For implemantation details see Notes Section.</span>
+<span class="sd">    For further implementation details, refer to the Notes Section.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    graph :</span>
-<span class="sd">        Graph on which the quantum walk occurs.</span>
-<span class="sd">        There are three two types acceptable.</span>
+<span class="sd">        Graph on which the quantum walk takes place.</span>
+<span class="sd">        There are two acceptable inputs:</span>
 
 <span class="sd">        :class:`hiperwalk.graph.Graph` :</span>
 <span class="sd">            The graph itself.</span>
 
 <span class="sd">        :class:`class:scipy.sparse.csr_array`:</span>
-<span class="sd">            The graph adjacency matrix.</span>
+<span class="sd">            The adjacency matrix of the graph.</span>
 
 <span class="sd">    adjacency : :class:`scipy.sparse.csr_array`, optional</span>
 <span class="sd">        .. deprecated:: 2.0a1</span>
 <span class="sd">            It will be removed in version 2.0.</span>
 <span class="sd">            Use ``graph`` instead.</span>
 
-<span class="sd">        Adjacency matrix of the graph on which the quantum occurs</span>
-<span class="sd">        is going to occur.</span>
+<span class="sd">        Adjacency matrix of the graph on which</span>
+<span class="sd">        the quantum walk takes place.</span>
 
 <span class="sd">    **kwargs : optional</span>
-<span class="sd">        Arguments for setting Hamiltonian.</span>
+<span class="sd">        Arguments to set the Hamiltonian.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -390,7 +390,7 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Let :math:`A` be the adjacency matrix of the graph :math:`G(V, E)`.</span>
+<span class="sd">    Let :math:`A` be the adjacency matrix of graph :math:`G(V, E)`.</span>
 <span class="sd">    :math:`A` is a :math:`|V| \times |V|`-dimensional matrix such that</span>
 
 <span class="sd">    .. math::</span>
@@ -400,12 +400,12 @@ document.write(`
 <span class="sd">        \end{cases}</span>
 
 <span class="sd">    The states of the computational basis are :math:`\ket{i}` for</span>
-<span class="sd">    :math:`0 \leq i &lt; |V|` where</span>
+<span class="sd">    :math:`0 \leq i &lt; |V|`, where</span>
 <span class="sd">    :math:`\ket i` is associated with the :math:`i`-th vertex.</span>
 
-<span class="sd">    This class can also be used to simulate the evolution of any</span>
-<span class="sd">    any Hamiltonian.</span>
-<span class="sd">    Simply pass the disered Hamiltonian instead of the adjacency matrix.</span>
+<span class="sd">    This class can also facilitate the simulation of any Hamiltonian</span>
+<span class="sd">    evolution. To do this, simply pass the desired Hamiltonian in place</span>
+<span class="sd">    of the adjacency matrix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_hamiltonian_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -450,7 +450,8 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousWalk.get_gamma"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousWalk.get_gamma.html#hiperwalk.ContinuousWalk.get_gamma">[docs]</a>    <span class="k">def</span> <span class="nf">get_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the gamma used for the Hamiltonian.</span>
+<span class="sd">        Retrieves the gamma value used in</span>
+<span class="sd">        the definition of the Hamiltonian.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -465,7 +466,7 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        **kwargs : </span>
+<span class="sd">        **kwargs :</span>
 <span class="sd">            Additional arguments.</span>
 <span class="sd">            Used for determining the gamma value and marked vertices.</span>
 <span class="sd">            See :meth:`set_gamma` and :meth:`set_marked`.</span>
@@ -475,7 +476,7 @@ document.write(`
 <span class="sd">        The Hamiltonian is given by</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            H = -\gamma A  - \sum_{m \in M} \ket m \bra m</span>
+<span class="sd">            H = -\gamma A  - \sum_{m \in M} \ket m \bra m,</span>
 
 <span class="sd">        where :math:`A` is the adjacency matrix, and</span>
 <span class="sd">        :math:`M` is the set of marked vertices.</span>
@@ -505,7 +506,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousWalk.get_hamiltonian"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousWalk.get_hamiltonian.html#hiperwalk.ContinuousWalk.get_hamiltonian">[docs]</a>    <span class="k">def</span> <span class="nf">get_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns Hamiltonian.</span>
+<span class="sd">        Returns the Hamiltonian.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -539,7 +540,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousWalk.get_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousWalk.get_evolution.html#hiperwalk.ContinuousWalk.get_evolution">[docs]</a>    <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the evolution operator.</span>
+<span class="sd">        Returns the evolution operator.</span>
 
 <span class="sd">        Constructs the evolution operator based on the previously</span>
 <span class="sd">        set Hamiltonian.</span>
@@ -571,12 +572,13 @@ document.write(`
 <span class="sd">        The evolution operator is given by</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            U = e^{-\text{i}tH}</span>
+<span class="sd">            U = e^{-\text{i}tH},</span>
 
-<span class="sd">        where :math:`H` is a Hamiltonian matrix, and</span>
+<span class="sd">        where :math:`H` is the Hamiltonian, and</span>
 <span class="sd">        :math:`t` is the time.</span>
 
-<span class="sd">        The evolution operator is constructed by Taylor Series expansion.</span>
+<span class="sd">        The evolution operator is constructed using</span>
+<span class="sd">        Taylor Series expansion.</span>
 
 <span class="sd">        .. warning::</span>
 <span class="sd">            For floating time (not integer),</span>
