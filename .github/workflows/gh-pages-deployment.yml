@@ -35,6 +35,11 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Install graphviz
+      run: |
+          sudo apt update
+          sudo apt install graphviz
+
     - name: Build docs
       run: |
           pushd hiperwalk/docs/
