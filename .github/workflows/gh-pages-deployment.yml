@@ -28,7 +28,7 @@ jobs:
       with:
         repository: hiperwalk/hiperwalk
         path: hiperwalk
-        ref: 2.0.x
+        ref: v2.0a4
 
     - name: Install Python
       uses: actions/setup-python@v2
