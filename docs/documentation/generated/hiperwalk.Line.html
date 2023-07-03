@@ -502,7 +502,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Line">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/line.html#Line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Line" title="Permalink to this definition">#</a></dt>
-<dd><p>Finite line graph (path graph).</p>
+<dd><p>Finite Line Graph (Path Graph).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -514,26 +514,25 @@ document.write(`
 <p class="rubric">Notes</p>
 <p>On the Line,
 we can assign directions to the arcs.
-An arc pointing rightward has direction 0 –
-i.e., (1, 2), and
-an arc pointing leftward has direction 1 –
+If an arc is pointing rightwards it has direction 0 –
+i.e., (1, 2).
+If an arc is pointing leftwards, it has direction 1 –
 i.e., (2, 1).</p>
-<p>We use the directions of the arcs to define their order.
-Thus, for a vertex <span class="math notranslate nohighlight">\(v \in V\)</span>,
+<p>We use the arc directions to define the arcs order.
+Hence, for a vertex <span class="math notranslate nohighlight">\(v \in V\)</span>,
 the arcs <span class="math notranslate nohighlight">\((v, v + 1)\)</span> and <span class="math notranslate nohighlight">\((v, v - 1)\)</span>
 have labels <span class="math notranslate nohighlight">\(a_0\)</span> and <span class="math notranslate nohighlight">\(a_1\)</span> (respectively)
 such that  <span class="math notranslate nohighlight">\(a_0 &lt; a_1\)</span>.
-This order is aligned with the description of
-coined quantum walks on the line in Reference <a class="reference internal" href="#r37e0670da139-1" id="id1">[1]</a>.
+This order is coherent with the Coined Quantum Walk on the line <a class="reference internal" href="#r37e0670da139-1" id="id1">[1]</a>.
 The only exceptions to this rule are the extreme vertices
-0 and <span class="math notranslate nohighlight">\(|V| - 1\)</span> because
-they only have one arc.
-Aside from these exceptions,
+0 and <span class="math notranslate nohighlight">\(|V| - 1\)</span>.
+Since they only have one arc.
+Besides that,
 for any two vertices <span class="math notranslate nohighlight">\(v_1 &lt; v_2\)</span>,
-any arc with tail <span class="math notranslate nohighlight">\(v_1\)</span> has a label smaller than
-the label of any arc with tail <span class="math notranslate nohighlight">\(v_2\)</span>.</p>
-<p>For example, Figure 1 depicts the labels of the arcs of a path graph
-with 4 vertices.</p>
+any arc with tail <span class="math notranslate nohighlight">\(v_1\)</span> has label smaller than
+any arc with tail <span class="math notranslate nohighlight">\(v_2\)</span>.</p>
+<p>For example, the arc labels of the 4-vertices Line
+are represented in Figure 1.</p>
 <figure class="align-center" id="id3">
 <div class="graphviz"><img src="../../_images/graphviz-600404c353bff8a5fe3f0626ae0103776606a8b4.png" alt="digraph {
 	0 [pos=&quot;0,0!&quot;];
@@ -555,8 +554,8 @@ with 4 vertices.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="r37e0670da139-1" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>R. Portugal. “Quantum walks and search algorithms”,
-2nd edition, Springer, 2018.</p>
+<p>Portugal, Renato. “Quantum walks and search algorithms”.
+Vol. 19. New York: Springer, 2013.</p>
 </div>
 </div>
 <dl class="py method">
@@ -583,7 +582,7 @@ with 4 vertices.</p>
 <td><p>Degree of given vertex.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Line.embeddable.html#hiperwalk.Line.embeddable" title="hiperwalk.Line.embeddable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">embeddable</span></code></a>()</p></td>
-<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the graph can be embedded on the plane, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></td>
+<td><p>Returns whether the graph can be embedded on the plane or not.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Line.neighbors.html#hiperwalk.Line.neighbors" title="hiperwalk.Line.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code></a>(vertex)</p></td>
 <td><p>Returns all neighbors of the given vertex.</p></td>

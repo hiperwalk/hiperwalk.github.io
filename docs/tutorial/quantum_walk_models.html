@@ -46,7 +46,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plotting" href="plotting.html" />
+    <link rel="next" title="Plotting Customization" href="plotting_customization.html" />
     <link rel="prev" title="Graphs" href="graphs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -306,7 +306,7 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Quantum Walk Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_customization.html">Plotting Customization</a></li>
 </ul>
 </div>
 </nav></div>
@@ -783,59 +783,12 @@ The values <code class="docutils literal notranslate"><span class="pre">start/st
 if it is within a <code class="docutils literal notranslate"><span class="pre">1e-05</span></code> value of the next integer
 and rounded down otherwise.</p></li>
 </ul>
-<p>For example, if <code class="docutils literal notranslate"><span class="pre">time=(10,</span> <span class="pre">0.51)</span></code> –
-which is equivalent to <code class="docutils literal notranslate"><span class="pre">time=(0,</span> <span class="pre">10,</span> <span class="pre">0.51)</span></code> –
-it is converted to <code class="docutils literal notranslate"><span class="pre">(19,</span> <span class="pre">1)</span></code>.
-Hence the states coresponding to timestamps
-<code class="docutils literal notranslate"><span class="pre">[0.</span>&#160;&#160; <span class="pre">,</span> <span class="pre">0.501,</span> <span class="pre">1.002,</span> <span class="pre">1.503,</span> <span class="pre">...,</span> <span class="pre">9.018,</span> <span class="pre">9.519]</span></code> wil be saved.
-On the other hand, if <code class="docutils literal notranslate"><span class="pre">time=(10,</span> <span class="pre">0.5000001)</span></code>,
-it is converted to <code class="docutils literal notranslate"><span class="pre">(20,</span> <span class="pre">1)</span></code>.
-Resulting in the states corresponding to the timestamps
-<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">0.</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">,</span>&#160; <span class="pre">0.5000001,</span>&#160; <span class="pre">1.0000002,</span>&#160; <span class="pre">...,</span>&#160; <span class="pre">9.5000019,</span> <span class="pre">10.000002</span> <span class="pre">])</span></code>.</p>
 </section>
 </section>
 </section>
 <section id="calculating-probability">
 <h2>Calculating Probability<a class="headerlink" href="#calculating-probability" title="Permalink to this heading">#</a></h2>
-<p>There are two ways of calculating probability:
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability()</span></code></a> and
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability_distribution()</span></code></a>.
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability()</span></code></a> computes
-the probability of each state entry.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<p><a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability_distribution()</span></code></a>
-calculates the probability of each vertex.
-Basically, the probability of vertex <code class="docutils literal notranslate"><span class="pre">v</span></code> is
-the sum of the probabilities of each entry
-corresponding to an arc with tail in <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prob_dist</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">prob_dist</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">prob_dist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Since each vertex on a cycle has degree 2, the following is True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">prob_dist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For the Continuous model,
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousWalk.probability.html#hiperwalk.ContinuousWalk.probability" title="hiperwalk.ContinuousWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousWalk.probability()</span></code></a> and
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousWalk.probability_distribution.html#hiperwalk.ContinuousWalk.probability_distribution" title="hiperwalk.ContinuousWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousWalk.probability_distribution()</span></code></a> yield
-the same result.</p>
-</div>
-<p>Now that a probability distribution was obtained,
-the user may wish to visualize it graphically to
-have additional insights.
-For more information about plotting and its customization,
-see next section.</p>
+<p>probability vs probability distribution</p>
 </section>
 </section>
 
@@ -860,11 +813,11 @@ see next section.</p>
       </div>
     </a>
     <a class="right-next"
-       href="plotting.html"
+       href="plotting_customization.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Plotting</p>
+        <p class="prev-next-title">Plotting Customization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

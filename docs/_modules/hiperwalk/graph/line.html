@@ -351,7 +351,7 @@ document.write(`
 
 <div class="viewcode-block" id="Line"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line">[docs]</a><span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finite line graph (path graph).</span>
+<span class="sd">    Finite Line Graph (Path Graph).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -362,28 +362,27 @@ document.write(`
 <span class="sd">    -----</span>
 <span class="sd">    On the Line,</span>
 <span class="sd">    we can assign directions to the arcs.</span>
-<span class="sd">    An arc pointing rightward has direction 0 --</span>
-<span class="sd">    i.e., (1, 2), and</span>
-<span class="sd">    an arc pointing leftward has direction 1 --</span>
+<span class="sd">    If an arc is pointing rightwards it has direction 0 --</span>
+<span class="sd">    i.e., (1, 2).</span>
+<span class="sd">    If an arc is pointing leftwards, it has direction 1 --</span>
 <span class="sd">    i.e., (2, 1).</span>
 
-<span class="sd">    We use the directions of the arcs to define their order.</span>
-<span class="sd">    Thus, for a vertex :math:`v \in V`,</span>
+<span class="sd">    We use the arc directions to define the arcs order.</span>
+<span class="sd">    Hence, for a vertex :math:`v \in V`,</span>
 <span class="sd">    the arcs :math:`(v, v + 1)` and :math:`(v, v - 1)`</span>
 <span class="sd">    have labels :math:`a_0` and :math:`a_1` (respectively)</span>
 <span class="sd">    such that  :math:`a_0 &lt; a_1`.</span>
-<span class="sd">    This order is aligned with the description of</span>
-<span class="sd">    coined quantum walks on the line in Reference [1]_.</span>
+<span class="sd">    This order is coherent with the Coined Quantum Walk on the line [1]_.</span>
 <span class="sd">    The only exceptions to this rule are the extreme vertices</span>
-<span class="sd">    0 and :math:`|V| - 1` because</span>
-<span class="sd">    they only have one arc.</span>
-<span class="sd">    Aside from these exceptions,</span>
+<span class="sd">    0 and :math:`|V| - 1`.</span>
+<span class="sd">    Since they only have one arc.</span>
+<span class="sd">    Besides that,</span>
 <span class="sd">    for any two vertices :math:`v_1 &lt; v_2`,</span>
-<span class="sd">    any arc with tail :math:`v_1` has a label smaller than</span>
-<span class="sd">    the label of any arc with tail :math:`v_2`.</span>
+<span class="sd">    any arc with tail :math:`v_1` has label smaller than</span>
+<span class="sd">    any arc with tail :math:`v_2`.</span>
 
-<span class="sd">    For example, Figure 1 depicts the labels of the arcs of a path graph</span>
-<span class="sd">    with 4 vertices.</span>
+<span class="sd">    For example, the arc labels of the 4-vertices Line</span>
+<span class="sd">    are represented in Figure 1.</span>
 <span class="sd">    </span>
 <span class="sd">    .. graphviz:: ../../graphviz/line-arcs.dot</span>
 <span class="sd">        :align: center</span>
@@ -392,8 +391,8 @@ document.write(`
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
-<span class="sd">    .. [1] R. Portugal. &quot;Quantum walks and search algorithms&quot;,</span>
-<span class="sd">        2nd edition, Springer, 2018.</span>
+<span class="sd">    .. [1] Portugal, Renato. &quot;Quantum walks and search algorithms&quot;.</span>
+<span class="sd">        Vol. 19. New York: Springer, 2013.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Line.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">):</span>
@@ -459,7 +458,7 @@ document.write(`
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">arc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mi">1</span>
-            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
+            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span> 
             <span class="k">if</span> <span class="n">arc</span> <span class="o">==</span> <span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">2</span>
             <span class="k">return</span> <span class="n">arc</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">arc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">arc</span> <span class="o">-</span> <span class="mi">2</span></div>

@@ -2,21 +2,20 @@
 Graphs
 ======
 
-You have the option to either generate arbitrary graphs or create specific,
-well-known graphs.
+It is possible to create arbitrary graphs or specific graphs.
 
 ----------------
 Arbitrary Graphs
 ----------------
 
-Currently, Hiperwalk supports only simple graphs.
-You can create any graph by passing the adjacency matrix to
+In the meantime, Hiperwalk only deals with simple graphs.
+Any graph be created by passing the adjacency matrix to
 the :class:`hiperwalk.Graph` constructor.
 
-You can obtain the adjacency matrix using `NetworkX
+The adjacency matrix can be obtained via `NetworkX
 <https://networkx.org/>`_.
-For instance, to generate the adjacency matrix of a ladder graph,
-you would execute the following commands:
+For example, the adjacency matrix of a ladder graph can be obtained
+by executing
 
 >>> import networkx as nx
 >>> ladder = nx.ladder_graph(10)
@@ -26,8 +25,7 @@ you would execute the following commands:
     with 56 stored elements in Compressed Sparse Row format>
 
 
-Once you have the adjacency matrix, you can then generate a
-Hiperwalk graph.
+We can then create a Hiperwalk graph by passing the adjacency matrix.
 
 .. testsetup::
 
@@ -39,13 +37,12 @@ Hiperwalk graph.
 >>> hpw_ladder #doctest: +SKIP
 <hiperwalk.graph.graph.Graph object at 0x7f3bd0627eb0>
 
-After accomplishing this, it's advisable to delete the NetworkX graph.
-This step is particularly important when dealing with large graphs,
-as it helps prevent memory overload.
+After doing this it is recommended do delete the NetworkX graph.
+Specially when dealing with large graphs to avoid memory overload.
 
 >>> del ladder
 
-Following this, we can use ``hpw_ladder`` to simulate a quantum walk.
+We then may use ``hpw_ladder`` to simulate any quantum walk.
 
 .. todo::
    In the meantime,
@@ -58,20 +55,20 @@ Following this, we can use ``hpw_ladder`` to simulate a quantum walk.
 Specific Graphs
 ---------------
 
-Hiperwalk includes classes for well-known specific graphs,
-such as Line, Cycle, and Lattice.
-For a complete list of specific graphs,
-refer to :ref:`docs_documentation_graph`.
+There are classes for specific well-known graphs,
+such as the Line, Cycle and Lattice.
+Please refer to :ref:`docs_documentation_graph`
+for the complete list of specific graphs.
 
-The key difference between creating an
-arbitrary graph and a specific graph is
-that for the former, you must explicitly provide the adjacency matrix.
-However, for the latter, the adjacency matrix is automatically generated
-based on the number of vertices.
-Consequently, you can create a line with 10 vertices,
+Generally, the difference between creating an arbitrary graph and
+a specific graph is that
+in the former the adjacency matrix must be explicited,
+while in the latter,
+the adjacency matrix is generated from the number of vertices.
+Thus, the following are valid commands for creating
+a line with 10 vertices,
 a cycle with 10 vertices,
-and a lattice of dimensions :math:`10 \times 10` using
-valid commands, respectively.
+and a :math:`10 \times 10`-dimensional lattice, respectively.
 
 >>> hpw.Line(10) #doctest: +SKIP
 <hiperwalk.graph.line.Line object at 0x7f0a6bb700d0>
@@ -80,32 +77,34 @@ valid commands, respectively.
 >>> hpw.Lattice(10) #doctest: +SKIP
 <hiperwalk.graph.lattice.Lattice object at 0x7f0a6bbb2da0>
 
-Naturally, you can create specific graphs using NetworkX and
-the :class:`hiperwalk.Graph` class.
-However, this approach is not recommended, especially when dealing with
-coined quantum walks, as it may result in undesirable behavior.
+Naturally, the specific graphs may be created using NetworkX and
+using the arbitrary :class:`hiperwalk.Graph` class.
+However, this is not recommended specifically when dealing with
+the Coined Quantum Walk model
+because it may result on undesirable behavior.
 
-As an example, let's consider a Line with 10 vertices.
-First, we create the line using the :class:`hiperwalk.Graph` class.
+For example, let us take a Line with 10 vertices as example.
+First, create the line using the :class:`hiperwalk.Graph` class.
 
 >>> path = nx.path_graph(10)
 >>> adj_matrix = nx.adjacency_matrix(path)
 >>> arbitrary_line = hpw.Graph(adj_matrix)
 
-Next, we create the line using the :class:`hiperwalk.Line` class.
+Then create the line using the :class:`hiperwalk.Line` class.
 
 >>> specific_line = hpw.Line(10)
 
-In a simple graph, we associate each edge with two arcs. Suppose we wish
-to know the label of the arc that links vertex 1 to 2. This information
-can be obtained using the :meth:`hiperwalk.Graph.arc_label` method.
-Observe the following results:
+We associate each edge of the simple graph with two arcs.
+Let's say that we which to know the label of the arc
+that goes from vertex 1 to 2.
+This can be done using the :meth:`hiperwalk.Graph.arc_label`.
+We have
 
 >>> arbitrary_line.arc_label(1, 2)
 2
 >>> specific_line.arc_label(1, 2)
 1
 
-For further details on arc labels for each graph, refer to the Notes
-section of each graph class, in this case,
-:class:`hiperwalk.Graph` and :class:`hiperwalk.Line`.
+For more details on the arc labels on each graph,
+refer to the Notes section of each graph class --
+in this case, :class:`hiperwalk.Graph` and :class:`hiperwalk.Line`.

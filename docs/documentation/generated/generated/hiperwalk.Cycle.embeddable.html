@@ -506,14 +506,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Cycle.embeddable">
 <span class="sig-prename descclassname"><span class="pre">Cycle.</span></span><span class="sig-name descname"><span class="pre">embeddable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/cycle.html#Cycle.embeddable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle.embeddable" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the graph can be embedded on the plane,
-and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<dd><p>Returns whether the graph can be embedded on the plane or not.</p>
 <p>If a graph can be embedded on the plane,
-we can assign meaningful right or left directions,
-and clockwise or counter-clockwise rotations to edges and arcs</p>
+we can assign directions to edges and arcs.</p>
 <p class="rubric">Notes</p>
 <p>The implementation is class-dependent.
-We do not inspect the structure of the graph to determine whether
+We do not check the graph structure to determine whether
 it is embeddable or not.</p>
 </dd></dl>
 

@@ -359,15 +359,15 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk">[docs]</a><span class="k">class</span> <span class="nc">QuantumWalk</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract class for Quantum Walks.</span>
+<span class="sd">    Basic (abstract) class for Quantum Walks.</span>
 
 <span class="sd">    Basic methods and attributes used for implementing</span>
-<span class="sd">    specific quantum walk models.</span>
+<span class="sd">    specific Quantum Walk models.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    graph</span>
-<span class="sd">        Graph on which the quantum walk takes place.</span>
+<span class="sd">        Graph on which the quantum walk occurs.</span>
 <span class="sd">        It can be the graph itself (:class:`hiperwalk.graph.Graph`) or</span>
 <span class="sd">        its adjacency matrix (:class:`scipy.sparse.csr_array`).</span>
 
@@ -452,11 +452,11 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.uniform_state"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state">[docs]</a>    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates a uniform state.</span>
+<span class="sd">        Generate the uniform state.</span>
 
 <span class="sd">        The state is constructed based on the ``hilb_dim`` attribute.</span>
-<span class="sd">        The uniform initial state is a unit vector with entries </span>
-<span class="sd">        that have the same real amplitude.</span>
+<span class="sd">        The uniform initial state is the state where</span>
+<span class="sd">        all entries have the same amplitude.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -523,7 +523,7 @@ document.write(`
 <div class="viewcode-block" id="QuantumWalk.get_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">():</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the evolution operator in matrix form.</span>
+<span class="sd">        Returns the evolution operator in matricial form.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
@@ -536,7 +536,7 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the probability distribution of each state.</span>
+<span class="sd">        Compute the probability states.</span>
 
 <span class="sd">        The probability of each entry of the state.</span>
 

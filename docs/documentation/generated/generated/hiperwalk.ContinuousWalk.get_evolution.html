@@ -507,7 +507,7 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousWalk.get_evolution">
 <span class="sig-prename descclassname"><span class="pre">ContinuousWalk.</span></span><span class="sig-name descname"><span class="pre">get_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_walk.html#ContinuousWalk.get_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousWalk.get_evolution" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns the evolution operator.</p>
+<dd><p>Return the evolution operator.</p>
 <p>Constructs the evolution operator based on the previously
 set Hamiltonian.</p>
 <dl class="field-list simple">
@@ -541,11 +541,10 @@ generate the evolution operator.</p>
 <p class="rubric">Notes</p>
 <p>The evolution operator is given by</p>
 <div class="math notranslate nohighlight">
-\[U = e^{-\text{i}tH},\]</div>
-<p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hamiltonian, and
+\[U = e^{-\text{i}tH}\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\)</span> is a Hamiltonian matrix, and
 <span class="math notranslate nohighlight">\(t\)</span> is the time.</p>
-<p>The evolution operator is constructed using
-Taylor Series expansion.</p>
+<p>The evolution operator is constructed by Taylor Series expansion.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>For floating time (not integer),

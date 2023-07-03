@@ -508,11 +508,10 @@ document.write(`
 <dt class="sig sig-object py" id="hiperwalk.CoinedWalk.set_coin">
 <span class="sig-prename descclassname"><span class="pre">CoinedWalk.</span></span><span class="sig-name descname"><span class="pre">set_coin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#CoinedWalk.set_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CoinedWalk.set_coin" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a coin operator based on the graph structure.</p>
-<p>Constructs a coin operator based on the degree of each vertex.
-A single type of coin may be applied to
-all vertices or a subset thereof.
-The coin operator is then established to be used in the generation
-of the evolution operator.</p>
+<p>Constructs coin operator depending on the degree of each vertex.
+A single coin type may be applied to all or subset of vertices.
+The coin operator is set to be used during the
+evolution operator generation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -554,7 +553,7 @@ that were not explicitly listed.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a></dt><dd><p>The explicit coin operator.</p>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a></dt><dd><p>The explicit coin operator.</p>
 </dd>
 </dl>
 </li>
@@ -564,11 +563,11 @@ that were not explicitly listed.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Owing to the selected computational basis (refer to the
-Notes in the <a class="reference internal" href="../hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">CoinedWalk</span></code></a>),
-the outcome is a block diagonal operator.
-Each block is a <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
-As a result, there are <span class="math notranslate nohighlight">\(|V|\)</span> blocks in total.</p>
+<p>Due to the chosen computational basis
+(see <a class="reference internal" href="../hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">CoinedWalk</span></code></a> Notes),
+the resulting operator is a block diagonal where
+each block is the <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
+Consequently, there are <span class="math notranslate nohighlight">\(|V|\)</span> blocks.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Check if explicit coin is valid.</p>

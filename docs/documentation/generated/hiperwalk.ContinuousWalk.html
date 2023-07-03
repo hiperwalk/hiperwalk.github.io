@@ -502,29 +502,29 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousWalk">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">ContinuousWalk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjacency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/continuous_walk.html#ContinuousWalk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousWalk" title="Permalink to this definition">#</a></dt>
-<dd><p>Manage an instance of the continuous-time quantum walk
-on an arbitrary simple graph.</p>
-<p>For further implementation details, refer to the Notes Section.</p>
+<dd><p>Manage instance of the continuous time quantum walk model
+on unweighted graphs.</p>
+<p>For implemantation details see Notes Section.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>graph</strong></dt><dd><p>Graph on which the quantum walk takes place.
-There are two acceptable inputs:</p>
+<dt><strong>graph</strong></dt><dd><p>Graph on which the quantum walk occurs.
+There are three two types acceptable.</p>
 <dl class="simple">
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code> :</dt><dd><p>The graph itself.</p>
 </dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">class:scipy.sparse.csr_array</span></code>:</dt><dd><p>The adjacency matrix of the graph.</p>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">class:scipy.sparse.csr_array</span></code>:</dt><dd><p>The graph adjacency matrix.</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>adjacency</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>, optional</span></dt><dd><div class="deprecated">
+<dt><strong>adjacency</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>, optional</span></dt><dd><div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 2.0a1: </span>It will be removed in version 2.0.
 Use <code class="docutils literal notranslate"><span class="pre">graph</span></code> instead.</p>
 </div>
-<p>Adjacency matrix of the graph on which
-the quantum walk takes place.</p>
+<p>Adjacency matrix of the graph on which the quantum occurs
+is going to occur.</p>
 </dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Arguments to set the Hamiltonian.</p>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Arguments for setting Hamiltonian.</p>
 </dd>
 </dl>
 </dd>
@@ -536,7 +536,7 @@ the quantum walk takes place.</p>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the adjacency matrix of graph <span class="math notranslate nohighlight">\(G(V, E)\)</span>.
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the adjacency matrix of the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span>.
 <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(|V| \times |V|\)</span>-dimensional matrix such that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A_{i,j} = \begin{cases}
@@ -544,11 +544,11 @@ the quantum walk takes place.</p>
     0, \text{ otherwise}
 \end{cases}\end{split}\]</div>
 <p>The states of the computational basis are <span class="math notranslate nohighlight">\(\ket{i}\)</span> for
-<span class="math notranslate nohighlight">\(0 \leq i &lt; |V|\)</span>, where
+<span class="math notranslate nohighlight">\(0 \leq i &lt; |V|\)</span> where
 <span class="math notranslate nohighlight">\(\ket i\)</span> is associated with the <span class="math notranslate nohighlight">\(i\)</span>-th vertex.</p>
-<p>This class can also facilitate the simulation of any Hamiltonian
-evolution. To do this, simply pass the desired Hamiltonian in place
-of the adjacency matrix.</p>
+<p>This class can also be used to simulate the evolution of any
+any Hamiltonian.
+Simply pass the disered Hamiltonian instead of the adjacency matrix.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousWalk.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjacency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/continuous_walk.html#ContinuousWalk.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousWalk.__init__" title="Permalink to this definition">#</a></dt>
@@ -558,13 +558,13 @@ of the adjacency matrix.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.get_evolution.html#hiperwalk.ContinuousWalk.get_evolution" title="hiperwalk.ContinuousWalk.get_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_evolution</span></code></a>([time, hpc])</p></td>
-<td><p>Returns the evolution operator.</p></td>
+<td><p>Return the evolution operator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.get_gamma.html#hiperwalk.ContinuousWalk.get_gamma" title="hiperwalk.ContinuousWalk.get_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gamma</span></code></a>()</p></td>
-<td><p>Retrieves the gamma value used in the definition of the Hamiltonian.</p></td>
+<td><p>Get the gamma used for the Hamiltonian.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.get_hamiltonian.html#hiperwalk.ContinuousWalk.get_hamiltonian" title="hiperwalk.ContinuousWalk.get_hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_hamiltonian</span></code></a>()</p></td>
-<td><p>Returns the Hamiltonian.</p></td>
+<td><p>Returns Hamiltonian.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.get_marked.html#hiperwalk.ContinuousWalk.get_marked" title="hiperwalk.ContinuousWalk.get_marked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marked</span></code></a>()</p></td>
 <td><p>Gets marked vertices.</p></td>
@@ -576,7 +576,7 @@ of the adjacency matrix.</p>
 <td><p>Create a computational basis state.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.probability.html#hiperwalk.ContinuousWalk.probability" title="hiperwalk.ContinuousWalk.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states)</p></td>
-<td><p>Computes the probability distribution of each state.</p></td>
+<td><p>Compute the probability states.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.probability_distribution.html#hiperwalk.ContinuousWalk.probability_distribution" title="hiperwalk.ContinuousWalk.probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability_distribution</span></code></a>(states)</p></td>
 <td><p>Compute the probability distribution of given states.</p></td>
@@ -600,7 +600,7 @@ of the adjacency matrix.</p>
 <td><p>Generates a valid state.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousWalk.uniform_state.html#hiperwalk.ContinuousWalk.uniform_state" title="hiperwalk.ContinuousWalk.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>()</p></td>
-<td><p>Creates a uniform state.</p></td>
+<td><p>Generate the uniform state.</p></td>
 </tr>
 </tbody>
 </table>

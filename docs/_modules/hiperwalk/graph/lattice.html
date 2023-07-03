@@ -353,14 +353,8 @@ document.write(`
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Two-dimensionsal lattice.</span>
 
-<span class="sd">    The lattice can be designed with either</span>
-<span class="sd">    cyclic boundary conditions or borders.</span>
-<span class="sd">    Moreover, the lattice&#39;s representation can be either</span>
-<span class="sd">    *natural* or *diagonal*.</span>
-<span class="sd">    In the *natural* representation,</span>
-<span class="sd">    neighboring vertices lie along the X and Y axes,</span>
-<span class="sd">    while in the *diagonal* representation,</span>
-<span class="sd">    they lie along the diagonals.</span>
+<span class="sd">    The lattice may have boundary conditions or not.</span>
+<span class="sd">    Its adjacency may be either natural or diagonal.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -369,45 +363,41 @@ document.write(`
 <span class="sd">        If ``dimensions`` is an integer, creates a square lattice.</span>
 
 <span class="sd">    periodic : bool, default=True</span>
-<span class="sd">        ``True`` if the lattice has cyclic boundary conditions,</span>
-<span class="sd">        ``False`` if it has borders.</span>
+<span class="sd">        Whether the lattice has boundary conditions or not.</span>
 
 <span class="sd">    diagonal : bool, default=False</span>
-<span class="sd">        ``True`` if the lattice has the diagonal representation,</span>
-<span class="sd">        ``False`` if it has the natural representation.</span>
+<span class="sd">        If ``False`` the natural adjacency is used.</span>
+<span class="sd">        Otherwise, diagonal adjacency is used.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The order of the arcs is determined according to</span>
-<span class="sd">    the order of the vertices.</span>
-<span class="sd">    The order of the vertices is defined as follows:</span>
+<span class="sd">    For defining the arc order, we must first define the vertices order.</span>
+<span class="sd">    The vertices are sorted with respect to the Y-axis first,</span>
+<span class="sd">    and then with respect to the X-axis.</span>
+<span class="sd">    That is,</span>
 <span class="sd">    if :math:`(x_1, y_1)` and :math:`(x_2, y_2)` are two valid vertices,</span>
 <span class="sd">    we say that :math:`(x_1, y_1) &lt; (x_2, y_2)` if :math:`y_1 &lt; y_2` or</span>
 <span class="sd">    if :math:`y_1 = y_2` and :math:`x_1 &lt; x_2`.</span>
-<span class="sd">    The order of the arcs also depends on the lattice representation</span>
-<span class="sd">    (natural or diagonal).</span>
 
 <span class="sd">    Natural Lattice:</span>
 <span class="sd">        In the natural lattice,</span>
-<span class="sd">        the directions are described as follows:</span>
+<span class="sd">        we have four directions possible.</span>
 
 <span class="sd">        * 00 = 0: right;</span>
 <span class="sd">        * 01 = 1: left;</span>
 <span class="sd">        * 10 = 2: up;</span>
 <span class="sd">        * 11 = 3: down.</span>
-<span class="sd">        </span>
-<span class="sd">        The most significant bit corresponds to the axis:</span>
-<span class="sd">        0 represents the X-axis and 1 represents the Y-axis.</span>
-<span class="sd">        The least significant bit indicates the direction of</span>
-<span class="sd">        movement along the given axis, with 0 signifying</span>
-<span class="sd">        forward movement and 1 signifying backward movement.</span>
 
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
+<span class="sd">        The most significant bit corresponds to the axis,</span>
+<span class="sd">        0 for the X-axis and 1 for the Y-axis.</span>
+<span class="sd">        The less significant bit indicates whether to</span>
+<span class="sd">        move forward (0) or backward (1) in the given axis.</span>
+
+<span class="sd">        The arcs order respect vertices order and these directions.</span>
+<span class="sd">        For example, let :math:`(x, y)` be a vertex where</span>
 <span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
-<span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
+<span class="sd">        are also valid vertices.</span>
+<span class="sd">        The directions give</span>
 
 <span class="sd">        .. math::</span>
 <span class="sd">            ((x, y), (x + 1, y)) &amp;&lt; ((x, y), (x - 1, y)) \\</span>
@@ -420,23 +410,22 @@ document.write(`
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
 <span class="sd">            :name: fig-natural-dir</span>
-<span class="sd">            :caption: Figure: Directions in the natural representation.</span>
+<span class="sd">            :caption: Figure: Natural lattice directions.</span>
 
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-lattice with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-natural-lattice`.</span>
+<span class="sd">        For example, the arcs labels for</span>
+<span class="sd">        the periodic natural :math:`3 \times 3`-lattice are</span>
+<span class="sd">        illustrated in :ref:`fig-periodic-natural-lattice`.</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/lattice/periodic-natural.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
 <span class="sd">            :name: fig-periodic-natural-lattice</span>
-<span class="sd">            :caption: Figure: 3x3-lattice with cyclic boundary conditions.</span>
+<span class="sd">            :caption: Figure: Periodic natural 3x3-lattice.</span>
 
-<span class="sd">        In the case of a natural lattice with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications</span>
-<span class="sd">        due to the presence of vertices with degrees 2 and 3.</span>
-<span class="sd">        Figure :ref:fig-bounded-natural-Lattice provides an illustration</span>
-<span class="sd">        of a bounded natural lattice.</span>
+<span class="sd">        For the natural lattice with boundary condition,</span>
+<span class="sd">        the arcs labels follow the same order.</span>
+<span class="sd">        But the labels are shifted when a given arc does not exist.</span>
+<span class="sd">        See :ref:`fig-bounded-natural-Lattice`</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/lattice/bounded-natural.dot</span>
 <span class="sd">            :align: center</span>
@@ -446,26 +435,23 @@ document.write(`
 
 <span class="sd">    Diagonal Lattice:</span>
 <span class="sd">        In the diagonal lattice,</span>
-<span class="sd">        the directions are described as follows:</span>
+<span class="sd">        we have four directions possible.</span>
 
 <span class="sd">        * 00 = 0: right, up;</span>
 <span class="sd">        * 01 = 1: right, down;</span>
 <span class="sd">        * 10 = 2: left, up;</span>
 <span class="sd">        * 11 = 3: left, down.</span>
 
-<span class="sd">        Each binary value indicates the direction of movement,</span>
-<span class="sd">        with 0 representing forward motion and 1 representing</span>
-<span class="sd">        backward motion. The most significant bit corresponds to</span>
-<span class="sd">        movement along the X-axis, while the least significant bit</span>
-<span class="sd">        corresponds to movement along the Y-axis.</span>
+<span class="sd">        Each binary value describes whether to move</span>
+<span class="sd">        forward (0) or backward (1).</span>
+<span class="sd">        The most significant bit describes the X-axis movement and</span>
+<span class="sd">        the less significant bit describes the Y-axis movement.</span>
 
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
-<span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
-<span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
-<span class="sd">        </span>
+<span class="sd">        The arcs order respect vertices order and these directions.</span>
+<span class="sd">        For example, let :math:`(x, y)` be a vertex where</span>
+<span class="sd">        :math:`(x \pm 1, y \pm 1)` are also valid vertices.</span>
+<span class="sd">        The directions give</span>
+
 <span class="sd">        .. math::</span>
 <span class="sd">            ((x, y), (x + 1, y + 1)) &amp;&lt; ((x, y), (x + 1, y - 1)) \\</span>
 <span class="sd">                                     &amp;&lt; ((x, y), (x - 1, y + 1)) \\</span>
@@ -477,11 +463,11 @@ document.write(`
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
 <span class="sd">            :name: fig-diagonal-dir</span>
-<span class="sd">            :caption: Figure: Directions in the diagonal representation.</span>
+<span class="sd">            :caption: Figure: Diagonal lattice directions.</span>
 
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-lattice with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-diagonal-lattice`</span>
+<span class="sd">        For example, the arcs labels for</span>
+<span class="sd">        the periodic diagonal :math:`3 \times 3`-lattice are</span>
+<span class="sd">        illustrated in :ref:`fig-periodic-diagonal-lattice`</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/lattice/periodic-diagonal.dot</span>
 <span class="sd">            :align: center</span>
@@ -489,31 +475,32 @@ document.write(`
 <span class="sd">            :name: fig-periodic-diagonal-lattice</span>
 <span class="sd">            :caption: Figure: Periodic diagonal 3x3-lattice.</span>
 
-<span class="sd">        In the case of a diagonal lattice with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications.</span>
-<span class="sd">        Figure :ref:`fig-bounded-diagonal-Lattice` provides</span>
-<span class="sd">        an illustration of a bounded diagonal lattice.</span>
+<span class="sd">        For the diagonal lattice with boundary condition,</span>
+<span class="sd">        the arcs labels follow the same order.</span>
+<span class="sd">        But the labels are shifted when a given arc does not exist.</span>
+<span class="sd">        See :ref:`fig-bounded-diagonal-Lattice`</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/lattice/bounded-diagonal.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
 <span class="sd">            :name: fig-bounded-diagonal-lattice</span>
-<span class="sd">            :caption: Figure: Bounded 3x3-lattice in the diagonal representation.</span>
+<span class="sd">            :caption: Figure: Bounded diagonal 3x3-lattice.</span>
 
-<span class="sd">        Note that in this context,</span>
-<span class="sd">        there exist two independent sublattices.</span>
-<span class="sd">        In other words, a vertex in one sublattice is not accessible from</span>
-<span class="sd">        a vertex in the other sublattice. This situation also arises</span>
-<span class="sd">        if the diagonal lattice has periodic boundary conditions and both</span>
-<span class="sd">        dimensions are even.</span>
-<span class="sd">        Figure :ref:`fig-even-dim-diagonal` illustrates</span>
-<span class="sd">        an example of this case.</span>
+<span class="sd">        Note that in this case, there are two independent sublattices.</span>
+<span class="sd">        That is, a vertex in one sublattice is not reacheable from</span>
+<span class="sd">        a vertex in the other sublattice.</span>
+<span class="sd">        This also occurs if the diagonal lattice is periodic and</span>
+<span class="sd">        both dimensions are even.</span>
+<span class="sd">        See :ref:`fig-even-dim-diagonal`</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/lattice/even-dim-diagonal.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
 <span class="sd">            :name: fig-even-dim-diagonal</span>
-<span class="sd">            :caption: Figure: 4x4-lattice with cyclic boundary conditions.</span>
+<span class="sd">            :caption: Figure: Periodic diagonal 4x4-lattice.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            If the diagonal lattice </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="Lattice.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Lattice.html#hiperwalk.Lattice.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -707,7 +694,7 @@ document.write(`
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Inexistent arc &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">tail</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">tail</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>  
 
         <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
@@ -729,8 +716,7 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arc in arc notation.</span>
 
-<span class="sd">        Given the arc label (a number),</span>
-<span class="sd">        returns the arc in the ``(tail, head)`` notation.</span>
+<span class="sd">        Given the arc label, returns it in the ``(tail, head)`` notation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -742,7 +728,7 @@ document.write(`
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        (tail, head)</span>
-<span class="sd">            There are two possible formats for the vertices</span>
+<span class="sd">            There are two possibile formats for the vertices</span>
 <span class="sd">            ``tail`` and ``head``.</span>
 
 <span class="sd">            (vertex_x, vertex_y) : (int, int)</span>
@@ -866,7 +852,7 @@ document.write(`
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">:</span>
             <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> 
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Lattice.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.previous_arc.html#hiperwalk.Lattice.previous_arc">[docs]</a>    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>

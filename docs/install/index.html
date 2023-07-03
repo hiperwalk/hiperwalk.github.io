@@ -349,16 +349,17 @@ document.write(`
                   
   <section id="install">
 <h1>Install<a class="headerlink" href="#install" title="Permalink to this heading">#</a></h1>
-<p>Hiperwalk relies on a number of Python libraries.
-However, installing these Python libraries alone does not enable
-Hiperwalk to leverage High-Performance Computing (HPC).
-If you desire to install Hiperwalk with HPC support, please refer
-to <a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> before proceeding
-with the Hiperwalk installation.</p>
-<p>On this page, we outline the process for installing Hiperwalk on
-a newly installed Ubuntu 20.04 operating system. The steps will
-cover identifying the GPU, installing the GPU drivers,
-neblina-core, pyneblina, and all necessary Python libraries.</p>
+<p>Hiperwalk is built on top of some Python libraries.
+By just installing the Python libraries,
+Hiperwalk does not make use of High-Performance Computing (HPC).
+If an installating with HPC support is desired,
+you can jump to <a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a>
+before installing Hiperwalk.</p>
+<p>In this page we describe the process of installing Hiperwalk in a
+freshly installed Ubuntu 20.04 operating system.
+We will describe the process of identifying the GPU, and
+installing the GPU drivers, neblina-core, pyneblina, and
+the necessary Python libraries.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Other distributions than Ubuntu 20.04 are currently not supported.</p>
@@ -367,40 +368,43 @@ Contributions are welcomed.</p>
 </div>
 <section id="hiperwalk">
 <span id="docs-install-hiperwalk"></span><h2>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Permalink to this heading">#</a></h2>
-<p>Hiperwalk can be conveniently installed using pip.
-To begin, ensure that pip is installed on your system.</p>
+<p>Hiperwalk can be easily installed via pip.
+First of all, install pip.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
 </pre></div>
 </div>
-<p>The following command will install Hiperwalk as well as all its
-Python dependencies, which include
+<p>The following command
+install Hiperwalk and all its Python dependencies.
+Namely
 <a class="reference external" href="https://numpy.org/">numpy</a>,
 <a class="reference external" href="https://scipy.org/">scipy</a>,
 <a class="reference external" href="https://networkx.org/">networkx</a>, and
 <a class="reference external" href="https://matplotlib.org/">matplotlib</a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you have older versions of these packages, they will likely be
-updated. If you prefer not to have them updated, we recommend
-<a class="reference external" href="https://docs.python.org/3/library/venv.html">creating a virtual environment</a>.</p>
+<p>If you have an old version of these packages,
+it will be probably updated.
+If you do not wish this to happen, we recommend you to
+<a class="reference external" href="https://docs.python.org/3/library/venv.html">create a virtual environment</a>.</p>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>hiperwalk
 </pre></div>
 </div>
-<p>To verify the success of the installation,
-you can execute any code found in the
-<a class="reference external" href="https://`https://github.com/hiperwalk/hiperwalk/tree/2.0.x/examples">examples directory of the repository</a>
-or proceed to the <a class="reference internal" href="../tutorial/index.html#docs-tutorial"><span class="std std-ref">Tutorial</span></a>.</p>
+<p>To test if it the installation was successful,
+you can execute any code in
+<a class="reference external" href="https://`https://github.com/hiperwalk/hiperwalk/tree/2.0.x/examples">repository examples directory</a>
+or go to the <a class="reference internal" href="../tutorial/index.html#docs-tutorial"><span class="std std-ref">Tutorial</span></a>.</p>
 </section>
 <section id="hpc-prerequisites">
 <span id="docs-install-hpc-prerequisites"></span><h2>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Permalink to this heading">#</a></h2>
-<p>Before proceeding, it’s advisable to update and upgrade your
-Ubuntu packages. Execute the following commands:</p>
+<p>Beforehand, it is recommended to update and upgrade the Ubuntu packages.
+Execute</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 </pre></div>
 </div>
-<p>Next, run the following commands to install the prerequisites:</p>
+<p>Then,
+execute the following commands to install the prerequisites.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>g++
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake
@@ -410,98 +414,99 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 pip3<span class="w"> </span>install<span class="w"> </span>pytest
 </pre></div>
 </div>
-<p>These newly installed programs serve the following purposes:</p>
+<p>The newly installed programs are needed for the following purposes.</p>
 <ul class="simple">
-<li><p>git: used to download neblina-core, pyneblina, and hiperwalk;</p></li>
-<li><p>g++: used for compiling neblina-core;</p></li>
-<li><p>cmake: essential for compiling neblina-core;</p></li>
-<li><p>libgtest-dev: verifies the successful installation of neblina-core;</p></li>
-<li><p>python3-distutils: aids in the installation of pyneblina;</p></li>
-<li><p>python3-pip: necessary for installing Python libraries;</p></li>
-<li><p>pytest: helps test pyneblina.</p></li>
+<li><p>git: download neblina-core, pyneblina, hiperwalk;</p></li>
+<li><p>g++: compiling neblina-core;</p></li>
+<li><p>cmake: compiling neblina-core;</p></li>
+<li><p>libgtest-dev: test if neblina-core installation is correct;</p></li>
+<li><p>python3-distutils: install pyneblina;</p></li>
+<li><p>python3-pip: install Python libraries;</p></li>
+<li><p>pytest: test pyneblina.</p></li>
 </ul>
-<p>Although it’s not essential, we <strong>recommend</strong> installing FFmpeg,
-which is used for generating animations.</p>
+<p>It is <strong>recommend</strong> but not necessary to install FFmpeg.
+It is used for generating animations.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
 </pre></div>
 </div>
 <section id="gpu-driver">
 <h3>GPU Driver<a class="headerlink" href="#gpu-driver" title="Permalink to this heading">#</a></h3>
-<p>To install the GPU driver, you can follow this
+<p>You may follow this
 <a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
-Below, we have outlined the essential steps.</p>
-<p>First, you’ll need to identify your GPU by running the following command:</p>
+Here we list the core steps.</p>
+<p>First we have to identify the GPU by running.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-e<span class="w"> </span>VGA
 </pre></div>
 </div>
-<p>You can then verify if the outputted
+<p>We can then check if the outputted
 <a class="reference external" href="https://developer.nvidia.com/cuda-gpus">GPU is CUDA compatible</a>.
-If it is, execute the following command:</p>
+If that’s the case, execute</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ubuntu-drivers<span class="w"> </span>devices
 </pre></div>
 </div>
-<p>This will list the available drivers for your GPU. We recommend
-installing the driver tagged with <code class="docutils literal notranslate"><span class="pre">recommended</span></code> at the end.
-The driver’s name typically follows the format <code class="docutils literal notranslate"><span class="pre">nvidia-driver-XXX</span></code>
-where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is a specific number.
-For the subsequent steps in the installation process, substitute <code class="docutils literal notranslate"><span class="pre">XXX</span></code>
-as required. To install the GPU driver, execute the following command:</p>
+<p>This is going to list the available drivers for your GPU.
+We recommend to install the driver tagged with <code class="docutils literal notranslate"><span class="pre">recommended</span></code> at the end.
+The driver name’s <cite>probably</cite> has format <code class="docutils literal notranslate"><span class="pre">nvidia-driver-XXX</span></code>
+where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is some number.
+For the remaining installation, substitute <code class="docutils literal notranslate"><span class="pre">XXX</span></code> accordingly when necessary.
+For installing the GPU driver, execute</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-driver-XXX
 </pre></div>
 </div>
 <p>Finally, <strong>reboot you computer</strong>.
-After rebooting, if the installation was successful,
-running the following command:</p>
+After reboot,
+if the installation was successful,
+running the command</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
 </pre></div>
 </div>
-<p>should display GPU information such as the name, driver version,
-CUDA version, and so on. Alternatively, you can verify the
-availability of the <strong>NVIDIA Settings</strong> application by
-pressing the <code class="docutils literal notranslate"><span class="pre">Super</span></code> key on your keyboard and
-typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
+<p>should print GPU Information,
+e.g. name, driver version, CUDA version, etc.
+Alternatively,
+you can verify whether the <strong>NVIDIA Settings</strong> application is available by
+pressing the <code class="docutils literal notranslate"><span class="pre">Super</span></code> keyboard key and typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
 </section>
 <section id="nvidia-toolkit">
 <h3>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Permalink to this heading">#</a></h3>
-<p>Once the GPU drivers have been successfully installed, it’s
-necessary to install the NVIDIA Toolkit, allowing neblina-core
-to use CUDA. To do this, execute the following command:</p>
+<p>After installing the GPU drivers correctly,
+it is necessary to install the NVIDIA Toolkit.
+So the neblina-core can use CUDA.
+Execute</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-cuda-toolkit
 </pre></div>
 </div>
-<p>To verify the correct installation of the NVIDIA Toolkit,
-you can check if the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler has been installed.
-This can be simply done by running the following command:</p>
+<p>To check if the NVIDIA Toolkit was installed correctly,
+check if the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler was installed.
+This can be done simply by running the command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>--version
 </pre></div>
 </div>
 </section>
 </section>
 <section id="installing-neblina-core-and-pyneblina">
-<h2>Installing neblina-core and pyneblina<a class="headerlink" href="#installing-neblina-core-and-pyneblina" title="Permalink to this heading">#</a></h2>
+<h2>Installing neblina-core And pyneblina<a class="headerlink" href="#installing-neblina-core-and-pyneblina" title="Permalink to this heading">#</a></h2>
 <p>For HPC support,
 Hiperwalk uses
 <a class="reference external" href="https://github.com/paulomotta/neblina-core">neblina-core</a>,
 and <a class="reference external" href="https://github.com/paulomotta/pyneblina">pyneblina</a>.
-Note that a computer with a <strong>GPU compatible with CUDA</strong> is required
-for this.</p>
-<p>The information in this guide is compiled from
+Although a computer with a <strong>GPU compatible with CUDA</strong> is necessary.</p>
+<p>We compile the information in
 <a class="reference external" href="https://paulomotta.pro.br/wp/2021/05/01/pyneblina-and-neblina-core/">Paulo Motta’s blog</a>,
 <a class="reference external" href="https://github.com/paulomotta/neblina-core">neblina-core github</a>,
 and <a class="reference external" href="https://github.com/paulomotta/pyneblina">pyneblina github</a>.</p>
 <p>It is <strong>strongly recommended</strong> that neblina-core and pyneblina
 are installed (i.e. cloned) in the same directory.
-In this guide, we will install both projects into the home directory.
-In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) serves as an alias for the home directory.</p>
+In this guide we will install both projects into the home directory.
+In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) is an alias for the home directory.</p>
 <section id="id1">
 <h3>neblina-core<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p>Firstly, clone the repository in the home directory.</p>
+<p>First, clone the repository in the home directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/paulomotta/neblina-core.git
 </pre></div>
 </div>
-<p>Next, navigate to the neblina-core directory to compile and
-install the code.</p>
+<p>Then,
+enter the neblina-core directory to compile and install the code.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>neblina-core
 cmake<span class="w"> </span>.
 make
@@ -509,9 +514,9 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
 sudo<span class="w"> </span>ldconfig
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> command creates a link for the newly installed neblina-core,
-making it accessible for use by pyneblina.</p>
-<p>To verify the successful installation of neblina-core,
+<p>The <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> commands creates a link for the newly installed neblina-core.
+Making it available to be used by the pyneblina.</p>
+<p>To check if neblina-core was installed successfully,
 execute the <code class="docutils literal notranslate"><span class="pre">vector_test</span></code> and <code class="docutils literal notranslate"><span class="pre">matrix_test</span></code> tests.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./vector_test
 ./matrix_test
@@ -521,23 +526,24 @@ execute the <code class="docutils literal notranslate"><span class="pre">vector_
 <section id="id2">
 <h3>pyneblina<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p>Before installing pyneblina,
-ensure that neblina-core has been successfully installed.
+make sure that neblina-core was installed successfully.
 Then, <strong>reboot</strong> your computer
-to ensure that the <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> command takes effect.</p>
-<p>To install pyneblina, first clone the repository into
+to make sure the <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> command takes effect.</p>
+<p>For installing pyneblina, first clone the repository into
 <strong>the same directory neblina-core was cloned</strong>.
-In this guide, we cloned neblina-core into the home directory.
-Thus, execute:</p>
+In this guide, neblina-core was cloned into the home directory.
+Thus,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/paulomotta/pyneblina.git
 </pre></div>
 </div>
-<p>Next, navigate to the newly created <code class="docutils literal notranslate"><span class="pre">pyneblina</span></code> directory to install it.</p>
+<p>Then enter the newly created <code class="docutils literal notranslate"><span class="pre">pyneblina</span></code> directory to install it.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>pyneblina
 sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="w"> </span>install
 </pre></div>
 </div>
-<p>To verify whether the installation was successful, run the following test:</p>
+<p>To verify if the installation completed successfully,
+run the test.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>test.py
 </pre></div>
 </div>
@@ -598,7 +604,7 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-neblina-core-and-pyneblina">Installing neblina-core and pyneblina</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-neblina-core-and-pyneblina">Installing neblina-core And pyneblina</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">neblina-core</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">pyneblina</a></li>
 </ul>

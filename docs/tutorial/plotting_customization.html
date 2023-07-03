@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plotting &#8212; Hiperwalk 2.0a4 documentation</title>
+    <title>Plotting Customization &#8212; Hiperwalk 2.0a4 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/plotting';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/plotting_customization';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.readthedocs.io/en/latest/_static/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
@@ -305,7 +305,7 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting Customization</a></li>
 </ul>
 </div>
 </nav></div>
@@ -346,7 +346,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorial</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Plotting</li>
+    <li class="breadcrumb-item active" aria-current="page">Plotting Customization</li>
   </ul>
 </nav>
 </div>
@@ -363,56 +363,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="plotting">
-<span id="docs-tutorial-plotting"></span><h1>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading">#</a></h1>
-<p>After calculating the probability distribution of one or multiple states,
-the user may wish to plot the distribution.
-This can be done by invoking the standalone
-<a class="reference internal" href="../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution" title="hiperwalk.plot_probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.plot_probability_distribution()</span></code></a> function.
-To plot the probability distribution given the probabilities,
-simply pass the probabilities as arguments to the
-<a class="reference internal" href="../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution" title="hiperwalk.plot_probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.plot_probability_distribution()</span></code></a> function.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create graph, quantum walk, simulate</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compute the probability distribution</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span><span class="n">prob_dist</span><span class="p">)</span> 
-</pre></div>
-</div>
-<p>This will generate <code class="docutils literal notranslate"><span class="pre">len(probs)</span></code> images where
-the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th image corresponds to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th probability.
-On a Jupyter notebook, the images will be shown in sequence simultaneously.
-On a terminal, the first image will be shown and
-the program will wait for the user to close the image
-– by pressing the <code class="docutils literal notranslate"><span class="pre">q</span></code> key for example –
-before showing the next one.</p>
-<section id="customization">
-<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this heading">#</a></h2>
-<p>Albeit plotting was simple,
-configuring the plot to behave as the user wishes may be a bit tricky.
-We antecipate that the plotting was built on top of
-<a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and
-<a class="reference external" href="https://networkx.org/">NetworkX</a>.
-Hence, every key argument accepted by these libraries is
-accepted by Hiperwalk!
-Of course, this depends on the plot type.
-It does not make sense to demand <code class="docutils literal notranslate"><span class="pre">node_color='red'</span></code> if
-a bar plot is being request.</p>
-<section id="plot-types">
-<h3>Plot Types<a class="headerlink" href="#plot-types" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>TODO</p></li>
-<li><p>TODO</p></li>
-</ol>
-</section>
-<section id="hiperwalk-specific-arguments">
-<h3>Hiperwalk-Specific Arguments<a class="headerlink" href="#hiperwalk-specific-arguments" title="Permalink to this heading">#</a></h3>
-<p>show
-filename
-animate
-interval
-rescale</p>
-</section>
-</section>
+  <section id="plotting-customization">
+<span id="docs-tutorial-plotting-customization"></span><h1>Plotting Customization<a class="headerlink" href="#plotting-customization" title="Permalink to this heading">#</a></h1>
+<p>Check out <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and
+<a class="reference external" href="https://networkx.org/">NetworkX</a> documentations for more details on
+how to customize graph plotting.
+Pay close attention to kwargs.</p>
 </section>
 
 
@@ -457,22 +413,8 @@ rescale</p>
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization">Customization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-types">Plot Types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk-specific-arguments">Hiperwalk-Specific Arguments</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../_sources/tutorial/plotting.rst.txt">
+    <a href="../_sources/tutorial/plotting_customization.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
