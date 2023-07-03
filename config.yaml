@@ -26,13 +26,13 @@ params:
   navbar:
     - title: Get started
       # url: /docs/
-      url: https://hiperwalk.readthedocs.io/en/stable/
+      url: https://hiperwalk.readthedocs.io/en/latest/
     - title: Install
       # url: /docs/install
-      url: https://hiperwalk.readthedocs.io/en/stable/install/index.html
+      url: https://hiperwalk.readthedocs.io/en/latest/install/index.html
     - title: Documentation
       # url: /docs/documentation/
-      url: https://hiperwalk.readthedocs.io/en/stable/documentation/index.html
+      url: https://hiperwalk.readthedocs.io/en/latest/documentation/index.html
     - title: Examples
       url: https://github.com/hiperwalk/hiperwalk/tree/master/examples
   keyfeatures:
