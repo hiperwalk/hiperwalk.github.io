@@ -1,0 +1,6 @@
+hiperwalk.Animation.create\_animation
+=====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Animation.create_animation

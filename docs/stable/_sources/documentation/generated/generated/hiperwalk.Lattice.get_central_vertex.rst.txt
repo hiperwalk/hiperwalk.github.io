@@ -1,0 +1,6 @@
+hiperwalk.Lattice.get\_central\_vertex
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.get_central_vertex

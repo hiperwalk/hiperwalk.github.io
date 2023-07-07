@@ -1,0 +1,6 @@
+hiperwalk.Cycle.neighbors
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.neighbors

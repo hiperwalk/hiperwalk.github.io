@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.arc\_label
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.arc_label

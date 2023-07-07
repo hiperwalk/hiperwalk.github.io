@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.number\_of\_vertices
+========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.number_of_vertices

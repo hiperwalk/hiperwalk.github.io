@@ -1,0 +1,60 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.Cycle
+===============
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: Cycle
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~Cycle.arc
+       
+       
+          ~Cycle.arc_label
+       
+       
+          ~Cycle.arcs_with_tail
+       
+       
+          ~Cycle.default_coin
+       
+       
+          ~Cycle.degree
+       
+       
+          ~Cycle.embeddable
+       
+       
+          ~Cycle.neighbors
+       
+       
+          ~Cycle.next_arc
+       
+       
+          ~Cycle.number_of_arcs
+       
+       
+          ~Cycle.number_of_edges
+       
+       
+          ~Cycle.number_of_vertices
+       
+       
+          ~Cycle.previous_arc
+       
+
+   
+   

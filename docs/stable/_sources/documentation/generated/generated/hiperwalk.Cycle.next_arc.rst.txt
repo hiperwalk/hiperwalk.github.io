@@ -1,0 +1,6 @@
+hiperwalk.Cycle.next\_arc
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.next_arc

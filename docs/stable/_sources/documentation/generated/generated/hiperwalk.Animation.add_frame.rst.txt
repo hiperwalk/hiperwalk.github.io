@@ -1,0 +1,6 @@
+hiperwalk.Animation.add\_frame
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Animation.add_frame

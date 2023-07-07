@@ -1,0 +1,6 @@
+hiperwalk.Lattice.arc\_direction
+================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.arc_direction

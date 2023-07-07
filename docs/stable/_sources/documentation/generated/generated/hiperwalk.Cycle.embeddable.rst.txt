@@ -1,0 +1,6 @@
+hiperwalk.Cycle.embeddable
+==========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.embeddable

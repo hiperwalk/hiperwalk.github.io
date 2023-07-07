@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.dimension
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.dimension

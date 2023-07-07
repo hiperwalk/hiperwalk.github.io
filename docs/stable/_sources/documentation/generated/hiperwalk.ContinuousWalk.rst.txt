@@ -1,0 +1,69 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.ContinuousWalk
+========================
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: ContinuousWalk
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~ContinuousWalk.get_evolution
+       
+       
+          ~ContinuousWalk.get_gamma
+       
+       
+          ~ContinuousWalk.get_hamiltonian
+       
+       
+          ~ContinuousWalk.get_marked
+       
+       
+          ~ContinuousWalk.hilbert_space_dimension
+       
+       
+          ~ContinuousWalk.ket
+       
+       
+          ~ContinuousWalk.probability
+       
+       
+          ~ContinuousWalk.probability_distribution
+       
+       
+          ~ContinuousWalk.set_evolution
+       
+       
+          ~ContinuousWalk.set_gamma
+       
+       
+          ~ContinuousWalk.set_hamiltonian
+       
+       
+          ~ContinuousWalk.set_marked
+       
+       
+          ~ContinuousWalk.simulate
+       
+       
+          ~ContinuousWalk.state
+       
+       
+          ~ContinuousWalk.uniform_state
+       
+
+   
+   

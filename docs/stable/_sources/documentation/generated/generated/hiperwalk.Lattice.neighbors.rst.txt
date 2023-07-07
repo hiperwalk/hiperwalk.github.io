@@ -1,0 +1,6 @@
+hiperwalk.Lattice.neighbors
+===========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Lattice.neighbors

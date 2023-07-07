@@ -1,0 +1,6 @@
+hiperwalk.ContinuousWalk.set\_marked
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousWalk.set_marked

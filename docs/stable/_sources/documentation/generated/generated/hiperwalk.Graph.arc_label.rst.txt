@@ -1,0 +1,6 @@
+hiperwalk.Graph.arc\_label
+==========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.arc_label

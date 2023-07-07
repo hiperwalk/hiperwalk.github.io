@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.arcs\_with\_tail
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.arcs_with_tail
