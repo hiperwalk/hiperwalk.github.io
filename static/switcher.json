@@ -1,0 +1,12 @@
+[
+    {
+        "name": "stable",
+        "version": "stable",
+        "url": "https://hiperwalk.org/docs/stable/"
+    },
+    {
+        "name": "latest",
+        "version": "latest",
+        "url": "https://hiperwalk.org/docs/latest/"
+    }
+]
