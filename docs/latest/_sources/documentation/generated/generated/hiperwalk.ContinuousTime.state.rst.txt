@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.state
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.state

@@ -1,0 +1,6 @@
+hiperwalk.Coined.state
+======================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.state

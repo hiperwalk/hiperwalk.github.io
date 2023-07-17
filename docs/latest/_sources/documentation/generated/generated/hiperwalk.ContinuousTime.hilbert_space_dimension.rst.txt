@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.hilbert\_space\_dimension
+==================================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.hilbert_space_dimension

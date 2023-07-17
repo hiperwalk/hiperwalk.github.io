@@ -1,0 +1,6 @@
+hiperwalk.Coined.hilbert\_space\_dimension
+==========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.hilbert_space_dimension

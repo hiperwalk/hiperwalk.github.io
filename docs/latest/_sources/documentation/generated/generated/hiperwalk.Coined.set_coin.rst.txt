@@ -1,0 +1,6 @@
+hiperwalk.Coined.set\_coin
+==========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.set_coin

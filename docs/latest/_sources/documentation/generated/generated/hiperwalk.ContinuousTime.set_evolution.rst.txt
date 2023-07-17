@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.set\_evolution
+=======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.set_evolution

@@ -1,0 +1,6 @@
+hiperwalk.Coined.ket
+====================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.ket

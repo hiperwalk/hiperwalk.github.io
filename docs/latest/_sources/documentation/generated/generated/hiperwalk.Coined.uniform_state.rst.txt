@@ -1,0 +1,6 @@
+hiperwalk.Coined.uniform\_state
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.uniform_state

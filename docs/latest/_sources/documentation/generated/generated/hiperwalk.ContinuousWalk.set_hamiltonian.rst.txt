@@ -1,6 +1,0 @@
-hiperwalk.ContinuousWalk.set\_hamiltonian
-=========================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: ContinuousWalk.set_hamiltonian

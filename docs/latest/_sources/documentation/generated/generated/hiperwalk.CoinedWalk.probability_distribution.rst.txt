@@ -1,6 +1,0 @@
-hiperwalk.CoinedWalk.probability\_distribution
-==============================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: CoinedWalk.probability_distribution

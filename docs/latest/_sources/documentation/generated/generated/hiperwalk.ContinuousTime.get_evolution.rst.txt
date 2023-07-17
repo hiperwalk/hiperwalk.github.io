@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.get\_evolution
+=======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.get_evolution

@@ -44,9 +44,6 @@ hiperwalk.Lattice
           ~Lattice.embeddable
        
        
-          ~Lattice.get_central_vertex
-       
-       
           ~Lattice.neighbors
        
        

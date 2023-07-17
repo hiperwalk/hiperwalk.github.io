@@ -1,0 +1,6 @@
+hiperwalk.Coined.set\_shift
+===========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.set_shift

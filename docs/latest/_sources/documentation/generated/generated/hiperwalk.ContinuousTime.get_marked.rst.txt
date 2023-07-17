@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.get\_marked
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.get_marked

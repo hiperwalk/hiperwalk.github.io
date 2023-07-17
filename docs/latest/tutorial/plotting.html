@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plotting &#8212; Hiperwalk latest documentation</title>
+    <title>Plotting &#8212; Hiperwalk stable documentation</title>
   
   
   
@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/plotting';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -118,7 +118,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      latest  <!-- this text may get changed later by javascript -->
+      stable  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -411,7 +411,7 @@ the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lat</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
 <span class="gp">... </span>                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>

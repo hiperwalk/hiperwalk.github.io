@@ -1,0 +1,6 @@
+hiperwalk.Coined.simulate
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.simulate

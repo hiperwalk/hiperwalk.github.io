@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.simulate
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.simulate
