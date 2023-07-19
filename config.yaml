@@ -25,14 +25,11 @@ params:
     subtitle: Simulations of quantum walks on graphs using HPC
   navbar:
     - title: Get started
-      # url: /docs/
-      url: https://hiperwalk.readthedocs.io/en/latest/
+      url: /docs/stable/
     - title: Install
-      # url: /docs/install
-      url: https://hiperwalk.readthedocs.io/en/latest/install/index.html
+      url: /docs/stable/install
     - title: Documentation
-      # url: /docs/documentation/
-      url: https://hiperwalk.readthedocs.io/en/latest/documentation/index.html
+      url: /docs/stable/documentation/
     - title: Examples
       url: https://github.com/hiperwalk/hiperwalk/tree/master/examples
   keyfeatures:
@@ -58,10 +55,8 @@ params:
       column2:
         links:
           - text: Documentation
-            # link: /docs/
-            link: https://hiperwalk.org/docs/documentation/
+            link: /docs/stable/documentation/
           - text: Tutorial
-            # link: /docs/tutorial
-            link: https://hiperwalk.org/docs/tutorial/index.html
+            link: /docs/stable/tutorial/
       column3:
         links:
