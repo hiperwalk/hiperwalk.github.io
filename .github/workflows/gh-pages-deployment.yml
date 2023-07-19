@@ -38,7 +38,7 @@ jobs:
       with:
         repository: hiperwalk/hiperwalk
         path: hiperwalk
-        ref: v2.0a5
+        ref: 2.0a
 
     - name: Build docs (stable)
       run: |
