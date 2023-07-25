@@ -41,7 +41,7 @@ params:
       - title: Open source
         text: Distributed under [LGPL3](https://github.com/hiperwalk/hiperwalk/blob/master/LICENSE), Hiperwalk is developed and maintained [publicly on GitHub](https://github.com/hiperwalk/hiperwalk).
   footer:
-    logo: logo.png
+    logo: logo_small_dark.png
     socialmediatitle: ""
     socialmedia:
       - link: https://github.com/hiperwalk/
