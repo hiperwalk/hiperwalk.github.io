@@ -9,3 +9,7 @@ The build is automatically started every time a new commit on the `main` branch 
 The GitHub Actions workflow that does that is described in the `.github/workflows/gh-pages-deployment.yml` file.
 
 Instructions to create and configure the SSH key pair used by the workflow are available in the [wiki](./wiki/Configuring-the-key-pair-for-the-automatic-build).
+
+## Main Project
+
+The main project is hosted at [https://github.com/hiperwalk/hiperwalk](https://github.com/hiperwalk/hiperwalk).
