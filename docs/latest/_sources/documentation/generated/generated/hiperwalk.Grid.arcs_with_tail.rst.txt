@@ -1,0 +1,6 @@
+hiperwalk.Grid.arcs\_with\_tail
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.arcs_with_tail

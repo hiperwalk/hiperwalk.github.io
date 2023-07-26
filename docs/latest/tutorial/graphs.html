@@ -419,7 +419,7 @@ Although the process of deleting the NetworkX is still recommended.</p>
 <section id="specific-graphs">
 <h2>Specific Graphs<a class="headerlink" href="#specific-graphs" title="Permalink to this heading">#</a></h2>
 <p>Hiperwalk includes classes for well-known specific graphs,
-such as Line, Cycle, and Lattice.
+such as Line, Cycle, and Grid.
 For a complete list of specific graphs,
 refer to <a class="reference internal" href="../documentation/graph.html#docs-documentation-graph"><span class="std std-ref">Graphs</span></a>.</p>
 <p>The key difference between creating an
@@ -429,14 +429,14 @@ However, for the latter, the adjacency matrix is automatically generated
 based on the number of vertices.
 Consequently, you can create a line with 10 vertices,
 a cycle with 10 vertices,
-and a lattice of dimensions <span class="math notranslate nohighlight">\(10 \times 10\)</span> using
+and a grid of dimensions <span class="math notranslate nohighlight">\(10 \times 10\)</span> using
 valid commands, respectively.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
 <span class="go">&lt;hiperwalk.graph.line.Line object at 0x7f0a6bb700d0&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
 <span class="go">&lt;hiperwalk.graph.cycle.Cycle object at 0x7f0a6bbb32e0&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.lattice.Lattice object at 0x7f0a6bbb2da0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
+<span class="go">&lt;hiperwalk.graph.grid.Grid object at 0x7f0a6bbb2da0&gt;</span>
 </pre></div>
 </div>
 <p>Naturally, you can create specific graphs using NetworkX and

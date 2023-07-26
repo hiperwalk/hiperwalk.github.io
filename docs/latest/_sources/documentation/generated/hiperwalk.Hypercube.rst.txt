@@ -41,13 +41,7 @@ hiperwalk.Hypercube
           ~Hypercube.dimension
        
        
-          ~Hypercube.embeddable
-       
-       
           ~Hypercube.neighbors
-       
-       
-          ~Hypercube.next_arc
        
        
           ~Hypercube.number_of_arcs
@@ -57,9 +51,6 @@ hiperwalk.Hypercube
        
        
           ~Hypercube.number_of_vertices
-       
-       
-          ~Hypercube.previous_arc
        
 
    

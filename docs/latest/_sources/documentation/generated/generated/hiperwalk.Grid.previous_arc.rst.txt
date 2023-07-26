@@ -1,0 +1,6 @@
+hiperwalk.Grid.previous\_arc
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.previous_arc

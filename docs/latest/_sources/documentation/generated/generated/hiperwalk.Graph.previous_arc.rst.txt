@@ -1,6 +1,0 @@
-hiperwalk.Graph.previous\_arc
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Graph.previous_arc

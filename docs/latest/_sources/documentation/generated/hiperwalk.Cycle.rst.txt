@@ -35,9 +35,6 @@ hiperwalk.Cycle
           ~Cycle.degree
        
        
-          ~Cycle.embeddable
-       
-       
           ~Cycle.neighbors
        
        

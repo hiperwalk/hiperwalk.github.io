@@ -1,6 +1,6 @@
-hiperwalk.Graph.next\_arc
+hiperwalk.Grid.dimensions
 =========================
 
 .. currentmodule:: hiperwalk
 
-.. automethod:: Graph.next_arc
+.. automethod:: Grid.dimensions

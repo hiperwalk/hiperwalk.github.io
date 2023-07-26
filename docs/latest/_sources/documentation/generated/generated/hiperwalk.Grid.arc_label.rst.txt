@@ -1,6 +1,6 @@
-hiperwalk.Line.embeddable
+hiperwalk.Grid.arc\_label
 =========================
 
 .. currentmodule:: hiperwalk
 
-.. automethod:: Line.embeddable
+.. automethod:: Grid.arc_label

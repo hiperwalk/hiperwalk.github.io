@@ -508,23 +508,6 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;grover&#39;</span></div>
 
-<div class="viewcode-block" id="Graph.embeddable"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.embeddable.html#hiperwalk.Graph.embeddable">[docs]</a>    <span class="k">def</span> <span class="nf">embeddable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns ``True`` if the graph can be embedded on the plane,</span>
-<span class="sd">        and ``False`` otherwise.</span>
-
-<span class="sd">        If a graph can be embedded on the plane,</span>
-<span class="sd">        we can assign meaningful right or left directions,</span>
-<span class="sd">        and clockwise or counter-clockwise rotations to edges and arcs</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        The implementation is class-dependent.</span>
-<span class="sd">        We do not inspect the structure of the graph to determine whether</span>
-<span class="sd">        it is embeddable or not.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
-
 <div class="viewcode-block" id="Graph.arc_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc_label.html#hiperwalk.Graph.arc_label">[docs]</a>    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the numerical label of the arc.</span>
@@ -570,60 +553,6 @@ document.write(`
             <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">label</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Graph.next_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.next_arc.html#hiperwalk.Graph.next_arc">[docs]</a>    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Next arc in an embeddable graph.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        arc</span>
-<span class="sd">            The arc in any of the following notations.</span>
-
-<span class="sd">            * arc notation: tuple of vertices</span>
-<span class="sd">                In ``(tail, head)`` format where</span>
-<span class="sd">                ``tail`` and ``head`` must be valid vertices.</span>
-<span class="sd">            * arc label: int.</span>
-<span class="sd">                The arc label (number).</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        Next arc in the same notation as the ``arc`` argument.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        arc</span>
-<span class="sd">        arc_label</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># implemented only if is embeddable</span>
-        <span class="k">raise</span> <span class="ne">AttributeError</span></div>
-
-<div class="viewcode-block" id="Graph.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.previous_arc.html#hiperwalk.Graph.previous_arc">[docs]</a>    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Previous arc in an embeddable graph.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        arc</span>
-<span class="sd">            The arc in any of the following notations.</span>
-
-<span class="sd">            * arc notation: tuple of vertices</span>
-<span class="sd">                In ``(tail, head)`` format where</span>
-<span class="sd">                ``tail`` and ``head`` must be valid vertices.</span>
-<span class="sd">            * arc label: int.</span>
-<span class="sd">                The arc label (number).</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        Previous arc in the same notation as the ``arc`` argument.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        arc</span>
-<span class="sd">        arc_label</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># implemented only if is embeddable</span>
-        <span class="k">raise</span> <span class="ne">AttributeError</span></div>
 
 <div class="viewcode-block" id="Graph.neighbors"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>

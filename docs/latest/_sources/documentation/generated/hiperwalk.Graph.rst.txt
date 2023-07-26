@@ -35,13 +35,7 @@ hiperwalk.Graph
           ~Graph.degree
        
        
-          ~Graph.embeddable
-       
-       
           ~Graph.neighbors
-       
-       
-          ~Graph.next_arc
        
        
           ~Graph.number_of_arcs
@@ -51,9 +45,6 @@ hiperwalk.Graph
        
        
           ~Graph.number_of_vertices
-       
-       
-          ~Graph.previous_arc
        
 
    

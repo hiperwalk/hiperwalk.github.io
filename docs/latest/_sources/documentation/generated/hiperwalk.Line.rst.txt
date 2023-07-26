@@ -35,9 +35,6 @@ hiperwalk.Line
           ~Line.degree
        
        
-          ~Line.embeddable
-       
-       
           ~Line.neighbors
        
        

@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.embeddable
-==============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.embeddable

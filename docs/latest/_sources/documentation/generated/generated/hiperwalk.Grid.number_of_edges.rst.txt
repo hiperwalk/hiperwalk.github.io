@@ -1,0 +1,6 @@
+hiperwalk.Grid.number\_of\_edges
+================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.number_of_edges

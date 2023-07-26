@@ -355,9 +355,9 @@ document.write(`
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">sys_path</span>
-<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
 
-<div class="viewcode-block" id="Line"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line">[docs]</a><span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="Line"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line">[docs]</a><span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finite line graph (path graph).</span>
 
@@ -409,9 +409,6 @@ document.write(`
         <span class="c1"># initializing</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Line.embeddable"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.embeddable.html#hiperwalk.Line.embeddable">[docs]</a>    <span class="k">def</span> <span class="nf">embeddable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
-
 <div class="viewcode-block" id="Line.default_coin"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.default_coin.html#hiperwalk.Line.default_coin">[docs]</a>    <span class="k">def</span> <span class="nf">default_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the default coin name.</span>
@@ -441,7 +438,6 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Line.next_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.next_arc.html#hiperwalk.Line.next_arc">[docs]</a>    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
@@ -462,7 +458,6 @@ document.write(`
             <span class="k">return</span> <span class="n">arc</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">arc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">arc</span> <span class="o">-</span> <span class="mi">2</span></div>
 
 <div class="viewcode-block" id="Line.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.previous_arc.html#hiperwalk.Line.previous_arc">[docs]</a>    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>

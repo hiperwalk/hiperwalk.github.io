@@ -352,594 +352,78 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for hiperwalk.graph.lattice</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
-<div class="viewcode-block" id="Lattice"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Lattice.html#hiperwalk.Lattice">[docs]</a><span class="k">class</span> <span class="nc">Lattice</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="Lattice"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Lattice.html#hiperwalk.Lattice">[docs]</a><span class="k">class</span> <span class="nc">Lattice</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Two-dimensionsal lattice.</span>
+<span class="sd">    Abstract class for Lattice graphs.</span>
 
-<span class="sd">    The lattice can be designed with either</span>
-<span class="sd">    cyclic boundary conditions or borders.</span>
-<span class="sd">    Moreover, the lattice&#39;s representation can be either</span>
-<span class="sd">    *natural* or *diagonal*.</span>
-<span class="sd">    In the *natural* representation,</span>
-<span class="sd">    neighboring vertices lie along the X and Y axes,</span>
-<span class="sd">    while in the *diagonal* representation,</span>
-<span class="sd">    they lie along the diagonals.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dimensions : int or tuple of int</span>
-<span class="sd">        Lattice dimensions in ``(x_dim, y_dim)`` format.</span>
-<span class="sd">        If ``dimensions`` is an integer, creates a square lattice.</span>
-
-<span class="sd">    periodic : bool, default=True</span>
-<span class="sd">        ``True`` if the lattice has cyclic boundary conditions,</span>
-<span class="sd">        ``False`` if it has borders.</span>
-
-<span class="sd">    diagonal : bool, default=False</span>
-<span class="sd">        ``True`` if the lattice has the diagonal representation,</span>
-<span class="sd">        ``False`` if it has the natural representation.</span>
+<span class="sd">    Lattice graphs are embedabble in a Euclidian Space,</span>
+<span class="sd">    forming a regular tiling.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The order of the arcs is determined according to</span>
-<span class="sd">    the order of the vertices.</span>
-<span class="sd">    The order of the vertices is defined as follows:</span>
-<span class="sd">    if :math:`(x_1, y_1)` and :math:`(x_2, y_2)` are two valid vertices,</span>
-<span class="sd">    we say that :math:`(x_1, y_1) &lt; (x_2, y_2)` if :math:`y_1 &lt; y_2` or</span>
-<span class="sd">    if :math:`y_1 = y_2` and :math:`x_1 &lt; x_2`.</span>
-<span class="sd">    The order of the arcs also depends on the lattice representation</span>
-<span class="sd">    (natural or diagonal).</span>
-
-<span class="sd">    Natural Lattice:</span>
-<span class="sd">        In the natural lattice,</span>
-<span class="sd">        the directions are described as follows:</span>
-
-<span class="sd">        * 00 = 0: right;</span>
-<span class="sd">        * 01 = 1: left;</span>
-<span class="sd">        * 10 = 2: up;</span>
-<span class="sd">        * 11 = 3: down.</span>
-<span class="sd">        </span>
-<span class="sd">        The most significant bit corresponds to the axis:</span>
-<span class="sd">        0 represents the X-axis and 1 represents the Y-axis.</span>
-<span class="sd">        The least significant bit indicates the direction of</span>
-<span class="sd">        movement along the given axis, with 0 signifying</span>
-<span class="sd">        forward movement and 1 signifying backward movement.</span>
-
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
-<span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
-<span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">            ((x, y), (x + 1, y)) &amp;&lt; ((x, y), (x - 1, y)) \\</span>
-<span class="sd">                                 &amp;&lt; ((x, y), (x, y + 1)) \\</span>
-<span class="sd">                                 &amp;&lt; ((x, y), (x, y - 1)).</span>
-
-<span class="sd">        The directions are depicted in :ref:`fig-natural-dir`.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/natural-directions.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-natural-dir</span>
-<span class="sd">            :caption: Figure: Directions in the natural representation.</span>
-
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-lattice with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-natural-lattice`.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/periodic-natural.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-periodic-natural-lattice</span>
-<span class="sd">            :caption: Figure: 3x3-lattice with cyclic boundary conditions.</span>
-
-<span class="sd">        In the case of a natural lattice with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications</span>
-<span class="sd">        due to the presence of vertices with degrees 2 and 3.</span>
-<span class="sd">        Figure :ref:fig-bounded-natural-Lattice provides an illustration</span>
-<span class="sd">        of a bounded natural lattice.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/bounded-natural.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-bounded-natural-lattice</span>
-<span class="sd">            :caption: Figure: Bounded natural 3x3-lattice.</span>
-
-<span class="sd">    Diagonal Lattice:</span>
-<span class="sd">        In the diagonal lattice,</span>
-<span class="sd">        the directions are described as follows:</span>
-
-<span class="sd">        * 00 = 0: right, up;</span>
-<span class="sd">        * 01 = 1: right, down;</span>
-<span class="sd">        * 10 = 2: left, up;</span>
-<span class="sd">        * 11 = 3: left, down.</span>
-
-<span class="sd">        Each binary value indicates the direction of movement,</span>
-<span class="sd">        with 0 representing forward motion and 1 representing</span>
-<span class="sd">        backward motion. The most significant bit corresponds to</span>
-<span class="sd">        movement along the X-axis, while the least significant bit</span>
-<span class="sd">        corresponds to movement along the Y-axis.</span>
-
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
-<span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
-<span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
-<span class="sd">        </span>
-<span class="sd">        .. math::</span>
-<span class="sd">            ((x, y), (x + 1, y + 1)) &amp;&lt; ((x, y), (x + 1, y - 1)) \\</span>
-<span class="sd">                                     &amp;&lt; ((x, y), (x - 1, y + 1)) \\</span>
-<span class="sd">                                     &amp;&lt; ((x, y), (x - 1, y - 1)).</span>
-
-<span class="sd">        The directions are depicted in :ref:`fig-diagonal-dir`.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/diagonal-directions.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-diagonal-dir</span>
-<span class="sd">            :caption: Figure: Directions in the diagonal representation.</span>
-
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-lattice with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-diagonal-lattice`</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/periodic-diagonal.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-periodic-diagonal-lattice</span>
-<span class="sd">            :caption: Figure: Periodic diagonal 3x3-lattice.</span>
-
-<span class="sd">        In the case of a diagonal lattice with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications.</span>
-<span class="sd">        Figure :ref:`fig-bounded-diagonal-Lattice` provides</span>
-<span class="sd">        an illustration of a bounded diagonal lattice.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/bounded-diagonal.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-bounded-diagonal-lattice</span>
-<span class="sd">            :caption: Figure: Bounded 3x3-lattice in the diagonal representation.</span>
-
-<span class="sd">        Note that in this context,</span>
-<span class="sd">        there exist two independent sublattices.</span>
-<span class="sd">        In other words, a vertex in one sublattice is not accessible from</span>
-<span class="sd">        a vertex in the other sublattice. This situation also arises</span>
-<span class="sd">        if the diagonal lattice has periodic boundary conditions and both</span>
-<span class="sd">        dimensions are even.</span>
-<span class="sd">        Figure :ref:`fig-even-dim-diagonal` illustrates</span>
-<span class="sd">        an example of this case.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/lattice/even-dim-diagonal.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-even-dim-diagonal</span>
-<span class="sd">            :caption: Figure: 4x4-lattice with cyclic boundary conditions.</span>
+<span class="sd">    Given an embedding,</span>
+<span class="sd">    directions can be assigned to the arcs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Lattice.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Lattice.html#hiperwalk.Lattice.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">x_dim</span><span class="p">,</span> <span class="n">y_dim</span> <span class="o">=</span> <span class="n">dimensions</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">x_dim</span> <span class="o">=</span> <span class="n">y_dim</span> <span class="o">=</span> <span class="n">dimensions</span>
 
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="n">x_dim</span> <span class="o">*</span> <span class="n">y_dim</span>
-        <span class="n">num_arcs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">num_vert</span> <span class="k">if</span> <span class="n">periodic</span>
-                    <span class="k">else</span> <span class="mi">4</span><span class="o">*</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x_dim</span> <span class="o">+</span> <span class="n">y_dim</span><span class="p">))</span>
-        <span class="n">num_edges</span> <span class="o">=</span> <span class="n">num_arcs</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
-
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-        <span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">)</span>
-        <span class="n">arc_count</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">periodic</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
-                <span class="c1">#indptr</span>
-                <span class="n">indptr</span><span class="p">[</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">indptr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">v</span> <span class="o">%</span> <span class="n">x_dim</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">v</span> <span class="o">//</span> <span class="n">x_dim</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">indptr</span><span class="p">[</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">indptr</span><span class="p">[</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-
-                <span class="c1">#indices</span>
-                <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span> <span class="c1">#stay in order</span>
-                    <span class="n">head</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_dim</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-
-                    <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">head</span> <span class="o">&lt;</span> <span class="n">num_vert</span>
-                        <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">head</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">head</span> <span class="o">-</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-                        <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">v</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">-</span> <span class="n">head</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="p">):</span>
-                        <span class="n">indices</span><span class="p">[</span><span class="n">arc_count</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span>
-                        <span class="n">arc_count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">periodic</span> <span class="ow">and</span> <span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-        <span class="k">if</span> <span class="n">periodic</span><span class="p">:</span>
-            <span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_arcs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
-                <span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                            <span class="p">[</span><span class="n">v</span> <span class="o">-</span> <span class="n">v</span> <span class="o">%</span> <span class="n">x_dim</span>
-                             <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">x_dim</span>
-                             <span class="k">if</span> <span class="n">coin</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span>
-                             <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="n">x_dim</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">num_vert</span>
-                             <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">diagonal</span>
-                        <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                            <span class="p">[((</span><span class="n">v</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">x_dim</span>
-                              <span class="o">+</span> <span class="n">x_dim</span><span class="o">*</span><span class="p">(</span><span class="n">v</span> <span class="o">//</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)))</span>
-                             <span class="o">%</span> <span class="n">num_vert</span>
-                             <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]))</span>
-                <span class="n">cols</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-                <span class="n">indices</span><span class="p">[</span><span class="n">arc_count</span><span class="p">:</span><span class="n">arc_count</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">cols</span>
-                <span class="n">arc_count</span> <span class="o">+=</span> <span class="mi">4</span>
-
-            <span class="c1"># TODO: use spdiags</span>
-
-        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span>
-                                            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">=</span> <span class="n">x_dim</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span> <span class="o">=</span> <span class="n">y_dim</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span> <span class="o">=</span> <span class="n">periodic</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="n">diagonal</span></div>
-
-<div class="viewcode-block" id="Lattice.embeddable"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.embeddable.html#hiperwalk.Lattice.embeddable">[docs]</a>    <span class="k">def</span> <span class="nf">embeddable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
-
-<div class="viewcode-block" id="Lattice.vertex_coordinates"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.vertex_coordinates.html#hiperwalk.Lattice.vertex_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<div class="viewcode-block" id="Lattice.next_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.next_arc.html#hiperwalk.Lattice.next_arc">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns vertex (x, y)-coordinates given its label.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        label : int</span>
-<span class="sd">            Vertex label.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        x : int</span>
-<span class="sd">            Vertex X-coordinate.</span>
-<span class="sd">        y : int</span>
-<span class="sd">            Vertex Y-coordinate.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        vertex_label</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">label</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span> <span class="n">label</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Lattice.vertex_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.vertex_label.html#hiperwalk.Lattice.vertex_label">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns vertex label (number) given its coordinates.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        x : int</span>
-<span class="sd">            Vertex X-coordinate.</span>
-<span class="sd">        y : int</span>
-<span class="sd">            Vertex Y-coordinate.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">            Vertex label.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        vertex_coordinates</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="Lattice.arc_direction"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.arc_direction.html#hiperwalk.Lattice.arc_direction">[docs]</a>    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return arc direction.</span>
+<span class="sd">        Next arc with respect to the default embedding.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        arc</span>
-<span class="sd">            Any of the following notations are acceptable.</span>
-<span class="sd">            </span>
-<span class="sd">            * ((int, int), (int, int))</span>
-<span class="sd">                Arc notation with vertices&#39; coordinates.</span>
-<span class="sd">            * (int, int)</span>
-<span class="sd">                Arc notation with vertices&#39; labels.</span>
-<span class="sd">            * int</span>
-<span class="sd">                Arc label.</span>
+<span class="sd">            The arc in any of the following notations.</span>
+
+<span class="sd">            * arc notation: tuple of vertices</span>
+<span class="sd">                In ``(tail, head)`` format where</span>
+<span class="sd">                ``tail`` and ``head`` must be valid vertices.</span>
+<span class="sd">            * arc label: int.</span>
+<span class="sd">                The arc label (number).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">            If natural (not diagonal) lattice:</span>
-<span class="sd">                * 0: right</span>
-<span class="sd">                * 1: left</span>
-<span class="sd">                * 2: up</span>
-<span class="sd">                * 3: down</span>
+<span class="sd">        Next arc in the same notation as the ``arc`` argument.</span>
 
-<span class="sd">            If diagonal lattice:</span>
-<span class="sd">                * 0: right, up</span>
-<span class="sd">                * 1: right, down</span>
-<span class="sd">                * 2: left, up</span>
-<span class="sd">                * 3: left, down</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        Does not check if arc exists.</span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        arc</span>
+<span class="sd">        arc_label</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># dealing with coordinates</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-                <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-            <span class="n">x_diff</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">y_diff</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="p">(</span><span class="n">x_diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x_diff</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="p">(</span><span class="n">y_diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">y_diff</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span>
-
-        <span class="n">y</span> <span class="o">=</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span> <span class="o">==</span> <span class="mi">1</span>
-             <span class="k">if</span> <span class="n">y</span> <span class="k">else</span>
-             <span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span></div>
-
-
-<div class="viewcode-block" id="Lattice.arc_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.arc_label.html#hiperwalk.Lattice.arc_label">[docs]</a>    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Inexistent arc &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">tail</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
-
-        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-        <span class="n">sub_x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="p">((</span><span class="n">tail</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span>
-                        <span class="ow">or</span> <span class="n">tail</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                       <span class="ow">and</span> <span class="n">direction</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-                 <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-            
-        <span class="n">sub_y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="p">((</span><span class="n">tail</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span>
-                        <span class="ow">or</span> <span class="n">tail</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                       <span class="ow">and</span> <span class="n">direction</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
-                 <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">label</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">-</span> <span class="n">sub_x</span> <span class="o">-</span> <span class="n">sub_y</span></div>
-
-<div class="viewcode-block" id="Lattice.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.arc.html#hiperwalk.Lattice.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Lattice.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.previous_arc.html#hiperwalk.Lattice.previous_arc">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Arc in arc notation.</span>
-
-<span class="sd">        Given the arc label (a number),</span>
-<span class="sd">        returns the arc in the ``(tail, head)`` notation.</span>
+<span class="sd">        Previous arc with respect to the default embedding.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        label : int</span>
-<span class="sd">            Arc label (number)</span>
-<span class="sd">        coordinates : bool, default=True</span>
-<span class="sd">            Whether the vertices are returned as coordinates or as labels.</span>
+<span class="sd">        arc</span>
+<span class="sd">            The arc in any of the following notations.</span>
+
+<span class="sd">            * arc notation: tuple of vertices</span>
+<span class="sd">                In ``(tail, head)`` format where</span>
+<span class="sd">                ``tail`` and ``head`` must be valid vertices.</span>
+<span class="sd">            * arc label: int.</span>
+<span class="sd">                The arc label (number).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        (tail, head)</span>
-<span class="sd">            There are two possible formats for the vertices</span>
-<span class="sd">            ``tail`` and ``head``.</span>
+<span class="sd">        Previous arc in the same notation as the ``arc`` argument.</span>
 
-<span class="sd">            (vertex_x, vertex_y) : (int, int)</span>
-<span class="sd">                If ``coordinates=True``.</span>
-<span class="sd">            label : int</span>
-<span class="sd">                If ``coordinates=False``.</span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        arc</span>
+<span class="sd">        arc_label</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">label</span> <span class="o">//</span> <span class="mi">4</span>
-            <span class="n">coin</span> <span class="o">=</span> <span class="n">label</span> <span class="o">%</span> <span class="mi">4</span>
-            <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-            <span class="n">x_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="p">(((</span><span class="n">tail</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">x_dim</span>
-                          <span class="o">+</span> <span class="n">x_dim</span><span class="o">*</span><span class="p">(</span><span class="n">tail</span> <span class="o">//</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)))</span>
-                        <span class="o">%</span> <span class="n">num_vert</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">-</span> <span class="n">tail</span> <span class="o">%</span> <span class="n">x_dim</span>
-                        <span class="o">+</span> <span class="p">(</span><span class="n">tail</span> <span class="o">%</span> <span class="n">x_dim</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">x_dim</span>
-                        <span class="k">if</span> <span class="n">coin</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span>
-                        <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="n">x_dim</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span> <span class="o">%</span> <span class="n">num_vert</span><span class="p">)</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># not diagonal</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-            <span class="n">diff</span> <span class="o">=</span> <span class="n">label</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
-            <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-
-            <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="o">**</span><span class="p">(</span><span class="n">coin</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">head</span> <span class="o">&lt;</span> <span class="n">num_vert</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">head</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">tail</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tail</span> <span class="o">-</span> <span class="n">head</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="p">):</span>
-                    <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="k">break</span>
-                    <span class="n">diff</span> <span class="o">-=</span> <span class="mi">1</span>
-
-        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">coordinates</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">arc</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
-
-<div class="viewcode-block" id="Lattice.neighbors"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.neighbors.html#hiperwalk.Lattice.neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
-        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">iterable</span><span class="p">:</span>
-            <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="n">neigh</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">iterable</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">,</span> <span class="n">neigh</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">neigh</span></div>
-
-<div class="viewcode-block" id="Lattice.arcs_with_tail"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.arcs_with_tail.html#hiperwalk.Lattice.arcs_with_tail">[docs]</a>    <span class="k">def</span> <span class="nf">arcs_with_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Lattice.degree"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.degree.html#hiperwalk.Lattice.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Lattice.next_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.next_arc.html#hiperwalk.Lattice.next_arc">[docs]</a>    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
-        
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
-
-        <span class="c1"># get direction</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">head</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">%</span> <span class="mi">2</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="p">((</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span>
-                    <span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">y_axis</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">exp</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">%</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-                <span class="n">tail</span> <span class="o">=</span> <span class="n">head</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="p">((</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">y_axis</span> <span class="k">else</span>
-                        <span class="p">((</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">,</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_head</span> <span class="o">=</span> <span class="p">((</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="k">if</span> <span class="n">y_axis</span>
-                            <span class="k">else</span> <span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">,</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="n">new_head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_head</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span>
-                    <span class="ow">or</span> <span class="n">new_head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_head</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span>
-                <span class="p">):</span>
-                    <span class="c1"># out of bounds. Rebound</span>
-                    <span class="n">new_head</span> <span class="o">=</span> <span class="n">tail</span>
-
-                <span class="n">tail</span> <span class="o">=</span> <span class="n">head</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="n">new_head</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">iterable</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Lattice.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.previous_arc.html#hiperwalk.Lattice.previous_arc">[docs]</a>    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="n">arc_iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">arc_iterable</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="n">vertex_iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">vertex_iterable</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
-
-        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-            <span class="n">x</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">%</span> <span class="mi">2</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="p">((</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span>
-                    <span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">y_axis</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">exp</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">%</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-                <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span>
-                <span class="n">tail</span> <span class="o">=</span> <span class="p">((</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">y_axis</span> <span class="k">else</span>
-                        <span class="p">((</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">,</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_tail</span> <span class="o">=</span> <span class="p">((</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">)</span> <span class="k">if</span> <span class="n">y_axis</span>
-                            <span class="k">else</span> <span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">exp</span><span class="p">,</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="n">new_tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span>
-                    <span class="ow">or</span> <span class="n">new_tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span>
-                <span class="p">):</span>
-                    <span class="c1"># out of bounds. Rebound</span>
-                    <span class="n">new_tail</span> <span class="o">=</span> <span class="n">head</span>
-
-                <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span>
-                <span class="n">tail</span> <span class="o">=</span> <span class="n">new_tail</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">vertex_iterable</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_label</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">head</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">arc_iterable</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Lattice.dimensions"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Lattice.dimensions.html#hiperwalk.Lattice.dimensions">[docs]</a>    <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Lattice dimensions.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        x_dim : int</span>
-<span class="sd">            Dimension alongside de X axis.</span>
-<span class="sd">        y_dim : int</span>
-<span class="sd">            Dimension alongside de Y axis.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">)</span></div></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 </pre></div>
 
                 </article>

@@ -23,9 +23,6 @@ hiperwalk.Lattice
           ~Lattice.arc
        
        
-          ~Lattice.arc_direction
-       
-       
           ~Lattice.arc_label
        
        
@@ -36,12 +33,6 @@ hiperwalk.Lattice
        
        
           ~Lattice.degree
-       
-       
-          ~Lattice.dimensions
-       
-       
-          ~Lattice.embeddable
        
        
           ~Lattice.neighbors
@@ -60,12 +51,6 @@ hiperwalk.Lattice
        
        
           ~Lattice.previous_arc
-       
-       
-          ~Lattice.vertex_coordinates
-       
-       
-          ~Lattice.vertex_label
        
 
    

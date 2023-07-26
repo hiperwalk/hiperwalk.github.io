@@ -1,0 +1,6 @@
+hiperwalk.Grid.vertex\_label
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.vertex_label
