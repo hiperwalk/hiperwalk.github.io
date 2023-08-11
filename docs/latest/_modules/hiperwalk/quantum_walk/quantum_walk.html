@@ -399,9 +399,10 @@ document.write(`
         <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;graph is None&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;marked&#39;</span><span class="p">])</span>
-                        <span class="k">if</span> <span class="s1">&#39;marked&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span>
-                        <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_marked</span><span class="p">([]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s1">&#39;marked&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;marked&#39;</span><span class="p">])</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1">##############################</span>
@@ -466,20 +467,35 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
                 <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.set_marked"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_marked.html#hiperwalk.QuantumWalk.set_marked">[docs]</a>    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span> <span class="nf">_update_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">marked</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="n">marked</span> <span class="o">=</span> <span class="p">[</span><span class="n">marked</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">marked</span><span class="p">)))</span>
+
+<div class="viewcode-block" id="QuantumWalk.set_marked"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_marked.html#hiperwalk.QuantumWalk.set_marked">[docs]</a>    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets marked vertices.</span>
+
+<span class="sd">        After the marked elements are changed,</span>
+<span class="sd">        the evolution operator is updated accordingly.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        marked : list of int or int</span>
 <span class="sd">            List of vertices to be marked.</span>
 <span class="sd">            If empty list, no vertex is marked.</span>
+
+<span class="sd">        ** kwargs :</span>
+<span class="sd">            Additional arguments for updating the evolution operator.</span>
+<span class="sd">            For example, whether to use neblina HPC or not.</span>
+<span class="sd">            See :meth:`set_evolution` for more options.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_evolution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">marked</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-            <span class="n">marked</span> <span class="o">=</span> <span class="p">[</span><span class="n">marked</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">marked</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QuantumWalk.get_marked"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked">[docs]</a>    <span class="k">def</span> <span class="nf">get_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -491,7 +507,7 @@ document.write(`
 <span class="sd">            List of marked vertices.</span>
 <span class="sd">            If no vertex is marked, returns the empty list.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span></div>
 
 <div class="viewcode-block" id="QuantumWalk.set_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -511,12 +527,19 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.get_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">():</span>
+<div class="viewcode-block" id="QuantumWalk.get_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>    <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the evolution operator in matrix form.</span>
+<span class="sd">        Returns the evolution operator.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`numpy.ndarray`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_evolution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span></div>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_elementwise_probability</span><span class="p">(</span><span class="n">elem</span><span class="p">):</span>
@@ -525,57 +548,132 @@ document.write(`
         <span class="c1"># elem.real**2 + elem.imag**2</span>
         <span class="k">return</span> <span class="n">elem</span><span class="o">.</span><span class="n">real</span><span class="o">*</span><span class="n">elem</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">elem</span><span class="o">.</span><span class="n">imag</span><span class="o">*</span><span class="n">elem</span><span class="o">.</span><span class="n">imag</span>
 
-<div class="viewcode-block" id="QuantumWalk.probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.success_probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.success_probability.html#hiperwalk.QuantumWalk.success_probability">[docs]</a>    <span class="k">def</span> <span class="nf">success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the probability distribution of each state.</span>
+<span class="sd">        Computes the success probability for the given state(s).</span>
 
-<span class="sd">        The probability of each entry of the state.</span>
+<span class="sd">        The success probability is the probability of the</span>
+<span class="sd">        walker being found in any of the marked vertices.</span>
+<span class="sd">        If no vertex is marked,</span>
+<span class="sd">        the success probability is 0.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        states : :class:`numpy.ndarray`</span>
-<span class="sd">            The states used to compute the probabilities.</span>
+<span class="sd">            The state(s) used to compute the probability.</span>
+<span class="sd">            ``states`` can be a single state or a list of states.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        probabilities : :class:`numpy.ndarray`</span>
-<span class="sd">            ``probabilities[i]`` is the probability of the ``i``-entry.</span>
+<span class="sd">        probabilities : float or :class:`numpy.ndarray`</span>
+<span class="sd">            float:</span>
+<span class="sd">                If ``states`` is a single state.</span>
+<span class="sd">            :class:`numpy.ndarray`:</span>
+<span class="sd">                If ``states`` is a list of states,</span>
+<span class="sd">                ``probabilities[i]`` is the probability</span>
+<span class="sd">                corresponding to the ``i``-th state.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        probability</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="QuantumWalk.probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the sum of probabilities of the given vertices.</span>
+
+<span class="sd">        Computes the probability of the walker being found on a</span>
+<span class="sd">        subset of the vertices in the given state(s).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        states : :class:`numpy.ndarray`</span>
+<span class="sd">            The state(s) used to compute the probability.</span>
+<span class="sd">            ``states`` can be a single state or a list of states.</span>
+
+<span class="sd">        vertices: list of int</span>
+<span class="sd">           The subset of vertices. </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        probabilities : float or :class:`numpy.ndarray`</span>
+<span class="sd">            float:</span>
+<span class="sd">                If ``states`` is a single state.</span>
+<span class="sd">            :class:`numpy.ndarray`:</span>
+<span class="sd">                If ``states`` is a list of states,</span>
+<span class="sd">                ``probabilities[i]`` is the probability</span>
+<span class="sd">                corresponding to the ``i``-th state.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        simulate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">single_state</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">single_state</span><span class="p">:</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">states</span><span class="p">])</span>
+
+        <span class="n">probs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">vertices</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))</span>
+                    <span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">single_state</span> <span class="k">else</span> <span class="n">probs</span></div>
+
+<div class="viewcode-block" id="QuantumWalk.probability_distribution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the probability distribution of given state(s).</span>
+
+<span class="sd">        The probability of the walker being found on each vertex</span>
+<span class="sd">        for the given state(s).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        states : :class:`numpy.ndarray`</span>
+<span class="sd">            The state(s) used to compute the probabilities.</span>
+<span class="sd">            It may be a single state or a list of states.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        probabilities : :class:`numpy.ndarray`</span>
+<span class="sd">            If ``states`` is a single state,</span>
+<span class="sd">            ``probabilities[v]`` is the probability of the</span>
+<span class="sd">            walker being found on vertex ``v``.</span>
+
+<span class="sd">            If ``states`` is a list of states,</span>
+<span class="sd">            ``probabilities[i][v]`` is the probability of the</span>
+<span class="sd">            walker beign found at vertex ``v`` in ``states[i]``.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        simulate</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The probability for a given vertex is the absolute square of</span>
+<span class="sd">        its amplitude.</span>
+<span class="sd">        That is, for an arbitrary superposition</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \sum_{v \in V} \alpha_v \ket{v},</span>
+
+<span class="sd">        the probability associated with vertex :math:`v` is</span>
+<span class="sd">        :math:`|\alpha_v|^2`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">single_state</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">single_state</span><span class="p">:</span>
             <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">states</span><span class="p">]</span>
 
         <span class="n">prob</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_elementwise_probability</span><span class="p">,</span> <span class="n">states</span><span class="p">))</span>
         <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">prob</span></div>
-
-<div class="viewcode-block" id="QuantumWalk.probability_distribution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the probability distribution of given states.</span>
-
-<span class="sd">        The probability of the walker being found on each vertex</span>
-<span class="sd">        for the given states.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        states : :class:`numpy.ndarray`</span>
-<span class="sd">            The states used to compute the probabilities.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        probabilities : :class:`numpy.ndarray`</span>
-<span class="sd">            ``probabilities[i]`` is the probability of the</span>
-<span class="sd">            walker beign found at vertex ``i``.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        simulate</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">prob</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">single_state</span> <span class="k">else</span> <span class="n">prob</span></div>
 
     <span class="k">def</span> <span class="nf">_time_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -882,7 +980,10 @@ document.write(`
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_filter_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">valid_kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span> <span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">valid_kwargs</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">}</span>
-                <span class="c1">#if kwargs.get(k) is not None}</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_pop_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">valid_kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span> <span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">valid_kwargs</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">}</span>
 
 <div class="viewcode-block" id="QuantumWalk.hilbert_space_dimension"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.hilbert_space_dimension.html#hiperwalk.QuantumWalk.hilbert_space_dimension">[docs]</a>    <span class="k">def</span> <span class="nf">hilbert_space_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>

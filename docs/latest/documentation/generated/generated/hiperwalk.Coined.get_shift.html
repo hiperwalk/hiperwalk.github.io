@@ -412,6 +412,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
@@ -431,6 +432,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
@@ -447,8 +449,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
@@ -534,8 +538,17 @@ document.write(`
 <h1>hiperwalk.Coined.get_shift<a class="headerlink" href="#hiperwalk-coined-get-shift" title="Permalink to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.get_shift">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">get_shift</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#Coined.get_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.get_shift" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">get_shift</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.get_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.get_shift" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the shift operator.</p>
+<p>Shift operator used for constructing the evolution operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>scipy.sparse.csr_array</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

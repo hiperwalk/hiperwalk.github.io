@@ -38,7 +38,6 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Coined.get_evolution';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -413,6 +412,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
@@ -432,6 +432,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
@@ -448,8 +449,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
@@ -535,63 +538,20 @@ document.write(`
 <h1>hiperwalk.Coined.get_evolution<a class="headerlink" href="#hiperwalk-coined-get-evolution" title="Permalink to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.get_evolution">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">get_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#Coined.get_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.get_evolution" title="Permalink to this definition">#</a></dt>
-<dd><p>Create evolution operator from previously set attributes.</p>
-<p>Creates evolution operator by multiplying the
-shift operator and coin operator.
-If the coin operator is not an explicit matrix,
-and the coin for marked vertices was specified,
-the coin of each marked vertex is substituted.</p>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">get_evolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.get_evolution" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the evolution operator.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>hpc</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether or not the evolution operator should be
-constructed using nelina’s high-performance computing.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a></dt><dd></dd>
+<dt><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>.</dt><dd></dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>The evolution operator is given by</p>
-<div class="math notranslate nohighlight">
-\[U = SC'\]</div>
-<p>where :math`S` is the shift operator, and
-<span class="math notranslate nohighlight">\(C'\)</span> is the coin operator (probably) modified by
-the marked vertices <a class="reference internal" href="#r2de9a3877cc9-1" id="id1">[1]</a>.</p>
-<p>If the coin operator was set as an explicit matrix,
-the marked vertices to not alter it.
-If the coin operator was not set as an explicit matrix
-(e.g. as a list of coins),
-the coin of each marked vertex is substituted as specified by
-the last <a class="reference internal" href="hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked" title="hiperwalk.Coined.set_marked"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_marked()</span></code></a> call.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Sparse matrix multipliation is not supported yet.
-Converting all matrices to dense.
-Then converting back to sparse.
-This uses unnecessary memory and computational time.</p></li>
-<li><p>Check if matrix is sparse in pynelibna interface</p></li>
-<li><p>Check if matrices are deleted from memory and GPU.</p></li>
-</ul>
-</div>
-<p class="rubric">References</p>
-<div role="list" class="citation-list">
-<div class="citation" id="r2de9a3877cc9-1" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>R. Portugal. “Quantum walks and search algorithms”,
-2nd edition, Springer, 2018.</p>
-</div>
-</div>
-<p class="rubric">Examples</p>
-<div class="admonition-todo admonition" id="id4">
-<p class="admonition-title">Todo</p>
-<p>Valid examples to clear behavior.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a></dt><dd></dd>
+</dl>
 </div>
 </dd></dl>
 

@@ -38,6 +38,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -412,6 +413,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
@@ -431,6 +433,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
@@ -447,8 +450,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
@@ -535,20 +540,25 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.QuantumWalk.probability_distribution">
 <span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">probability_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.probability_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.probability_distribution" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute the probability distribution of given states.</p>
+<dd><p>Compute the probability distribution of given state(s).</p>
 <p>The probability of the walker being found on each vertex
-for the given states.</p>
+for the given state(s).</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>states</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The states used to compute the probabilities.</p>
+<dt><strong>states</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The state(s) used to compute the probabilities.
+It may be a single state or a list of states.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">probabilities[i]</span></code> is the probability of the
-walker beign found at vertex <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">states</span></code> is a single state,
+<code class="docutils literal notranslate"><span class="pre">probabilities[v]</span></code> is the probability of the
+walker being found on vertex <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">states</span></code> is a list of states,
+<code class="docutils literal notranslate"><span class="pre">probabilities[i][v]</span></code> is the probability of the
+walker beign found at vertex <code class="docutils literal notranslate"><span class="pre">v</span></code> in <code class="docutils literal notranslate"><span class="pre">states[i]</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -559,6 +569,14 @@ walker beign found at vertex <code class="docutils literal notranslate"><span cl
 <dt><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate</span></code></a></dt><dd></dd>
 </dl>
 </div>
+<p class="rubric">Notes</p>
+<p>The probability for a given vertex is the absolute square of
+its amplitude.
+That is, for an arbitrary superposition</p>
+<div class="math notranslate nohighlight">
+\[\sum_{v \in V} \alpha_v \ket{v},\]</div>
+<p>the probability associated with vertex <span class="math notranslate nohighlight">\(v\)</span> is
+<span class="math notranslate nohighlight">\(|\alpha_v|^2\)</span>.</p>
 </dd></dl>
 
 </section>

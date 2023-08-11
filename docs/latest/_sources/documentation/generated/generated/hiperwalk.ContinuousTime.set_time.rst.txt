@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.set\_time
+==================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.set_time

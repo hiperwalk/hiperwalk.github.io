@@ -65,6 +65,9 @@ hiperwalk.Coined
           ~Coined.state
        
        
+          ~Coined.success_probability
+       
+       
           ~Coined.uniform_state
        
 

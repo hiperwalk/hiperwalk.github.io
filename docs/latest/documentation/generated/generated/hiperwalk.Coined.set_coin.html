@@ -413,6 +413,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
@@ -432,6 +433,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
@@ -448,8 +450,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
@@ -535,13 +539,13 @@ document.write(`
 <h1>hiperwalk.Coined.set_coin<a class="headerlink" href="#hiperwalk-coined-set-coin" title="Permalink to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.set_coin">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">set_coin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined_walk.html#Coined.set_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.set_coin" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">set_coin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.set_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.set_coin" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a coin operator based on the graph structure.</p>
 <p>Constructs a coin operator based on the degree of each vertex.
 A single type of coin may be applied to
 all vertices or a subset thereof.
-The coin operator is then established to be used in the generation
-of the evolution operator.</p>
+Once the coin operator is set,
+the evolution operator is updated accordingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -589,9 +593,20 @@ that were not explicitly listed.</p>
 </li>
 </ul>
 </dd>
+<dt><strong>**kwargs:</strong></dt><dd><p>Additional arguments.
+Used for determining the procedure for
+updating the evolution operator.
+See <a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.set_evolution()</span></code></a> for valid options.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
 <p>Owing to the selected computational basis (refer to the
 Notes in the <a class="reference internal" href="../hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coined</span></code></a>),

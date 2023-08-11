@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.success\_probability
+=============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.success_probability

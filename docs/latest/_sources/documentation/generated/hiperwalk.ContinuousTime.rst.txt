@@ -56,10 +56,16 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.set_marked
        
        
+          ~ContinuousTime.set_time
+       
+       
           ~ContinuousTime.simulate
        
        
           ~ContinuousTime.state
+       
+       
+          ~ContinuousTime.success_probability
        
        
           ~ContinuousTime.uniform_state

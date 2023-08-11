@@ -412,6 +412,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
@@ -431,6 +432,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
@@ -447,8 +449,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
@@ -567,7 +571,7 @@ its adjacency matrix (<a class="reference external" href="https://docs.scipy.org
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution" title="hiperwalk.QuantumWalk.get_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_evolution</span></code></a>()</p></td>
-<td><p>Returns the evolution operator in matrix form.</p></td>
+<td><p>Returns the evolution operator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked" title="hiperwalk.QuantumWalk.get_marked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marked</span></code></a>()</p></td>
 <td><p>Gets marked vertices.</p></td>
@@ -578,11 +582,11 @@ its adjacency matrix (<a class="reference external" href="https://docs.scipy.org
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket" title="hiperwalk.QuantumWalk.ket"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ket</span></code></a>(label)</p></td>
 <td><p>Creates a state of the computational basis.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states)</p></td>
-<td><p>Computes the probability distribution of each state.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states, vertices)</p></td>
+<td><p>Computes the sum of probabilities of the given vertices.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability_distribution</span></code></a>(states)</p></td>
-<td><p>Compute the probability distribution of given states.</p></td>
+<td><p>Compute the probability distribution of given state(s).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution" title="hiperwalk.QuantumWalk.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a>(**kwargs)</p></td>
 <td><p>Create the standard evolution operator.</p></td>
@@ -596,7 +600,10 @@ its adjacency matrix (<a class="reference external" href="https://docs.scipy.org
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a>(*args)</p></td>
 <td><p>Generates a valid state.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.success_probability.html#hiperwalk.QuantumWalk.success_probability" title="hiperwalk.QuantumWalk.success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">success_probability</span></code></a>(states)</p></td>
+<td><p>Computes the success probability for the given state(s).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>()</p></td>
 <td><p>Creates a uniform state.</p></td>
 </tr>
 </tbody>

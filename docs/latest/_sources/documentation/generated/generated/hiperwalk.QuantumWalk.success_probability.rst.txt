@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.success\_probability
+==========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.success_probability
