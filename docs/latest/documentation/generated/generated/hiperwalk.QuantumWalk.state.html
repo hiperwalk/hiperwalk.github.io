@@ -547,7 +547,8 @@ The state is normalized in order to be unitary.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>*args</strong></dt><dd><p>Each entry is a 2-tuple or array with format
-<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">vertex)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">vertex)</span></code>.
+An entry may be an array of such tuples.</p>
 </dd>
 </dl>
 </dd>
@@ -557,10 +558,22 @@ The state is normalized in order to be unitary.</p>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>If there are repeated vertices,
+the amplitude of the last entry is used.</p>
 <p class="rubric">Examples</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>valid example</p>
+<p>The following commands generate the same state.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi1</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi2</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi3</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">psi</span> <span class="o">==</span> <span class="n">ps1</span><span class="p">)</span> 
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">psi1</span> <span class="o">==</span> <span class="n">ps2</span><span class="p">)</span> 
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">psi2</span> <span class="o">==</span> <span class="n">ps3</span><span class="p">)</span> 
+<span class="go">True</span>
+</pre></div>
 </div>
 </dd></dl>
 

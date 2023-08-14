@@ -1233,55 +1233,69 @@ document.write(`
 <span class="sd">        *args</span>
 <span class="sd">            Each entry is a tuple (or array).</span>
 <span class="sd">            An entry can be specified in three different ways:</span>
-<span class="sd">            ``(amplitude, (vertex, dst_vertex))``,</span>
-<span class="sd">            ``(amplitude, arc_label)``,</span>
-<span class="sd">            ``(amplitude, vertex, coin)``.</span>
+<span class="sd">            ``(amplitude, (tail, head))``,</span>
+<span class="sd">            ``(amplitude, tail, head)``, and</span>
+<span class="sd">            ``(amplitude, arc_label)``.</span>
 
 <span class="sd">            amplitude</span>
 <span class="sd">                The amplitude of the given entry.</span>
-<span class="sd">            vertex</span>
+<span class="sd">            tail</span>
 <span class="sd">                The vertex corresponding to the position of the walker</span>
 <span class="sd">                in the superposition.</span>
-<span class="sd">            dst_vertex</span>
+<span class="sd">                In other words, the tail of the arc.</span>
+<span class="sd">            head</span>
 <span class="sd">                The vertex to which the coin is pointing.</span>
-<span class="sd">                In other words, the tuple</span>
-<span class="sd">                ``(vertex, dst_vertex)`` must be a valid arc.</span>
+<span class="sd">                That is, the tuple</span>
+<span class="sd">                ``(tail, head)`` must be a valid arc.</span>
 <span class="sd">            arc_label</span>
 <span class="sd">                The arc label with respect to the arc ordering</span>
 <span class="sd">                given by the computational basis.</span>
-<span class="sd">            coin</span>
-<span class="sd">                The direction towards which the coin is pointing.</span>
-<span class="sd">                It is dependable on the Graph coloring.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        If entries are repeated (except by the amplitude),</span>
-<span class="sd">        they are overwritten by the last one.</span>
+<span class="sd">        If there are repeated arcs,</span>
+<span class="sd">        the amplitude of the last entry is used.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            </span>
-<span class="sd">            qw.state([1/np.sqrt(2), 0], [1/np.sqrt(2), (1, 0)])</span>
+<span class="sd">        The following commands generate the same state on a</span>
+<span class="sd">        ``(dim, dim)``-dimensional grid.</span>
+
+<span class="sd">        &gt;&gt;&gt; psi = qw.state((1, (0, 1)), [1, 1], (1, 2))</span>
+<span class="sd">        &gt;&gt;&gt; psi1 = qw.state((1, ([0, 0], [1, 0])),</span>
+<span class="sd">        ...                 [[1, (0, dim - 1)],</span>
+<span class="sd">        ...                  (1, [(0, 0), [0, 1]])])</span>
+<span class="sd">        &gt;&gt;&gt; psi2 = qw.state([(1, [0, 0], [1, 0]),</span>
+<span class="sd">        ...                  [1, 0, dim - 1]],</span>
+<span class="sd">        ...                 (1, (0, 0), [0, 1]))</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi == ps1) #doctest: +SKIP</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi1 == ps2) #doctest: +SKIP</span>
+<span class="sd">        True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
-        <span class="n">has_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span> <span class="k">if</span> <span class="n">has_complex</span>
-                                                      <span class="k">else</span> <span class="nb">float</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                    <span class="s1">&#39;position-coin notation not implemented&#39;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-                <span class="c1"># arc notation</span>
-                <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">tail</span><span class="p">)]</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span>
+        <span class="k">def</span> <span class="nf">add_amplitude</span><span class="p">(</span><span class="n">ampl</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arc</span> <span class="o">=</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">state</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">=</span> <span class="n">ampl</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="o">*</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># arc label</span>
-                <span class="n">state</span><span class="p">[</span><span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="o">*</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
 
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
+                    <span class="n">add_amplitude</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">add_amplitude</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Coined.ket"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket">[docs]</a>    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>

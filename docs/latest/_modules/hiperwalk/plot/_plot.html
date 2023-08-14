@@ -1191,6 +1191,61 @@ document.write(`
 
 <span class="c1">#########################################################################################</span>
 
+<span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the success probability with respect to time.</span>
+
+<span class="sd">    The probabilities must have been calculated previously.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time:</span>
+<span class="sd">        Time used for the quantum walk simulation.</span>
+<span class="sd">        See :meth:`QuantumWalk.simulate` for details.</span>
+
+<span class="sd">    probabilities:</span>
+<span class="sd">        Success probabilities with respect to ``time``,</span>
+<span class="sd">        such that ``probabilities[i]`` corresponds to ``i``-th</span>
+<span class="sd">        timestamp described by ``time``.</span>
+
+<span class="sd">    **kwargs:</span>
+<span class="sd">        Additional arguments to customize plot.</span>
+<span class="sd">        See :obj:`matplotlib.pyplot.plot` for the optional keywords.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    QuantumWalk.simulate</span>
+<span class="sd">    QuantumWalk.success_probability</span>
+<span class="sd">    matplotlib.pyplot.plot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># else len(time) == 3</span>
+
+    <span class="n">time</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="s1">&#39;marker&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;marker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Success probability&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 </pre></div>

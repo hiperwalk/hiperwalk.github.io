@@ -549,24 +549,22 @@ The final state is normalized in order to be a unit vector.</p>
 <dd class="field-odd"><dl>
 <dt><strong>*args</strong></dt><dd><p>Each entry is a tuple (or array).
 An entry can be specified in three different ways:
-<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">(vertex,</span> <span class="pre">dst_vertex))</span></code>,
-<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">arc_label)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">vertex,</span> <span class="pre">coin)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">(tail,</span> <span class="pre">head))</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">tail,</span> <span class="pre">head)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">(amplitude,</span> <span class="pre">arc_label)</span></code>.</p>
 <dl class="simple">
 <dt>amplitude</dt><dd><p>The amplitude of the given entry.</p>
 </dd>
-<dt>vertex</dt><dd><p>The vertex corresponding to the position of the walker
-in the superposition.</p>
+<dt>tail</dt><dd><p>The vertex corresponding to the position of the walker
+in the superposition.
+In other words, the tail of the arc.</p>
 </dd>
-<dt>dst_vertex</dt><dd><p>The vertex to which the coin is pointing.
-In other words, the tuple
-<code class="docutils literal notranslate"><span class="pre">(vertex,</span> <span class="pre">dst_vertex)</span></code> must be a valid arc.</p>
+<dt>head</dt><dd><p>The vertex to which the coin is pointing.
+That is, the tuple
+<code class="docutils literal notranslate"><span class="pre">(tail,</span> <span class="pre">head)</span></code> must be a valid arc.</p>
 </dd>
 <dt>arc_label</dt><dd><p>The arc label with respect to the arc ordering
 given by the computational basis.</p>
-</dd>
-<dt>coin</dt><dd><p>The direction towards which the coin is pointing.
-It is dependable on the Graph coloring.</p>
 </dd>
 </dl>
 </dd>
@@ -574,12 +572,23 @@ It is dependable on the Graph coloring.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>If entries are repeated (except by the amplitude),
-they are overwritten by the last one.</p>
+<p>If there are repeated arcs,
+the amplitude of the last entry is used.</p>
 <p class="rubric">Examples</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>qw.state([1/np.sqrt(2), 0], [1/np.sqrt(2), (1, 0)])</p>
+<p>The following commands generate the same state on a
+<code class="docutils literal notranslate"><span class="pre">(dim,</span> <span class="pre">dim)</span></code>-dimensional grid.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi1</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])),</span>
+<span class="gp">... </span>                <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span>
+<span class="gp">... </span>                 <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi2</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">psi</span> <span class="o">==</span> <span class="n">ps1</span><span class="p">)</span> 
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">psi1</span> <span class="o">==</span> <span class="n">ps2</span><span class="p">)</span> 
+<span class="go">True</span>
+</pre></div>
 </div>
 </dd></dl>
 
