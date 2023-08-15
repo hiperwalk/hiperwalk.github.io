@@ -627,17 +627,17 @@ document.write(`
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
         <span class="k">return</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Graph.vertex_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_label.html#hiperwalk.Graph.vertex_label">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.vertex_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns vertex label (number) given any vertex representation.</span>
+<span class="sd">        Returns vertex number given any vertex representation.</span>
 
 <span class="sd">        By invoking this method,</span>
-<span class="sd">        the vertex label is returned regardless of its representation.</span>
+<span class="sd">        the vertex number is returned regardless of its representation.</span>
 <span class="sd">        There are some graphs in which a vertex may have multiple</span>
 <span class="sd">        representations.</span>
 <span class="sd">        For example, coordinates in a grid.</span>
 <span class="sd">        For general graphs,</span>
-<span class="sd">        this function returns the argument itself.</span>
+<span class="sd">        this function returns the argument itself if valid.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -649,7 +649,7 @@ document.write(`
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">            Vertex label.</span>
+<span class="sd">            Vertex number.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>

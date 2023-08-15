@@ -53,7 +53,7 @@ hiperwalk.Lattice
           ~Lattice.previous_arc
        
        
-          ~Lattice.vertex_label
+          ~Lattice.vertex_number
        
 
    

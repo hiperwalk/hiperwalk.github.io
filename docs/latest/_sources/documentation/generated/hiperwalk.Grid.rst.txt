@@ -62,7 +62,7 @@ hiperwalk.Grid
           ~Grid.vertex_coordinates
        
        
-          ~Grid.vertex_label
+          ~Grid.vertex_number
        
 
    

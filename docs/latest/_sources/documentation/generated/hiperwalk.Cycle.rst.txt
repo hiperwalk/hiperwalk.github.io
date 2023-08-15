@@ -53,7 +53,7 @@ hiperwalk.Cycle
           ~Cycle.previous_arc
        
        
-          ~Cycle.vertex_label
+          ~Cycle.vertex_number
        
 
    

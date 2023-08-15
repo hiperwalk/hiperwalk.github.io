@@ -53,7 +53,7 @@ hiperwalk.Hypercube
           ~Hypercube.number_of_vertices
        
        
-          ~Hypercube.vertex_label
+          ~Hypercube.vertex_number
        
 
    

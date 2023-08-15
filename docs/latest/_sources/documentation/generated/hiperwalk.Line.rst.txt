@@ -53,7 +53,7 @@ hiperwalk.Line
           ~Line.previous_arc
        
        
-          ~Line.vertex_label
+          ~Line.vertex_number
        
 
    
