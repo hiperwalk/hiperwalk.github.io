@@ -32,9 +32,6 @@ hiperwalk.Hypercube
           ~Hypercube.arcs_with_tail
        
        
-          ~Hypercube.default_coin
-       
-       
           ~Hypercube.degree
        
        

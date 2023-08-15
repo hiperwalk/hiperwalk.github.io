@@ -29,9 +29,6 @@ hiperwalk.Line
           ~Line.arcs_with_tail
        
        
-          ~Line.default_coin
-       
-       
           ~Line.degree
        
        

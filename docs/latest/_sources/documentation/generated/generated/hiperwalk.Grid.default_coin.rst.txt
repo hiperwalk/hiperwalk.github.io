@@ -1,6 +1,0 @@
-hiperwalk.Grid.default\_coin
-============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.default_coin

@@ -29,9 +29,6 @@ hiperwalk.Graph
           ~Graph.arcs_with_tail
        
        
-          ~Graph.default_coin
-       
-       
           ~Graph.degree
        
        

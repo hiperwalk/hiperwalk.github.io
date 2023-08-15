@@ -29,9 +29,6 @@ hiperwalk.Cycle
           ~Cycle.arcs_with_tail
        
        
-          ~Cycle.default_coin
-       
-       
           ~Cycle.degree
        
        

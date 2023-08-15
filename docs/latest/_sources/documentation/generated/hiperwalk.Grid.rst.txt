@@ -32,9 +32,6 @@ hiperwalk.Grid
           ~Grid.arcs_with_tail
        
        
-          ~Grid.default_coin
-       
-       
           ~Grid.degree
        
        

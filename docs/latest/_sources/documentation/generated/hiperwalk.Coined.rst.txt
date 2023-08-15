@@ -20,6 +20,9 @@ hiperwalk.Coined
    
        
        
+          ~Coined.default_coin
+       
+       
           ~Coined.get_coin
        
        

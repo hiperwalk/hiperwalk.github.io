@@ -29,9 +29,6 @@ hiperwalk.Lattice
           ~Lattice.arcs_with_tail
        
        
-          ~Lattice.default_coin
-       
-       
           ~Lattice.degree
        
        
