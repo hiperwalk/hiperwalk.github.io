@@ -665,9 +665,6 @@ an instance of the object.</p>
 <h4>Continuous-time Model<a class="headerlink" href="#continuous-time-model" title="Permalink to this heading">#</a></h4>
 <p>The dynamics of the continuous-time quantum walk is
 fully defined by the Hamiltonian.
-As a result, calling <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_evolution()</span></code></a>
-is the same as calling <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>
-in the same class.
 The Hamiltonian is given by</p>
 <div class="math notranslate nohighlight">
 \[H = -\gamma A - \sum_{m \in M} \ket m \bra m\]</div>
@@ -675,22 +672,23 @@ The Hamiltonian is given by</p>
 <span class="math notranslate nohighlight">\(M\)</span> is the set of marked vertices.
 Therefore, the <code class="docutils literal notranslate"><span class="pre">set_hamiltonian</span></code> method accepts two arguments:
 * <code class="docutils literal notranslate"><span class="pre">gamma</span></code>: the value of gamma.
-* <code class="docutils literal notranslate"><span class="pre">marked</span></code>: the list of marked vertices.
-For example,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous2</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">ContinuousTime</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous2</span> 
-<span class="go">&lt;hiperwalk.quantum_walk.continuous_walk.ContinuousTime object at 0x7ffad2de9510&gt;</span>
-</pre></div>
-</div>
-<p>The evolution operator is defined as</p>
+* <code class="docutils literal notranslate"><span class="pre">marked</span></code>: the list of marked vertices.</p>
+<p>On the other hand,
+the evolution operator is defined as</p>
 <div class="math notranslate nohighlight">
 \[U = e^{-\text{i} t H}.\]</div>
-<p>Since the continuous-time evolution operator is time-dependent,
-it should be generated as needed, based on the most recent timestamp.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">U2</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">U</span> <span class="o">!=</span> <span class="n">U2</span><span class="p">)</span>
+<p>Note that the continuous-time evolution operator is time-dependent.
+The <code class="docutils literal notranslate"><span class="pre">time</span></code> may be specified using the constructor, by the
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time" title="hiperwalk.ContinuousTime.set_time"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_time()</span></code></a> method or by the
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_evolution()</span></code></a>.
+If <code class="docutils literal notranslate"><span class="pre">time</span></code> is omitted, it is set to 0 and
+the evolution operator equals the identity.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span> <span class="c1"># time was omitted on the constructor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">I</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">U</span> <span class="o">!=</span> <span class="n">I</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -800,6 +798,10 @@ On the other hand, if <code class="docutils literal notranslate"><span class="pr
 it is converted to <code class="docutils literal notranslate"><span class="pre">(20,</span> <span class="pre">1)</span></code>, which
 results in the states corresponding to the timestamps
 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">0.</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">,</span>&#160; <span class="pre">0.5000001,</span>&#160; <span class="pre">1.0000002,</span>&#160; <span class="pre">...,</span>&#160; <span class="pre">9.5000019,</span> <span class="pre">10.000002</span> <span class="pre">])</span></code>.</p>
+<p>In the continuous-time quantum walk model,
+it is recommended that <code class="docutils literal notranslate"><span class="pre">step</span></code> has the same value as
+the <code class="docutils literal notranslate"><span class="pre">time</span></code> used in the constructor or in the <code class="docutils literal notranslate"><span class="pre">set_evolution</span></code>.
+Otherwise, the evolution operator is computated twice.</p>
 </section>
 </section>
 </section>
@@ -809,11 +811,12 @@ results in the states corresponding to the timestamps
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability()</span></code></a> and
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability_distribution()</span></code></a>.
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability()</span></code></a> computes
-the probability of each state entry.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+the probability of the walker being found on a
+subset of the vertices for each state.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">1</span>  <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">probs</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
 </div>

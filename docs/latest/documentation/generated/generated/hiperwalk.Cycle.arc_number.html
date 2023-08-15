@@ -570,13 +570,13 @@ different arguments, not as a tuple.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p>If arc <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1)</span></code> exists, the following commands should return
+<p>If arc <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1)</span></code> exists, the following commands return
 the same result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#arc number 0</span>
 <span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1">#arc as tuple</span>
 <span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#tail and head in separate arguments</span>
 <span class="go">0</span>
 </pre></div>
 </div>

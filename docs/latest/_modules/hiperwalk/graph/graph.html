@@ -532,14 +532,24 @@ document.write(`
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        If arc ``(0, 1)`` exists, the following commands should return</span>
+<span class="sd">        If arc ``(0, 1)`` exists, the following commands return</span>
 <span class="sd">        the same result.</span>
 
-<span class="sd">        &gt;&gt;&gt; qw.arc_number(0)</span>
+<span class="sd">        .. testsetup::</span>
+
+<span class="sd">            import networkx as nx</span>
+<span class="sd">            from sys import path</span>
+<span class="sd">            path.append(&#39;../..&#39;)</span>
+<span class="sd">            import hiperwalk as hpw</span>
+<span class="sd">            nxg = nx.cycle_graph(10)</span>
+<span class="sd">            adj_matrix = nx.adjacency_matrix(nxg)</span>
+<span class="sd">            graph = hpw.Graph(adj_matrix)</span>
+
+<span class="sd">        &gt;&gt;&gt; graph.arc_number(0) #arc number 0</span>
 <span class="sd">        0</span>
-<span class="sd">        &gt;&gt;&gt; qw.arc_number((0, 1))</span>
+<span class="sd">        &gt;&gt;&gt; graph.arc_number((0, 1)) #arc as tuple</span>
 <span class="sd">        0</span>
-<span class="sd">        &gt;&gt;&gt; qw.arc_number(0, 1)</span>
+<span class="sd">        &gt;&gt;&gt; graph.arc_number(0, 1) #tail and head in separate arguments</span>
 <span class="sd">        0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
