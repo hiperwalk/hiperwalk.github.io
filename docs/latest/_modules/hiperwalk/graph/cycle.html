@@ -372,9 +372,9 @@ document.write(`
 <span class="sd">    we assign the direction ``0`` to the right and ``1`` to the left.</span>
 <span class="sd">    This assignment alters the order of the arcs.</span>
 <span class="sd">    Any arc with a tail denoted by :math:`v`</span>
-<span class="sd">    has the label :math:`2v` if it points to the right,</span>
-<span class="sd">    and the label :math:`2v + 1` if it points to the left.</span>
-<span class="sd">    Figure 1 illustrates the arc labels of a cycle with 3 vertices.</span>
+<span class="sd">    has the numerical label :math:`2v` if it points to the right,</span>
+<span class="sd">    and the numerical label :math:`2v + 1` if it points to the left.</span>
+<span class="sd">    Figure 1 illustrates the arc numbers of a cycle with 3 vertices.</span>
 
 <span class="sd">    .. graphviz:: ../../graphviz/cycle-arcs.dot</span>
 <span class="sd">        :align: center</span>
@@ -404,7 +404,13 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;hadamard&#39;</span></div>
 
-<div class="viewcode-block" id="Cycle.arc_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc_label.html#hiperwalk.Cycle.arc_label">[docs]</a>    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<div class="viewcode-block" id="Cycle.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc_number.html#hiperwalk.Cycle.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+
+        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tail</span> <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">-</span> <span class="n">tail</span> <span class="o">==</span> <span class="mi">1</span>
                           <span class="ow">or</span> <span class="n">tail</span> <span class="o">-</span> <span class="n">head</span> <span class="o">==</span> <span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>

@@ -23,7 +23,7 @@ hiperwalk.Graph
           ~Graph.arc
        
        
-          ~Graph.arc_label
+          ~Graph.arc_number
        
        
           ~Graph.arcs_with_tail
@@ -45,6 +45,9 @@ hiperwalk.Graph
        
        
           ~Graph.number_of_vertices
+       
+       
+          ~Graph.vertex_label
        
 
    

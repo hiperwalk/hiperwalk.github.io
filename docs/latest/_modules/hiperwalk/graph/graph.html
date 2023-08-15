@@ -508,32 +508,63 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;grover&#39;</span></div>
 
-<div class="viewcode-block" id="Graph.arc_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc_label.html#hiperwalk.Graph.arc_label">[docs]</a>    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the numerical label of the arc.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        tail: int</span>
-<span class="sd">            Tail of the arc.</span>
-
-<span class="sd">        head: int</span>
-<span class="sd">            Head of the arc.</span>
+<span class="sd">        *args:</span>
+<span class="sd">            int:</span>
+<span class="sd">                The numerical arc label itself is passed</span>
+<span class="sd">                as argument.</span>
+<span class="sd">            (tail, head):</span>
+<span class="sd">                Arc in arc notation.</span>
+<span class="sd">            tail, head:</span>
+<span class="sd">                Arc in arc notation,</span>
+<span class="sd">                but ``tail`` and ``head`` are passed as</span>
+<span class="sd">                different arguments, not as a tuple.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        label: int</span>
 <span class="sd">            Arc label.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        If arc ``(0, 1)`` exists, the following commands should return</span>
+<span class="sd">        the same result.</span>
+
+<span class="sd">        &gt;&gt;&gt; qw.arc_number(0)</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; qw.arc_number((0, 1))</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; qw.arc_number(0, 1)</span>
+<span class="sd">        0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span>
-                              <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span>
-                              <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span></div>
+        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">arc</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arc</span> <span class="o">&gt;=</span> <span class="n">num_arcs</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arc value out of range. &quot;</span>
+                                 <span class="o">+</span> <span class="s2">&quot;Expected arc value from 0 to &quot;</span>
+                                 <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+
+        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
+        <span class="n">arc_number</span> <span class="o">=</span> <span class="n">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span>
+                                   <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span>
+                                   <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">arc_number</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inexistent arc &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arc_number</span></div>
 
 <div class="viewcode-block" id="Graph.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts the numerical label to arc notation.</span>
 
-<span class="sd">        Given the arc label as a number,</span>
+<span class="sd">        Given the arc number,</span>
 <span class="sd">        returns the arc in the ``(tail, head)`` notation.</span>
 
 <span class="sd">        Parameters</span>
@@ -594,7 +625,44 @@ document.write(`
 <span class="sd">        Degree of given vertex.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
-        <span class="k">return</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Graph.vertex_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_label.html#hiperwalk.Graph.vertex_label">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns vertex label (number) given any vertex representation.</span>
+
+<span class="sd">        By invoking this method,</span>
+<span class="sd">        the vertex label is returned regardless of its representation.</span>
+<span class="sd">        There are some graphs in which a vertex may have multiple</span>
+<span class="sd">        representations.</span>
+<span class="sd">        For example, coordinates in a grid.</span>
+<span class="sd">        For general graphs,</span>
+<span class="sd">        this function returns the argument itself.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertex: int</span>
+<span class="sd">            The vertex in any of its representation.</span>
+<span class="sd">            For general graphs,</span>
+<span class="sd">            only its label is accepted.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Vertex label.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        It is useful to have this function implemented for general graphs</span>
+<span class="sd">        to simplify the implementation of some quantum walk methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">vertex</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">vertex</span> <span class="o">&gt;=</span> <span class="n">num_vert</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vertex label out of range. &quot;</span> <span class="o">+</span>
+                             <span class="s2">&quot;Expected integer value from 0 to&quot;</span> <span class="o">+</span>
+                             <span class="nb">str</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">vertex</span></div></div>
 </pre></div>
 
                 </article>

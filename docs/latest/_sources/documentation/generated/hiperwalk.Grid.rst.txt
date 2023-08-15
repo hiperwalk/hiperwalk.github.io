@@ -26,7 +26,7 @@ hiperwalk.Grid
           ~Grid.arc_direction
        
        
-          ~Grid.arc_label
+          ~Grid.arc_number
        
        
           ~Grid.arcs_with_tail

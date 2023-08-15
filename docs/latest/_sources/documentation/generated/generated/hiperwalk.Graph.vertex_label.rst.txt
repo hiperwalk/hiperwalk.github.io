@@ -1,0 +1,6 @@
+hiperwalk.Graph.vertex\_label
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.vertex_label

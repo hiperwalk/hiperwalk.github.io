@@ -1,0 +1,6 @@
+hiperwalk.Cycle.vertex\_label
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.vertex_label

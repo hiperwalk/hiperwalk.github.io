@@ -418,7 +418,13 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;hadamard&#39;</span></div>
 
-<div class="viewcode-block" id="Line.arc_label"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc_label.html#hiperwalk.Line.arc_label">[docs]</a>    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<div class="viewcode-block" id="Line.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc_number.html#hiperwalk.Line.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+
+        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
         <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc.&#39;</span><span class="p">)</span>

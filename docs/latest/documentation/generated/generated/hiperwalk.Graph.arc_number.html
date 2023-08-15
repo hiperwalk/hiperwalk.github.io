@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.Grid.arc_label &#8212; Hiperwalk latest documentation</title>
+    <title>hiperwalk.Graph.arc_number &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -38,15 +38,15 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Grid.arc_label';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Graph.arc_number';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hiperwalk.Grid.arcs_with_tail" href="hiperwalk.Grid.arcs_with_tail.html" />
-    <link rel="prev" title="hiperwalk.Grid.arc_direction" href="hiperwalk.Grid.arc_direction.html" />
+    <link rel="next" title="hiperwalk.Graph.arcs_with_tail" href="hiperwalk.Graph.arcs_with_tail.html" />
+    <link rel="prev" title="hiperwalk.Graph.arc" href="hiperwalk.Graph.arc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -312,9 +312,9 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../graph.html">Graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arc_label.html">hiperwalk.Graph.arc_label</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.Graph.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arcs_with_tail.html">hiperwalk.Graph.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.default_coin.html">hiperwalk.Graph.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.degree.html">hiperwalk.Graph.degree</a></li>
@@ -322,11 +322,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_arcs.html">hiperwalk.Graph.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_edges.html">hiperwalk.Graph.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_vertices.html">hiperwalk.Graph.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.vertex_label.html">hiperwalk.Graph.vertex_label</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Cycle.html">hiperwalk.Cycle</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arc.html">hiperwalk.Cycle.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arc_label.html">hiperwalk.Cycle.arc_label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arc_number.html">hiperwalk.Cycle.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arcs_with_tail.html">hiperwalk.Cycle.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.default_coin.html">hiperwalk.Cycle.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.degree.html">hiperwalk.Cycle.degree</a></li>
@@ -336,12 +337,13 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.number_of_edges.html">hiperwalk.Cycle.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.number_of_vertices.html">hiperwalk.Cycle.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.previous_arc.html">hiperwalk.Cycle.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.vertex_label.html">hiperwalk.Cycle.vertex_label</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.Grid.html">hiperwalk.Grid</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Grid.html">hiperwalk.Grid</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc.html">hiperwalk.Grid.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc_direction.html">hiperwalk.Grid.arc_direction</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.Grid.arc_label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc_number.html">hiperwalk.Grid.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arcs_with_tail.html">hiperwalk.Grid.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.default_coin.html">hiperwalk.Grid.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.degree.html">hiperwalk.Grid.degree</a></li>
@@ -359,7 +361,7 @@ document.write(`
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc.html">hiperwalk.Hypercube.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_direction.html">hiperwalk.Hypercube.arc_direction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_label.html">hiperwalk.Hypercube.arc_label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_number.html">hiperwalk.Hypercube.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arcs_with_tail.html">hiperwalk.Hypercube.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.default_coin.html">hiperwalk.Hypercube.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.degree.html">hiperwalk.Hypercube.degree</a></li>
@@ -368,11 +370,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.number_of_arcs.html">hiperwalk.Hypercube.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.number_of_edges.html">hiperwalk.Hypercube.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.number_of_vertices.html">hiperwalk.Hypercube.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.vertex_label.html">hiperwalk.Hypercube.vertex_label</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Lattice.html">hiperwalk.Lattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arc.html">hiperwalk.Lattice.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arc_label.html">hiperwalk.Lattice.arc_label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arc_number.html">hiperwalk.Lattice.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arcs_with_tail.html">hiperwalk.Lattice.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.default_coin.html">hiperwalk.Lattice.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.degree.html">hiperwalk.Lattice.degree</a></li>
@@ -382,11 +385,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.number_of_edges.html">hiperwalk.Lattice.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.number_of_vertices.html">hiperwalk.Lattice.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.previous_arc.html">hiperwalk.Lattice.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.vertex_label.html">hiperwalk.Lattice.vertex_label</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arc.html">hiperwalk.Line.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arc_label.html">hiperwalk.Line.arc_label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arc_number.html">hiperwalk.Line.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arcs_with_tail.html">hiperwalk.Line.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.default_coin.html">hiperwalk.Line.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.degree.html">hiperwalk.Line.degree</a></li>
@@ -396,6 +400,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.number_of_edges.html">hiperwalk.Line.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.number_of_vertices.html">hiperwalk.Line.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.previous_arc.html">hiperwalk.Line.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.vertex_label.html">hiperwalk.Line.vertex_label</a></li>
 </ul>
 </li>
 </ul>
@@ -515,9 +520,9 @@ document.write(`
     <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
     
     
-    <li class="breadcrumb-item"><a href="../hiperwalk.Grid.html" class="nav-link">hiperwalk.Grid</a></li>
+    <li class="breadcrumb-item"><a href="../hiperwalk.Graph.html" class="nav-link">hiperwalk.Graph</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Grid.arc_label</li>
+    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Graph.arc_number</li>
   </ul>
 </nav>
 </div>
@@ -534,18 +539,26 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="hiperwalk-grid-arc-label">
-<h1>hiperwalk.Grid.arc_label<a class="headerlink" href="#hiperwalk-grid-arc-label" title="Permalink to this heading">#</a></h1>
+  <section id="hiperwalk-graph-arc-number">
+<h1>hiperwalk.Graph.arc_number<a class="headerlink" href="#hiperwalk-graph-arc-number" title="Permalink to this heading">#</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="hiperwalk.Grid.arc_label">
-<span class="sig-prename descclassname"><span class="pre">Grid.</span></span><span class="sig-name descname"><span class="pre">arc_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/grid.html#Grid.arc_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Grid.arc_label" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="hiperwalk.Graph.arc_number">
+<span class="sig-prename descclassname"><span class="pre">Graph.</span></span><span class="sig-name descname"><span class="pre">arc_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/graph.html#Graph.arc_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph.arc_number" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the numerical label of the arc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>tail: int</strong></dt><dd><p>Tail of the arc.</p>
+<dt><strong>*args:</strong></dt><dd><dl class="simple">
+<dt>int:</dt><dd><p>The numerical arc label itself is passed
+as argument.</p>
 </dd>
-<dt><strong>head: int</strong></dt><dd><p>Head of the arc.</p>
+<dt>(tail, head):</dt><dd><p>Arc in arc notation.</p>
+</dd>
+<dt>tail, head:</dt><dd><p>Arc in arc notation,
+but <code class="docutils literal notranslate"><span class="pre">tail</span></code> and <code class="docutils literal notranslate"><span class="pre">head</span></code> are passed as
+different arguments, not as a tuple.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
@@ -556,6 +569,17 @@ document.write(`
 </dl>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>If arc <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1)</span></code> exists, the following commands should return
+the same result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -572,20 +596,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.Grid.arc_direction.html"
+       href="hiperwalk.Graph.arc.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.Grid.arc_direction</p>
+        <p class="prev-next-title">hiperwalk.Graph.arc</p>
       </div>
     </a>
     <a class="right-next"
-       href="hiperwalk.Grid.arcs_with_tail.html"
+       href="hiperwalk.Graph.arcs_with_tail.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.Grid.arcs_with_tail</p>
+        <p class="prev-next-title">hiperwalk.Graph.arcs_with_tail</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -607,13 +631,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.Grid.arc_label"><code class="docutils literal notranslate"><span class="pre">Grid.arc_label()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.Graph.arc_number"><code class="docutils literal notranslate"><span class="pre">Graph.arc_number()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../../../_sources/documentation/generated/generated/hiperwalk.Grid.arc_label.rst.txt">
+    <a href="../../../_sources/documentation/generated/generated/hiperwalk.Graph.arc_number.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

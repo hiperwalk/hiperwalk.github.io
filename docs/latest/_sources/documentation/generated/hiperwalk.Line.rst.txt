@@ -23,7 +23,7 @@ hiperwalk.Line
           ~Line.arc
        
        
-          ~Line.arc_label
+          ~Line.arc_number
        
        
           ~Line.arcs_with_tail
@@ -51,6 +51,9 @@ hiperwalk.Line
        
        
           ~Line.previous_arc
+       
+       
+          ~Line.vertex_label
        
 
    

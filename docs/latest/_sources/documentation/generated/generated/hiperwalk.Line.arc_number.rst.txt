@@ -1,6 +1,6 @@
-hiperwalk.Cycle.arc\_label
+hiperwalk.Line.arc\_number
 ==========================
 
 .. currentmodule:: hiperwalk
 
-.. automethod:: Cycle.arc_label
+.. automethod:: Line.arc_number

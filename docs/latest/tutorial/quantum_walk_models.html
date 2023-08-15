@@ -444,7 +444,7 @@ as long as the correct label is passed.</p>
 the label of a state within the computational basis corresponds
 to an arc. You can use either the arc notation, which involves
 specifying the arc’s tail and head,
-or the arc label (an integer). Please refer to the Graph class
+or the arc number (an integer). Please refer to the Graph class
 for correct arc labeling guidelines.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
@@ -457,14 +457,14 @@ for correct arc labeling guidelines.</p>
 </div>
 <p>An easy way to convert between arc notation and the numerical label is by using
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc" title="hiperwalk.Graph.arc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc()</span></code></a> and
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc_label.html#hiperwalk.Graph.arc_label" title="hiperwalk.Graph.arc_label"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_label()</span></code></a> methods.</p>
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number" title="hiperwalk.Graph.arc_number"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_number()</span></code></a> methods.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arc</span> <span class="o">=</span> <span class="n">cycle</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arc</span>
 <span class="go">(5, 6)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="go">10</span>
 <span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="go">(5, 6)</span>
 </pre></div>
 </div>

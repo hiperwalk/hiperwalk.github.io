@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.arc\_number
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.arc_number

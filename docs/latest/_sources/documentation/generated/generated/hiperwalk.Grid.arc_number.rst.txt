@@ -1,6 +1,6 @@
-hiperwalk.Graph.arc\_label
+hiperwalk.Grid.arc\_number
 ==========================
 
 .. currentmodule:: hiperwalk
 
-.. automethod:: Graph.arc_label
+.. automethod:: Grid.arc_number

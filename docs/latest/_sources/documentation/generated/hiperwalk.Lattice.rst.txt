@@ -23,7 +23,7 @@ hiperwalk.Lattice
           ~Lattice.arc
        
        
-          ~Lattice.arc_label
+          ~Lattice.arc_number
        
        
           ~Lattice.arcs_with_tail
@@ -51,6 +51,9 @@ hiperwalk.Lattice
        
        
           ~Lattice.previous_arc
+       
+       
+          ~Lattice.vertex_label
        
 
    

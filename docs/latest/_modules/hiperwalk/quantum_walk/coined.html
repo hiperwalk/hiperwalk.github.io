@@ -485,7 +485,7 @@ document.write(`
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
 
-        <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
                   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
 
@@ -1005,8 +1005,8 @@ document.write(`
             <span class="k">def</span> <span class="nf">get_block</span><span class="p">(</span><span class="n">vertex</span><span class="p">):</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
                 <span class="n">neighbors</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">end</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
 
                 <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">,</span>
                                                          <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
@@ -1235,7 +1235,7 @@ document.write(`
 <span class="sd">            An entry can be specified in three different ways:</span>
 <span class="sd">            ``(amplitude, (tail, head))``,</span>
 <span class="sd">            ``(amplitude, tail, head)``, and</span>
-<span class="sd">            ``(amplitude, arc_label)``.</span>
+<span class="sd">            ``(amplitude, arc_number)``.</span>
 
 <span class="sd">            amplitude</span>
 <span class="sd">                The amplitude of the given entry.</span>
@@ -1247,8 +1247,8 @@ document.write(`
 <span class="sd">                The vertex to which the coin is pointing.</span>
 <span class="sd">                That is, the tuple</span>
 <span class="sd">                ``(tail, head)`` must be a valid arc.</span>
-<span class="sd">            arc_label</span>
-<span class="sd">                The arc label with respect to the arc ordering</span>
+<span class="sd">            arc_number</span>
+<span class="sd">                The numerical arc label with respect to the arc ordering</span>
 <span class="sd">                given by the computational basis.</span>
 
 <span class="sd">        Notes</span>
@@ -1277,23 +1277,20 @@ document.write(`
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span>
-        <span class="k">def</span> <span class="nf">add_amplitude</span><span class="p">(</span><span class="n">ampl</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">add_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">):</span>
+            <span class="n">ampl</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">arc</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">arc</span> <span class="o">=</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">state</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">=</span> <span class="n">ampl</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="o">*</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="o">*</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
-
+            <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
 
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
-                    <span class="n">add_amplitude</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                    <span class="n">add_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">add_amplitude</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                <span class="n">add_entry</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
@@ -1310,7 +1307,7 @@ document.write(`
 
 <span class="sd">            tail, head</span>
 <span class="sd">                The arc notation.</span>
-<span class="sd">            arc_label</span>
+<span class="sd">            arc_number</span>
 <span class="sd">                The label of the arc.</span>
 <span class="sd">                Its number according to the computational basis order.</span>
 
@@ -1320,10 +1317,11 @@ document.write(`
 <span class="sd">            valid examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">ket</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_label</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ket</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># if len(args) == 2:</span>
+        <span class="c1">#     ket[self._graph.arc_number(args[0], args[1])] = 1</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     ket[args] = 1</span>
+        <span class="n">ket</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">args</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">ket</span></div>
 

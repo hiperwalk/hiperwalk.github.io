@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.vertex\_label
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.vertex_label

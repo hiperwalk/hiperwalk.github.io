@@ -26,7 +26,7 @@ hiperwalk.Hypercube
           ~Hypercube.arc_direction
        
        
-          ~Hypercube.arc_label
+          ~Hypercube.arc_number
        
        
           ~Hypercube.arcs_with_tail
@@ -51,6 +51,9 @@ hiperwalk.Hypercube
        
        
           ~Hypercube.number_of_vertices
+       
+       
+          ~Hypercube.vertex_label
        
 
    
