@@ -508,7 +508,7 @@ document.write(`
 <span class="sd">        If this method is invoked,</span>
 <span class="sd">        the hamiltonian is recalculated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">adj_matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
 
         <span class="c1"># creating oracle</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>

@@ -1,0 +1,6 @@
+hiperwalk.Graph.adjacency\_matrix
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.adjacency_matrix

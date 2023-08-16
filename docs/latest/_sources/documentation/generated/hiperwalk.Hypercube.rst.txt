@@ -20,6 +20,9 @@ hiperwalk.Hypercube
    
        
        
+          ~Hypercube.adjacency_matrix
+       
+       
           ~Hypercube.arc
        
        

@@ -20,6 +20,9 @@ hiperwalk.Lattice
    
        
        
+          ~Lattice.adjacency_matrix
+       
+       
           ~Lattice.arc
        
        

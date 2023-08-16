@@ -20,6 +20,9 @@ hiperwalk.Graph
    
        
        
+          ~Graph.adjacency_matrix
+       
+       
           ~Graph.arc
        
        

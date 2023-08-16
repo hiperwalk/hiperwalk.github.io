@@ -1238,19 +1238,12 @@ document.write(`
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">states</span><span class="p">]</span>
 
-        <span class="k">def</span> <span class="nf">get_entries</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">indexes</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">])</span>
-
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
+        <span class="n">num_vert</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">Coined</span><span class="o">.</span><span class="n">_elementwise_probability</span><span class="p">(</span>
-                              <span class="n">get_entries</span><span class="p">(</span>
-                                  <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                                  <span class="n">graph</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-                              <span class="p">)</span>
-                          <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                              <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">v</span><span class="p">)])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
                           <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
-                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))])</span>
+                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))])</span>
 
         <span class="k">return</span> <span class="n">prob</span></div>
 

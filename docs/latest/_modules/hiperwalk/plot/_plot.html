@@ -658,7 +658,7 @@ document.write(`
         <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;graph&#39;</span>
 
-            <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
+            <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span>
             <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nx_graph</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">nx_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s2">&quot;subset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">bit_count</span><span class="p">()</span>
@@ -706,8 +706,7 @@ document.write(`
 <span class="sd">    Set parameters that need not to be changed for multiple plots</span>
 <span class="sd">    or animation of a quantum walk.</span>
 <span class="sd">    For example: the graph.</span>
-<span class="sd">    The graph must be sent via kwargs,</span>
-<span class="sd">    either via the &#39;graph&#39; or the &#39;adj_matrix&#39; keywords.</span>
+<span class="sd">    The graph must be sent via kwargs via the &#39;graph&#39; keyword.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -733,12 +732,8 @@ document.write(`
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">):</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">Graph</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="s1">&#39;adj_matrix&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="c1"># Pops adj_matrix if both graph and adj_matrix keywords are set;</span>
-        <span class="c1"># otherwise invalid keyword may be raisen by networkx</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;adj_matrix&#39;</span><span class="p">)</span>
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s1">&#39;min_node_size&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;min_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>

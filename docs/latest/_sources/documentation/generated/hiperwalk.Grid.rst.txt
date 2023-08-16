@@ -20,6 +20,9 @@ hiperwalk.Grid
    
        
        
+          ~Grid.adjacency_matrix
+       
+       
           ~Grid.arc
        
        

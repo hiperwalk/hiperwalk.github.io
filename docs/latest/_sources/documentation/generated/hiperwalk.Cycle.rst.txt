@@ -20,6 +20,9 @@ hiperwalk.Cycle
    
        
        
+          ~Cycle.adjacency_matrix
+       
+       
           ~Cycle.arc
        
        

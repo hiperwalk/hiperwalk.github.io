@@ -411,9 +411,9 @@ document.write(`
                <span class="k">else</span> <span class="mi">2</span><span class="o">*</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">arc</span></div>
 
-<div class="viewcode-block" id="Cycle.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc.html#hiperwalk.Cycle.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">label</span><span class="o">//</span><span class="mi">2</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">label</span> <span class="o">%</span> <span class="mi">2</span>
+<div class="viewcode-block" id="Cycle.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc.html#hiperwalk.Cycle.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span>
         <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">remainder</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 

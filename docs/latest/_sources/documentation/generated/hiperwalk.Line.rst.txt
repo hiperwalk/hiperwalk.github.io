@@ -20,6 +20,9 @@ hiperwalk.Line
    
        
        
+          ~Line.adjacency_matrix
+       
+       
           ~Line.arc
        
        

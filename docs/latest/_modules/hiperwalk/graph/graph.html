@@ -496,8 +496,8 @@ document.write(`
         <span class="c1"># * Check if valid adjacency matrix</span>
         <span class="c1"># * Add option: numpy dense matrix as parameters.</span>
         <span class="c1"># * Add option: networkx graph as parameter.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">coloring</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coloring</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="Graph.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -554,35 +554,35 @@ document.write(`
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
 
         <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="n">arc_number</span> <span class="o">=</span> <span class="n">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span>
-                                   <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span>
-                                   <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">arc_number</span> <span class="o">=</span> <span class="n">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span>
+                                   <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span>
+                                   <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">arc_number</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inexistent arc &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">arc_number</span></div>
 
-<div class="viewcode-block" id="Graph.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts the numerical label to arc notation.</span>
+<span class="sd">        Converts the arc number to arc notation.</span>
 
 <span class="sd">        Given the arc number,</span>
 <span class="sd">        returns the arc in the ``(tail, head)`` notation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        label: int</span>
-<span class="sd">            Arc label (number)</span>
+<span class="sd">        number: int</span>
+<span class="sd">            The arc number</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        (int, int)</span>
 <span class="sd">            Arc in the arc notation ``(tail, head)``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
-        <span class="c1"># TODO: binary search</span>
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
+        <span class="c1">#TODO: binary search</span>
         <span class="k">for</span> <span class="n">tail</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">label</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
@@ -590,22 +590,22 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns all neighbors of the given vertex.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span></div>
+        <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Graph.arcs_with_tail"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arcs_with_tail.html#hiperwalk.Graph.arcs_with_tail">[docs]</a>    <span class="k">def</span> <span class="nf">arcs_with_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns all arcs that have the given tail.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">arcs_lim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
+        <span class="n">arcs_lim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">arcs_lim</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span> <span class="n">arcs_lim</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Graph.number_of_vertices"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cardinality of vertex set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Graph.number_of_arcs"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_arcs.html#hiperwalk.Graph.number_of_arcs">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_arcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -613,19 +613,19 @@ document.write(`
 
 <span class="sd">        For simple graphs, the cardinality is twice the number of edges.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Graph.number_of_edges"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cardinality of edge set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="Graph.degree"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.degree.html#hiperwalk.Graph.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Degree of given vertex.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
+        <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
         <span class="k">return</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Graph.vertex_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
@@ -663,7 +663,22 @@ document.write(`
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vertex label out of range. &quot;</span> <span class="o">+</span>
                              <span class="s2">&quot;Expected integer value from 0 to&quot;</span> <span class="o">+</span>
                              <span class="nb">str</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">vertex</span></div></div>
+        <span class="k">return</span> <span class="n">vertex</span></div>
+
+<div class="viewcode-block" id="Graph.adjacency_matrix"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the graph adjacency matrix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`scipy.sparse.csr_array`.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        .. todo::</span>
+<span class="sd">            Add other return types depending on the stored matrix type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span></div></div>
 </pre></div>
 
                 </article>

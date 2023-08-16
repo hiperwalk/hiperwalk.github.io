@@ -718,13 +718,13 @@ document.write(`
         <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
         <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="p">[</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Inexistent arc &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">tail</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
 
-        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
@@ -740,7 +740,7 @@ document.write(`
                  <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">label</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">-</span> <span class="n">sub_x</span> <span class="o">-</span> <span class="n">sub_y</span></div>
 
-<div class="viewcode-block" id="Grid.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc.html#hiperwalk.Grid.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Grid.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc.html#hiperwalk.Grid.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arc in arc notation.</span>
 
@@ -749,11 +749,12 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        arc number : int</span>
+<span class="sd">        number : int</span>
 <span class="sd">            Numerical arc label.</span>
 
 <span class="sd">        coordinates : bool, default=True</span>
-<span class="sd">            Whether the vertices are returned as coordinates or as labels.</span>
+<span class="sd">            Whether the vertices are returned as coordinates or as</span>
+<span class="sd">            a single number.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -763,15 +764,15 @@ document.write(`
 
 <span class="sd">            (vertex_x, vertex_y) : (int, int)</span>
 <span class="sd">                If ``coordinates=True``.</span>
-<span class="sd">            label : int</span>
+<span class="sd">            number : int</span>
 <span class="sd">                If ``coordinates=False``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span><span class="p">:</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">label</span> <span class="o">//</span> <span class="mi">4</span>
-            <span class="n">coin</span> <span class="o">=</span> <span class="n">label</span> <span class="o">%</span> <span class="mi">4</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="mi">4</span>
+            <span class="n">coin</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">4</span>
             <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
             <span class="n">x_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
@@ -786,8 +787,8 @@ document.write(`
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># not diagonal</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-            <span class="n">diff</span> <span class="o">=</span> <span class="n">label</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
+            <span class="n">tail</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span>
             <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
 
             <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
