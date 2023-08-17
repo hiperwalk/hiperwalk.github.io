@@ -35,9 +35,9 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/plotting';</script>
     <script>
@@ -373,7 +373,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="plotting">
-<span id="docs-tutorial-plotting"></span><h1>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading">#</a></h1>
+<span id="docs-tutorial-plotting"></span><h1>Plotting<a class="headerlink" href="#plotting" title="Link to this heading">#</a></h1>
 <p>After calculating the probability distribution of one or multiple states,
 the user may wish to plot the distribution.
 This can be done by invoking the standalone
@@ -395,7 +395,7 @@ the program will wait for the user to close the image
 – by pressing the <code class="docutils literal notranslate"><span class="pre">q</span></code> key for example –
 before showing the next one.</p>
 <section id="customization">
-<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this heading">#</a></h2>
+<h2>Customization<a class="headerlink" href="#customization" title="Link to this heading">#</a></h2>
 <p>Albeit plotting is simple,
 configuring the plot to behave as the user wishes may be a bit tricky.
 We antecipate that the plotting was built on top of
@@ -407,7 +407,7 @@ Of course, this depends on the plot type.
 It does not make sense to demand <code class="docutils literal notranslate"><span class="pre">node_color='red'</span></code> if
 a bar plot is being request.</p>
 <section id="plot-types">
-<h3>Plot Types<a class="headerlink" href="#plot-types" title="Permalink to this heading">#</a></h3>
+<h3>Plot Types<a class="headerlink" href="#plot-types" title="Link to this heading">#</a></h3>
 <p>There are five plot types:
 bar, histogram, line, plane and graph.
 The difference between the plots are explained and illustrated in
@@ -437,7 +437,7 @@ the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional
 </pre></div>
 </div>
 <section id="bar-plot">
-<h4>Bar Plot<a class="headerlink" href="#bar-plot" title="Permalink to this heading">#</a></h4>
+<h4>Bar Plot<a class="headerlink" href="#bar-plot" title="Link to this heading">#</a></h4>
 <p>The vertices are represented on the x-axis.
 The respective probabilities are represented on the y-axis.
 Each vertex is associated with a bar.</p>
@@ -457,13 +457,13 @@ The respective valid matplotlib keywords can be used to customize the plot.</p>
 <img alt="../_images/custom_bar.png" src="../_images/custom_bar.png" />
 </section>
 <section id="histogram-plot">
-<h4>Histogram Plot<a class="headerlink" href="#histogram-plot" title="Permalink to this heading">#</a></h4>
+<h4>Histogram Plot<a class="headerlink" href="#histogram-plot" title="Link to this heading">#</a></h4>
 <p>This is essentially the same as the bar plot
 but the <code class="docutils literal notranslate"><span class="pre">width</span></code> kwarg is <em>overriden</em> so the bars are not separated.</p>
 <img alt="../_images/histogram.png" src="../_images/histogram.png" />
 </section>
 <section id="line-plot">
-<h4>Line Plot<a class="headerlink" href="#line-plot" title="Permalink to this heading">#</a></h4>
+<h4>Line Plot<a class="headerlink" href="#line-plot" title="Link to this heading">#</a></h4>
 <p>The vertices are represented on the x-axis.
 The respective probabilities are represented on the y-axis.
 The probability of each vertex is highlighted by a marker.
@@ -489,7 +489,7 @@ The respective valid matplotlib keywords can be used to customize the plot.</p>
 <img alt="../_images/custom_line.png" src="../_images/custom_line.png" />
 </section>
 <section id="plane-plot">
-<h4>Plane Plot<a class="headerlink" href="#plane-plot" title="Permalink to this heading">#</a></h4>
+<h4>Plane Plot<a class="headerlink" href="#plane-plot" title="Link to this heading">#</a></h4>
 <p>If a graph is embeddable on the plane,
 each vertex can be assigned a cartesian coordinate and
 the probability can be shown on the z-axis.
@@ -512,7 +512,7 @@ be passed to the Hiperwalk function.</p>
 <img alt="../_images/custom_plane.png" src="../_images/custom_plane.png" />
 </section>
 <section id="graph-plot">
-<h4>Graph Plot<a class="headerlink" href="#graph-plot" title="Permalink to this heading">#</a></h4>
+<h4>Graph Plot<a class="headerlink" href="#graph-plot" title="Link to this heading">#</a></h4>
 <p>Draws the graph where probabilities are depicted by
 different colors and vertex sizes.
 The graph structure is required.</p>
@@ -536,7 +536,7 @@ accepts any valid keywords associated with it.</p>
 <img alt="../_images/custom_graph.png" src="../_images/custom_graph.png" />
 </section>
 <section id="default-plot-type">
-<h4>Default Plot Type<a class="headerlink" href="#default-plot-type" title="Permalink to this heading">#</a></h4>
+<h4>Default Plot Type<a class="headerlink" href="#default-plot-type" title="Link to this heading">#</a></h4>
 <p>Each Hiperwalk graph is associated with a default graph type.
 Hence, it is sufficient to specify the probabilities and the graph
 to obtain the default plot.
@@ -548,7 +548,7 @@ For instance, the default grid plot is the plane plot.</p>
 </section>
 </section>
 <section id="hiperwalk-specific-keyworkds">
-<h3>Hiperwalk Specific Keyworkds<a class="headerlink" href="#hiperwalk-specific-keyworkds" title="Permalink to this heading">#</a></h3>
+<h3>Hiperwalk Specific Keyworkds<a class="headerlink" href="#hiperwalk-specific-keyworkds" title="Link to this heading">#</a></h3>
 <p>There are some keywords specific to Hiperwalk.
 These keywords are detailed on the
 <a class="reference internal" href="../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution" title="hiperwalk.plot_probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hiperwalk.plot_probability_distribution</span></code></a> documentation.
@@ -573,7 +573,7 @@ the probabilities of the intermediate simulation steps are saved.</p>
 </pre></div>
 </div>
 <section id="animate">
-<h4><code class="docutils literal notranslate"><span class="pre">animate</span></code><a class="headerlink" href="#animate" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">animate</span></code><a class="headerlink" href="#animate" title="Link to this heading">#</a></h4>
 <p>If multiple probabilites are stored,
 the <code class="docutils literal notranslate"><span class="pre">animate</span></code> keyword can be used to generate an animation.
 The <code class="docutils literal notranslate"><span class="pre">animate</span></code> keyword accepts a boolean value.
@@ -586,7 +586,7 @@ If <code class="docutils literal notranslate"><span class="pre">animate</span> <
 <img alt="../_images/animate.gif" src="../_images/animate.gif" />
 </section>
 <section id="rescale">
-<h4><code class="docutils literal notranslate"><span class="pre">rescale</span></code><a class="headerlink" href="#rescale" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">rescale</span></code><a class="headerlink" href="#rescale" title="Link to this heading">#</a></h4>
 <p>In the previous section plot, the probability axis was fixed.
 As the graph size and number of simulation steps increases,
 the walker (and the probabilities) tend to spread.
@@ -708,7 +708,7 @@ the maximum value on the axis.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

@@ -35,9 +35,9 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/quantum_walk_models';</script>
     <script>
@@ -373,7 +373,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="quantum-walk-models">
-<h1>Quantum Walk Models<a class="headerlink" href="#quantum-walk-models" title="Permalink to this heading">#</a></h1>
+<h1>Quantum Walk Models<a class="headerlink" href="#quantum-walk-models" title="Link to this heading">#</a></h1>
 <p>There are numerous known quantum walk models. Hiperwalk offers a
 unified interface for all quantum walks via the abstract
 class <a class="reference internal" href="../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk" title="hiperwalk.QuantumWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk</span></code></a>. This class cannot be instantiated
@@ -387,7 +387,7 @@ to implement new models and add them to the Hiperwalk
 package (see the <a class="reference internal" href="../development/index.html#docs-development"><span class="std std-ref">Development</span></a> section
 for more information).</p>
 <section id="creating-a-quantum-walk">
-<h2>Creating a Quantum Walk<a class="headerlink" href="#creating-a-quantum-walk" title="Permalink to this heading">#</a></h2>
+<h2>Creating a Quantum Walk<a class="headerlink" href="#creating-a-quantum-walk" title="Link to this heading">#</a></h2>
 <p>For creating a quantum walk,
 we must first define the graph in which the quantum walk will
 take place. This can be accomplished by passing a <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>
@@ -429,14 +429,14 @@ accepted default value for <code class="docutils literal notranslate"><span clas
 </div>
 </section>
 <section id="creating-a-state">
-<h2>Creating a State<a class="headerlink" href="#creating-a-state" title="Permalink to this heading">#</a></h2>
+<h2>Creating a State<a class="headerlink" href="#creating-a-state" title="Link to this heading">#</a></h2>
 <p>Hiperwalk offers three easy ways of creating a state.
 The user can create a state of the computational basis
 (<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket" title="hiperwalk.QuantumWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.ket()</span></code></a>),
 a uniform superposition (<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.uniform_state()</span></code></a>,
 or an arbitrary superposition (<a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.state()</span></code></a>).</p>
 <section id="state-of-the-computational-basis">
-<h3>State of the computational basis<a class="headerlink" href="#state-of-the-computational-basis" title="Permalink to this heading">#</a></h3>
+<h3>State of the computational basis<a class="headerlink" href="#state-of-the-computational-basis" title="Link to this heading">#</a></h3>
 <p>Any state of the computational basis can be created using the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket" title="hiperwalk.QuantumWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.ket()</span></code></a> method
 as long as the correct label is passed.</p>
@@ -476,7 +476,7 @@ the labels correspond directly to the labels of the vertices.</p>
 </div>
 </section>
 <section id="uniform-superposition">
-<h3>Uniform superposition<a class="headerlink" href="#uniform-superposition" title="Permalink to this heading">#</a></h3>
+<h3>Uniform superposition<a class="headerlink" href="#uniform-superposition" title="Link to this heading">#</a></h3>
 <p>To create a uniform superposition,
 you can use the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.uniform_state()</span></code></a> method
 which is applicable to any model.</p>
@@ -494,7 +494,7 @@ which is applicable to any model.</p>
 </div>
 </section>
 <section id="arbitrary-state">
-<h3>Arbitrary state<a class="headerlink" href="#arbitrary-state" title="Permalink to this heading">#</a></h3>
+<h3>Arbitrary state<a class="headerlink" href="#arbitrary-state" title="Link to this heading">#</a></h3>
 <p>Creating a generic state with the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state" title="hiperwalk.QuantumWalk.state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.state()</span></code></a>
 method can be a bit challenging. It expects a list consisting
 of <code class="docutils literal notranslate"><span class="pre">[amplitude,</span> <span class="pre">label]</span></code> entries, where each entry represents an amplitude
@@ -545,14 +545,14 @@ the amplitudes are renormalized when needed.</p>
 </section>
 </section>
 <section id="simulation-of-propagation">
-<h2>Simulation of Propagation<a class="headerlink" href="#simulation-of-propagation" title="Permalink to this heading">#</a></h2>
+<h2>Simulation of Propagation<a class="headerlink" href="#simulation-of-propagation" title="Link to this heading">#</a></h2>
 <p>Once a quantum walk is defined, it is linked to an appropriate evolution operator.
 The user has the flexibility to modify this operator either during
 the quantum walk’s creation or at any time afterward. Once the evolution
 operator is set, the user triggers the simulation process,
 deciding which intermediate states are of particular interest.</p>
 <section id="configuring-the-evolution-operator">
-<h3>Configuring the evolution operator<a class="headerlink" href="#configuring-the-evolution-operator" title="Permalink to this heading">#</a></h3>
+<h3>Configuring the evolution operator<a class="headerlink" href="#configuring-the-evolution-operator" title="Link to this heading">#</a></h3>
 <p>To set up the evolution operator, users should refer to
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution" title="hiperwalk.QuantumWalk.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.set_evolution()</span></code></a> method.
 Note that the parameters for this method depend on the model being used.</p>
@@ -574,7 +574,7 @@ the <a class="reference internal" href="../documentation/generated/generated/hip
 </pre></div>
 </div>
 <section id="coined-model">
-<h4>Coined Model<a class="headerlink" href="#coined-model" title="Permalink to this heading">#</a></h4>
+<h4>Coined Model<a class="headerlink" href="#coined-model" title="Link to this heading">#</a></h4>
 <p>The <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.set_evolution()</span></code></a> method
 accepts three key arguments:
 <code class="docutils literal notranslate"><span class="pre">shift</span></code>, <code class="docutils literal notranslate"><span class="pre">coin</span></code>, and <code class="docutils literal notranslate"><span class="pre">marked</span></code>,
@@ -662,7 +662,7 @@ operator to even vertices and the Hadamard operator to odd vertices:</p>
 an instance of the object.</p>
 </section>
 <section id="continuous-time-model">
-<h4>Continuous-time Model<a class="headerlink" href="#continuous-time-model" title="Permalink to this heading">#</a></h4>
+<h4>Continuous-time Model<a class="headerlink" href="#continuous-time-model" title="Link to this heading">#</a></h4>
 <p>The dynamics of the continuous-time quantum walk is
 fully defined by the Hamiltonian.
 The Hamiltonian is given by</p>
@@ -695,7 +695,7 @@ the evolution operator equals the identity.</p>
 </section>
 </section>
 <section id="simulation-invocation">
-<h3>Simulation Invocation<a class="headerlink" href="#simulation-invocation" title="Permalink to this heading">#</a></h3>
+<h3>Simulation Invocation<a class="headerlink" href="#simulation-invocation" title="Link to this heading">#</a></h3>
 <p>Once the evolution operator is set,
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a> method
 needs to be called in order to carry out the simulation.
@@ -708,7 +708,7 @@ as many times as necessary.
 The simulation returns a list of states such that
 the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry corresponds to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th saved state.</p>
 <section id="id1">
-<h4>Coined Model<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<h4>Coined Model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>In the coined quantum walk model,
 the <code class="docutils literal notranslate"><span class="pre">time</span></code> is discrete.
 Thus, only integer entries are accepted.
@@ -764,7 +764,7 @@ if <code class="docutils literal notranslate"><span class="pre">time=(1,</span> 
 </ul>
 </section>
 <section id="id2">
-<h4>Continuous-time Model<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<h4>Continuous-time Model<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>In the continuous-time quantum walk model,
 the <code class="docutils literal notranslate"><span class="pre">time</span></code> parameter is continuous, which means it can accept
 float values. The operation is similar to the coined model, but here,
@@ -806,7 +806,7 @@ Otherwise, the evolution operator is computated twice.</p>
 </section>
 </section>
 <section id="calculating-probability">
-<h2>Calculating Probability<a class="headerlink" href="#calculating-probability" title="Permalink to this heading">#</a></h2>
+<h2>Calculating Probability<a class="headerlink" href="#calculating-probability" title="Link to this heading">#</a></h2>
 <p>There are two ways of calculating probabilities:
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability" title="hiperwalk.QuantumWalk.probability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability()</span></code></a> and
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution" title="hiperwalk.QuantumWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.probability_distribution()</span></code></a>.
@@ -964,7 +964,7 @@ and customization options.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

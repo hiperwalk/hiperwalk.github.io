@@ -34,9 +34,9 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=dc535ff5"></script>
+    <script src="../../../_static/documentation_options.js?v=fe2989bd"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/plot/_animation';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -356,7 +356,9 @@ document.write(`
     <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Animation"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Animation.html#hiperwalk.Animation">[docs]</a><span class="k">class</span> <span class="nc">Animation</span><span class="p">:</span>
+<div class="viewcode-block" id="Animation">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Animation.html#hiperwalk.Animation">[docs]</a>
+<span class="k">class</span> <span class="nc">Animation</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class responsible for creating, managing and saving animations.</span>
 <span class="sd">    </span>
@@ -370,10 +372,13 @@ document.write(`
 <span class="sd">        Filepath for saving the animation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Animation.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Animation.html#hiperwalk.Animation.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Animation.__init__">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Animation.html#hiperwalk.Animation.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plt_anim</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save_path</span> <span class="o">=</span> <span class="kc">None</span></div>
+
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">_delete</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
@@ -384,7 +389,9 @@ document.write(`
         <span class="n">_delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="p">)</span>
         <span class="n">_delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_path</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Animation.add_frame"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.add_frame.html#hiperwalk.Animation.add_frame">[docs]</a>    <span class="k">def</span> <span class="nf">add_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">):</span>
+<div class="viewcode-block" id="Animation.add_frame">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.add_frame.html#hiperwalk.Animation.add_frame">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Draws and adds (appends) a new frame to the `frames` list.</span>
 
@@ -406,7 +413,10 @@ document.write(`
 
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Animation.create_animation"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.create_animation.html#hiperwalk.Animation.create_animation">[docs]</a>    <span class="k">def</span> <span class="nf">create_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Animation.create_animation">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.create_animation.html#hiperwalk.Animation.create_animation">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates animation using the `frames` content.</span>
 
@@ -469,12 +479,15 @@ document.write(`
             <span class="c1"># used to check if no extra padding is being added</span>
             <span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span></div>
 
+
     <span class="c1"># TODO: saving video is supported but not recommended because</span>
     <span class="c1">#   fps may not be respected.</span>
     <span class="c1"># ffmpeg is necessary for saving video and better quality gifs.</span>
     <span class="c1"># Pillow is sufficient for saving gifs,</span>
     <span class="c1"># although colorbar may be discretized.</span>
-<div class="viewcode-block" id="Animation.save_animation"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.save_animation.html#hiperwalk.Animation.save_animation">[docs]</a>    <span class="k">def</span> <span class="nf">save_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="Animation.save_animation">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.save_animation.html#hiperwalk.Animation.save_animation">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves animation as a gif if it is already created.</span>
 
@@ -528,6 +541,7 @@ document.write(`
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">frames</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="kc">None</span></div>
 
+
     <span class="k">def</span> <span class="nf">_is_saved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_path</span> <span class="o">!=</span> <span class="kc">None</span>
 
@@ -551,7 +565,9 @@ document.write(`
         <span class="k">except</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="Animation.show_animation"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.show_animation.html#hiperwalk.Animation.show_animation">[docs]</a>    <span class="k">def</span> <span class="nf">show_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Animation.show_animation">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Animation.show_animation.html#hiperwalk.Animation.show_animation">[docs]</a>
+    <span class="k">def</span> <span class="nf">show_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows animation as long as it has been created.</span>
 
@@ -581,6 +597,7 @@ document.write(`
             <span class="bp">self</span><span class="o">.</span><span class="n">_show_animation_notebook</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_show_animation_terminal</span><span class="p">()</span></div>
+
 
     <span class="k">def</span> <span class="nf">_show_animation_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_animation_in_temp_file</span><span class="p">()</span>
@@ -710,6 +727,7 @@ document.write(`
 
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
+
 </pre></div>
 
                 </article>
@@ -762,7 +780,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

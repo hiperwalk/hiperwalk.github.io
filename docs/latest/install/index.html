@@ -35,9 +35,9 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'install/index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -356,7 +356,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="install">
-<h1>Install<a class="headerlink" href="#install" title="Permalink to this heading">#</a></h1>
+<h1>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h1>
 <p>Hiperwalk relies on a number of Python libraries.
 However, installing these Python libraries alone does not enable
 Hiperwalk to leverage High-Performance Computing (HPC).
@@ -378,7 +378,7 @@ being the adaptation of plotting features, which currently work well
 in Jupyter notebooks.</p>
 </div>
 <section id="hiperwalk">
-<span id="docs-install-hiperwalk"></span><h2>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Permalink to this heading">#</a></h2>
+<span id="docs-install-hiperwalk"></span><h2>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h2>
 <p>Hiperwalk can be conveniently installed using pip.
 To begin, ensure that pip is installed on your system.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
@@ -405,7 +405,7 @@ you can execute any code found in the
 or proceed to the <a class="reference internal" href="../tutorial/index.html#docs-tutorial"><span class="std std-ref">Tutorial</span></a>.</p>
 </section>
 <section id="hpc-prerequisites">
-<span id="docs-install-hpc-prerequisites"></span><h2>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Permalink to this heading">#</a></h2>
+<span id="docs-install-hpc-prerequisites"></span><h2>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Link to this heading">#</a></h2>
 <p>Before proceeding, it’s advisable to update and upgrade your
 Ubuntu packages. Execute the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
@@ -440,7 +440,7 @@ which is used for generating animations.</p>
 </pre></div>
 </div>
 <section id="gpu-driver">
-<h3>GPU Driver<a class="headerlink" href="#gpu-driver" title="Permalink to this heading">#</a></h3>
+<h3>GPU Driver<a class="headerlink" href="#gpu-driver" title="Link to this heading">#</a></h3>
 <p>To install the GPU driver, you can follow this
 <a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
 Below, we have outlined the essential steps.</p>
@@ -476,7 +476,7 @@ pressing the <code class="docutils literal notranslate"><span class="pre">Super<
 typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
 </section>
 <section id="nvidia-toolkit">
-<h3>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Permalink to this heading">#</a></h3>
+<h3>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Link to this heading">#</a></h3>
 <p>Once the GPU drivers have been successfully installed, it’s
 necessary to install the NVIDIA Toolkit, allowing neblina-core
 to use CUDA. To do this, execute the following command:</p>
@@ -492,7 +492,7 @@ This can be simply done by running the following command:</p>
 </section>
 </section>
 <section id="installing-neblina-core-neblina-opencl-bridge-and-pyneblina">
-<h2>Installing neblina-core neblina-opencl-bridge and pyneblina<a class="headerlink" href="#installing-neblina-core-neblina-opencl-bridge-and-pyneblina" title="Permalink to this heading">#</a></h2>
+<h2>Installing neblina-core neblina-opencl-bridge and pyneblina<a class="headerlink" href="#installing-neblina-core-neblina-opencl-bridge-and-pyneblina" title="Link to this heading">#</a></h2>
 <p>For HPC support,
 Hiperwalk uses
 <a class="reference external" href="https://github.com/paulomotta/neblina-core">neblina-core</a>,
@@ -510,7 +510,7 @@ are installed (i.e. cloned) in the same directory.
 In this guide, we will install both projects into the home directory.
 In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) serves as an alias for the home directory.</p>
 <section id="id1">
-<h3>neblina-core<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>neblina-core<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Firstly, clone the repository in the home directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/paulomotta/neblina-core.git
@@ -543,7 +543,7 @@ execute the <code class="docutils literal notranslate"><span class="pre">vector_
 </div>
 </section>
 <section id="id2">
-<h3>neblina-opencl-bridge<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>neblina-opencl-bridge<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>The installation of the neblina-opencl-bridge is very similar to
 the installation of neblina-core.
 To install neblina-opencl-bridge,
@@ -570,7 +570,7 @@ execute the tests</p>
 </div>
 </section>
 <section id="id3">
-<h3>pyneblina<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3>pyneblina<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>To install pyneblina, first clone the repository into
 <strong>the same directory neblina-core was cloned</strong>.
 In this guide, we cloned neblina-core into the home directory.
@@ -694,7 +694,7 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

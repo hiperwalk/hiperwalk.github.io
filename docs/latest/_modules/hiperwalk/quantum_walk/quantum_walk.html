@@ -34,9 +34,9 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/quantum_walk/quantum_walk';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -365,7 +365,9 @@ document.write(`
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
     <span class="n">warn</span><span class="p">(</span><span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span><span class="p">)</span>
 
-<div class="viewcode-block" id="QuantumWalk"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk">[docs]</a><span class="k">class</span> <span class="nc">QuantumWalk</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk">[docs]</a>
+<span class="k">class</span> <span class="nc">QuantumWalk</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract class for Quantum Walks.</span>
 
@@ -394,7 +396,9 @@ document.write(`
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="QuantumWalk.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk.__init__">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="QuantumWalk.__init__">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk.__init__">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;graph is None&#39;</span><span class="p">)</span>
@@ -442,7 +446,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="QuantumWalk.uniform_state"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state">[docs]</a>    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.uniform_state">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a uniform state.</span>
 
@@ -467,6 +474,7 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
                 <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span></div>
 
+
     <span class="k">def</span> <span class="nf">_update_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">marked</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
             <span class="n">marked</span> <span class="o">=</span> <span class="p">[</span><span class="n">marked</span><span class="p">]</span>
@@ -474,7 +482,9 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">,</span> <span class="n">marked</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">))</span>
 
-<div class="viewcode-block" id="QuantumWalk.set_marked"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_marked.html#hiperwalk.QuantumWalk.set_marked">[docs]</a>    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.set_marked">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_marked.html#hiperwalk.QuantumWalk.set_marked">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets marked vertices.</span>
 
@@ -499,7 +509,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.get_marked"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked">[docs]</a>    <span class="k">def</span> <span class="nf">get_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.get_marked">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets marked vertices.</span>
 
@@ -511,7 +524,10 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.set_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution">[docs]</a>    <span class="nd">@abstractmethod</span>
+
+<div class="viewcode-block" id="QuantumWalk.set_evolution">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_evolution.html#hiperwalk.QuantumWalk.set_evolution">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the standard evolution operator.</span>
@@ -529,7 +545,10 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.get_evolution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>    <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.get_evolution">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the evolution operator.</span>
 
@@ -543,6 +562,7 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span></div>
 
+
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_elementwise_probability</span><span class="p">(</span><span class="n">elem</span><span class="p">):</span>
         <span class="c1"># This is more efficient than:</span>
@@ -550,7 +570,9 @@ document.write(`
         <span class="c1"># elem.real**2 + elem.imag**2</span>
         <span class="k">return</span> <span class="n">elem</span><span class="o">.</span><span class="n">real</span><span class="o">*</span><span class="n">elem</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="n">elem</span><span class="o">.</span><span class="n">imag</span><span class="o">*</span><span class="n">elem</span><span class="o">.</span><span class="n">imag</span>
 
-<div class="viewcode-block" id="QuantumWalk.success_probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.success_probability.html#hiperwalk.QuantumWalk.success_probability">[docs]</a>    <span class="k">def</span> <span class="nf">success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.success_probability">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.success_probability.html#hiperwalk.QuantumWalk.success_probability">[docs]</a>
+    <span class="k">def</span> <span class="nf">success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the success probability for the given state(s).</span>
 
@@ -586,7 +608,10 @@ document.write(`
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.probability"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.probability">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>
+    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sum of probabilities of the given vertices.</span>
 
@@ -628,7 +653,10 @@ document.write(`
 
         <span class="k">return</span> <span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">single_state</span> <span class="k">else</span> <span class="n">probs</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.probability_distribution"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.probability_distribution">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution">[docs]</a>
+    <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the probability distribution of given state(s).</span>
 
@@ -676,6 +704,7 @@ document.write(`
         <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">prob</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">single_state</span> <span class="k">else</span> <span class="n">prob</span></div>
+
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_time_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
@@ -726,7 +755,9 @@ document.write(`
             <span class="k">return</span> <span class="n">state</span>
         <span class="k">return</span> <span class="n">state</span> <span class="o">/</span> <span class="n">norm</span>
 
-<div class="viewcode-block" id="QuantumWalk.state"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state">[docs]</a>    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.state">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state">[docs]</a>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a valid state.</span>
 
@@ -781,7 +812,10 @@ document.write(`
         <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QuantumWalk.ket"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket">[docs]</a>    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantumWalk.ket">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.ket.html#hiperwalk.QuantumWalk.ket">[docs]</a>
+    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a state of the computational basis.</span>
 
@@ -798,6 +832,7 @@ document.write(`
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">ket</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">ket</span></div>
+
 
     <span class="k">def</span> <span class="nf">_pyneblina_imported</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -861,7 +896,9 @@ document.write(`
         <span class="k">return</span> <span class="n">ret</span>
 
 
-<div class="viewcode-block" id="QuantumWalk.simulate"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.simulate">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
@@ -996,6 +1033,7 @@ document.write(`
 
         <span class="k">return</span> <span class="n">saved_states</span></div>
 
+
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_valid_kwargs</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">method</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
@@ -1008,11 +1046,15 @@ document.write(`
     <span class="k">def</span> <span class="nf">_pop_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">valid_kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span> <span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">valid_kwargs</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">}</span>
 
-<div class="viewcode-block" id="QuantumWalk.hilbert_space_dimension"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.hilbert_space_dimension.html#hiperwalk.QuantumWalk.hilbert_space_dimension">[docs]</a>    <span class="k">def</span> <span class="nf">hilbert_space_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantumWalk.hilbert_space_dimension">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.hilbert_space_dimension.html#hiperwalk.QuantumWalk.hilbert_space_dimension">[docs]</a>
+    <span class="k">def</span> <span class="nf">hilbert_space_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns dimension of the Hilbert space.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span></div>
+</div>
+
 </pre></div>
 
                 </article>
@@ -1065,7 +1107,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

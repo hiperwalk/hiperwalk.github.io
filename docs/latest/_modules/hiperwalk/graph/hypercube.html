@@ -34,9 +34,9 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/graph/hypercube';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -357,7 +357,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
-<div class="viewcode-block" id="Hypercube"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube">[docs]</a><span class="k">class</span> <span class="nc">Hypercube</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="Hypercube">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube">[docs]</a>
+<span class="k">class</span> <span class="nc">Hypercube</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hypercube graph.</span>
 
@@ -391,7 +393,9 @@ document.write(`
 <span class="sd">    if either :math:`u &lt; v` is true, or</span>
 <span class="sd">    both :math:`u = v` and :math:`i &lt; j` are true.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Hypercube.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">):</span>
+<div class="viewcode-block" id="Hypercube.__init__">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">):</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">dimension</span>
         <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">dimension</span><span class="o">*</span><span class="n">num_vert</span>
 
@@ -406,7 +410,10 @@ document.write(`
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Hypercube.arc_direction"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_direction.html#hiperwalk.Hypercube.arc_direction">[docs]</a>    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hypercube.arc_direction">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_direction.html#hiperwalk.Hypercube.arc_direction">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the arc direction.</span>
 
@@ -445,7 +452,10 @@ document.write(`
 
         <span class="k">return</span> <span class="n">direction</span></div>
 
-<div class="viewcode-block" id="Hypercube.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_number.html#hiperwalk.Hypercube.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hypercube.arc_number">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_number.html#hiperwalk.Hypercube.arc_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
@@ -455,16 +465,25 @@ document.write(`
         <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">tail</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span> <span class="o">+</span> <span class="n">direction</span></div>
 
-<div class="viewcode-block" id="Hypercube.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc.html#hiperwalk.Hypercube.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hypercube.arc">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc.html#hiperwalk.Hypercube.arc">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
         <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="n">tail</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span>
         <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">^</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">direction</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Hypercube.degree"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.degree.html#hiperwalk.Hypercube.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hypercube.degree">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.degree.html#hiperwalk.Hypercube.degree">[docs]</a>
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span></div>
 
-<div class="viewcode-block" id="Hypercube.dimension"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.dimension.html#hiperwalk.Hypercube.dimension">[docs]</a>    <span class="k">def</span> <span class="nf">dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hypercube.dimension">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.dimension.html#hiperwalk.Hypercube.dimension">[docs]</a>
+    <span class="k">def</span> <span class="nf">dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Hypercube dimension.</span>
 
@@ -472,7 +491,9 @@ document.write(`
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span></div>
+</div>
+
 </pre></div>
 
                 </article>
@@ -525,7 +546,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

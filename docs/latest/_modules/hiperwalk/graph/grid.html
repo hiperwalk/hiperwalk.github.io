@@ -34,9 +34,9 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/graph/grid';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -357,7 +357,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
-<div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Grid.html#hiperwalk.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
+<div class="viewcode-block" id="Grid">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Grid.html#hiperwalk.Grid">[docs]</a>
+<span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Two-dimensionsal grid.</span>
 
@@ -523,7 +525,9 @@ document.write(`
 <span class="sd">            :name: fig-even-dim-diagonal</span>
 <span class="sd">            :caption: Figure: 4x4-grid with cyclic boundary conditions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Grid.__init__"><a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Grid.html#hiperwalk.Grid.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Grid.__init__">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Grid.html#hiperwalk.Grid.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">x_dim</span><span class="p">,</span> <span class="n">y_dim</span> <span class="o">=</span> <span class="n">dimensions</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -593,7 +597,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">periodic</span> <span class="o">=</span> <span class="n">periodic</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="n">diagonal</span></div>
 
-<div class="viewcode-block" id="Grid.vertex_coordinates"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.vertex_coordinates.html#hiperwalk.Grid.vertex_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.vertex_coordinates">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.vertex_coordinates.html#hiperwalk.Grid.vertex_coordinates">[docs]</a>
+    <span class="k">def</span> <span class="nf">vertex_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns vertex (x, y)-coordinates given its label.</span>
 
@@ -616,7 +623,10 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="n">label</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span> <span class="n">label</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Grid.vertex_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.vertex_number.html#hiperwalk.Grid.vertex_number">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.vertex_number">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.vertex_number.html#hiperwalk.Grid.vertex_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns vertex number given any vertex representation.</span>
 
@@ -648,7 +658,10 @@ document.write(`
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">vertex</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Grid.arc_direction"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc_direction.html#hiperwalk.Grid.arc_direction">[docs]</a>    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.arc_direction">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc_direction.html#hiperwalk.Grid.arc_direction">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return arc direction.</span>
 
@@ -708,7 +721,10 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span></div>
 
 
-<div class="viewcode-block" id="Grid.arc_number"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc_number.html#hiperwalk.Grid.arc_number">[docs]</a>    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.arc_number">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc_number.html#hiperwalk.Grid.arc_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
@@ -740,7 +756,10 @@ document.write(`
                  <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">label</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">-</span> <span class="n">sub_x</span> <span class="o">-</span> <span class="n">sub_y</span></div>
 
-<div class="viewcode-block" id="Grid.arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc.html#hiperwalk.Grid.arc">[docs]</a>    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.arc">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arc.html#hiperwalk.Grid.arc">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Arc in arc notation.</span>
 
@@ -809,7 +828,10 @@ document.write(`
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="Grid.neighbors"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.neighbors.html#hiperwalk.Grid.neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.neighbors">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.neighbors.html#hiperwalk.Grid.neighbors">[docs]</a>
+    <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
         <span class="n">iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">iterable</span><span class="p">:</span>
             <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
@@ -820,7 +842,10 @@ document.write(`
             <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">,</span> <span class="n">neigh</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">neigh</span></div>
 
-<div class="viewcode-block" id="Grid.arcs_with_tail"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arcs_with_tail.html#hiperwalk.Grid.arcs_with_tail">[docs]</a>    <span class="k">def</span> <span class="nf">arcs_with_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.arcs_with_tail">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.arcs_with_tail.html#hiperwalk.Grid.arcs_with_tail">[docs]</a>
+    <span class="k">def</span> <span class="nf">arcs_with_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -828,7 +853,10 @@ document.write(`
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Grid.degree"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.degree.html#hiperwalk.Grid.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.degree">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.degree.html#hiperwalk.Grid.degree">[docs]</a>
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -836,7 +864,10 @@ document.write(`
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Grid.next_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.next_arc.html#hiperwalk.Grid.next_arc">[docs]</a>    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.next_arc">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.next_arc.html#hiperwalk.Grid.next_arc">[docs]</a>
+    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -886,7 +917,10 @@ document.write(`
             <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Grid.previous_arc"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.previous_arc.html#hiperwalk.Grid.previous_arc">[docs]</a>    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.previous_arc">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.previous_arc.html#hiperwalk.Grid.previous_arc">[docs]</a>
+    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
         <span class="n">arc_iterable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arc_iterable</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
@@ -937,7 +971,10 @@ document.write(`
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Grid.dimensions"><a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.dimensions.html#hiperwalk.Grid.dimensions">[docs]</a>    <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Grid.dimensions">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Grid.dimensions.html#hiperwalk.Grid.dimensions">[docs]</a>
+    <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Grid dimensions.</span>
 
@@ -948,7 +985,9 @@ document.write(`
 <span class="sd">        y_dim : int</span>
 <span class="sd">            Dimension alongside de Y axis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_dim</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
                 </article>
@@ -1001,7 +1040,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>

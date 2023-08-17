@@ -35,9 +35,9 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d649ff4b"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -369,7 +369,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="tutorial">
-<span id="docs-tutorial"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">#</a></h1>
+<span id="docs-tutorial"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h1>
 <p>Every code based on Hiperwalk follows up to five distinct steps.</p>
 <ol class="arabic simple">
 <li><p>Import the Hiperwalk package.</p></li>
@@ -382,13 +382,13 @@ document.write(`
 Don’t worry about the specifics for the time being; we are
 merely illustrating the steps.</p>
 <section id="import-the-hiperwalk-package">
-<h2>Import the Hiperwalk package<a class="headerlink" href="#import-the-hiperwalk-package" title="Permalink to this heading">#</a></h2>
+<h2>Import the Hiperwalk package<a class="headerlink" href="#import-the-hiperwalk-package" title="Link to this heading">#</a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
 </pre></div>
 </div>
 </section>
 <section id="define-a-graph">
-<h2>Define a graph<a class="headerlink" href="#define-a-graph" title="Permalink to this heading">#</a></h2>
+<h2>Define a graph<a class="headerlink" href="#define-a-graph" title="Link to this heading">#</a></h2>
 <p>In this step, we generate a line comprising 11 vertices.
 The output is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">11</span>
@@ -399,7 +399,7 @@ The output is an object from the <a class="reference internal" href="../document
 </div>
 </section>
 <section id="construct-the-quantum-walk-using-the-previously-defined-graph">
-<h2>Construct the quantum walk using the previously defined graph<a class="headerlink" href="#construct-the-quantum-walk-using-the-previously-defined-graph" title="Permalink to this heading">#</a></h2>
+<h2>Construct the quantum walk using the previously defined graph<a class="headerlink" href="#construct-the-quantum-walk-using-the-previously-defined-graph" title="Link to this heading">#</a></h2>
 <p>We now create a coined quantum walk on the line with 11 vertices.
 We achieve this by passing the previously created graph as an
 argument to the quantum walk constructor.
@@ -411,7 +411,7 @@ The outcome is an object from the <a class="reference internal" href="../documen
 </div>
 </section>
 <section id="simulate-the-quantum-walk">
-<h2>Simulate the quantum walk<a class="headerlink" href="#simulate-the-quantum-walk" title="Permalink to this heading">#</a></h2>
+<h2>Simulate the quantum walk<a class="headerlink" href="#simulate-the-quantum-walk" title="Link to this heading">#</a></h2>
 <p>Before running the simulation, we need to specify the initial state.
 One way to accomplish this is by using the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket" title="hiperwalk.Coined.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.ket()</span></code></a> method,
@@ -440,7 +440,7 @@ high-performance computing to perform the matrix-vector multiplications.</p>
 </div>
 </section>
 <section id="display-the-results">
-<h2>Display the results<a class="headerlink" href="#display-the-results" title="Permalink to this heading">#</a></h2>
+<h2>Display the results<a class="headerlink" href="#display-the-results" title="Link to this heading">#</a></h2>
 <p>Presenting the results can be as straightforward as printing them.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">final_state</span>
 <span class="go">array([[ 0.1767767 ,  0.        ,  0.        , -0.1767767 ,  0.35355339,</span>
@@ -469,12 +469,12 @@ using a simple command.</p>
 <figure class="align-default" id="id1">
 <img alt="Plot of the probability distribution." src="../_images/probability_distribution.png" />
 <figcaption>
-<p><span class="caption-text">Probability distribution of a quantum walk on a line.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Probability distribution of a quantum walk on a line.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
 <p>The remainder of the tutorial is split into the following sections.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -582,7 +582,7 @@ using a simple command.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     <br/>
   </p>
 </div>
