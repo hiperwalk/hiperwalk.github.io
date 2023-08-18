@@ -353,6 +353,7 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -386,18 +387,21 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array`</span>
+<span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array` or :class:`numpy.ndarray`</span>
 <span class="sd">        Adjacency matrix of the graph on</span>
 <span class="sd">        which the quantum walk takes place.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    TypeError</span>
-<span class="sd">        if ``adj_matrix`` is not an instance of</span>
-<span class="sd">        :class:`scipy.sparse.csr_array`.</span>
+<span class="sd">        if ``adj_matrix`` is not an square matrix.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
+<span class="sd">    .. todo::</span>
+<span class="sd">        Check if it is more efficient to store the adjacency matrix as</span>
+<span class="sd">        sparse or dense.</span>
+
 <span class="sd">    A wide range of methods are available. </span>
 <span class="sd">    These methods can be used by a quantum walk model </span>
 <span class="sd">    to generate a valid quantum walk.</span>
@@ -500,6 +504,19 @@ document.write(`
         <span class="c1"># * Check if valid adjacency matrix</span>
         <span class="c1"># * Add option: numpy dense matrix as parameters.</span>
         <span class="c1"># * Add option: networkx graph as parameter.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">issparse</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">):</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Adjacency matrix is not square.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># the following is commented because the current way to</span>
+        <span class="c1"># implement Laplacian in ContinuousTime quantum walks is by</span>
+        <span class="c1"># passing the Laplacian as adjacency matrix</span>
+        <span class="c1"># if adj_matrix.data.min() != 1 or adj_matrix.data.max() != 1:</span>
+        <span class="c1">#     raise ValueError(&quot;Adjacency matrix must only have 0&#39;s &quot;</span>
+        <span class="c1">#                      + &quot;and 1&#39;s as entries.&quot;)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_coloring</span> <span class="o">=</span> <span class="kc">None</span></div>
 

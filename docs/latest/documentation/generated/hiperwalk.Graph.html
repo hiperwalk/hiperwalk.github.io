@@ -546,20 +546,24 @@ document.write(`
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a></span></dt><dd><p>Adjacency matrix of the graph on
+<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>Adjacency matrix of the graph on
 which the quantum walk takes place.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>TypeError</dt><dd><p>if <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is not an instance of
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.</p>
+<dt>TypeError</dt><dd><p>if <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is not an square matrix.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Check if it is more efficient to store the adjacency matrix as
+sparse or dense.</p>
+</div>
 <p>A wide range of methods are available. 
 These methods can be used by a quantum walk model 
 to generate a valid quantum walk.</p>
@@ -567,7 +571,7 @@ to generate a valid quantum walk.</p>
 In this case,
 the default representation for the graph will be displayed.</p>
 <p>The recommended parameter type is
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>,
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>,
 where 1 denotes adjacency and 0 denotes non-adjacency.
 If any entry differs from 0 or 1,
 some methods may not operate as expected.</p>
@@ -603,7 +607,7 @@ Figure 1 has an adjacency matrix <code class="docutils literal notranslate"><spa
 <span class="go">       [0, 1, 1, 0]])</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <div class="graphviz"><img src="../../_images/graphviz-e5b10aac86d507de3ccf8b826d0e040a20d7084b.png" alt="graph {
 	0 [pos=&quot;0,0!&quot;];
 	1 [pos=&quot;2,0!&quot;];
@@ -615,7 +619,7 @@ Figure 1 has an adjacency matrix <code class="docutils literal notranslate"><spa
 	2 -- 3;
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure 1</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure 1</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The arcs of the associated digraph in the arc notation are</p>
@@ -633,7 +637,7 @@ numeric labels are</p>
 </pre></div>
 </div>
 <p>The numeric labels are depicted in Figure 2.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id3">
 <div class="graphviz"><img src="../../_images/graphviz-d291529b74dd776e3eb45c7c6835af0344323c8f.png" alt="digraph {
 	0 [pos=&quot;0,0!&quot;];
 	1 [pos=&quot;2,0!&quot;];
@@ -649,7 +653,7 @@ numeric labels are</p>
 	3 -&gt; 2 [headlabel=7 labeldistance=5.5 labelangle=-7];
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure 2</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure 2</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If we insert the labels of the arcs into the adjacency matrix,
