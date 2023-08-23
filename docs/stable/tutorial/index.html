@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tutorial &#8212; Hiperwalk stable documentation</title>
+    <title>Tutorial &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -35,13 +35,13 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=fe2989bd"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -107,6 +107,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
   
     <p class="title logo__title">Hiperwalk</p>
   
@@ -117,7 +125,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      stable  <!-- this text may get changed later by javascript -->
+      latest  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -395,10 +403,10 @@ The output is an object from the <a class="reference internal" href="../document
 <p>We now create a coined quantum walk on the line with 11 vertices.
 We achieve this by passing the previously created graph as an
 argument to the quantum walk constructor.
-The outcome is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.CoinedWalk.html#hiperwalk.CoinedWalk" title="hiperwalk.CoinedWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+The outcome is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Coined</span></code></a> class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> 
-<span class="go">&lt;hiperwalk.quantum_walk.coined_walk.CoinedWalk object at 0x7f2691de9840&gt;</span>
+<span class="go">&lt;hiperwalk.quantum_walk.coined_walk.Coined object at 0x7f2691de9840&gt;</span>
 </pre></div>
 </div>
 </section>
@@ -406,7 +414,7 @@ The outcome is an object from the <a class="reference internal" href="../documen
 <h2>Simulate the quantum walk<a class="headerlink" href="#simulate-the-quantum-walk" title="Link to this heading">#</a></h2>
 <p>Before running the simulation, we need to specify the initial state.
 One way to accomplish this is by using the
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.ket.html#hiperwalk.CoinedWalk.ket" title="hiperwalk.CoinedWalk.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.ket()</span></code></a> method,
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket" title="hiperwalk.Coined.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.ket()</span></code></a> method,
 which generates a state of the computational basis.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vertex</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -417,14 +425,14 @@ which generates a state of the computational basis.</p>
 </div>
 <p>This state corresponds to the walker on
 vertex 5 with the coin pointing to vertex 6
-(keep in mind that the vertex labels range from 0 to 10).</p>
+(keep in mind that the vertex numbers range from 0 to 10).</p>
 <p>To run the simulation, we must specify the initial state and
 the number of steps
 (i.e., the number of applications of the evolution operator).
 When specifying only the final time,
 the output will be the final state.
 If everything was installed correctly,
-the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.simulate.html#hiperwalk.CoinedWalk.simulate" title="hiperwalk.CoinedWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.simulate()</span></code></a> method will automatically use
+the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.simulate.html#hiperwalk.Coined.simulate" title="hiperwalk.Coined.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.simulate()</span></code></a> method will automatically use
 high-performance computing to perform the matrix-vector multiplications.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">final_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">)</span>
@@ -444,7 +452,7 @@ high-performance computing to perform the matrix-vector multiplications.</p>
 <p>Or, the output could be more sophisticated. Often, we are interested
 in the probability of the walker being found at each vertex.
 This can be accomplished via the
-<a class="reference internal" href="../documentation/generated/generated/hiperwalk.CoinedWalk.probability_distribution.html#hiperwalk.CoinedWalk.probability_distribution" title="hiperwalk.CoinedWalk.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.CoinedWalk.probability_distribution()</span></code></a> method
+<a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.probability_distribution.html#hiperwalk.Coined.probability_distribution" title="hiperwalk.Coined.probability_distribution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.probability_distribution()</span></code></a> method
 by passing the final state as an argument.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probability</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">final_state</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">probability</span>

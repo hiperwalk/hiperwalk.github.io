@@ -1,6 +1,0 @@
-hiperwalk.ContinuousWalk.uniform\_state
-=======================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: ContinuousWalk.uniform_state

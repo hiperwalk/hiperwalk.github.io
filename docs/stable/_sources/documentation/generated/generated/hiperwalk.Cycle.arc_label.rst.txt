@@ -1,6 +1,0 @@
-hiperwalk.Cycle.arc\_label
-==========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.arc_label

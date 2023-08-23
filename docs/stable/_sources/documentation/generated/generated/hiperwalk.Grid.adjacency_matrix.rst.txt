@@ -1,0 +1,6 @@
+hiperwalk.Grid.adjacency\_matrix
+================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.adjacency_matrix

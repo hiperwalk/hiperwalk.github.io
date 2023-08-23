@@ -1,6 +1,0 @@
-hiperwalk.CoinedWalk.set\_shift
-===============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: CoinedWalk.set_shift

@@ -20,22 +20,19 @@ hiperwalk.Cycle
    
        
        
+          ~Cycle.adjacency_matrix
+       
+       
           ~Cycle.arc
        
        
-          ~Cycle.arc_label
+          ~Cycle.arc_number
        
        
           ~Cycle.arcs_with_tail
        
        
-          ~Cycle.default_coin
-       
-       
           ~Cycle.degree
-       
-       
-          ~Cycle.embeddable
        
        
           ~Cycle.neighbors
@@ -54,6 +51,9 @@ hiperwalk.Cycle
        
        
           ~Cycle.previous_arc
+       
+       
+          ~Cycle.vertex_number
        
 
    

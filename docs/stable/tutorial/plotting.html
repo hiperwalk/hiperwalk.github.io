@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plotting &#8212; Hiperwalk stable documentation</title>
+    <title>Plotting &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -35,14 +35,14 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=fe2989bd"></script>
+    <script src="../_static/documentation_options.js?v=f4332903"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/plotting';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -108,6 +108,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
   
     <p class="title logo__title">Hiperwalk</p>
   
@@ -118,7 +126,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      stable  <!-- this text may get changed later by javascript -->
+      latest  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -405,13 +413,13 @@ bar, histogram, line, plane and graph.
 The difference between the plots are explained and illustrated in
 the following subsections.
 All plots correspond to the following quantum walk simulation on
-the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional natural lattice.</p>
+the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional natural grid.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dim</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lat</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Lattice</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lat</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">CoinedWalk</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
 <span class="gp">... </span>                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
@@ -532,7 +540,7 @@ accepts any valid keywords associated with it.</p>
 <p>Each Hiperwalk graph is associated with a default graph type.
 Hence, it is sufficient to specify the probabilities and the graph
 to obtain the default plot.
-For instance, the default lattice plot is the plane plot.</p>
+For instance, the default grid plot is the plane plot.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">lat</span><span class="p">)</span> 
 </pre></div>
 </div>

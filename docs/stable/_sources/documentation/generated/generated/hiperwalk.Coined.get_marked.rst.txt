@@ -1,0 +1,6 @@
+hiperwalk.Coined.get\_marked
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.get_marked

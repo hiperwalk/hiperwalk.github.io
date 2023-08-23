@@ -1,0 +1,6 @@
+hiperwalk.Cycle.adjacency\_matrix
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Cycle.adjacency_matrix

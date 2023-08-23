@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hiperwalk.graph.line &#8212; Hiperwalk stable documentation</title>
+    <title>hiperwalk.graph.line &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -34,13 +34,13 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../../../_static/documentation_options.js?v=fe2989bd"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/graph/line';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -104,6 +104,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
   
     <p class="title logo__title">Hiperwalk</p>
   
@@ -114,7 +122,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      stable  <!-- this text may get changed later by javascript -->
+      latest  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -347,11 +355,11 @@ document.write(`
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">sys_path</span>
-<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
 
 <div class="viewcode-block" id="Line">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line">[docs]</a>
-<span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finite line graph (path graph).</span>
 
@@ -406,27 +414,15 @@ document.write(`
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Line.embeddable">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.embeddable.html#hiperwalk.Line.embeddable">[docs]</a>
-    <span class="k">def</span> <span class="nf">embeddable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+<div class="viewcode-block" id="Line.arc_number">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc_number.html#hiperwalk.Line.arc_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Line.default_coin">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.default_coin.html#hiperwalk.Line.default_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">default_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the default coin name.</span>
-
-<span class="sd">        The default coin for a coined quantum walk on a</span>
-<span class="sd">        segment is ``&#39;hadamard&#39;``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;hadamard&#39;</span></div>
-
-
-<div class="viewcode-block" id="Line.arc_label">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc_label.html#hiperwalk.Line.arc_label">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
         <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc.&#39;</span><span class="p">)</span>
@@ -439,20 +435,19 @@ document.write(`
 
 <div class="viewcode-block" id="Line.arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc.html#hiperwalk.Line.arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-        <span class="n">label</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">label</span><span class="o">//</span><span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span><span class="o">//</span><span class="mi">2</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">label</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">tail</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tail</span> <span class="o">!=</span> <span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span>
-                <span class="k">else</span> <span class="n">tail</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">label</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="k">else</span> <span class="n">tail</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Line.next_arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.next_arc.html#hiperwalk.Line.next_arc">[docs]</a>
     <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
@@ -476,7 +471,6 @@ document.write(`
 <div class="viewcode-block" id="Line.previous_arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.previous_arc.html#hiperwalk.Line.previous_arc">[docs]</a>
     <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>

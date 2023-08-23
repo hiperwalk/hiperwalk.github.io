@@ -1,0 +1,6 @@
+hiperwalk.Grid.arc\_direction
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.arc_direction

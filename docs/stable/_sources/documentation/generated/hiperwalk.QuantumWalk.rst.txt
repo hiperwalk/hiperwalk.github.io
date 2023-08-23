@@ -50,6 +50,9 @@ hiperwalk.QuantumWalk
           ~QuantumWalk.state
        
        
+          ~QuantumWalk.success_probability
+       
+       
           ~QuantumWalk.uniform_state
        
 

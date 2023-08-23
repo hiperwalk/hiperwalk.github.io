@@ -1,0 +1,6 @@
+hiperwalk.Coined.default\_coin
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.default_coin

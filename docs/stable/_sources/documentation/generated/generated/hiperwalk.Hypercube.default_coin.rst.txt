@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.default\_coin
-=================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.default_coin

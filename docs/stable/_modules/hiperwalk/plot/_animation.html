@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hiperwalk.plot._animation &#8212; Hiperwalk stable documentation</title>
+    <title>hiperwalk.plot._animation &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -34,13 +34,13 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../../../_static/documentation_options.js?v=fe2989bd"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/plot/_animation';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -104,6 +104,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
   
     <p class="title logo__title">Hiperwalk</p>
   
@@ -114,7 +122,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      stable  <!-- this text may get changed later by javascript -->
+      latest  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -621,9 +629,6 @@ document.write(`
             <span class="c1"># creating window</span>
             <span class="n">window</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ApplicationWindow</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Animation&quot;</span><span class="p">)</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;window.get_state() is deprecated. Change.&quot;</span>
-            <span class="p">)</span>
             <span class="n">window</span><span class="o">.</span><span class="n">override_background_color</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">RGBA</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
             <span class="k">def</span> <span class="nf">configure_gif_window</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

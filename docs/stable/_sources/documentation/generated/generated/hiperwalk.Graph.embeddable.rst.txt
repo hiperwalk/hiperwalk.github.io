@@ -1,6 +1,0 @@
-hiperwalk.Graph.embeddable
-==========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Graph.embeddable

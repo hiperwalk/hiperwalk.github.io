@@ -1,0 +1,6 @@
+hiperwalk.Coined.get\_evolution
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.get_evolution

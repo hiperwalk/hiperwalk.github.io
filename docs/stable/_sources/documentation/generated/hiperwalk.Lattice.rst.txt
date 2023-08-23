@@ -20,31 +20,19 @@ hiperwalk.Lattice
    
        
        
+          ~Lattice.adjacency_matrix
+       
+       
           ~Lattice.arc
        
        
-          ~Lattice.arc_direction
-       
-       
-          ~Lattice.arc_label
+          ~Lattice.arc_number
        
        
           ~Lattice.arcs_with_tail
        
        
-          ~Lattice.default_coin
-       
-       
           ~Lattice.degree
-       
-       
-          ~Lattice.dimensions
-       
-       
-          ~Lattice.embeddable
-       
-       
-          ~Lattice.get_central_vertex
        
        
           ~Lattice.neighbors
@@ -65,10 +53,7 @@ hiperwalk.Lattice
           ~Lattice.previous_arc
        
        
-          ~Lattice.vertex_coordinates
-       
-       
-          ~Lattice.vertex_label
+          ~Lattice.vertex_number
        
 
    

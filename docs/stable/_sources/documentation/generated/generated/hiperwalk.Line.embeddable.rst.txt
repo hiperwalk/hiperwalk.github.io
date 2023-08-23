@@ -1,6 +1,0 @@
-hiperwalk.Line.embeddable
-=========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.embeddable

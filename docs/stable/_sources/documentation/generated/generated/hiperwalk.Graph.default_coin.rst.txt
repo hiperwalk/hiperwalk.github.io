@@ -1,6 +1,0 @@
-hiperwalk.Graph.default\_coin
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Graph.default_coin

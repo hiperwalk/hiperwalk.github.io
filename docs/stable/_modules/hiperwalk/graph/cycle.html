@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hiperwalk.graph.cycle &#8212; Hiperwalk stable documentation</title>
+    <title>hiperwalk.graph.cycle &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -34,13 +34,13 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../../../_static/documentation_options.js?v=fe2989bd"></script>
+    <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/graph/cycle';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -104,6 +104,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
   
     <p class="title logo__title">Hiperwalk</p>
   
@@ -114,7 +122,7 @@
 document.write(`
   <div class="version-switcher__container dropdown">
     <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
-      stable  <!-- this text may get changed later by javascript -->
+      latest  <!-- this text may get changed later by javascript -->
       <span class="caret"></span>
     </button>
     <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
@@ -345,11 +353,11 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.cycle</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
-<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="Cycle">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Cycle.html#hiperwalk.Cycle">[docs]</a>
-<span class="k">class</span> <span class="nc">Cycle</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cycle</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cycle graph.</span>
 
@@ -366,9 +374,9 @@ document.write(`
 <span class="sd">    we assign the direction ``0`` to the right and ``1`` to the left.</span>
 <span class="sd">    This assignment alters the order of the arcs.</span>
 <span class="sd">    Any arc with a tail denoted by :math:`v`</span>
-<span class="sd">    has the label :math:`2v` if it points to the right,</span>
-<span class="sd">    and the label :math:`2v + 1` if it points to the left.</span>
-<span class="sd">    Figure 1 illustrates the arc labels of a cycle with 3 vertices.</span>
+<span class="sd">    has the numerical label :math:`2v` if it points to the right,</span>
+<span class="sd">    and the numerical label :math:`2v + 1` if it points to the left.</span>
+<span class="sd">    Figure 1 illustrates the arc numbers of a cycle with 3 vertices.</span>
 
 <span class="sd">    .. graphviz:: ../../graphviz/cycle-arcs.dot</span>
 <span class="sd">        :align: center</span>
@@ -395,24 +403,15 @@ document.write(`
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Cycle.embeddable">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.embeddable.html#hiperwalk.Cycle.embeddable">[docs]</a>
-    <span class="k">def</span> <span class="nf">embeddable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+<div class="viewcode-block" id="Cycle.arc_number">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc_number.html#hiperwalk.Cycle.arc_number">[docs]</a>
+    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Cycle.default_coin">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.default_coin.html#hiperwalk.Cycle.default_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">default_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the default coin name.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;hadamard&#39;</span></div>
-
-
-<div class="viewcode-block" id="Cycle.arc_label">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc_label.html#hiperwalk.Cycle.arc_label">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tail</span> <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">-</span> <span class="n">tail</span> <span class="o">==</span> <span class="mi">1</span>
                           <span class="ow">or</span> <span class="n">tail</span> <span class="o">-</span> <span class="n">head</span> <span class="o">==</span> <span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -422,9 +421,9 @@ document.write(`
 
 <div class="viewcode-block" id="Cycle.arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc.html#hiperwalk.Cycle.arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">label</span><span class="o">//</span><span class="mi">2</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="n">label</span> <span class="o">%</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span>
         <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">remainder</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
@@ -432,7 +431,6 @@ document.write(`
 <div class="viewcode-block" id="Cycle.next_arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.next_arc.html#hiperwalk.Cycle.next_arc">[docs]</a>
     <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
@@ -454,7 +452,6 @@ document.write(`
 <div class="viewcode-block" id="Cycle.previous_arc">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.previous_arc.html#hiperwalk.Cycle.previous_arc">[docs]</a>
     <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="c1"># implemented only if is embeddable</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
             <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>

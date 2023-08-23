@@ -1,6 +1,0 @@
-hiperwalk.ContinuousWalk.get\_gamma
-===================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: ContinuousWalk.get_gamma

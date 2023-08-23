@@ -20,22 +20,19 @@ hiperwalk.Line
    
        
        
+          ~Line.adjacency_matrix
+       
+       
           ~Line.arc
        
        
-          ~Line.arc_label
+          ~Line.arc_number
        
        
           ~Line.arcs_with_tail
        
        
-          ~Line.default_coin
-       
-       
           ~Line.degree
-       
-       
-          ~Line.embeddable
        
        
           ~Line.neighbors
@@ -54,6 +51,9 @@ hiperwalk.Line
        
        
           ~Line.previous_arc
+       
+       
+          ~Line.vertex_number
        
 
    

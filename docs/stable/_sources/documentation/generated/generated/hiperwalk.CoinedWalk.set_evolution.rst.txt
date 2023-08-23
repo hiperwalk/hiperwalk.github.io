@@ -1,6 +1,0 @@
-hiperwalk.CoinedWalk.set\_evolution
-===================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: CoinedWalk.set_evolution

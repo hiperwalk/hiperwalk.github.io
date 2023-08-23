@@ -1,0 +1,6 @@
+hiperwalk.Line.adjacency\_matrix
+================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Line.adjacency_matrix

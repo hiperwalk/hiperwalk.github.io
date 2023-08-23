@@ -1,0 +1,6 @@
+hiperwalk.Coined.has\_persistent\_shift
+=======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.has_persistent_shift

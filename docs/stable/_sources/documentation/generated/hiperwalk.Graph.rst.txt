@@ -20,28 +20,22 @@ hiperwalk.Graph
    
        
        
+          ~Graph.adjacency_matrix
+       
+       
           ~Graph.arc
        
        
-          ~Graph.arc_label
+          ~Graph.arc_number
        
        
           ~Graph.arcs_with_tail
        
        
-          ~Graph.default_coin
-       
-       
           ~Graph.degree
        
        
-          ~Graph.embeddable
-       
-       
           ~Graph.neighbors
-       
-       
-          ~Graph.next_arc
        
        
           ~Graph.number_of_arcs
@@ -53,7 +47,7 @@ hiperwalk.Graph
           ~Graph.number_of_vertices
        
        
-          ~Graph.previous_arc
+          ~Graph.vertex_number
        
 
    

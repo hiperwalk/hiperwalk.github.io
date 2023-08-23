@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.probability\_distribution
+==================================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.probability_distribution

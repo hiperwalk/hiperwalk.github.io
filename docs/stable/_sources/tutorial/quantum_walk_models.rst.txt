@@ -9,8 +9,8 @@ will be available to the child class. However, the abstract methods must
 be overridden by the child class as they are model-dependent.
 
 Currently, two models are available: the Coined model 
-(:class:`hiperwalk.CoinedWalk`) and the Continuous model 
-(:class:`hiperwalk.ContinuousWalk`). Users are encouraged 
+(:class:`hiperwalk.Coined`) and the Continuous model 
+(:class:`hiperwalk.ContinuousTime`). Users are encouraged 
 to implement new models and add them to the Hiperwalk 
 package (see the :ref:`docs_development` section 
 for more information).
@@ -43,9 +43,9 @@ we can pass ``cycle`` to the quantum walk constructor.
 
 To create a coined quantum walk, we execute
 
->>> coined = hpw.CoinedWalk(graph=cycle)
+>>> coined = hpw.Coined(graph=cycle)
 >>> coined #doctest: +SKIP
-<hiperwalk.quantum_walk.coined_walk.CoinedWalk object at 0x7f655b0cd900>
+<hiperwalk.quantum_walk.coined_walk.Coined object at 0x7f655b0cd900>
 
 The Hilbert space of the coined quantum walk has dimension
 :math:`2|E|`, i.e. the number of arcs.
@@ -58,9 +58,9 @@ we need to pass both the graph and the ``gamma`` parameter.
 The ``gamma`` parameter is required because there is no universally
 accepted default value for ``gamma`` in the literature.
 
->>> continuous = hpw.ContinuousWalk(graph=cycle, gamma=0.35)
+>>> continuous = hpw.ContinuousTime(graph=cycle, gamma=0.35)
 >>> continuous #doctest: +SKIP
-<hiperwalk.quantum_walk.continuous_walk.ContinuousWalk object at 0x7f655b0cd8d0>
+<hiperwalk.quantum_walk.continuous_walk.ContinuousTime object at 0x7f655b0cd8d0>
 
 The Hilbert space of the continuous-time quantum walk has dimension
 :math:`|V|`, i.e. the number of vertices.
@@ -87,7 +87,7 @@ In the coined quantum walk model,
 the label of a state within the computational basis corresponds 
 to an arc. You can use either the arc notation, which involves 
 specifying the arc's tail and head,
-or the arc label (an integer). Please refer to the Graph class 
+or the arc number (an integer). Please refer to the Graph class 
 for correct arc labeling guidelines.
 
 >>> state = coined.ket(5, 6)
@@ -100,15 +100,15 @@ True
 
 An easy way to convert between arc notation and the numerical label is by using
 the :meth:`hiperwalk.Graph.arc` and
-:meth:`hiperwalk.Graph.arc_label` methods.
+:meth:`hiperwalk.Graph.arc_number` methods.
 
 >>> arc = cycle.arc(10)
 >>> arc
 (5, 6)
->>> cycle.arc_label(arc[0], arc[1])
+>>> cycle.arc_number(arc[0], arc[1])
 10
 >>>
->>> cycle.arc(cycle.arc_label(5, 6))
+>>> cycle.arc(cycle.arc_number(5, 6))
 (5, 6)
 
 In the continuous-time model,
@@ -213,20 +213,20 @@ the :meth:`hiperwalk.QuantumWalk.get_evolution` method from the QuantumWalk clas
 >>> U2 = coined.get_evolution()
 >>> (U != U2).nnz == 0 # efficient way of comparing sparse arrays
 False
->>> coined2 = hpw.CoinedWalk(graph=cycle, shift='flipflop', coin='grover')
+>>> coined2 = hpw.Coined(graph=cycle, shift='flipflop', coin='grover')
 >>> U3 = coined.get_evolution()
 >>> (U2 != U3).nnz == 0
 True
 
 Coined Model
 ''''''''''''
-The :meth:`hiperwalk.CoinedWalk.set_evolution` method
+The :meth:`hiperwalk.Coined.set_evolution` method
 accepts three key arguments:
 ``shift``, ``coin``, and ``marked``,
 which are the arguments of
-:meth:`hiperwalk.CoinedWalk.set_shift`,
-:meth:`hiperwalk.CoinedWalk.set_coin`, and
-:meth:`hiperwalk.CoinedWalk.set_marked`,
+:meth:`hiperwalk.Coined.set_shift`,
+:meth:`hiperwalk.Coined.set_coin`, and
+:meth:`hiperwalk.Coined.set_marked`,
 respectively.
 
 The ``shift`` key can either take a string value 
@@ -284,7 +284,7 @@ The ``marked`` key can accept two types of inputs:
 * A dictionary with the coin name as key and
   the list of vertices as values:
   This operates similarly to the dictionary accepted by the
-  :meth:`hiperwalk.CoinedWalk.set_coin` method.
+  :meth:`hiperwalk.Coined.set_coin` method.
   The vertices are set as marked and
   *the coin operator is modified* accordingly.
 
@@ -306,16 +306,13 @@ True
 True
 
 All these keys can be integrated into a single call to the
-:meth:`hiperwalk.CoinedWalk.set_evolution` method when creating 
+:meth:`hiperwalk.Coined.set_evolution` method when creating 
 an instance of the object.
 
 Continuous-time Model
 '''''''''''''''''''''
 The dynamics of the continuous-time quantum walk is
 fully defined by the Hamiltonian.
-As a result, calling :meth:`hiperwalk.ContinuousWalk.set_evolution`
-is the same as calling :meth:`hiperwalk.ContinuousWalk.set_hamiltonian`
-in the same class.
 The Hamiltonian is given by
 
 .. math::
@@ -327,25 +324,27 @@ where :math:`A` is the graph adjacency matrix and
 Therefore, the ``set_hamiltonian`` method accepts two arguments:
 * ``gamma``: the value of gamma.
 * ``marked``: the list of marked vertices.
-For example,
 
->>> continuous2 = hpw.ContinuousWalk(graph=cycle, gamma=0.35, marked=0)
->>> continuous2 #doctest: +SKIP
-<hiperwalk.quantum_walk.continuous_walk.ContinuousWalk object at 0x7ffad2de9510>
-
-The evolution operator is defined as
+On the other hand,
+the evolution operator is defined as
 
 .. math::
 
    U = e^{-\text{i} t H}.
 
-Since the continuous-time evolution operator is time-dependent,
-it should be generated as needed, based on the most recent timestamp. 
+Note that the continuous-time evolution operator is time-dependent.
+The ``time`` may be specified using the constructor, by the
+:meth:`hiperwalk.ContinuousTime.set_time` method or by the
+:meth:`hiperwalk.ContinuousTime.set_evolution`.
+If ``time`` is omitted, it is set to 0 and
+the evolution operator equals the identity.
 
->>> U = continuous.get_evolution(time=1)
->>> continuous.set_marked(marked=0)
->>> U2 = continuous.get_evolution(time=1)
->>> np.any(U != U2)
+>>> I = continuous.get_evolution() # time was omitted on the constructor
+>>> np.all(I == np.eye(I.shape[0]))
+True
+>>> continuous.set_time(1)
+>>> U = continuous.get_evolution()
+>>> np.any(U != I)
 True
 
 Simulation Invocation
@@ -451,6 +450,11 @@ it is converted to ``(20, 1)``, which
 results in the states corresponding to the timestamps
 ``[ 0.       ,  0.5000001,  1.0000002,  ...,  9.5000019, 10.000002 ])``.
 
+In the continuous-time quantum walk model,
+it is recommended that ``step`` has the same value as
+the ``time`` used in the constructor or in the ``set_evolution``.
+Otherwise, the evolution operator is computated twice.
+
 Calculating Probability
 -----------------------
 
@@ -458,12 +462,13 @@ There are two ways of calculating probabilities:
 :meth:`hiperwalk.QuantumWalk.probability` and
 :meth:`hiperwalk.QuantumWalk.probability_distribution`.
 :meth:`hiperwalk.QuantumWalk.probability` computes
-the probability of each state entry.
+the probability of the walker being found on a
+subset of the vertices for each state.
 
->>> probs = coined.probability(states)
+>>> probs = coined.probability(states, [0, 1, 2])
 >>> len(probs) == len(states)
 True
->>> len(probs[0]) == len(states[0])
+>>> np.all([0 <= p and p <= 1  for p in probs])
 True
 
 :meth:`hiperwalk.QuantumWalk.probability_distribution`
@@ -483,8 +488,8 @@ True
 
 .. note::
    For the Continuous model,
-   :meth:`hiperwalk.ContinuousWalk.probability` and
-   :meth:`hiperwalk.ContinuousWalk.probability_distribution` yield
+   :meth:`hiperwalk.ContinuousTime.probability` and
+   :meth:`hiperwalk.ContinuousTime.probability_distribution` yield
    the same result.
 
 Having obtained a probability distribution, the user may find it helpful to 

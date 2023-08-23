@@ -1,0 +1,6 @@
+hiperwalk.Coined.probability
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.probability

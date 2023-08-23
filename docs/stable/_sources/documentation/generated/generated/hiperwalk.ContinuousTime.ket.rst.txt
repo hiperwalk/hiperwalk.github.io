@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.ket
+============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.ket

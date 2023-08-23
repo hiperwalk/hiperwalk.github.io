@@ -1,0 +1,6 @@
+hiperwalk.Graph.vertex\_number
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.vertex_number

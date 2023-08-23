@@ -1,6 +1,0 @@
-hiperwalk.CoinedWalk.set\_marked
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: CoinedWalk.set_marked

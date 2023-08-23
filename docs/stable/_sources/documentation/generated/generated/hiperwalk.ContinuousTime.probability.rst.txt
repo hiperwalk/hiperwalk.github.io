@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.probability
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.probability

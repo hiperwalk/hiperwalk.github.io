@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.set\_gamma
+===================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.set_gamma
