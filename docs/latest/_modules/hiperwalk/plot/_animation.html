@@ -390,7 +390,7 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    frames : list</span>
 <span class="sd">        List of frames.</span>
-<span class="sd">    plt_anim : :class:`matplotlib.animation.FuncAnimation`</span>
+<span class="sd">    plt_anim : :class:`matplotlib.animation.ArtistAnimation`</span>
 <span class="sd">        Animation object of matplotlib.</span>
 <span class="sd">    save_path : str</span>
 <span class="sd">        Filepath for saving the animation.</span>
@@ -466,7 +466,7 @@ document.write(`
 <span class="sd">                ignores the `repeat_delay` parameter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">._plot</span> <span class="kn">import</span> <span class="n">_configure_figure</span>
-        <span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">ArtistAnimation</span>
 
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">_configure_figure</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
@@ -477,17 +477,11 @@ document.write(`
         <span class="c1"># and y-axes were not found.</span>
         <span class="c1"># TODO: documentation: recommend saving gif</span>
         <span class="c1"># and not showing for any animations</span>
-        <span class="k">def</span> <span class="nf">update_figure</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-                <span class="k">global</span> <span class="n">start</span>
-                <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
 
         <span class="c1"># TODO: repeat_delay not implemented in animation.save</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plt_anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span>
-            <span class="n">fig</span><span class="p">,</span> <span class="n">update_figure</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="p">,</span>
+        <span class="n">artists</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plt_anim</span> <span class="o">=</span> <span class="n">ArtistAnimation</span><span class="p">(</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span>
             <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_in_notebook</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="c1"># repeat=True causes updateFigure to be called</span>
