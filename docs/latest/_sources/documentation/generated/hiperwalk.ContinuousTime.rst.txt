@@ -20,6 +20,9 @@ hiperwalk.ContinuousTime
    
        
        
+          ~ContinuousTime.fit_sin_square
+       
+       
           ~ContinuousTime.get_evolution
        
        

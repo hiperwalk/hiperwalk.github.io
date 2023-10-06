@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.Hypercube.arc_number &#8212; Hiperwalk latest documentation</title>
+    <title>hiperwalk.QuantumWalk.fit_sin_square &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -39,7 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Hypercube.arc_number';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.QuantumWalk.fit_sin_square';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.14.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -48,8 +48,8 @@
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hiperwalk.Hypercube.arcs_with_tail" href="hiperwalk.Hypercube.arcs_with_tail.html" />
-    <link rel="prev" title="hiperwalk.Hypercube.arc_direction" href="hiperwalk.Hypercube.arc_direction.html" />
+    <link rel="next" title="hiperwalk.QuantumWalk.get_evolution" href="hiperwalk.QuantumWalk.get_evolution.html" />
+    <link rel="prev" title="hiperwalk.QuantumWalk" href="../hiperwalk.QuantumWalk.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -327,7 +327,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../graph.html">Graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../graph.html">Graphs</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
@@ -374,11 +374,11 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.vertex_number.html">hiperwalk.Grid.vertex_number</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.adjacency_matrix.html">hiperwalk.Hypercube.adjacency_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc.html">hiperwalk.Hypercube.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_direction.html">hiperwalk.Hypercube.arc_direction</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.Hypercube.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_number.html">hiperwalk.Hypercube.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arcs_with_tail.html">hiperwalk.Hypercube.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.degree.html">hiperwalk.Hypercube.degree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.dimension.html">hiperwalk.Hypercube.dimension</a></li>
@@ -421,9 +421,9 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.fit_sin_square.html">hiperwalk.QuantumWalk.fit_sin_square</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../quantum_walk.html">Quantum Walk Models</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.QuantumWalk.fit_sin_square</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.get_evolution.html">hiperwalk.QuantumWalk.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.get_marked.html">hiperwalk.QuantumWalk.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.hilbert_space_dimension.html">hiperwalk.QuantumWalk.hilbert_space_dimension</a></li>
@@ -540,9 +540,9 @@ document.write(`
     <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
     
     
-    <li class="breadcrumb-item"><a href="../hiperwalk.Hypercube.html" class="nav-link">hiperwalk.Hypercube</a></li>
+    <li class="breadcrumb-item"><a href="../hiperwalk.QuantumWalk.html" class="nav-link">hiperwalk.QuantumWalk</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Hy...</li>
+    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Qu...</li>
   </ul>
 </nav>
 </div>
@@ -559,47 +559,63 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="hiperwalk-hypercube-arc-number">
-<h1>hiperwalk.Hypercube.arc_number<a class="headerlink" href="#hiperwalk-hypercube-arc-number" title="Link to this heading">#</a></h1>
+  <section id="hiperwalk-quantumwalk-fit-sin-square">
+<h1>hiperwalk.QuantumWalk.fit_sin_square<a class="headerlink" href="#hiperwalk-quantumwalk-fit-sin-square" title="Link to this heading">#</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="hiperwalk.Hypercube.arc_number">
-<span class="sig-prename descclassname"><span class="pre">Hypercube.</span></span><span class="sig-name descname"><span class="pre">arc_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/hypercube.html#Hypercube.arc_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Hypercube.arc_number" title="Link to this definition">#</a></dt>
-<dd><p>Returns the numerical label of the arc.</p>
-<dl class="field-list simple">
+<dt class="sig sig-object py" id="hiperwalk.QuantumWalk.fit_sin_square">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">fit_sin_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.fit_sin_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.fit_sin_square" title="Link to this definition">#</a></dt>
+<dd><p>Fit data to the squared sine function.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>*args:</strong></dt><dd><dl class="simple">
-<dt>int:</dt><dd><p>The numerical arc label itself is passed
-as argument.</p>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The domain values.
+It is assumed that the entries are evenly spaced.
+That is, <code class="docutils literal notranslate"><span class="pre">x[i</span> <span class="pre">+</span> <span class="pre">1]</span> <span class="pre">-</span> <span class="pre">x[i]</span> <span class="pre">==</span> <span class="pre">x[j</span> <span class="pre">+</span> <span class="pre">1]</span> <span class="pre">-</span> <span class="pre">x[j]</span></code> for
+any valid <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>.</p>
 </dd>
-<dt>(tail, head):</dt><dd><p>Arc in arc notation.</p>
-</dd>
-<dt>tail, head:</dt><dd><p>Arc in arc notation,
-but <code class="docutils literal notranslate"><span class="pre">tail</span></code> and <code class="docutils literal notranslate"><span class="pre">head</span></code> are passed as
-different arguments, not as a tuple.</p>
-</dd>
-</dl>
+<dt><strong>y</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The image values evaluated at each <code class="docutils literal notranslate"><span class="pre">x[i]</span></code>.
+It is required that <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> corresponds to
+the evaluation at <code class="docutils literal notranslate"><span class="pre">x[i]</span></code>.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>label: int</dt><dd><p>Arc label.</p>
+<dd class="field-even"><dl>
+<dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>It contains information about the best fit found.
+The dictionary keys are</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;fit</span> <span class="pre">function&quot;</span></code> :</dt><dd><p>a pointer to the obtained sine squared
+function. Issuing <code class="docutils literal notranslate"><span class="pre">d[&quot;fit</span> <span class="pre">function&quot;](theta)</span></code> evaluates
+the function at point <code class="docutils literal notranslate"><span class="pre">theta</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;amplitude&quot;</span></code>:</dt><dd><p>amplitude of the obtained fit function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;angular</span> <span class="pre">frequency&quot;</span></code> :</dt><dd><p>angular frequency of the obtained fit function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;phase</span> <span class="pre">shift&quot;</span></code> :</dt><dd><p>phase shift of the obtained fit function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;vertical</span> <span class="pre">offset&quot;</span></code> :</dt><dd><p>vertical offset of the obtained fit function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;frequency&quot;</span></code> :</dt><dd><p>frequency of the obtained fit function.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;period&quot;</span></code> :</dt><dd><p>period of the obtained fit function.</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<p>If arc <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1)</span></code> exists, the following commands return
-the same result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#arc number 0</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1">#arc as tuple</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#tail and head in separate arguments</span>
-<span class="go">0</span>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">d[&quot;fit</span> <span class="pre">function&quot;]</span></code> is a pointer to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_func</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;amplitude&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span>
+               <span class="n">d</span><span class="p">[</span><span class="s2">&quot;angular frequency&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">theta</span> <span class="o">+</span>
+               <span class="n">d</span><span class="p">[</span><span class="s2">&quot;phase shift&quot;</span><span class="p">]</span>
+           <span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;vertical offset&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>The code was adapted from
+<a class="reference external" href="https://stackoverflow.com/questions/16716302/how-do-i-fit-a-sine-curve-to-my-data-with-pylab-and-numpy">https://stackoverflow.com/questions/16716302/how-do-i-fit-a-sine-curve-to-my-data-with-pylab-and-numpy</a></p>
 </dd></dl>
 
 </section>
@@ -615,20 +631,20 @@ the same result.</p>
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.Hypercube.arc_direction.html"
+       href="../hiperwalk.QuantumWalk.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.Hypercube.arc_direction</p>
+        <p class="prev-next-title">hiperwalk.QuantumWalk</p>
       </div>
     </a>
     <a class="right-next"
-       href="hiperwalk.Hypercube.arcs_with_tail.html"
+       href="hiperwalk.QuantumWalk.get_evolution.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.Hypercube.arcs_with_tail</p>
+        <p class="prev-next-title">hiperwalk.QuantumWalk.get_evolution</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -647,13 +663,13 @@ the same result.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.Hypercube.arc_number"><code class="docutils literal notranslate"><span class="pre">Hypercube.arc_number()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.QuantumWalk.fit_sin_square"><code class="docutils literal notranslate"><span class="pre">QuantumWalk.fit_sin_square()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../../../_sources/documentation/generated/generated/hiperwalk.Hypercube.arc_number.rst.txt">
+    <a href="../../../_sources/documentation/generated/generated/hiperwalk.QuantumWalk.fit_sin_square.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

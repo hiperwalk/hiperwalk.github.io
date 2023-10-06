@@ -20,6 +20,9 @@ hiperwalk.QuantumWalk
    
        
        
+          ~QuantumWalk.fit_sin_square
+       
+       
           ~QuantumWalk.get_evolution
        
        

@@ -376,6 +376,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
@@ -1069,6 +1070,100 @@ document.write(`
 <span class="sd">        Returns dimension of the Hilbert space.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span></div>
+
+
+
+<div class="viewcode-block" id="QuantumWalk.fit_sin_square">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.fit_sin_square.html#hiperwalk.QuantumWalk.fit_sin_square">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fit_sin_square</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit data to the squared sine function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : :class:`numpy.ndarray`</span>
+<span class="sd">            The domain values.</span>
+<span class="sd">            It is assumed that the entries are evenly spaced.</span>
+<span class="sd">            That is, ``x[i + 1] - x[i] == x[j + 1] - x[j]`` for</span>
+<span class="sd">            any valid ``i`` and ``j``.</span>
+
+<span class="sd">        y : :class:`numpy.ndarray`</span>
+<span class="sd">            The image values evaluated at each ``x[i]``.</span>
+<span class="sd">            It is required that ``y[i]`` corresponds to</span>
+<span class="sd">            the evaluation at ``x[i]``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        d : dict</span>
+<span class="sd">            It contains information about the best fit found.</span>
+<span class="sd">            The dictionary keys are</span>
+
+<span class="sd">            ``&quot;fit function&quot;`` :</span>
+<span class="sd">                a pointer to the obtained sine squared</span>
+<span class="sd">                function. Issuing ``d[&quot;fit function&quot;](theta)`` evaluates</span>
+<span class="sd">                the function at point ``theta``.</span>
+
+<span class="sd">            ``&quot;amplitude&quot;``:</span>
+<span class="sd">                amplitude of the obtained fit function.</span>
+
+<span class="sd">            ``&quot;angular frequency&quot;`` :</span>
+<span class="sd">                angular frequency of the obtained fit function.</span>
+
+<span class="sd">            ``&quot;phase shift&quot;`` :</span>
+<span class="sd">                phase shift of the obtained fit function.</span>
+
+<span class="sd">            ``&quot;vertical offset&quot;`` :</span>
+<span class="sd">                vertical offset of the obtained fit function.</span>
+
+<span class="sd">            ``&quot;frequency&quot;`` :</span>
+<span class="sd">                frequency of the obtained fit function.</span>
+
+<span class="sd">            ``&quot;period&quot;`` :</span>
+<span class="sd">                period of the obtained fit function.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The returned ``d[&quot;fit function&quot;]`` is a pointer to</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            def fit_func(theta):</span>
+<span class="sd">                return d[&quot;amplitude&quot;]*np.sin(</span>
+<span class="sd">                           d[&quot;angular frequency&quot;]*theta +</span>
+<span class="sd">                           d[&quot;phase shift&quot;]</span>
+<span class="sd">                       )**2 + d[&quot;vertical offset&quot;]</span>
+
+
+<span class="sd">        The code was adapted from</span>
+<span class="sd">        `https://stackoverflow.com/questions/16716302/how-do-i-fit-a-sine-curve-to-my-data-with-pylab-and-numpy</span>
+<span class="sd">        &lt;https://stackoverflow.com/questions/16716302/how-do-i-fit-a-sine-curve-to-my-data-with-pylab-and-numpy&gt;`_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># uniform spacing is assumed</span>
+        <span class="n">fft_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">abs_fft</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+        <span class="c1"># excluding the zero frequency &quot;peak&quot;, which is related to offset</span>
+        <span class="n">guess_freq</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fft_freq</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">abs_fft</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">guess_amp</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">guess_offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess_amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">guess_freq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guess_offset</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">sin_square</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">ang_freq</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">vert_offset</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ampl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ang_freq</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vert_offset</span>
+                
+        <span class="n">opt_res</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">sin_square</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guess</span><span class="p">)</span>
+
+        <span class="n">ampl</span><span class="p">,</span> <span class="n">ang_freq</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">vert_offset</span> <span class="o">=</span> <span class="n">opt_res</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">ang_freq</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">fitfunc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ampl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ang_freq</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vert_offset</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;amplitude&quot;</span><span class="p">:</span> <span class="n">ampl</span><span class="p">,</span>
+                <span class="s2">&quot;angular frequency&quot;</span><span class="p">:</span> <span class="n">ang_freq</span><span class="p">,</span>
+                <span class="s2">&quot;phase shift&quot;</span><span class="p">:</span> <span class="n">shift</span><span class="p">,</span>
+                <span class="s2">&quot;vertical offset&quot;</span><span class="p">:</span> <span class="n">vert_offset</span><span class="p">,</span>
+                <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="n">freq</span><span class="p">,</span>
+                <span class="s2">&quot;period&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="n">freq</span><span class="p">,</span>
+                <span class="s2">&quot;fit function&quot;</span><span class="p">:</span> <span class="n">fitfunc</span><span class="p">}</span></div>
 </div>
 
 </pre></div>
