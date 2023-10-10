@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.optimal\_runtime
+=========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.optimal_runtime

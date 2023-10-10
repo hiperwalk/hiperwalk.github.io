@@ -20,7 +20,7 @@ hiperwalk.ContinuousTime
    
        
        
-          ~ContinuousTime.fit_sin_square
+          ~ContinuousTime.fit_sin_squared
        
        
           ~ContinuousTime.get_evolution
@@ -39,6 +39,9 @@ hiperwalk.ContinuousTime
        
        
           ~ContinuousTime.ket
+       
+       
+          ~ContinuousTime.optimal_runtime
        
        
           ~ContinuousTime.probability

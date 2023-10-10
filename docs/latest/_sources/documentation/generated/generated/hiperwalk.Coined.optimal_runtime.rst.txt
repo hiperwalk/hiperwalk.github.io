@@ -1,0 +1,6 @@
+hiperwalk.Coined.optimal\_runtime
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.optimal_runtime

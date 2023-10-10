@@ -23,7 +23,7 @@ hiperwalk.Coined
           ~Coined.default_coin
        
        
-          ~Coined.fit_sin_square
+          ~Coined.fit_sin_squared
        
        
           ~Coined.get_coin
@@ -45,6 +45,9 @@ hiperwalk.Coined
        
        
           ~Coined.ket
+       
+       
+          ~Coined.optimal_runtime
        
        
           ~Coined.probability

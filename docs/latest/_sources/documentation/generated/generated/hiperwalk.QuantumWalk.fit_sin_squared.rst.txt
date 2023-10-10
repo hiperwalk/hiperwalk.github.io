@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.fit\_sin\_squared
+=======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.fit_sin_squared

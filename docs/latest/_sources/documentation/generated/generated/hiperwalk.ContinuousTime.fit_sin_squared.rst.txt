@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.fit\_sin\_squared
+==========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.fit_sin_squared

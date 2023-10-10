@@ -1,6 +1,0 @@
-hiperwalk.Coined.fit\_sin\_square
-=================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Coined.fit_sin_square
