@@ -47,6 +47,9 @@ hiperwalk.Coined
           ~Coined.ket
        
        
+          ~Coined.max_success_probability
+       
+       
           ~Coined.optimal_runtime
        
        

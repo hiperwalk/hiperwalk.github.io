@@ -1,0 +1,6 @@
+hiperwalk.Coined.max\_success\_probability
+==========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Coined.max_success_probability

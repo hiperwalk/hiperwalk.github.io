@@ -41,6 +41,9 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.ket
        
        
+          ~ContinuousTime.max_success_probability
+       
+       
           ~ContinuousTime.optimal_runtime
        
        

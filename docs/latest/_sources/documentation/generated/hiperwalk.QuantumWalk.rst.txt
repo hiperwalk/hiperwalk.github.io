@@ -35,6 +35,9 @@ hiperwalk.QuantumWalk
           ~QuantumWalk.ket
        
        
+          ~QuantumWalk.max_success_probability
+       
+       
           ~QuantumWalk.optimal_runtime
        
        

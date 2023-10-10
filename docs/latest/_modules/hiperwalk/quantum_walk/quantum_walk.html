@@ -1237,10 +1237,63 @@ document.write(`
 <span class="sd">        --------</span>
 <span class="sd">        simulate</span>
 <span class="sd">        uniform_state</span>
+<span class="sd">        success_probability</span>
 <span class="sd">        fit_sin_squared</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">t_opt</span></div>
+
+
+<div class="viewcode-block" id="QuantumWalk.max_success_probability">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.max_success_probability.html#hiperwalk.QuantumWalk.max_success_probability">[docs]</a>
+    <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the max success probability.</span>
+<span class="sd">        The success probability corresponding to the optimal runtime.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        initial_state : :class:`numpy.ndarray`, default=None</span>
+<span class="sd">            The state initial state for the simulation.</span>
+<span class="sd">            If ``None``, uses the uniform state.</span>
+
+<span class="sd">        delta_time :</span>
+<span class="sd">            Time difference between two consecutive states</span>
+<span class="sd">            to be saved by the simulation.</span>
+<span class="sd">            See ``time`` argument in :meth:`simulate` for details.</span>
+
+<span class="sd">        hpc : boolean</span>
+<span class="sd">            Whether or not to use neblina&#39;s high-performance computing</span>
+<span class="sd">            to perform matrix multiplications.</span>
+<span class="sd">            If ``hpc=False`` uses standalone python.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The maximum success probability.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        optimal_runtime</span>
+<span class="sd">        simulate</span>
+<span class="sd">        uniform_state</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+
+<span class="sd">        .. todo::</span>
+<span class="sd">            If ``t_opt / delta_time`` is not close to an integer,</span>
+<span class="sd">            the max success probability was not obtained in the simulation.</span>
+<span class="sd">            The simulation must be rerun or interpolated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span>
+                                              <span class="n">delta_time</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+        <span class="n">opt_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span> <span class="o">/</span> <span class="n">delta_time</span><span class="p">)</span>
+        <span class="c1"># TODO: if t_opt / delta_time is not close to an integer,</span>
+        <span class="c1"># max_sucess_probability is not in p_succ.</span>
+        <span class="c1"># simulation must be rerun</span>
+        <span class="k">return</span> <span class="n">p_succ</span><span class="p">[</span><span class="n">opt_index</span><span class="p">]</span></div>
 </div>
 
 </pre></div>

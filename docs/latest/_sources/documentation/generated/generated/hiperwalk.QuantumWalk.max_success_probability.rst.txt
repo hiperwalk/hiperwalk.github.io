@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.max\_success\_probability
+===============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.max_success_probability

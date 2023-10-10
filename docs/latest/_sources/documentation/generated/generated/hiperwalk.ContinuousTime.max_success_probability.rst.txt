@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.max\_success\_probability
+==================================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.max_success_probability
