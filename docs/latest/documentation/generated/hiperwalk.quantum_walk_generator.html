@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.Lattice &#8212; Hiperwalk latest documentation</title>
+    <title>hiperwalk.quantum_walk_generator &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -39,7 +39,7 @@
     <script src="../../_static/documentation_options.js?v=f4332903"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.Lattice';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.quantum_walk_generator';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.14.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -48,8 +48,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="hiperwalk.Lattice.adjacency_matrix" href="generated/hiperwalk.Lattice.adjacency_matrix.html" />
-    <link rel="prev" title="hiperwalk.Hypercube.vertex_number" href="generated/hiperwalk.Hypercube.vertex_number.html" />
+    <link rel="next" title="Development" href="../../development/index.html" />
+    <link rel="prev" title="Generators" href="../generator.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -327,7 +327,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../graph.html">Graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../graph.html">Graphs</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
@@ -389,7 +389,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.vertex_number.html">hiperwalk.Hypercube.vertex_number</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">hiperwalk.Lattice</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Lattice.html">hiperwalk.Lattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.adjacency_matrix.html">hiperwalk.Lattice.adjacency_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc.html">hiperwalk.Lattice.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc_number.html">hiperwalk.Lattice.arc_number</a></li>
@@ -500,8 +500,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../generator.html">Generators</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.quantum_walk_generator.html">hiperwalk.quantum_walk_generator</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../generator.html">Generators</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">hiperwalk.quantum_walk_generator</a></li>
 </ul>
 </li>
 </ul>
@@ -545,9 +545,9 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Documentation</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../graph.html" class="nav-link">Graphs</a></li>
+    <li class="breadcrumb-item"><a href="../generator.html" class="nav-link">Generators</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Lattice</li>
+    <li class="breadcrumb-item active" aria-current="page">hiperwalk.qu...</li>
   </ul>
 </nav>
 </div>
@@ -564,63 +564,83 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="hiperwalk-lattice">
-<h1>hiperwalk.Lattice<a class="headerlink" href="#hiperwalk-lattice" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="hiperwalk.Lattice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Lattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/lattice.html#Lattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Lattice" title="Link to this definition">#</a></dt>
-<dd><p>Abstract class for Lattice graphs.</p>
-<p>Lattice graphs are embedabble in a Euclidian Space,
-forming a regular tiling.</p>
+  <section id="hiperwalk-quantum-walk-generator">
+<h1>hiperwalk.quantum_walk_generator<a class="headerlink" href="#hiperwalk-quantum-walk-generator" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="hiperwalk.quantum_walk_generator">
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">quantum_walk_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/generator.html#quantum_walk_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.quantum_walk_generator" title="Link to this definition">#</a></dt>
+<dd><p>Create a generator of quantum walks.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>model: :class:`QuantumWalk` class</strong></dt><dd><p>Quantum walk model for which multiple instances will be created.
+A <a class="reference internal" href="hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk" title="hiperwalk.QuantumWalk"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumWalk</span></code></a> class is expected, not an object.</p>
+</dd>
+<dt><strong>**kwargs:</strong></dt><dd><p>Arguments to instantiate a quantum walk.
+The arguments are passed to
+the constructor of the given quantum walk model.
+Each key must correspond to a valid constructor key.
+One additional key is also available: <code class="docutils literal notranslate"><span class="pre">func_args</span></code>,
+explained in detail later.
+There are two types of valid keys:
+function, and iterable.
+The types of keys can be used simultaneously.</p>
+<dl class="simple">
+<dt>function:</dt><dd><p>A function that generates a constructor kwarg on demand.
+If a function is passed,
+the <code class="docutils literal notranslate"><span class="pre">func_args</span></code> key must also be specified.
+<code class="docutils literal notranslate"><span class="pre">func_args</span></code> must be any iterable such that
+its values are valid arguments for <code class="docutils literal notranslate"><span class="pre">function</span></code>.
+It is recommended to use a generator as <code class="docutils literal notranslate"><span class="pre">func_args</span></code>
+to optimize memory usage.</p>
+</dd>
+<dt>iterable:</dt><dd><p>A quantum walk instance is created for each iterable entry,
+even when multiple iterables are specified.
+For example, if <code class="docutils literal notranslate"><span class="pre">iter1</span></code> and <code class="docutils literal notranslate"><span class="pre">iter2</span></code>
+are specified in two different kwargs,
+the values of <code class="docutils literal notranslate"><span class="pre">iter1[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">iter2[i]</span></code> are used to
+create the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th quantum walk.
+It is recommended to use a generator as the iterable
+to optimize memory usage.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
-<p>Given an embedding,
-directions can be assigned to the arcs.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="hiperwalk.Lattice.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Lattice.__init__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<p class="rubric">Methods</p>
-<table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.adjacency_matrix.html#hiperwalk.Lattice.adjacency_matrix" title="hiperwalk.Lattice.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>()</p></td>
-<td><p>Returns the graph adjacency matrix.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.arc.html#hiperwalk.Lattice.arc" title="hiperwalk.Lattice.arc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc</span></code></a>(number)</p></td>
-<td><p>Converts the arc number to arc notation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.arc_number.html#hiperwalk.Lattice.arc_number" title="hiperwalk.Lattice.arc_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc_number</span></code></a>(*args)</p></td>
-<td><p>Returns the numerical label of the arc.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.arcs_with_tail.html#hiperwalk.Lattice.arcs_with_tail" title="hiperwalk.Lattice.arcs_with_tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arcs_with_tail</span></code></a>(tail)</p></td>
-<td><p>Returns all arcs that have the given tail.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.degree.html#hiperwalk.Lattice.degree" title="hiperwalk.Lattice.degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degree</span></code></a>(vertex)</p></td>
-<td><p>Degree of given vertex.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.neighbors.html#hiperwalk.Lattice.neighbors" title="hiperwalk.Lattice.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code></a>(vertex)</p></td>
-<td><p>Returns all neighbors of the given vertex.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.next_arc.html#hiperwalk.Lattice.next_arc" title="hiperwalk.Lattice.next_arc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_arc</span></code></a>(arc)</p></td>
-<td><p>Next arc with respect to the default embedding.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_arcs.html#hiperwalk.Lattice.number_of_arcs" title="hiperwalk.Lattice.number_of_arcs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_arcs</span></code></a>()</p></td>
-<td><p>Cardinality of arc set.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_edges.html#hiperwalk.Lattice.number_of_edges" title="hiperwalk.Lattice.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
-<td><p>Cardinality of edge set.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_vertices.html#hiperwalk.Lattice.number_of_vertices" title="hiperwalk.Lattice.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
-<td><p>Cardinality of vertex set.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.previous_arc.html#hiperwalk.Lattice.previous_arc" title="hiperwalk.Lattice.previous_arc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previous_arc</span></code></a>(arc)</p></td>
-<td><p>Previous arc with respect to the default embedding.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Lattice.vertex_number.html#hiperwalk.Lattice.vertex_number" title="hiperwalk.Lattice.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
-<td><p>Returns vertex number given any vertex representation.</p></td>
-</tr>
-</tbody>
-</table>
+<p>A fixed key type is not implemented to avoid ambiguity.
+For example, in a quantum walk on a grid, if <code class="docutils literal notranslate"><span class="pre">marked=(1,</span> <span class="pre">1)</span></code>,
+it is unclear whether
+vertex <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> should be marked in all quantum walks or
+vertex <code class="docutils literal notranslate"><span class="pre">1</span></code> should be marked in two quantum walks.</p>
+<p class="rubric">Examples</p>
+<p>The following creates coined quantum walks on hypercubes with
+increasing dimension.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">quantum_walk_generator</span><span class="p">(</span><span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">graph</span><span class="o">=</span><span class="n">hpw</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">marked</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">func_args</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This creates five coined quantum walks on hypercubes.
+The <code class="docutils literal notranslate"><span class="pre">func_args</span></code> values are used to invoke any
+callable keyword, like the hypercube constructor.
+Hence, the first quantum walk occurs on a 5-dimensional hypercube,
+the second on a 6-dimensional hypercube, and so on.
+Since <code class="docutils literal notranslate"><span class="pre">marked</span></code> is an iterable,
+it changes simultaneously with the other iterables, like <code class="docutils literal notranslate"><span class="pre">func_args</span></code>.
+Hence, vertex 0 is marked on the first quantum walk,
+vertex 1 is marked on the second quantum walk, and so on.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span> 
+<span class="go">&lt;generator object quantum_walk_generator at 0x7fda7e13af80&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qw_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">qw</span> <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">gen</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">qw</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">dimension</span><span class="p">()</span> <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">qw_list</span><span class="p">]</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">qw</span><span class="o">.</span><span class="n">get_marked</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">qw_list</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -636,20 +656,20 @@ directions can be assigned to the arcs.</p>
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="generated/hiperwalk.Hypercube.vertex_number.html"
+       href="../generator.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.Hypercube.vertex_number</p>
+        <p class="prev-next-title">Generators</p>
       </div>
     </a>
     <a class="right-next"
-       href="generated/hiperwalk.Lattice.adjacency_matrix.html"
+       href="../../development/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.Lattice.adjacency_matrix</p>
+        <p class="prev-next-title">Development</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -668,16 +688,13 @@ directions can be assigned to the arcs.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.Lattice"><code class="docutils literal notranslate"><span class="pre">Lattice</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.Lattice.__init__"><code class="docutils literal notranslate"><span class="pre">Lattice.__init__()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.quantum_walk_generator"><code class="docutils literal notranslate"><span class="pre">quantum_walk_generator()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../../_sources/documentation/generated/hiperwalk.Lattice.rst.txt">
+    <a href="../../_sources/documentation/generated/hiperwalk.quantum_walk_generator.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

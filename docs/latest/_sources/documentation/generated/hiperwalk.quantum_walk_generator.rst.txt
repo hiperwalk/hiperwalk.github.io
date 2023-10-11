@@ -1,0 +1,6 @@
+﻿hiperwalk.quantum\_walk\_generator
+==================================
+
+.. currentmodule:: hiperwalk
+
+.. autofunction:: quantum_walk_generator

@@ -610,7 +610,7 @@ document.write(`
 
     <span class="c1"># preparing probabilities to shape requested by called functions</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">probabilities</span><span class="p">]</span>
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">probabilities</span><span class="p">])</span>
 
     <span class="c1"># passes kwargs by reference to be updated accordingly</span>
     <span class="n">preconfigs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
@@ -1248,6 +1248,11 @@ document.write(`
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">plot_x_by_y</span><span class="p">(</span><span class="n">qw_gen</span><span class="p">,</span> <span class="n">x_arg</span><span class="p">,</span> <span class="n">y_func</span><span class="p">,</span> <span class="o">*</span><span class="n">y_args</span><span class="p">,</span> <span class="o">**</span><span class="n">y_kwargs</span><span class="p">):</span>
+    <span class="n">y_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_func</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="o">*</span><span class="n">y_args</span><span class="p">,</span> <span class="o">**</span><span class="n">y_kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">qw_gen</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_arg</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
