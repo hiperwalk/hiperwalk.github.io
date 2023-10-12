@@ -1201,7 +1201,7 @@ document.write(`
     <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">mappable</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
     <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="c1">#########################################################################################</span>
+<span class="c1">###########################################################################</span>
 
 <span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -1250,10 +1250,120 @@ document.write(`
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">plot_x_by_y</span><span class="p">(</span><span class="n">qw_gen</span><span class="p">,</span> <span class="n">x_arg</span><span class="p">,</span> <span class="n">y_func</span><span class="p">,</span> <span class="o">*</span><span class="n">y_args</span><span class="p">,</span> <span class="o">**</span><span class="n">y_kwargs</span><span class="p">):</span>
-    <span class="n">y_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_func</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="o">*</span><span class="n">y_args</span><span class="p">,</span> <span class="o">**</span><span class="n">y_kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">qw_gen</span><span class="p">]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_arg</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">y_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
+                  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># TODO: any situation where *y_args and **y_kwargs are iterable?</span>
+
+    <span class="c1"># y_vals = [y_func(qw, *y_args, **y_kwargs) for qw in qw_gen]</span>
+    <span class="c1"># plt.plot(x_arg, y_vals)</span>
+    <span class="c1"># plt.show()</span>
+    <span class="c1">#######################################</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+        <span class="n">x_vals</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
+
+    <span class="n">valid_function_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="n">function_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_pop_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
+            <span class="n">valid_function_kwargs</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">valid_function_kwargs</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">qw</span> <span class="ow">in</span> <span class="n">qw_iter</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_vals</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
+                 <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
+                 <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">x_vals</span><span class="p">))</span>
+
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">function_kwargs</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">plot_optimal_runtime</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    qw_iter : iterable of :class:`QuantumWalk`</span>
+<span class="sd">        The code will be execute for each quantum walk in</span>
+<span class="sd">        the iterable.</span>
+
+<span class="sd">    x_vals :</span>
+<span class="sd">        The values to be plotted in the x-axis.</span>
+<span class="sd">        Iterable or callable.</span>
+
+<span class="sd">    initial_state:</span>
+<span class="sd">        The initial state of the simulation.</span>
+<span class="sd">        If ``None`` uses default argument.</span>
+<span class="sd">        There are two types allowed.</span>
+
+<span class="sd">        iterable :</span>
+<span class="sd">            An array of states or an iterable.</span>
+<span class="sd">            The ``i``-th entry will be used as the inital state</span>
+<span class="sd">            of the ``i``-th quantum walk.</span>
+
+<span class="sd">        callable :</span>
+<span class="sd">            A function that receives a :class:`QuantumWalk` as argument</span>
+<span class="sd">            and returns a state.</span>
+
+<span class="sd">            .. todo::</span>
+<span class="sd">                Should the function accept ``*args`` and ``**kwargs``?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># if hasattr(x_vals, &#39;__iter__&#39;):</span>
+    <span class="c1">#     x_vals = iter(x_vals)</span>
+
+    <span class="c1"># if hasattr(initial_state, &#39;__iter__&#39;):</span>
+    <span class="c1">#     initial_state = iter(initial_state)</span>
+
+    <span class="c1"># valid_opt_run_kwargs = QuantumWalk._get_valid_kwargs(</span>
+    <span class="c1">#                                 QuantumWalk.optimal_runtime)</span>
+    <span class="c1"># opt_run_kwargs = QuantumWalk._pop_valid_kwargs(kwargs,</span>
+    <span class="c1">#                         valid_opt_run_kwargs)</span>
+    <span class="c1"># del valid_opt_run_kwargs</span>
+
+    <span class="c1"># x = []</span>
+    <span class="c1"># t_opt = []</span>
+    <span class="c1"># psi0 = None</span>
+
+    <span class="c1"># for qw in qw_iter:</span>
+    <span class="c1">#     x.append(x_vals(qw)</span>
+    <span class="c1">#              if callable(x_vals)</span>
+    <span class="c1">#              else next(x_vals))</span>
+
+    <span class="c1">#     if initial_state is not None:</span>
+    <span class="c1">#         psi0 = (initial_state(qw)</span>
+    <span class="c1">#                 if callable(initial_state)</span>
+    <span class="c1">#                 else next(initial_state))</span>
+
+    <span class="c1">#     t_opt.append(</span>
+    <span class="c1">#         qw.optimal_runtime(initial_state=psi0, **opt_run_kwargs))</span>
+
+    <span class="c1"># plt.plot(x, t_opt, marker=&#39;o&#39;)</span>
+    <span class="c1"># plt.xlabel(x_label)</span>
+    <span class="c1"># plt.ylabel(&#39;Optimal runtime&#39;)</span>
+    <span class="c1"># plt.show()</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+        <span class="n">initial_state</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+
+    <span class="n">valid_opt_run_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
+                                    <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">opt_run_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
+                                <span class="n">valid_opt_run_kwargs</span><span class="p">)</span>
+
+        <span class="n">psi0</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">initial_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">psi0</span> <span class="o">=</span> <span class="p">(</span><span class="n">initial_state</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">initial_state</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span> <span class="o">**</span><span class="n">opt_run_kwargs</span><span class="p">)</span>
+
+    <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Optimal runtime&#39;</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
+                  <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
