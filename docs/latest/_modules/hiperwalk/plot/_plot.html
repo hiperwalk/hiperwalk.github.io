@@ -1348,22 +1348,42 @@ document.write(`
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
         <span class="n">initial_state</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
 
-    <span class="n">valid_opt_run_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                                    <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">opt_run_kwargs</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
-                                <span class="n">valid_opt_run_kwargs</span><span class="p">)</span>
-
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">psi0</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">initial_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">psi0</span> <span class="o">=</span> <span class="p">(</span><span class="n">initial_state</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
                     <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
                     <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">initial_state</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span> <span class="o">**</span><span class="n">opt_run_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span>
+                                  <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">,</span>
+                                  <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
 
     <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Optimal runtime&#39;</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
                   <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_max_success_probability</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+        <span class="n">initial_state</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">psi0</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">initial_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">psi0</span> <span class="o">=</span> <span class="p">(</span><span class="n">initial_state</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">initial_state</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">max_success_probability</span><span class="p">(</span><span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span>
+                                          <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">,</span>
+                                          <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
+
+    <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Max success probability&#39;</span><span class="p">,</span>
+                  <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
 
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
