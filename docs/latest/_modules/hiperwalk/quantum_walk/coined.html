@@ -505,7 +505,7 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">_set_flipflop_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create the flipflop shift operator (:math:`S`) based on</span>
+<span class="sd">        Creates the flipflop shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
 
 <span class="sd">        The operator is configured for future use. If an evolution</span>
@@ -555,7 +555,7 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">_set_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create the persistent shift operator (:math:`S`) based on</span>
+<span class="sd">        Creates the persistent shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
 
 <span class="sd">        The operator is set for future usage.</span>
@@ -606,7 +606,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
     <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the shift operator.</span>
+<span class="sd">        Sets the shift operator.</span>
 
 <span class="sd">        Sets either the flipflop or the persistent shift operator.</span>
 <span class="sd">        Afterwards, the evolution operator is updated accordingly.</span>
@@ -766,7 +766,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
     <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a coin operator based on the graph structure.</span>
+<span class="sd">        Sets the coin operator based on the graph structure.</span>
 
 <span class="sd">        Constructs a coin operator based on the degree of each vertex.</span>
 <span class="sd">        A single type of coin may be applied to</span>
@@ -1002,7 +1002,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
     <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set marked vertices.</span>
+<span class="sd">        Sets the set of marked vertices.</span>
 
 <span class="sd">        If a list of vertices is provided, those vertices are</span>
 <span class="sd">        deemed as marked.</span>
@@ -1161,7 +1161,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution">[docs]</a>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create evolution operator.</span>
+<span class="sd">        Sets the evolution operator.</span>
 
 <span class="sd">        Sets shift, coin and marked vertices.</span>
 <span class="sd">        They are set using the appropriate ``**kwargs``.</span>
