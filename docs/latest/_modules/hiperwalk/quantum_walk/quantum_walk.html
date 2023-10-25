@@ -513,10 +513,10 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.set_marked.html#hiperwalk.QuantumWalk.set_marked">[docs]</a>
     <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets marked vertices.</span>
+<span class="sd">        Set the marked vertices.</span>
 
-<span class="sd">        After the marked elements are changed,</span>
-<span class="sd">        the evolution operator is updated accordingly.</span>
+<span class="sd">        When the marked vertices are updated using this method,</span>
+<span class="sd">        the evolution operator adjusts accordingly.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -541,7 +541,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_marked.html#hiperwalk.QuantumWalk.get_marked">[docs]</a>
     <span class="k">def</span> <span class="nf">get_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Gets marked vertices.</span>
+<span class="sd">        Retrieve the marked vertices.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -557,9 +557,9 @@ document.write(`
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create the standard evolution operator.</span>
+<span class="sd">        Set the standard evolution operator.</span>
 
-<span class="sd">        The evolution operator is saved to be used during the simulation.</span>
+<span class="sd">        This evolution operator is stored for use in subsequent simulations.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -577,7 +577,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.get_evolution.html#hiperwalk.QuantumWalk.get_evolution">[docs]</a>
     <span class="k">def</span> <span class="nf">get_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the evolution operator.</span>
+<span class="sd">        Retrieve the evolution operator.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
