@@ -585,11 +585,11 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.set_coin">
 <span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">set_coin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.set_coin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.set_coin" title="Link to this definition">#</a></dt>
-<dd><p>Sets the coin operator based on the graph structure.</p>
-<p>Constructs a coin operator based on the degree of each vertex.
-A single type of coin may be applied to
-all vertices or a subset thereof.
-Once the coin operator is set,
+<dd><p>Set the coin operator based on the graph’s structure.</p>
+<p>Builds a coin operator considering the degree of each vertex.
+The same coin can be applied to all vertices, or multiple 
+coins can be assigned, each to a specific subset of vertices. 
+After setting the coin operator,
 the evolution operator is updated accordingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

@@ -606,10 +606,10 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
     <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the shift operator.</span>
+<span class="sd">        Set the shift operator.</span>
 
-<span class="sd">        Sets either the flipflop or the persistent shift operator.</span>
-<span class="sd">        Afterwards, the evolution operator is updated accordingly.</span>
+<span class="sd">        Chooses either the flipflop or the persistent shift operator.</span>
+<span class="sd">        Following this, the evolution operator updates accordingly.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -727,7 +727,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_shift.html#hiperwalk.Coined.get_shift">[docs]</a>
     <span class="k">def</span> <span class="nf">get_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the shift operator.</span>
+<span class="sd">        Retrieve the shift operator.</span>
 
 <span class="sd">        Shift operator used for constructing the evolution operator.</span>
 
@@ -766,12 +766,12 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
     <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the coin operator based on the graph structure.</span>
+<span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
-<span class="sd">        Constructs a coin operator based on the degree of each vertex.</span>
-<span class="sd">        A single type of coin may be applied to</span>
-<span class="sd">        all vertices or a subset thereof.</span>
-<span class="sd">        Once the coin operator is set,</span>
+<span class="sd">        Builds a coin operator considering the degree of each vertex.</span>
+<span class="sd">        The same coin can be applied to all vertices, or multiple </span>
+<span class="sd">        coins can be assigned, each to a specific subset of vertices. </span>
+<span class="sd">        After setting the coin operator,</span>
 <span class="sd">        the evolution operator is updated accordingly.</span>
 
 <span class="sd">        Parameters</span>
@@ -1002,17 +1002,16 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
     <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the set of marked vertices.</span>
+<span class="sd">        Set the marked vertices.</span>
 
-<span class="sd">        If a list of vertices is provided, those vertices are</span>
-<span class="sd">        deemed as marked.</span>
+<span class="sd">        When a set or list of vertices is provided, they </span>
+<span class="sd">        are set as marked.</span>
 <span class="sd">        The evolution operator is updated accordingly.</span>
 
-<span class="sd">        If a dictionary is passed,</span>
-<span class="sd">        the coin of those vertices are substituted</span>
-<span class="sd">        only for generating the evolution operator.</span>
-<span class="sd">        This can only be done if the set coin operator is</span>
-<span class="sd">        not a explicit matrix.</span>
+<span class="sd">        If a dictionary is passed, the coin of those vertices is</span>
+<span class="sd">        replaced solely for the purpose of generating the evolution </span>
+<span class="sd">        operator. This can only be done if the set coin operator is</span>
+<span class="sd">        not an explicit matrix.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1055,7 +1054,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_coin.html#hiperwalk.Coined.get_coin">[docs]</a>
     <span class="k">def</span> <span class="nf">get_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the coin used for creating the evolution operator.</span>
+<span class="sd">        Retrieve the coin used in the creation of the evolution operator.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1161,17 +1160,18 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution">[docs]</a>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the evolution operator.</span>
+<span class="sd">        Set the evolution operator.</span>
 
-<span class="sd">        Sets shift, coin and marked vertices.</span>
+<span class="sd">        Establishes the shift operator, coin operator,</span>
+<span class="sd">        and the marked vertices.</span>
 <span class="sd">        They are set using the appropriate ``**kwargs``.</span>
 <span class="sd">        If ``**kwargs`` is empty, the default arguments are used.</span>
 
-<span class="sd">        Then, creates evolution operator by multiplying the</span>
-<span class="sd">        shift operator and coin operator.</span>
-<span class="sd">        If the coin operator is not an explicit matrix,</span>
-<span class="sd">        and the coin for marked vertices was specified,</span>
-<span class="sd">        the coin of each marked vertex is substituted.</span>
+<span class="sd">        Subsequently, the evolution operator is constructed by </span>
+<span class="sd">        multiplying the shift and coin operators. </span>
+<span class="sd">        If the coin operator isn&#39;t an explicit matrix </span>
+<span class="sd">        and a coin for the marked vertices has been specified, </span>
+<span class="sd">        the coin for each marked vertex is replaced.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
