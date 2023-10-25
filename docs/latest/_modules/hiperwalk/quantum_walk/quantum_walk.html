@@ -946,8 +946,8 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
-<span class="sd">        Simulates the quantum walk applying the evolution operator</span>
-<span class="sd">        multiple times to the initial state.</span>
+<span class="sd">        The walk is simulated by repeatedly applying the evolution operator </span>
+<span class="sd">        to the result of the previous application, starting from the initial state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -998,16 +998,16 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The walk is simulated by applying the</span>
-<span class="sd">        evolution operator to the initial state multiple times.</span>
+<span class="sd">        The walk is simulated by repeatedly applying the evolution operator </span>
+<span class="sd">        to the result of the previous application, starting from the initial state.</span>
 <span class="sd">        The maximum and intermediate applications</span>
-<span class="sd">        are describred by ``time``.</span>
+<span class="sd">        are described by ``time``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        If ``time=(0, 13, 3)``, the saved states will be:</span>
-<span class="sd">        the initial state (0), the intermediate states (3, 6, and 9),</span>
-<span class="sd">        and the final state (12).</span>
+<span class="sd">        the initial state (t=0), the intermediate states (t=3, 6, and 9),</span>
+<span class="sd">        and the final state (t=12).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">############################################</span>
         <span class="c1">### Check if simulation was set properly ###</span>
