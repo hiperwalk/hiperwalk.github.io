@@ -585,19 +585,20 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.set_evolution">
 <span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_evolution" title="Link to this definition">#</a></dt>
-<dd><p>Sets the evolution operator.</p>
-<p>Sets Hamiltonian and time.
-They are set using the appropriate <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.
-If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is empty, the default arguments are used.
-Then, the evolution operator is constructed using
-a Taylor series expansion.</p>
+<dd><p>Set the evolution operator.</p>
+<p>Defines the Hamiltonian and the evolution operator 
+for a given time t using the time specified in <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is empty, the default arguments are used
+(H=A and t=1).
+Subsequently, the evolution operator is derived 
+through a Taylor series expansion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>hpc</strong><span class="classifier">bool, default = True</span></dt><dd><p>Determines whether or not to use neblina HPC 
 functions to generate the evolution operator.</p>
 </dd>
-<dt><strong>terms</strong><span class="classifier">int</span></dt><dd><p>Number of terms in Taylor series expansion.</p>
+<dt><strong>terms</strong><span class="classifier">int</span></dt><dd><p>Number of terms in the Taylor series expansion.</p>
 </dd>
 <dt><strong>**kwargs</strong></dt><dd><p>Additional arguments for setting Hamiltonian and time.
 See <a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>, and
@@ -622,7 +623,7 @@ If omitted, the default arguments are used.</p>
 <span class="math notranslate nohighlight">\(t\)</span> is the time.</p>
 <p>The Taylor series expansion is given by</p>
 <div class="math notranslate nohighlight">
-\[e^{-\text{i}tH} &amp;= \sum_{j = 0}^{n} (\text{i}tH)^j / j!\]</div>
+\[\text{e}^{-\text{i}tH} = \sum_{j = 0}^{n} (\text{i}tH)^j / j!\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of terms minus 1
 (i.e. <code class="docutils literal notranslate"><span class="pre">terms</span> <span class="pre">-</span> <span class="pre">1</span></code>).</p>
 <div class="admonition warning">

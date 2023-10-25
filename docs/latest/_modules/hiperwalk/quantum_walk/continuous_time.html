@@ -492,11 +492,12 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_gamma.html#hiperwalk.ContinuousTime.set_gamma">[docs]</a>
     <span class="k">def</span> <span class="nf">set_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the gamma parameter.</span>
+<span class="sd">        Set gamma.</span>
 <span class="sd">        </span>
-<span class="sd">        The gamma parameter is used in the definition of the Hamiltonian.</span>
-<span class="sd">        By setting gamma,</span>
-<span class="sd">        both the Hamiltonian and evolution operator are updated.</span>
+<span class="sd">        Parameter gamma is used in the definition of the</span>
+<span class="sd">        Hamiltonian to determine the hopping probability per unit </span>
+<span class="sd">        of time. Upon setting gamma, both the Hamiltonian and evolution </span>
+<span class="sd">        operators are updated.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -524,7 +525,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.get_gamma.html#hiperwalk.ContinuousTime.get_gamma">[docs]</a>
     <span class="k">def</span> <span class="nf">get_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrieves the gamma value used in</span>
+<span class="sd">        Retrieve the value of gamma used in</span>
 <span class="sd">        the definition of the Hamiltonian.</span>
 
 <span class="sd">        Returns</span>
@@ -545,7 +546,7 @@ document.write(`
     <span class="k">def</span> <span class="nf">_update_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If this method is invoked,</span>
-<span class="sd">        the hamiltonian is recalculated</span>
+<span class="sd">        The Hamiltonian is recalculated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
 
@@ -562,20 +563,20 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian">[docs]</a>
     <span class="k">def</span> <span class="nf">set_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates the Hamiltonian.</span>
+<span class="sd">        Set the Hamiltonian.</span>
 
-<span class="sd">        If no marked vertices is specified,</span>
-<span class="sd">        the default value is used.</span>
+<span class="sd">        If no marked vertices are specified,</span>
+<span class="sd">        the Hamiltonian is the standard one (see Notes).</span>
 <span class="sd">        After the Hamiltonian is created,</span>
 <span class="sd">        the evolution operator is updated accordingly.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        gamma : float</span>
-<span class="sd">            Gamma value.</span>
+<span class="sd">            Value of gamma.</span>
 
 <span class="sd">        **kwargs :</span>
-<span class="sd">            Used for determining the marked vertices, and</span>
+<span class="sd">            Used for setting the marked vertices, and</span>
 <span class="sd">            the procedure for updating the evolution operator.</span>
 <span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_marked`, and</span>
 <span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_evolution`.</span>
@@ -617,7 +618,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.get_hamiltonian.html#hiperwalk.ContinuousTime.get_hamiltonian">[docs]</a>
     <span class="k">def</span> <span class="nf">get_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the Hamiltonian.</span>
+<span class="sd">        Retrieve the Hamiltonian.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -642,11 +643,10 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time">[docs]</a>
     <span class="k">def</span> <span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets time.</span>
+<span class="sd">        Set a time instant.</span>
 
-<span class="sd">        Sets time and</span>
-<span class="sd">        generates the evolution operator corresponding to</span>
-<span class="sd">        the specified time.</span>
+<span class="sd">        Defines a time t and calculates the evolution operator U(t) at</span>
+<span class="sd">        the specified time (see Notes).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -754,13 +754,14 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution">[docs]</a>
     <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the evolution operator.</span>
+<span class="sd">        Set the evolution operator.</span>
 
-<span class="sd">        Sets Hamiltonian and time.</span>
-<span class="sd">        They are set using the appropriate ``**kwargs``.</span>
-<span class="sd">        If ``**kwargs`` is empty, the default arguments are used.</span>
-<span class="sd">        Then, the evolution operator is constructed using</span>
-<span class="sd">        a Taylor series expansion.</span>
+<span class="sd">        Defines the Hamiltonian and the evolution operator </span>
+<span class="sd">        for a given time t using the time specified in ``**kwargs``.</span>
+<span class="sd">        If ``**kwargs`` is empty, the default arguments are used</span>
+<span class="sd">        (H=A and t=1).</span>
+<span class="sd">        Subsequently, the evolution operator is derived </span>
+<span class="sd">        through a Taylor series expansion.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -769,7 +770,7 @@ document.write(`
 <span class="sd">            functions to generate the evolution operator.</span>
 
 <span class="sd">        terms : int</span>
-<span class="sd">            Number of terms in Taylor series expansion.</span>
+<span class="sd">            Number of terms in the Taylor series expansion.</span>
 
 <span class="sd">        **kwargs :</span>
 <span class="sd">            Additional arguments for setting Hamiltonian and time.</span>
@@ -795,7 +796,7 @@ document.write(`
 <span class="sd">        The Taylor series expansion is given by</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            e^{-\text{i}tH} &amp;= \sum_{j = 0}^{n} (\text{i}tH)^j / j!</span>
+<span class="sd">            \text{e}^{-\text{i}tH} = \sum_{j = 0}^{n} (\text{i}tH)^j / j!</span>
 
 <span class="sd">        where :math:`n` is the number of terms minus 1</span>
 <span class="sd">        (i.e. ``terms - 1``).</span>
