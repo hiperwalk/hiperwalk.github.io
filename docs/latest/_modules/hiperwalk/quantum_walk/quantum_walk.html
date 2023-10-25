@@ -648,10 +648,11 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability.html#hiperwalk.QuantumWalk.probability">[docs]</a>
     <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the sum of probabilities of the given vertices.</span>
+<span class="sd">        Computes the sum of probabilities for the specified vertices.</span>
 
-<span class="sd">        Computes the probability of the walker being found on a</span>
-<span class="sd">        subset of the vertices in the given state(s).</span>
+<span class="sd">        Computes the probability of the walker being located on a</span>
+<span class="sd">        vertex within the set of provided vertices, given that the walk </span>
+<span class="sd">        is on specified states.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -699,10 +700,11 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.probability_distribution.html#hiperwalk.QuantumWalk.probability_distribution">[docs]</a>
     <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the probability distribution of given state(s).</span>
+<span class="sd">        Compute the probability distribution of the given state(s).</span>
 
-<span class="sd">        The probability of the walker being found on each vertex</span>
-<span class="sd">        for the given state(s).</span>
+<span class="sd">        The probability distribution is determined by the</span>
+<span class="sd">        state of the walk. It describes the likelihood of the</span>
+<span class="sd">        walker being located at each vertex for the specified state(s).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -727,15 +729,17 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The probability for a given vertex is the absolute square of</span>
-<span class="sd">        its amplitude.</span>
+<span class="sd">        If the Hilbert space is spanned by the set of vertices,</span>
+<span class="sd">        the probability of finding the walker on a given vertex </span>
+<span class="sd">        is the absolute square of its amplitude.</span>
 <span class="sd">        That is, for an arbitrary superposition</span>
 
 <span class="sd">        .. math::</span>
 <span class="sd">            \sum_{v \in V} \alpha_v \ket{v},</span>
 
 <span class="sd">        the probability associated with vertex :math:`v` is</span>
-<span class="sd">        :math:`|\alpha_v|^2`.</span>
+<span class="sd">        :math:`|\alpha_v|^2`. The calculation of the probability</span>
+<span class="sd">        depends on the specifics of the quantum walk model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">single_state</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1228,14 +1232,14 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.optimal_runtime.html#hiperwalk.QuantumWalk.optimal_runtime">[docs]</a>
     <span class="k">def</span> <span class="nf">optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find the optimal runtime of a quantum walk search.</span>
+<span class="sd">        Find the optimal running time of a quantum-walk-based search.</span>
 
-<span class="sd">        Simulate the aplication of the previously set evolution operator</span>
-<span class="sd">        passing the ``initial_state`` to the simulation.</span>
-<span class="sd">        Calculate the success probability of each intermediate state.</span>
-<span class="sd">        Fit the probabilities to a sine squared function.</span>
-<span class="sd">        The optimal runtime is the point in the domain where the</span>
-<span class="sd">        sine squared function attains its first maximum.</span>
+<span class="sd">        This method simulates the use of the previously set evolution operator,</span>
+<span class="sd">        taking the ``initial_state`` as an input for the simulation. It then</span>
+<span class="sd">        calculates the success probability for each intermediate state and fits</span>
+<span class="sd">        these probabilities to a sine-squared function. The optimal running time</span>
+<span class="sd">        corresponds to the point in the domain where the sine-squared function</span>
+<span class="sd">        reaches its first peak.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1276,8 +1280,10 @@ document.write(`
     <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
         <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find the max success probability.</span>
-<span class="sd">        The success probability corresponding to the optimal runtime.</span>
+<span class="sd">        Find the maximum success probability.</span>
+<span class="sd">        </span>
+<span class="sd">        This method returns the success probability that corresponds </span>
+<span class="sd">        to the optimal running time.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

@@ -585,9 +585,10 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.probability_distribution">
 <span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">probability_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.probability_distribution" title="Link to this definition">#</a></dt>
-<dd><p>Compute the probability distribution of given state(s).</p>
-<p>The probability of the walker being found on each vertex
-for the given state(s).</p>
+<dd><p>Compute the probability distribution of the given state(s).</p>
+<p>The probability distribution is determined by the
+state of the walk. It describes the likelihood of the
+walker being located at each vertex for the specified state(s).</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -615,13 +616,15 @@ walker beign found at vertex <code class="docutils literal notranslate"><span cl
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The probability for a given vertex is the absolute square of
-its amplitude.
+<p>If the Hilbert space is spanned by the set of vertices,
+the probability of finding the walker on a given vertex 
+is the absolute square of its amplitude.
 That is, for an arbitrary superposition</p>
 <div class="math notranslate nohighlight">
 \[\sum_{v \in V} \alpha_v \ket{v},\]</div>
 <p>the probability associated with vertex <span class="math notranslate nohighlight">\(v\)</span> is
-<span class="math notranslate nohighlight">\(|\alpha_v|^2\)</span>.</p>
+<span class="math notranslate nohighlight">\(|\alpha_v|^2\)</span>. The calculation of the probability
+depends on the specifics of the quantum walk model.</p>
 </dd></dl>
 
 </section>
