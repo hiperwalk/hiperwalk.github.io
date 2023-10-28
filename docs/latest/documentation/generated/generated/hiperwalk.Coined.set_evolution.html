@@ -592,9 +592,13 @@ They are set using the appropriate <code class="docutils literal notranslate"><s
 If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is empty, the default arguments are used.</p>
 <p>Subsequently, the evolution operator is constructed by 
 multiplying the shift and coin operators. 
-If the coin operator isn’t an explicit matrix 
-and a coin for the marked vertices has been specified, 
-the coin for each marked vertex is replaced.</p>
+If the coin operator is given as an explicit matrix, 
+its definition remains unaltered 
+even in the presence of marked vertices. However, if the coin 
+operator is defined using coin names, any marked vertices will 
+prompt an update to the coin operator. Specifically, the coin names 
+for each marked vertex will default to a replacement with -I, 
+unless an alternative substitution is provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -620,16 +624,16 @@ constructed using nelina’s high-performance computing.</p>
 <p class="rubric">Notes</p>
 <p>The evolution operator is given by</p>
 <div class="math notranslate nohighlight">
-\[U = SC'\]</div>
-<p>where :math`S` is the shift operator, and
-<span class="math notranslate nohighlight">\(C'\)</span> is the coin operator (probably) modified by
-the marked vertices <a class="reference internal" href="#rfbbe806fc15a-1" id="id1">[1]</a>.</p>
-<p>If the coin operator was set as an explicit matrix,
-the marked vertices to not alter it.
-If the coin operator was not set as an explicit matrix
-(e.g. as a list of coins),
-the coin of each marked vertex is substituted as specified by
-the last <a class="reference internal" href="hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked" title="hiperwalk.Coined.set_marked"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_marked()</span></code></a> call.</p>
+\[U = SC\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the shift operator, and
+<span class="math notranslate nohighlight">\(C\)</span> is the coin operator. If there are
+any marked vertices, the coin operator is
+modified accordingly <a class="reference internal" href="#rfbbe806fc15a-1" id="id1">[1]</a>.</p>
+<p>When the coin operator is set as an explicit matrix, it remains 
+unaltered by marked vertices. However, if it’s not provided in 
+matrix form (e.g., as a list of coins), the coin for each marked 
+vertex will be substituted based on the most recent 
+<a class="reference internal" href="hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked" title="hiperwalk.Coined.set_marked"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_marked()</span></code></a> invocation.</p>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <ul class="simple">

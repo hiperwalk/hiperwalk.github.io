@@ -1169,9 +1169,13 @@ document.write(`
 
 <span class="sd">        Subsequently, the evolution operator is constructed by </span>
 <span class="sd">        multiplying the shift and coin operators. </span>
-<span class="sd">        If the coin operator isn&#39;t an explicit matrix </span>
-<span class="sd">        and a coin for the marked vertices has been specified, </span>
-<span class="sd">        the coin for each marked vertex is replaced.</span>
+<span class="sd">        If the coin operator is given as an explicit matrix, </span>
+<span class="sd">        its definition remains unaltered </span>
+<span class="sd">        even in the presence of marked vertices. However, if the coin </span>
+<span class="sd">        operator is defined using coin names, any marked vertices will </span>
+<span class="sd">        prompt an update to the coin operator. Specifically, the coin names </span>
+<span class="sd">        for each marked vertex will default to a replacement with -I, </span>
+<span class="sd">        unless an alternative substitution is provided.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1196,18 +1200,18 @@ document.write(`
 <span class="sd">        The evolution operator is given by</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">           U = SC&#39;</span>
+<span class="sd">           U = SC</span>
 
-<span class="sd">        where :math`S` is the shift operator, and</span>
-<span class="sd">        :math:`C&#39;` is the coin operator (probably) modified by</span>
-<span class="sd">        the marked vertices [1]_.</span>
+<span class="sd">        where :math:`S` is the shift operator, and</span>
+<span class="sd">        :math:`C` is the coin operator. If there are</span>
+<span class="sd">        any marked vertices, the coin operator is</span>
+<span class="sd">        modified accordingly [1]_.</span>
 
-<span class="sd">        If the coin operator was set as an explicit matrix,</span>
-<span class="sd">        the marked vertices to not alter it.</span>
-<span class="sd">        If the coin operator was not set as an explicit matrix</span>
-<span class="sd">        (e.g. as a list of coins),</span>
-<span class="sd">        the coin of each marked vertex is substituted as specified by</span>
-<span class="sd">        the last :meth:`set_marked` call.</span>
+<span class="sd">        When the coin operator is set as an explicit matrix, it remains </span>
+<span class="sd">        unaltered by marked vertices. However, if it&#39;s not provided in </span>
+<span class="sd">        matrix form (e.g., as a list of coins), the coin for each marked </span>
+<span class="sd">        vertex will be substituted based on the most recent </span>
+<span class="sd">        :meth:`set_marked` invocation.</span>
 
 <span class="sd">        .. todo::</span>
 <span class="sd">            * Sparse matrix multipliation is not supported yet.</span>
