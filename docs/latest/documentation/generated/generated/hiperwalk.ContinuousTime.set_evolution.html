@@ -586,14 +586,15 @@ document.write(`
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.set_evolution">
 <span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_evolution" title="Link to this definition">#</a></dt>
 <dd><p>Set the evolution operator.</p>
-<p>Defines the evolution operator for a specified time ‘t’ 
-using the time provided in <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.
-If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is not given, default arguments are used
-(H=-gamma A and t=None). This method determines the 
-Hamiltonian and then derives the evolution operator 
-using a Taylor series expansion. The initial value
-for <code class="docutils literal notranslate"><span class="pre">terms=21</span></code> is enough when the Hamiltonian
-is obtained from the adjacency matrix and gamma&lt;1.</p>
+<p>This method defines the evolution operator for a specified 
+time ‘t’ using the time provided in <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is not specified, default arguments are 
+employed (H=-gamma A and t=None). It first determines the 
+Hamiltonian and subsequently derives the evolution operator 
+through a Taylor series expansion. The default value
+of <code class="docutils literal notranslate"><span class="pre">terms=21</span></code> is suitable when the Hamiltonian
+is derived from the adjacency matrix and gamma is less 
+than 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
