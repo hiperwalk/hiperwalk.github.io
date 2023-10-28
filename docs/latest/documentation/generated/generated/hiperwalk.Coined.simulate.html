@@ -650,13 +650,15 @@ If set to <code class="docutils literal notranslate"><span class="pre">hpc=False
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The walk’s simulation leverages the formula
-<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(t-1)\rangle\)</span>.        
-The states computed and retained 
+<p>The states computed and retained 
 are determined by <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.
+The walk’s simulation leverages the formula
+<span class="math notranslate nohighlight">\(|\psi(\text{end})\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
+<span class="math notranslate nohighlight">\(t\)</span> is the time and
+<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> is the initial state.   
 Simulation starts from <span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span>, and
-then computes and stores <span class="math notranslate nohighlight">\(|\psi(\text{step}+\text{start})\)</span>,
-continuing until <span class="math notranslate nohighlight">\(|\psi(\text{end})\)</span>.</p>
+then computes and stores <span class="math notranslate nohighlight">\(|\psi(\text{start}+\text{step})\rangle\)</span>,
+continuing until <span class="math notranslate nohighlight">\(|\psi(\text{end})\rangle\)</span>.</p>
 <p class="rubric">Examples</p>
 <p>Given <code class="docutils literal notranslate"><span class="pre">time=(0,</span> <span class="pre">13,</span> <span class="pre">3)</span></code>, the saved states would include:
 the initial state (t=0), intermediate states (t=3, 6, and 9),
