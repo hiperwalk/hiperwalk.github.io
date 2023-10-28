@@ -780,7 +780,9 @@ document.write(`
 <span class="sd">        If ``**kwargs`` is not given, default arguments are used</span>
 <span class="sd">        (H=-gamma A and t=None). This method determines the </span>
 <span class="sd">        Hamiltonian and then derives the evolution operator </span>
-<span class="sd">        using a Taylor series expansion.</span>
+<span class="sd">        using a Taylor series expansion. The initial value</span>
+<span class="sd">        for ``terms=21`` is enough when the Hamiltonian</span>
+<span class="sd">        is obtained from the adjacency matrix and gamma&lt;1.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

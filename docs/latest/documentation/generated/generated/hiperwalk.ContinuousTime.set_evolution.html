@@ -591,7 +591,9 @@ using the time provided in <code class="docutils literal notranslate"><span clas
 If <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is not given, default arguments are used
 (H=-gamma A and t=None). This method determines the 
 Hamiltonian and then derives the evolution operator 
-using a Taylor series expansion.</p>
+using a Taylor series expansion. The initial value
+for <code class="docutils literal notranslate"><span class="pre">terms=21</span></code> is enough when the Hamiltonian
+is obtained from the adjacency matrix and gamma&lt;1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
