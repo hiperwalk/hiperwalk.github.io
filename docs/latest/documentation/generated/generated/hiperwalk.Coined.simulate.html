@@ -39,6 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Coined.simulate';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.14.2';
@@ -648,8 +649,9 @@ If <code class="docutils literal notranslate"><span class="pre">hpc=False</span>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The walk is simulated by repeatedly applying the evolution operator 
-to the result of the previous application, starting from the initial state.
+<p>The simulation of the walk uses the expression
+<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(t)\rangle\)</span>, starting from 
+<span class="math notranslate nohighlight">\(|\psi(0)\rangle\)</span>.
 The maximum and intermediate applications
 are described by <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p>
 <p class="rubric">Examples</p>
