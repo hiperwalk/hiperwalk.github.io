@@ -1005,24 +1005,24 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The states that are computed and stored during the simulation </span>
-<span class="sd">        are defined by the parameter ``time=(start,end,step)``.        </span>
+<span class="sd">        The states computed and saved during the simulation </span>
+<span class="sd">        are determined by the parameter ``time=(start,end,step)``.        </span>
 <span class="sd">        </span>
 <span class="sd">        The simulation of the walk is based on the expression</span>
 <span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(\text{start})\rangle`, where</span>
-<span class="sd">        :math:`|\psi(\text{start})\rangle` denotes the initial state.</span>
-<span class="sd">        </span>
-<span class="sd">        The values for :math:`t` progress as :math:`t=0,\text{step},\,2\cdot\text{step},...`, </span>
+<span class="sd">        :math:`|\psi(\text{start})\rangle` denotes the initial state.        </span>
+<span class="sd">        The values for :math:`t` progress as </span>
+<span class="sd">        :math:`t=0,\,\text{step},\,2\cdot\text{step},...`, </span>
 <span class="sd">        until reaching the highest multiple of step that is less than or equal to </span>
-<span class="sd">        :math:`t=\text{end}-\text{start}`.</span>
+<span class="sd">        :math:`\text{end}-\text{start}`.</span>
 <span class="sd">        </span>
 <span class="sd">        Specifically, the simulation begins from the state </span>
 <span class="sd">        :math:`|\psi(\text{start})\rangle` and </span>
 <span class="sd">        sequentially calculates and saves states in the form of </span>
-<span class="sd">        :math:`|\psi(\text{start}+t\cdot\text{step})\rangle`,</span>
-<span class="sd">        where the value of :math:`t` ensures that </span>
-<span class="sd">        :math:`\text{start}+t\cdot\text{step}\le \text{end}`.</span>
-
+<span class="sd">        :math:`|\psi(\text{start}+j\cdot\text{step})\rangle`,</span>
+<span class="sd">        where :math:`j=0,1,...` and the maximum value of :math:`j`</span>
+<span class="sd">        ensures that </span>
+<span class="sd">        :math:`\text{start}+j\cdot\text{step}\le \text{end}`.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>

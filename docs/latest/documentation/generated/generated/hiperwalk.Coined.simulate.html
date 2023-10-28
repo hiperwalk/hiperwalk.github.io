@@ -650,20 +650,22 @@ If set to <code class="docutils literal notranslate"><span class="pre">hpc=False
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The states that are computed and stored during the simulation 
-are defined by the parameter <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.</p>
+<p>The states computed and saved during the simulation 
+are determined by the parameter <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.</p>
 <p>The simulation of the walk is based on the expression
 <span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
-<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> denotes the initial state.</p>
-<p>The values for <span class="math notranslate nohighlight">\(t\)</span> progress as <span class="math notranslate nohighlight">\(t=0,\text{step},\,2\cdot\text{step},...\)</span>, 
+<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> denotes the initial state.        
+The values for <span class="math notranslate nohighlight">\(t\)</span> progress as 
+<span class="math notranslate nohighlight">\(t=0,\,\text{step},\,2\cdot\text{step},...\)</span>, 
 until reaching the highest multiple of step that is less than or equal to 
-<span class="math notranslate nohighlight">\(t=\text{end}-\text{start}\)</span>.</p>
+<span class="math notranslate nohighlight">\(\text{end}-\text{start}\)</span>.</p>
 <p>Specifically, the simulation begins from the state 
 <span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> and 
 sequentially calculates and saves states in the form of 
-<span class="math notranslate nohighlight">\(|\psi(\text{start}+t\cdot\text{step})\rangle\)</span>,
-where the value of <span class="math notranslate nohighlight">\(t\)</span> ensures that 
-<span class="math notranslate nohighlight">\(\text{start}+t\cdot\text{step}\le \text{end}\)</span>.</p>
+<span class="math notranslate nohighlight">\(|\psi(\text{start}+j\cdot\text{step})\rangle\)</span>,
+where <span class="math notranslate nohighlight">\(j=0,1,...\)</span> and the maximum value of <span class="math notranslate nohighlight">\(j\)</span>
+ensures that 
+<span class="math notranslate nohighlight">\(\text{start}+j\cdot\text{step}\le \text{end}\)</span>.</p>
 <p class="rubric">Examples</p>
 <p>Given <code class="docutils literal notranslate"><span class="pre">time=(0,</span> <span class="pre">13,</span> <span class="pre">3)</span></code>, the saved states would include:
 the initial state (t=0), intermediate states (t=3, 6, and 9),
