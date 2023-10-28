@@ -1010,11 +1010,13 @@ document.write(`
 <span class="sd">        The walk&#39;s simulation leverages the formula</span>
 <span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(\text{start})\rangle`, where</span>
 <span class="sd">        :math:`|\psi(\text{start})\rangle` is the initial state. </span>
-<span class="sd">        The values of :math:`t` are :math:`t=0,\text{step},\,2\text{step},...`</span>
-<span class="sd">        until :math:`t=\text{end}`. That is, the</span>
+<span class="sd">        The values of :math:`t` are :math:`t=0,\text{step},\,2\cdot\text{step},...`</span>
+<span class="sd">        until the largest multiple of step that is smaller or equal</span>
+<span class="sd">        to :math:`t=\text{end}-\text{start}`. That is, the</span>
 <span class="sd">        simulation starts from :math:`|\psi(\text{start})\rangle`, and</span>
 <span class="sd">        then computes and stores :math:`|\psi(\text{start}+\text{step})\rangle`,</span>
-<span class="sd">        continuing until :math:`|\psi(\text{end})\rangle`.</span>
+<span class="sd">        continuing until :math:`|\psi(\text{start}+j\cdot\text{step})\rangle` so</span>
+<span class="sd">        that :math:`\text{start}+j\cdot\text{step}\le \text{end}`.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
