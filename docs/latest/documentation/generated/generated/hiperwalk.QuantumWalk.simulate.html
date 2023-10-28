@@ -653,10 +653,11 @@ If set to <code class="docutils literal notranslate"><span class="pre">hpc=False
 <p>The states computed and retained 
 are determined by <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.
 The walk’s simulation leverages the formula
-<span class="math notranslate nohighlight">\(|\psi(\text{end})\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
-<span class="math notranslate nohighlight">\(t\)</span> is the time and
-<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> is the initial state.   
-Simulation starts from <span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span>, and
+<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
+<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> is the initial state. 
+The values of <span class="math notranslate nohighlight">\(t\)</span> are <span class="math notranslate nohighlight">\(t=0,\text{step},\,2\text{step},...\)</span>
+until <span class="math notranslate nohighlight">\(t=\text{end}\)</span>. That is, the
+simulation starts from <span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span>, and
 then computes and stores <span class="math notranslate nohighlight">\(|\psi(\text{start}+\text{step})\rangle\)</span>,
 continuing until <span class="math notranslate nohighlight">\(|\psi(\text{end})\rangle\)</span>.</p>
 <p class="rubric">Examples</p>
