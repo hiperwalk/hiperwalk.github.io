@@ -775,12 +775,12 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the evolution operator.</span>
 
-<span class="sd">        Defines the Hamiltonian and the evolution operator </span>
-<span class="sd">        for a given time t using the time specified in ``**kwargs``.</span>
-<span class="sd">        If ``**kwargs`` is empty, the default arguments are used</span>
-<span class="sd">        (H=-gamma A and t=None).</span>
-<span class="sd">        Subsequently, the evolution operator is derived </span>
-<span class="sd">        through a Taylor series expansion.</span>
+<span class="sd">        Defines the evolution operator for a specified time &#39;t&#39; </span>
+<span class="sd">        using the time provided in ``**kwargs``.</span>
+<span class="sd">        If ``**kwargs`` is not given, default arguments are used</span>
+<span class="sd">        (H=-gamma A and t=None). This method determines the </span>
+<span class="sd">        Hamiltonian and then derives the evolution operator </span>
+<span class="sd">        using a Taylor series expansion.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
