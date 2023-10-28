@@ -945,56 +945,58 @@ document.write(`
         <span class="k">return</span> <span class="n">ret</span>
 
 
+
 <div class="viewcode-block" id="QuantumWalk.simulate">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
-<span class="sd">        The walk is simulated by repeatedly applying the evolution operator </span>
-<span class="sd">        to the result of the previous application, starting from the initial state.</span>
+<span class="sd">        The simulation progresses by iteratively applying </span>
+<span class="sd">        the evolution operator to the outcome of its prior </span>
+<span class="sd">        application, initiating from the specified initial state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        time : int, tuple of int, default=None</span>
-<span class="sd">            Describes at which time instants the state must be saved.</span>
-<span class="sd">            It can be specified in three different ways.</span>
+<span class="sd">            Specifies the time instances when the state should be saved.</span>
+<span class="sd">            It can be defined in three distinct ways:</span>
 <span class="sd">            </span>
 <span class="sd">            * end</span>
-<span class="sd">                Save the state at time ``end``.</span>
-<span class="sd">                Only the final state is saved.</span>
+<span class="sd">                Saves the state at the ``end`` time.</span>
+<span class="sd">                Only the final state is retained.</span>
 
 <span class="sd">            * (end, step)</span>
-<span class="sd">                Saves each state from time 0 to time ``end`` (inclusive)</span>
-<span class="sd">                that is multiple of ``step``.</span>
+<span class="sd">                Retains every state from time 0 to ``end`` (inclusive)</span>
+<span class="sd">                that corresponds to a multiple of ``step``.</span>
 
 <span class="sd">            * (start, end, step)</span>
-<span class="sd">                Saves every state from time ``start`` (inclusive)</span>
-<span class="sd">                to time ``end`` (inclusive)</span>
-<span class="sd">                that is multiple of ``step``.</span>
+<span class="sd">                Stores every state from time ``start`` (inclusive)</span>
+<span class="sd">                to ``end`` (inclusive)</span>
+<span class="sd">                that is a multiple of ``step``.</span>
 
 <span class="sd">        initial_state : :class:`numpy.array`, default=None</span>
-<span class="sd">            The initial state which the evolution operator</span>
-<span class="sd">            is going to be applied to.</span>
+<span class="sd">            The starting state onto which the evolution operator</span>
+<span class="sd">            will be applied.</span>
 
 <span class="sd">        hpc : bool, default=True</span>
-<span class="sd">            Whether or not to use neblina&#39;s high-performance computing</span>
-<span class="sd">            to perform matrix multiplications.</span>
-<span class="sd">            If ``hpc=False`` uses standalone python.</span>
+<span class="sd">            Indicates whether to utilize neblina&#39;s high-performance computing</span>
+<span class="sd">            for matrix multiplication. </span>
+<span class="sd">            If set to ``hpc=False``, it will use standalone Python.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        states : :class:`numpy.ndarray`.</span>
-<span class="sd">            States saved during simulation where</span>
-<span class="sd">            ``states[i]`` corresponds to the ``i``-th saved state.</span>
+<span class="sd">            States retained during the simulation where</span>
+<span class="sd">            ``states[i]`` is the ``i``-th saved state.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            If any of the following occurs</span>
+<span class="sd">            Triggered if:</span>
 <span class="sd">            * ``time=None``.</span>
 <span class="sd">            * ``initial_state=None``.</span>
-<span class="sd">            * ``evolution_operator=None`` and it was no set previously.</span>
+<span class="sd">            * ``evolution_operator=None`` and hasn&#39;t been set before.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1003,17 +1005,19 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The simulation of the walk uses the expression</span>
-<span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(t)\rangle`, starting from </span>
-<span class="sd">        :math:`|\psi(0)\rangle`.</span>
-<span class="sd">        The maximum and intermediate applications</span>
-<span class="sd">        are described by ``time``.</span>
+<span class="sd">        The walk&#39;s simulation leverages the formula</span>
+<span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(t-1)\rangle`.        </span>
+<span class="sd">        The states computed and retained </span>
+<span class="sd">        are determined by ``time=(start,end,step)``.</span>
+<span class="sd">        Simulation starts from :math:`|\psi(\text{start})\rangle`, and</span>
+<span class="sd">        then computes and stores :math:`|\psi(\text{step}+\text{start})`,</span>
+<span class="sd">        continuing until :math:`|\psi(\text{end})`.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        If ``time=(0, 13, 3)``, the saved states will be:</span>
-<span class="sd">        the initial state (t=0), the intermediate states (t=3, 6, and 9),</span>
-<span class="sd">        and the final state (t=12).</span>
+<span class="sd">        Given ``time=(0, 13, 3)``, the saved states would include:</span>
+<span class="sd">        the initial state (t=0), intermediate states (t=3, 6, and 9),</span>
+<span class="sd">        and the concluding state (t=12).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">############################################</span>
         <span class="c1">### Check if simulation was set properly ###</span>
