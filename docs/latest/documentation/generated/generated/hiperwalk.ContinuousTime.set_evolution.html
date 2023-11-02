@@ -624,9 +624,11 @@ If omitted, the default arguments are used.</p>
 \[U(t) =      \text{e}^{-\text{i}tH},\]</div>
 <p>where <span class="math notranslate nohighlight">\(H\)</span> is the Hamiltonian, and
 <span class="math notranslate nohighlight">\(t\)</span> is the time.</p>
-<p>The :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>n`th partial sum of the Taylor series expansion is given by</p>
-<div class="math notranslate nohighlight">
-\[\text{e}^{-\text{i}tH} \approx \sum_{j = 0}^{n} (-\text{i}tH)^j / j!\]</div>
+<p>The <span class="math notranslate nohighlight">\(n\text{th}\)</span> partial sum of the Taylor series expansion is given by
+.. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\text{e}^{-\text{i}tH} \approx \sum_{j = 0}^{n} (-\text{i}tH)^j / j!
+</pre></div>
+</div>
 <p>where <code class="docutils literal notranslate"><span class="pre">terms</span></code><span class="math notranslate nohighlight">\(=n+1\)</span>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -636,7 +638,7 @@ to select a small time interval and perform
 multiple matrix multiplications to minimize 
 rounding errors.</p>
 </div>
-<div class="admonition-todo admonition" id="id3">
+<div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">scipy.linalg.expm</span></code> when <code class="docutils literal notranslate"><span class="pre">hpc=False</span></code> once the
 <a class="reference external" href="https://github.com/scipy/scipy/issues/18086">scipy issue 18086</a>
