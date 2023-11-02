@@ -407,7 +407,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph">[docs]</a>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Arbitrary simple graph.</span>
+<span class="sd">    Arbitrary graph.</span>
 
 <span class="sd">    The graph on which a quantum walk takes place.</span>
 
@@ -419,7 +419,7 @@ document.write(`
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    TypeError</span>
-<span class="sd">        if ``adj_matrix`` is not an square matrix.</span>
+<span class="sd">        If ``adj_matrix`` is not a square matrix.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -431,36 +431,38 @@ document.write(`
 <span class="sd">    takes place is specified by the</span>
 <span class="sd">    adjacency matrix, Laplacian matrix, or </span>
 <span class="sd">    any Hermitian matrix :math:`C`.</span>
+<span class="sd">    Let :math:`V` be the vertex set :math:`\{v_0,...,v_{n-1}\}`, where</span>
+<span class="sd">    where :math:`n=|V|`.</span>
 <span class="sd">    Two distinct vertices :math:`v_i` and :math:`v_j` in :math:`V`</span>
 <span class="sd">    are adjacent if and only if :math:`C_{ij}\neq 0`.</span>
 
-<span class="sd">    A wide range of methods are available. </span>
-<span class="sd">    These methods can be used by a quantum walk model </span>
-<span class="sd">    to generate a valid quantum walk.</span>
-<span class="sd">    </span>
-<span class="sd">    This class can be passed as an argument for plotting functions.</span>
-<span class="sd">    In this case,</span>
-<span class="sd">    the default representation for the graph will be displayed.</span>
+<span class="sd">    The class methods facilitate the construction of a valid quantum walk </span>
+<span class="sd">    and can be provided as parameters to plotting functions. For visualizations, </span>
+<span class="sd">    the default graph representation will be used. Specific classes are available </span>
+<span class="sd">    for well-known graph types, such as hypercubes and lattices.</span>
 
-<span class="sd">    The recommended parameter type is</span>
-<span class="sd">    :class:`scipy.sparse.csr_array` with ``dtype=np.int8``.</span>
+<span class="sd">    The preferred parameter type for the adjacency matrix is</span>
+<span class="sd">    :class:`scipy.sparse.csr_matrix` with `dtype=np.int8`.</span>
 
-<span class="sd">    Each edge of a given graph :math:`G(V, E)` is associated with</span>
-<span class="sd">    two arcs in the symmetric digraph :math:`\vec{G}(V, A)`,</span>
-<span class="sd">    where</span>
+<span class="sd">    Each edge in the graph :math:`G(V, E)` corresponds </span>
+<span class="sd">    to two arcs in the associated directed </span>
+<span class="sd">    graph :math:`\vec{G}(V, A)`, where</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \begin{align*}</span>
-<span class="sd">            A = \bigcup_{(v,u) \in E} \{(v, u), (u, v)\}.</span>
+<span class="sd">            A = \bigcup_{(v_k,v_\ell) \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
 <span class="sd">        \end{align*}</span>
 
-<span class="sd">    An arc can be described either in the arc notation as (tail,head) </span>
-<span class="sd">    or through a numerical label. The ordering of the labels in </span>
-<span class="sd">    the :obj:`Graph` class is as follows: </span>
-<span class="sd">    Consider two arcs, :math:`(v_1, u_1)` and :math:`(v_2, u_2&#39;)`, </span>
-<span class="sd">    with numerical labels :math:`a_1` and :math:`a_2` respectively. </span>
-<span class="sd">    Then, :math:`a_1 &lt; a_2` if and only if either :math:`v_1 &lt; v_2` </span>
-<span class="sd">    or :math:`v_1 = v_2` and :math:`u_1 &lt; u_2`.</span>
+<span class="sd">    Arcs can be denoted using the (tail,head) notation or with numerical labels. </span>
+<span class="sd">    In the :obj:`Graph` class, the arc labels are ordered such that for two arcs, </span>
+<span class="sd">    :math:`(v_i, v_j)` and :math:`(v_k, v_\ell)`, with labels :math:`a_1` and </span>
+<span class="sd">    :math:`a_2` respectively, :math:`a_1 &lt; a_2` if and only if :math:`i &lt; k` or </span>
+<span class="sd">    (:math:`i = k` and :math:`j &lt; \ell`).</span>
+<span class="sd">    </span>
+<span class="sd">    If ``adj_matrix`` is specified as a Hermitian matrix :math:`C`, </span>
+<span class="sd">    then :math:`C_{ij}` represents the weight of the arc :math:`(v_i, v_j)`. </span>
+<span class="sd">    This weight is considered a generalized weight when :math:`C_{ij}` is </span>
+<span class="sd">    negative or complex.</span>
 
 <span class="sd">    .. note::</span>
 <span class="sd">        The arc ordering may change for graphs defined using specific classes.</span>
