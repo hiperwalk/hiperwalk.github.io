@@ -637,12 +637,17 @@ as vertex <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
     -1, \text{ if } i\neq j \text{ and } v_i \text{ is adjacent to } v_j,\\
     0, \text{ otherwise.}
 \end{cases}\end{split}\]</div>
-<p>The Hamiltonian’s formulation is detailed in <a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>, 
-depending on the choice between the adjacency or Laplacian matrix, along with the positioning 
+<p>The Hamiltonian’s formulation is detailed in 
+<a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>, 
+depending on the choice between the adjacency 
+or Laplacian matrix, along with the positioning 
 of the marked vertices.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ContinuousTime</span></code> class also supports simulating arbitrary Hamiltonians. 
-To utilize a specific Hamiltonian, provide it directly as matrix <span class="math notranslate nohighlight">\(H\)</span> 
-with the argument <code class="docutils literal notranslate"><span class="pre">graph=H</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ContinuousTime</span></code> class also supports simulating 
+arbitrary Hamiltonians. 
+To use a specific Hamiltonian <span class="math notranslate nohighlight">\(H\)</span>, provide it directly 
+via some Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span> 
+using the argument <code class="docutils literal notranslate"><span class="pre">graph=C</span></code>, 
+so that <span class="math notranslate nohighlight">\(H=-\gamma C\)</span>.</p>
 <p>For a comprehensive understanding of continuous-time quantum walks, consult reference <a class="reference internal" href="#r93c4d787ae58-1" id="id1">[1]</a>. 
 To examine the differences between utilizing the adjacency matrix and the Laplacian matrix, 
 refer to reference <a class="reference internal" href="#r93c4d787ae58-2" id="id2">[2]</a>.</p>
