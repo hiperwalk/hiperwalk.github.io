@@ -426,23 +426,24 @@ document.write(`
 <span class="sd">    .. todo::</span>
 <span class="sd">        Check if it is more efficient to store the adjacency matrix as</span>
 <span class="sd">        sparse or dense.</span>
-
 <span class="sd">    </span>
-<span class="sd">    The graph on which the quantum walk takes place .</span>
+<span class="sd">    The graph :math:`G(V,E)` on which the quantum walk </span>
+<span class="sd">    takes place is specified by the</span>
+<span class="sd">    adjacency matrix, Laplacian matrix, or </span>
+<span class="sd">    any Hermitian matrix :math:`C`.</span>
+<span class="sd">    Two distinct vertices :math:`v_i` and :math:`v_j` in :math:`V`</span>
+<span class="sd">    are adjacent if and only if :math:`C_{ij}\neq 0`.</span>
 
 <span class="sd">    A wide range of methods are available. </span>
 <span class="sd">    These methods can be used by a quantum walk model </span>
 <span class="sd">    to generate a valid quantum walk.</span>
 <span class="sd">    </span>
-<span class="sd">    This class can be passed as an argument to plotting functions.</span>
+<span class="sd">    This class can be passed as an argument for plotting functions.</span>
 <span class="sd">    In this case,</span>
 <span class="sd">    the default representation for the graph will be displayed.</span>
 
 <span class="sd">    The recommended parameter type is</span>
-<span class="sd">    :class:`scipy.sparse.csr_array` with ``dtype=np.int8``,</span>
-<span class="sd">    where 1 denotes adjacency and 0 denotes non-adjacency.</span>
-<span class="sd">    If any entry differs from 0 or 1,</span>
-<span class="sd">    some methods may not operate as expected.</span>
+<span class="sd">    :class:`scipy.sparse.csr_array` with ``dtype=np.int8``.</span>
 
 <span class="sd">    Each edge of a given graph :math:`G(V, E)` is associated with</span>
 <span class="sd">    two arcs in the symmetric digraph :math:`\vec{G}(V, A)`,</span>
