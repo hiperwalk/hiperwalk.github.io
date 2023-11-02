@@ -422,6 +422,13 @@ document.write(`
 <span class="sd">    **kwargs : optional</span>
 <span class="sd">        Additional arguments to set the Hamiltonian and evolution operator.</span>
 
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``gamma`` is ``None`` or complex.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``gamma &lt; 0``.</span>
+
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    set_hamiltonian</span>
