@@ -584,7 +584,7 @@ document.write(`
 <p>The continuous-time quantum walk model represents quantum particles 
 evolving on a graph in continuous time, as directed by the Schrödinger 
 equation. The Hamiltonian is usually chosen as the adjacency matrix 
-or the Laplacian of the graph. A positive parameter, gamma, acts 
+or the Laplacian of the graph. A positive parameter gamma acts 
 as a weighting factor for the Hamiltonian, adjusting the walk’s 
 spreading rate. When marked vertices are present, 
 the Hamiltonian is suitably modified.</p>
@@ -597,13 +597,13 @@ There are two acceptable inputs:</p>
 <dl class="simple">
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code> :</dt><dd><p>The graph itself.</p>
 </dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">class:scipy.sparse.csr_array</span></code>:</dt><dd><p>The adjacency matrix of the graph.</p>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>:</dt><dd><p>The adjacency matrix of the graph.</p>
 </dd>
 </dl>
 </dd>
-<dt><strong>gamma</strong><span class="classifier">float</span></dt><dd><p>The value of gamma for setting Hamiltonian.</p>
+<dt><strong>gamma</strong><span class="classifier">float</span></dt><dd><p>The value of gamma for setting the Hamiltonian.</p>
 </dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Arguments to set the Hamiltonian and evolution operator.</p>
+<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional arguments to set the Hamiltonian and evolution operator.</p>
 </dd>
 </dl>
 </dd>
@@ -616,30 +616,46 @@ There are two acceptable inputs:</p>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The adjacency matrix of a graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> is
-the <span class="math notranslate nohighlight">\(|V| \times |V|\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span> such that</p>
+<p>The computational basis associated with a graph 
+<span class="math notranslate nohighlight">\(G(V, E)\)</span> comprising <span class="math notranslate nohighlight">\(n\)</span> vertices
+<span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span> is spanned by the states 
+<span class="math notranslate nohighlight">\(\ket{i}\)</span> for
+<span class="math notranslate nohighlight">\(0 \leq i &lt; n\)</span>, where
+<span class="math notranslate nohighlight">\(\ket{i}\)</span> is the state corresponding to <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
+<p>The adjacency matrix of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is the 
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span> such that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A_{i,j} = \begin{cases}
-    1, \text{ if } (i,j) \in E(G),\\
+    1, \text{ if } v_i \text{ is adjacent to } v_j,\\
     0, \text{ otherwise.}
 \end{cases}\end{split}\]</div>
-<p>The Hamiltonian, which depends on the adjacency matrix and the location of 
-the marked vertices, is described in the
-<a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a> method.</p>
-<p>The states of the computational basis are <span class="math notranslate nohighlight">\(\ket{i}\)</span> for
-<span class="math notranslate nohighlight">\(0 \leq i &lt; |V|\)</span>, where
-<span class="math notranslate nohighlight">\(\ket i\)</span> is associated with the <span class="math notranslate nohighlight">\(i\)</span>-th vertex.</p>
-<p>This class can also facilitate the simulation of any Hamiltonian
-evolution. To do this, simply pass the desired Hamiltonian in place
-of the adjacency matrix.</p>
-<p>For a deeper understanding of continuous-time quantum 
-walks, see <a class="reference internal" href="#r93c4d787ae58-1" id="id1">[1]</a>.</p>
+<p>Similarly, the Laplacian matrix is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L_{i,j} = \begin{cases}
+    \text{degree}(v_i), \text{ if } i=j,\\
+    -1, \text{ if } i\neq j \text{ and } v_i \text{ is adjacent to } v_j,\\
+    0, \text{ otherwise.}
+\end{cases}\end{split}\]</div>
+<p>The Hamiltonian’s formulation is detailed in <a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>, 
+depending on the choice between the adjacency or Laplacian matrix, along with the positioning 
+of the marked vertices.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ContinuousTime</span></code> class also supports simulating arbitrary Hamiltonians. 
+To utilize a specific Hamiltonian, provide it directly as matrix <span class="math notranslate nohighlight">\(H\)</span> 
+with the argument <code class="docutils literal notranslate"><span class="pre">graph=H</span></code>.</p>
+<p>For a comprehensive understanding of continuous-time quantum walks, consult reference <a class="reference internal" href="#r93c4d787ae58-1" id="id1">[1]</a>. 
+To examine the differences between utilizing the adjacency matrix and the Laplacian matrix, 
+refer to reference <a class="reference internal" href="#r93c4d787ae58-2" id="id2">[2]</a>.</p>
 <p class="rubric">References</p>
 <div role="list" class="citation-list">
 <div class="citation" id="r93c4d787ae58-1" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>E. Farhi and S. Gutmann. “Quantum computation and decision trees”. 
 Physical Review A, 58(2):915–928, 1998. ArXiv:quant-ph/9706062.</p>
+</div>
+<div class="citation" id="r93c4d787ae58-2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>T. G. Wong, L. Tarrataca, and N. Nahimov. Laplacian versus adjacency 
+matrix in quantum walk search. Quantum Inf Process 15, 4029-4048, 2016.</p>
 </div>
 </div>
 <dl class="py method">

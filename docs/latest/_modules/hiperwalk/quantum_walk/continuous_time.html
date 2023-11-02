@@ -397,7 +397,7 @@ document.write(`
 <span class="sd">    The continuous-time quantum walk model represents quantum particles </span>
 <span class="sd">    evolving on a graph in continuous time, as directed by the Schrödinger </span>
 <span class="sd">    equation. The Hamiltonian is usually chosen as the adjacency matrix </span>
-<span class="sd">    or the Laplacian of the graph. A positive parameter, gamma, acts </span>
+<span class="sd">    or the Laplacian of the graph. A positive parameter gamma acts </span>
 <span class="sd">    as a weighting factor for the Hamiltonian, adjusting the walk&#39;s </span>
 <span class="sd">    spreading rate. When marked vertices are present, </span>
 <span class="sd">    the Hamiltonian is suitably modified.</span>
@@ -413,14 +413,14 @@ document.write(`
 <span class="sd">        :class:`hiperwalk.graph.Graph` :</span>
 <span class="sd">            The graph itself.</span>
 
-<span class="sd">        :class:`class:scipy.sparse.csr_array`:</span>
+<span class="sd">        :class:`scipy.sparse.csr_array`:</span>
 <span class="sd">            The adjacency matrix of the graph.</span>
 
 <span class="sd">    gamma : float</span>
-<span class="sd">        The value of gamma for setting Hamiltonian.</span>
+<span class="sd">        The value of gamma for setting the Hamiltonian.</span>
 
 <span class="sd">    **kwargs : optional</span>
-<span class="sd">        Arguments to set the Hamiltonian and evolution operator.</span>
+<span class="sd">        Additional arguments to set the Hamiltonian and evolution operator.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -429,34 +429,50 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The adjacency matrix of a graph :math:`G(V, E)` is</span>
-<span class="sd">    the :math:`|V| \times |V|`-dimensional matrix :math:`A` such that</span>
+<span class="sd">    The computational basis associated with a graph </span>
+<span class="sd">    :math:`G(V, E)` comprising :math:`n` vertices</span>
+<span class="sd">    :math:`v_0, \ldots, v_{n-1}` is spanned by the states </span>
+<span class="sd">    :math:`\ket{i}` for</span>
+<span class="sd">    :math:`0 \leq i &lt; n`, where</span>
+<span class="sd">    :math:`\ket{i}` is the state corresponding to :math:`v_i`.</span>
+<span class="sd">    </span>
+<span class="sd">    The adjacency matrix of :math:`G(V, E)` is the </span>
+<span class="sd">    :math:`n`-dimensional matrix :math:`A` such that</span>
 <span class="sd">    </span>
 <span class="sd">    .. math::</span>
 <span class="sd">        A_{i,j} = \begin{cases}</span>
-<span class="sd">            1, \text{ if } (i,j) \in E(G),\\</span>
+<span class="sd">            1, \text{ if } v_i \text{ is adjacent to } v_j,\\</span>
+<span class="sd">            0, \text{ otherwise.}</span>
+<span class="sd">        \end{cases}</span>
+<span class="sd">        </span>
+<span class="sd">    Similarly, the Laplacian matrix is defined as</span>
+<span class="sd">    </span>
+<span class="sd">    .. math::</span>
+<span class="sd">        L_{i,j} = \begin{cases}</span>
+<span class="sd">            \text{degree}(v_i), \text{ if } i=j,\\</span>
+<span class="sd">            -1, \text{ if } i\neq j \text{ and } v_i \text{ is adjacent to } v_j,\\</span>
 <span class="sd">            0, \text{ otherwise.}</span>
 <span class="sd">        \end{cases}</span>
 
-<span class="sd">    The Hamiltonian, which depends on the adjacency matrix and the location of </span>
-<span class="sd">    the marked vertices, is described in the</span>
-<span class="sd">    :meth:`hiperwalk.ContinuousTime.set_hamiltonian` method.</span>
+<span class="sd">    The Hamiltonian&#39;s formulation is detailed in :meth:`hiperwalk.ContinuousTime.set_hamiltonian`, </span>
+<span class="sd">    depending on the choice between the adjacency or Laplacian matrix, along with the positioning </span>
+<span class="sd">    of the marked vertices.</span>
 
-<span class="sd">    The states of the computational basis are :math:`\ket{i}` for</span>
-<span class="sd">    :math:`0 \leq i &lt; |V|`, where</span>
-<span class="sd">    :math:`\ket i` is associated with the :math:`i`-th vertex.</span>
+<span class="sd">    The ``ContinuousTime`` class also supports simulating arbitrary Hamiltonians. </span>
+<span class="sd">    To utilize a specific Hamiltonian, provide it directly as matrix :math:`H` </span>
+<span class="sd">    with the argument ``graph=H``.</span>
 
-<span class="sd">    This class can also facilitate the simulation of any Hamiltonian</span>
-<span class="sd">    evolution. To do this, simply pass the desired Hamiltonian in place</span>
-<span class="sd">    of the adjacency matrix.</span>
-
-<span class="sd">    For a deeper understanding of continuous-time quantum </span>
-<span class="sd">    walks, see [1]_.</span>
+<span class="sd">    For a comprehensive understanding of continuous-time quantum walks, consult reference [1]_. </span>
+<span class="sd">    To examine the differences between utilizing the adjacency matrix and the Laplacian matrix, </span>
+<span class="sd">    refer to reference [2]_.</span>
 <span class="sd">    </span>
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [1] E. Farhi and S. Gutmann. &quot;Quantum computation and decision trees&quot;. </span>
 <span class="sd">        Physical Review A, 58(2):915–928, 1998. ArXiv:quant-ph/9706062.</span>
+<span class="sd">        </span>
+<span class="sd">    .. [2] T. G. Wong, L. Tarrataca, and N. Nahimov. Laplacian versus adjacency </span>
+<span class="sd">    	matrix in quantum walk search. Quantum Inf Process 15, 4029-4048, 2016.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_valid_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
