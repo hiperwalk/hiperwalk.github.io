@@ -788,10 +788,10 @@ document.write(`
 <span class="sd">        If ``**kwargs`` is not specified, default arguments are </span>
 <span class="sd">        employed (H=-gamma A and t=None). It first determines the </span>
 <span class="sd">        Hamiltonian and subsequently derives the evolution operator </span>
-<span class="sd">        through a Taylor series expansion. The default value</span>
-<span class="sd">        of ``terms=21`` is suitable when the Hamiltonian</span>
-<span class="sd">        is derived from the adjacency matrix and gamma is less </span>
-<span class="sd">        than 1.</span>
+<span class="sd">        via a truncated Taylor series. The default number of terms </span>
+<span class="sd">        in this series is set to ``terms=21``, which is adequate </span>
+<span class="sd">        when the Hamiltonian is derived from the adjacency matrix </span>
+<span class="sd">        and gamma is less than 1.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
