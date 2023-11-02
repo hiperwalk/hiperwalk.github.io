@@ -819,9 +819,8 @@ document.write(`
 <span class="sd">        Set the evolution operator.</span>
 
 <span class="sd">        This method defines the evolution operator for a specified </span>
-<span class="sd">        time &#39;t&#39; using the time provided in ``**kwargs``.</span>
-<span class="sd">        If ``**kwargs`` is not specified, default arguments are </span>
-<span class="sd">        employed (H=-gamma A and t=None). It first determines the </span>
+<span class="sd">        time t via the argument ``time=t``.</span>
+<span class="sd">        It first determines the </span>
 <span class="sd">        Hamiltonian and subsequently derives the evolution operator </span>
 <span class="sd">        via a truncated Taylor series. The default number of terms </span>
 <span class="sd">        in this series is set to ``terms=21``, which is adequate </span>
@@ -847,6 +846,7 @@ document.write(`
 <span class="sd">        --------</span>
 <span class="sd">        set_hamiltonian</span>
 <span class="sd">        set_time</span>
+<span class="sd">        set_marked</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
