@@ -580,13 +580,12 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
-<dd><p>Arbitrary graph.</p>
+<dd><p>Arbitrary simple graph.</p>
 <p>The graph on which a quantum walk takes place.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>Adjacency matrix of the graph on
-which the quantum walk takes place.</p>
+<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>Adjacency matrix, Laplacian matrix, or any Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.</p>
 </dd>
 </dl>
 </dd>
@@ -603,6 +602,7 @@ which the quantum walk takes place.</p>
 <p>Check if it is more efficient to store the adjacency matrix as
 sparse or dense.</p>
 </div>
+<p>The graph on which the quantum walk takes place .</p>
 <p>A wide range of methods are available. 
 These methods can be used by a quantum walk model 
 to generate a valid quantum walk.</p>
