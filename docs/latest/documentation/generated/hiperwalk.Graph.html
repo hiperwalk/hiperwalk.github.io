@@ -585,7 +585,7 @@ document.write(`
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>Adjacency matrix, Laplacian matrix, or any Hermitian matrix.</p>
+<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>Adjacency matrix, Laplacian matrix, or any real Hermitian matrix.</p>
 </dd>
 </dl>
 </dd>
@@ -605,7 +605,7 @@ sparse or dense.</p>
 <p>The graph <span class="math notranslate nohighlight">\(G(V,E)\)</span> on which the quantum walk 
 takes place is specified by the
 adjacency matrix, Laplacian matrix, or 
-any Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.
+any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.
 Let <span class="math notranslate nohighlight">\(V\)</span> be the vertex set <span class="math notranslate nohighlight">\(\{v_0,...,v_{n-1}\}\)</span>, 
 where <span class="math notranslate nohighlight">\(n=|V|\)</span>.
 Two distinct vertices <span class="math notranslate nohighlight">\(v_i\)</span> and <span class="math notranslate nohighlight">\(v_j\)</span> in <span class="math notranslate nohighlight">\(V\)</span>
@@ -628,7 +628,7 @@ In the <a class="reference internal" href="#hiperwalk.Graph" title="hiperwalk.Gr
 <span class="math notranslate nohighlight">\((v_i, v_j)\)</span> and <span class="math notranslate nohighlight">\((v_k, v_\ell)\)</span>, with labels <span class="math notranslate nohighlight">\(a_1\)</span> and 
 <span class="math notranslate nohighlight">\(a_2\)</span> respectively, <span class="math notranslate nohighlight">\(a_1 &lt; a_2\)</span> if and only if <span class="math notranslate nohighlight">\(i &lt; k\)</span> or 
 (<span class="math notranslate nohighlight">\(i = k\)</span> and <span class="math notranslate nohighlight">\(j &lt; \ell\)</span>).</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is specified as a Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, 
+<p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is specified as a real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, 
 then <span class="math notranslate nohighlight">\(C_{ij}\)</span> represents the weight of the arc <span class="math notranslate nohighlight">\((v_i, v_j)\)</span>. 
 This weight is considered a generalized weight when <span class="math notranslate nohighlight">\(C_{ij}\)</span> is 
 negative or complex.</p>

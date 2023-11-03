@@ -414,7 +414,7 @@ document.write(`
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array` or :class:`numpy.ndarray`</span>
-<span class="sd">        Adjacency matrix, Laplacian matrix, or any Hermitian matrix. </span>
+<span class="sd">        Adjacency matrix, Laplacian matrix, or any real Hermitian matrix. </span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -430,7 +430,7 @@ document.write(`
 <span class="sd">    The graph :math:`G(V,E)` on which the quantum walk </span>
 <span class="sd">    takes place is specified by the</span>
 <span class="sd">    adjacency matrix, Laplacian matrix, or </span>
-<span class="sd">    any Hermitian matrix :math:`C`.</span>
+<span class="sd">    any real Hermitian matrix :math:`C`.</span>
 <span class="sd">    Let :math:`V` be the vertex set :math:`\{v_0,...,v_{n-1}\}`, </span>
 <span class="sd">    where :math:`n=|V|`.</span>
 <span class="sd">    Two distinct vertices :math:`v_i` and :math:`v_j` in :math:`V`</span>
@@ -459,7 +459,7 @@ document.write(`
 <span class="sd">    :math:`a_2` respectively, :math:`a_1 &lt; a_2` if and only if :math:`i &lt; k` or </span>
 <span class="sd">    (:math:`i = k` and :math:`j &lt; \ell`).</span>
 <span class="sd">    </span>
-<span class="sd">    If ``adj_matrix`` is specified as a Hermitian matrix :math:`C`, </span>
+<span class="sd">    If ``adj_matrix`` is specified as a real Hermitian matrix :math:`C`, </span>
 <span class="sd">    then :math:`C_{ij}` represents the weight of the arc :math:`(v_i, v_j)`. </span>
 <span class="sd">    This weight is considered a generalized weight when :math:`C_{ij}` is </span>
 <span class="sd">    negative or complex.</span>
