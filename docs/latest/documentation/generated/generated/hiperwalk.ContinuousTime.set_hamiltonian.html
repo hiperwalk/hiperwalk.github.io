@@ -588,7 +588,7 @@ document.write(`
 <dd><p>Set the Hamiltonian.</p>
 <p>The Hamiltonian takes the form of -gamma A, -gamma L, 
 or -gamma C, where A is the adjacency matrix, L is 
-the Laplacian matrix, and C is any Hermitian matrix.
+the Laplacian matrix, and C is any real Hermitian matrix.
 If marked vertices are specified, the Hamiltonian 
 is modified as described in the Notes section. 
 Once the Hamiltonian has been established, 
@@ -627,7 +627,7 @@ See <a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.h
 <div class="math notranslate nohighlight">
 \[H = -\gamma C  - \sum_{m \in M} \ket m \bra m,\]</div>
 <p>where <span class="math notranslate nohighlight">\(C\)</span> is the adjacency matrix, Laplacian
-matrix, or any Hermitian matrix. The set
+matrix, or any real Hermitian matrix. The set
 <span class="math notranslate nohighlight">\(M\)</span> specifies the marked vertices via
 the argument <code class="docutils literal notranslate"><span class="pre">marked=M</span></code>. For instance, <code class="docutils literal notranslate"><span class="pre">marked={0}</span></code>
 specifies that <span class="math notranslate nohighlight">\(v_0\)</span> is the marked vertex.

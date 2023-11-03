@@ -591,7 +591,7 @@ There are two acceptable inputs:</p>
 <dl class="simple">
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code> :</dt><dd><p>The graph itself.</p>
 </dd>
-<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>:</dt><dd><p>An adjacency matrix, Laplacian matrix, or any Hermitian matrix.</p>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>:</dt><dd><p>An adjacency matrix, Laplacian matrix, or any real Hermitian matrix.</p>
 </dd>
 </dl>
 </dd>
@@ -654,7 +654,7 @@ of the marked vertices.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ContinuousTime</span></code> class also supports simulating 
 arbitrary Hamiltonians. 
 To use a specific Hamiltonian <span class="math notranslate nohighlight">\(H\)</span>, provide it directly 
-via some Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span> 
+via some real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span> 
 using the argument <code class="docutils literal notranslate"><span class="pre">graph=C</span></code>, 
 so that <span class="math notranslate nohighlight">\(H=-\gamma C\)</span>.</p>
 <p>For a comprehensive understanding of continuous-time quantum walks, consult reference <a class="reference internal" href="#r93c4d787ae58-1" id="id1">[1]</a>. 
