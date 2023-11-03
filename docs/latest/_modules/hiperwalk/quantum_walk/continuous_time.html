@@ -392,17 +392,10 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.ContinuousTime.html#hiperwalk.ContinuousTime">[docs]</a>
 <span class="k">class</span> <span class="nc">ContinuousTime</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Manage instances of continuous-time quantum walks on simple graphs.</span>
-
-<span class="sd">    The continuous-time quantum walk model represents quantum particles </span>
-<span class="sd">    evolving on a graph in continuous time, as directed by the Schrödinger </span>
-<span class="sd">    equation. The Hamiltonian is usually chosen as the adjacency matrix </span>
-<span class="sd">    or the Laplacian of the graph. A positive parameter gamma acts </span>
-<span class="sd">    as a weighting factor for the Hamiltonian, adjusting the walk&#39;s </span>
-<span class="sd">    spreading rate. When marked vertices are present, </span>
-<span class="sd">    the Hamiltonian is suitably modified.</span>
+<span class="sd">    Manage instances of continuous-time quantum walks on graphs.</span>
 <span class="sd">    </span>
-<span class="sd">    For further implementation details, refer to the Notes Section.</span>
+<span class="sd">    For further implementation details and theoretical background, </span>
+<span class="sd">    refer to the Notes Section.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -414,7 +407,7 @@ document.write(`
 <span class="sd">            The graph itself.</span>
 
 <span class="sd">        :class:`scipy.sparse.csr_array`:</span>
-<span class="sd">            The adjacency matrix of the graph.</span>
+<span class="sd">            An adjacency matrix, Laplacian matrix, or any Hermitian matrix.</span>
 
 <span class="sd">    gamma : float</span>
 <span class="sd">        The value of gamma for setting the Hamiltonian.</span>
@@ -436,6 +429,14 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
+<span class="sd">    The continuous-time quantum walk model represents quantum particles </span>
+<span class="sd">    evolving on a graph in continuous time, as directed by the Schrödinger </span>
+<span class="sd">    equation. The Hamiltonian is usually chosen as the adjacency matrix </span>
+<span class="sd">    or the Laplacian of the graph. A positive parameter gamma acts </span>
+<span class="sd">    as a weighting factor for the Hamiltonian, adjusting the walk&#39;s </span>
+<span class="sd">    spreading rate. When marked vertices are present, </span>
+<span class="sd">    the Hamiltonian is suitably modified.</span>
+<span class="sd">    </span>
 <span class="sd">    The computational basis associated with a graph </span>
 <span class="sd">    :math:`G(V, E)` comprising :math:`n` vertices</span>
 <span class="sd">    :math:`v_0, \ldots, v_{n-1}` is spanned by the states </span>

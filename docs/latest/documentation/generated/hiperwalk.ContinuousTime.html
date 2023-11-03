@@ -580,15 +580,9 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">ContinuousTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime" title="Link to this definition">#</a></dt>
-<dd><p>Manage instances of continuous-time quantum walks on simple graphs.</p>
-<p>The continuous-time quantum walk model represents quantum particles 
-evolving on a graph in continuous time, as directed by the Schrödinger 
-equation. The Hamiltonian is usually chosen as the adjacency matrix 
-or the Laplacian of the graph. A positive parameter gamma acts 
-as a weighting factor for the Hamiltonian, adjusting the walk’s 
-spreading rate. When marked vertices are present, 
-the Hamiltonian is suitably modified.</p>
-<p>For further implementation details, refer to the Notes Section.</p>
+<dd><p>Manage instances of continuous-time quantum walks on graphs.</p>
+<p>For further implementation details and theoretical background, 
+refer to the Notes Section.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -597,7 +591,7 @@ There are two acceptable inputs:</p>
 <dl class="simple">
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code> :</dt><dd><p>The graph itself.</p>
 </dd>
-<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>:</dt><dd><p>The adjacency matrix of the graph.</p>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.11.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>:</dt><dd><p>An adjacency matrix, Laplacian matrix, or any Hermitian matrix.</p>
 </dd>
 </dl>
 </dd>
@@ -624,6 +618,13 @@ There are two acceptable inputs:</p>
 </dl>
 </div>
 <p class="rubric">Notes</p>
+<p>The continuous-time quantum walk model represents quantum particles 
+evolving on a graph in continuous time, as directed by the Schrödinger 
+equation. The Hamiltonian is usually chosen as the adjacency matrix 
+or the Laplacian of the graph. A positive parameter gamma acts 
+as a weighting factor for the Hamiltonian, adjusting the walk’s 
+spreading rate. When marked vertices are present, 
+the Hamiltonian is suitably modified.</p>
 <p>The computational basis associated with a graph 
 <span class="math notranslate nohighlight">\(G(V, E)\)</span> comprising <span class="math notranslate nohighlight">\(n\)</span> vertices
 <span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span> is spanned by the states 
