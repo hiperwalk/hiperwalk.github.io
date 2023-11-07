@@ -379,6 +379,7 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -413,8 +414,10 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array` or :class:`numpy.ndarray`</span>
-<span class="sd">        Adjacency matrix, Laplacian matrix, or any real Hermitian matrix. </span>
+<span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array`, :class:`numpy.ndarray` or :class:`networkx.Graph`</span>
+<span class="sd">        Adjacency matrix, Laplacian matrix, or any real Hermitian matrix.</span>
+
+<span class="sd">        If :class:`network.Graph`, the adjacency matrix of the graph is used.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -531,10 +534,12 @@ document.write(`
 <div class="viewcode-block" id="Graph.__init__">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
-        <span class="c1"># TODO:</span>
-        <span class="c1"># * Check if valid adjacency matrix</span>
-        <span class="c1"># * Add option: numpy dense matrix as parameters.</span>
-        <span class="c1"># * Add option: networkx graph as parameter.</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span>
+               <span class="p">[</span><span class="s1">&#39;__len__&#39;</span><span class="p">,</span> <span class="s1">&#39;edges&#39;</span><span class="p">,</span> <span class="s1">&#39;nbunch_iter&#39;</span><span class="p">,</span> <span class="s1">&#39;subgraph&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;is_directed&#39;</span><span class="p">]):</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">convert_matrix</span><span class="o">.</span><span class="n">to_scipy_sparse_array</span><span class="p">(</span>
+                    <span class="n">adj_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">issparse</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">):</span>
             <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
 
