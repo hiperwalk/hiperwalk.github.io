@@ -1315,6 +1315,8 @@ document.write(`
 
 <span class="c1">##########################################################################</span>
 
+<div class="viewcode-block" id="plot_success_probability">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_success_probability.html#hiperwalk.plot_success_probability">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the success probability with respect to time.</span>
@@ -1360,8 +1362,11 @@ document.write(`
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
+
+<div class="viewcode-block" id="plot_function">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_function.html#hiperwalk.plot_function">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">y_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
                   <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># TODO: any situation where *y_args and **y_kwargs are iterable?</span>
@@ -1391,8 +1396,11 @@ document.write(`
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
+
+<div class="viewcode-block" id="plot_optimal_runtime">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_optimal_runtime.html#hiperwalk.plot_optimal_runtime">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_optimal_runtime</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -1472,8 +1480,11 @@ document.write(`
                                   <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
 
     <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Optimal runtime&#39;</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
-                  <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                  <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="plot_max_success_probability">
+<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_max_success_probability.html#hiperwalk.plot_max_success_probability">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_max_success_probability</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span>
         <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -1494,7 +1505,8 @@ document.write(`
                                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
 
     <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Max success probability&#39;</span><span class="p">,</span>
-                  <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                  <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 
 
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>

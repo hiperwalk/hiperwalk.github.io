@@ -1,0 +1,6 @@
+﻿hiperwalk.plot\_optimal\_runtime
+================================
+
+.. currentmodule:: hiperwalk
+
+.. autofunction:: plot_optimal_runtime

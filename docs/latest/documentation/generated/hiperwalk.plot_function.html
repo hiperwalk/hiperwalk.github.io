@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>hiperwalk.plot_function &#8212; Hiperwalk latest documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.plot_function';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="hiperwalk.plot_optimal_runtime" href="hiperwalk.plot_optimal_runtime.html" />
+    <link rel="prev" title="hiperwalk.plot_success_probability" href="hiperwalk.plot_success_probability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://hiperwalk.org/images/logo_small_light.png" class="logo__image only-light" alt="Hiperwalk"/>
+    <script>document.write(`<img src="https://hiperwalk.org/images/logo_small_dark.png" class="logo__image only-dark" alt="Hiperwalk"/>`);</script>
+  
+  
+    <p class="title logo__title">Hiperwalk</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install/index.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../tutorial/index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install/index.html">
+                        Install
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../tutorial/index.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">
+                        Development
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../graph.html">Graphs</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arc_number.html">hiperwalk.Graph.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arcs_with_tail.html">hiperwalk.Graph.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.degree.html">hiperwalk.Graph.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html">hiperwalk.Graph.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_arcs.html">hiperwalk.Graph.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html">hiperwalk.Graph.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html">hiperwalk.Graph.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html">hiperwalk.Graph.vertex_number</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Cycle.html">hiperwalk.Cycle</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.adjacency_matrix.html">hiperwalk.Cycle.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arc.html">hiperwalk.Cycle.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arc_number.html">hiperwalk.Cycle.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arcs_with_tail.html">hiperwalk.Cycle.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.degree.html">hiperwalk.Cycle.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.neighbors.html">hiperwalk.Cycle.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.next_arc.html">hiperwalk.Cycle.next_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_arcs.html">hiperwalk.Cycle.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_edges.html">hiperwalk.Cycle.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_vertices.html">hiperwalk.Cycle.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.previous_arc.html">hiperwalk.Cycle.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.vertex_number.html">hiperwalk.Cycle.vertex_number</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Grid.html">hiperwalk.Grid</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.adjacency_matrix.html">hiperwalk.Grid.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc.html">hiperwalk.Grid.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc_direction.html">hiperwalk.Grid.arc_direction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc_number.html">hiperwalk.Grid.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arcs_with_tail.html">hiperwalk.Grid.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.degree.html">hiperwalk.Grid.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.dimensions.html">hiperwalk.Grid.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.neighbors.html">hiperwalk.Grid.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.next_arc.html">hiperwalk.Grid.next_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_arcs.html">hiperwalk.Grid.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_edges.html">hiperwalk.Grid.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_vertices.html">hiperwalk.Grid.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.previous_arc.html">hiperwalk.Grid.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.vertex_coordinates.html">hiperwalk.Grid.vertex_coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.vertex_number.html">hiperwalk.Grid.vertex_number</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.adjacency_matrix.html">hiperwalk.Hypercube.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc.html">hiperwalk.Hypercube.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc_direction.html">hiperwalk.Hypercube.arc_direction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc_number.html">hiperwalk.Hypercube.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arcs_with_tail.html">hiperwalk.Hypercube.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.degree.html">hiperwalk.Hypercube.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.dimension.html">hiperwalk.Hypercube.dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.neighbors.html">hiperwalk.Hypercube.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_arcs.html">hiperwalk.Hypercube.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_edges.html">hiperwalk.Hypercube.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_vertices.html">hiperwalk.Hypercube.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.vertex_number.html">hiperwalk.Hypercube.vertex_number</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Lattice.html">hiperwalk.Lattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.adjacency_matrix.html">hiperwalk.Lattice.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc.html">hiperwalk.Lattice.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc_number.html">hiperwalk.Lattice.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arcs_with_tail.html">hiperwalk.Lattice.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.degree.html">hiperwalk.Lattice.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.neighbors.html">hiperwalk.Lattice.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.next_arc.html">hiperwalk.Lattice.next_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_arcs.html">hiperwalk.Lattice.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_edges.html">hiperwalk.Lattice.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_vertices.html">hiperwalk.Lattice.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.previous_arc.html">hiperwalk.Lattice.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.vertex_number.html">hiperwalk.Lattice.vertex_number</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.adjacency_matrix.html">hiperwalk.Line.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arc.html">hiperwalk.Line.arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arc_number.html">hiperwalk.Line.arc_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arcs_with_tail.html">hiperwalk.Line.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.degree.html">hiperwalk.Line.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.neighbors.html">hiperwalk.Line.neighbors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.next_arc.html">hiperwalk.Line.next_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_arcs.html">hiperwalk.Line.number_of_arcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_edges.html">hiperwalk.Line.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_vertices.html">hiperwalk.Line.number_of_vertices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.previous_arc.html">hiperwalk.Line.previous_arc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.vertex_number.html">hiperwalk.Line.vertex_number</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.fit_sin_squared.html">hiperwalk.QuantumWalk.fit_sin_squared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_evolution.html">hiperwalk.QuantumWalk.get_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_marked.html">hiperwalk.QuantumWalk.get_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.hilbert_space_dimension.html">hiperwalk.QuantumWalk.hilbert_space_dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.ket.html">hiperwalk.QuantumWalk.ket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.max_success_probability.html">hiperwalk.QuantumWalk.max_success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.optimal_runtime.html">hiperwalk.QuantumWalk.optimal_runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability.html">hiperwalk.QuantumWalk.probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.probability_distribution.html">hiperwalk.QuantumWalk.probability_distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.set_evolution.html">hiperwalk.QuantumWalk.set_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.set_marked.html">hiperwalk.QuantumWalk.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.simulate.html">hiperwalk.QuantumWalk.simulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.state.html">hiperwalk.QuantumWalk.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.success_probability.html">hiperwalk.QuantumWalk.success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Coined.html">hiperwalk.Coined</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.default_coin.html">hiperwalk.Coined.default_coin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.fit_sin_squared.html">hiperwalk.Coined.fit_sin_squared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.get_coin.html">hiperwalk.Coined.get_coin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.get_evolution.html">hiperwalk.Coined.get_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.get_marked.html">hiperwalk.Coined.get_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.get_shift.html">hiperwalk.Coined.get_shift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.has_persistent_shift.html">hiperwalk.Coined.has_persistent_shift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.hilbert_space_dimension.html">hiperwalk.Coined.hilbert_space_dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.ket.html">hiperwalk.Coined.ket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.max_success_probability.html">hiperwalk.Coined.max_success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.optimal_runtime.html">hiperwalk.Coined.optimal_runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.probability.html">hiperwalk.Coined.probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.probability_distribution.html">hiperwalk.Coined.probability_distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.set_coin.html">hiperwalk.Coined.set_coin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.set_evolution.html">hiperwalk.Coined.set_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.set_marked.html">hiperwalk.Coined.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.set_shift.html">hiperwalk.Coined.set_shift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.simulate.html">hiperwalk.Coined.simulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.state.html">hiperwalk.Coined.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.success_probability.html">hiperwalk.Coined.success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.ContinuousTime.html">hiperwalk.ContinuousTime</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.fit_sin_squared.html">hiperwalk.ContinuousTime.fit_sin_squared</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_evolution.html">hiperwalk.ContinuousTime.get_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_gamma.html">hiperwalk.ContinuousTime.get_gamma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian.html">hiperwalk.ContinuousTime.get_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.optimal_runtime.html">hiperwalk.ContinuousTime.optimal_runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability.html">hiperwalk.ContinuousTime.probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability_distribution.html">hiperwalk.ContinuousTime.probability_distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_evolution.html">hiperwalk.ContinuousTime.set_evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../plot.html">Plotting</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">hiperwalk.plot_function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Documentation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../plot.html" class="nav-link">Plotting</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">hiperwalk.pl...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="hiperwalk-plot-function">
+<h1>hiperwalk.plot_function<a class="headerlink" href="#hiperwalk-plot-function" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="hiperwalk.plot_function">
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">plot_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qw_iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/plot/_plot.html#plot_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.plot_function" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="hiperwalk.plot_success_probability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">hiperwalk.plot_success_probability</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="hiperwalk.plot_optimal_runtime.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">hiperwalk.plot_optimal_runtime</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.plot_function"><code class="docutils literal notranslate"><span class="pre">plot_function()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/documentation/generated/hiperwalk.plot_function.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
