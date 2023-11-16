@@ -492,13 +492,6 @@ document.write(`
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Animation.html">hiperwalk.Animation</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Animation.add_frame.html">hiperwalk.Animation.add_frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Animation.create_animation.html">hiperwalk.Animation.create_animation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Animation.save_animation.html">hiperwalk.Animation.save_animation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Animation.show_animation.html">hiperwalk.Animation.show_animation</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -583,12 +576,12 @@ not a explicit matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>marked</strong><span class="classifier">list of int or dict</span></dt><dd><p>list of vertices to be marked and
+<dt><strong>marked</strong><span class="classifier">list of vertices or dict</span></dt><dd><p>list of vertices to be marked and
 how they are going to be marked.</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>list of int</dt><dd><p>Given vertices are set as marked but
-the evolution operator remains unchanged.</p>
+<dt>list of vertices</dt><dd><p>Given vertices are set as marked.
+The coin for those vertices is ‘-I’.</p>
 </dd>
 </dl>
 </li>
