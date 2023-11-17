@@ -726,10 +726,10 @@ the evolution operator equals the identity.</p>
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a> method
 needs to be called in order to carry out the simulation.
 This method primarily requires two arguments:
-<code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">initial_state</span></code>.
+<code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">state</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">time</span></code> argument specifies when the simulation should
 stop and which intermediate states need to be stored.
-The evolution operator will be applied to the <code class="docutils literal notranslate"><span class="pre">initial_state</span></code>
+The evolution operator will be applied to the <code class="docutils literal notranslate"><span class="pre">state</span></code>
 as many times as necessary.
 The simulation returns a list of states such that
 the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry corresponds to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th saved state.</p>
@@ -743,7 +743,7 @@ There are three argument types for <code class="docutils literal notranslate"><s
 <li><p>integer: <code class="docutils literal notranslate"><span class="pre">stop</span></code>.
 The final simulation time.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
@@ -762,7 +762,7 @@ For example,
 if <code class="docutils literal notranslate"><span class="pre">time=(10,</span> <span class="pre">2)</span></code>, returns the states obtained at times
 <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 <span class="go">6</span>
@@ -778,7 +778,7 @@ For example,
 if <code class="docutils literal notranslate"><span class="pre">time=(1,</span> <span class="pre">10,</span> <span class="pre">2)</span></code>, returns the states at times
 <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">9]</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>                         <span class="n">initial_state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 <span class="go">5</span>

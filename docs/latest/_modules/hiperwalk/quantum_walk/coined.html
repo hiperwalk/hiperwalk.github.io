@@ -1444,21 +1444,21 @@ document.write(`
         <span class="k">return</span> <span class="n">ket</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">hpc</span><span class="p">:</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">())</span>
             <span class="n">C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
             <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="nb">complex</span> <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="n">C</span><span class="o">.</span><span class="n">is_complex</span>
-                                 <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">initial_state</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+                                 <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
                      <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">dtype</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_simulate_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>

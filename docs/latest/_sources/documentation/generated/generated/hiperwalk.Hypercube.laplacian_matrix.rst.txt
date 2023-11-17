@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.laplacian\_matrix
+=====================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.laplacian_matrix

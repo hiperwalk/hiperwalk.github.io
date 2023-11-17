@@ -35,6 +35,9 @@ hiperwalk.Graph
           ~Graph.degree
        
        
+          ~Graph.laplacian_matrix
+       
+       
           ~Graph.neighbors
        
        

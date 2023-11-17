@@ -35,6 +35,9 @@ hiperwalk.Line
           ~Line.degree
        
        
+          ~Line.laplacian_matrix
+       
+       
           ~Line.neighbors
        
        

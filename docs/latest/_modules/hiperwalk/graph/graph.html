@@ -380,7 +380,7 @@ document.write(`
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span><span class="p">,</span> <span class="n">diags</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -766,6 +766,43 @@ document.write(`
 <span class="sd">            Add other return types depending on the stored matrix type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span></div>
+
+
+<div class="viewcode-block" id="Graph.laplacian_matrix">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">laplacian_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the graph Laplacian matrix.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        adjacency_matrix</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The Laplacian matrix is given by</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            L = D - A,</span>
+
+<span class="sd">        where :math:`D` is the degree matrix</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            D_{i, j} = \begin{case}</span>
+<span class="sd">                degree(v_i) &amp;\text{if } i = j</span>
+<span class="sd">                0 &amp;\text{otherwise},</span>
+<span class="sd">            \end{cases}</span>
+
+<span class="sd">        and :math:`A` is the graph adjacency matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">diags</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span></div>
 </div>
 
 </pre></div>

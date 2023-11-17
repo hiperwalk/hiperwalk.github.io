@@ -35,6 +35,9 @@ hiperwalk.Lattice
           ~Lattice.degree
        
        
+          ~Lattice.laplacian_matrix
+       
+       
           ~Lattice.neighbors
        
        

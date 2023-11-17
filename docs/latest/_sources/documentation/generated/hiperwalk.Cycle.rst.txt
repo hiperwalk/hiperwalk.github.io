@@ -35,6 +35,9 @@ hiperwalk.Cycle
           ~Cycle.degree
        
        
+          ~Cycle.laplacian_matrix
+       
+       
           ~Cycle.neighbors
        
        

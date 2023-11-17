@@ -41,6 +41,9 @@ hiperwalk.Grid
           ~Grid.dimensions
        
        
+          ~Grid.laplacian_matrix
+       
+       
           ~Grid.neighbors
        
        

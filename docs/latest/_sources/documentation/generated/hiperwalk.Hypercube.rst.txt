@@ -41,6 +41,9 @@ hiperwalk.Hypercube
           ~Hypercube.dimension
        
        
+          ~Hypercube.laplacian_matrix
+       
+       
           ~Hypercube.neighbors
        
        
