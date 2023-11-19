@@ -614,17 +614,20 @@ walker beign found at vertex <code class="docutils literal notranslate"><span cl
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The probability for a given vertex <span class="math notranslate nohighlight">\(u\)</span> is the sum of the
-absolute square of the amplitudes of the arcs with tail <span class="math notranslate nohighlight">\(u\)</span>.
-That is, for an arbitrary superposition</p>
+<p>The probability for a given vertex <span class="math notranslate nohighlight">\(u\)</span> is calculated as the sum of the
+absolute squares of the amplitudes of the arcs originating from <span class="math notranslate nohighlight">\(u\)</span>.
+If the state of the walker is represented by</p>
 <div class="math notranslate nohighlight">
 \[\sum_{(u, v) \in A(\vec G)} \alpha_{u,v} \ket{u,v},\]</div>
-<p>– where <span class="math notranslate nohighlight">\(\vec G\)</span> is the graph <span class="math notranslate nohighlight">\(G\)</span> with each
-edge substituted by two arcs (one for each direction) –
-the probability associated with vertex <span class="math notranslate nohighlight">\(u\)</span> is</p>
+<p>where <span class="math notranslate nohighlight">\(\vec G\)</span> denotes the symmetric directed graph formed by
+replacing each edge in <span class="math notranslate nohighlight">\(G\)</span> with two arcs, one for each direction,
+then the probability associated with vertex <span class="math notranslate nohighlight">\(u\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\sum_{v \in N(u)}|\alpha_{u, v}|^2,\]</div>
-<p>where <span class="math notranslate nohighlight">\(N(u)\)</span> is the set of neighbors of <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<p>with <span class="math notranslate nohighlight">\(N(u)\)</span> being the set of neighbors of <span class="math notranslate nohighlight">\(u\)</span>.
+The probability distribution, which is returned by this
+method as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, is the collection of these
+probabilities for all vertices.</p>
 </dd></dl>
 
 </section>

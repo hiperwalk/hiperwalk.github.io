@@ -1301,21 +1301,24 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The probability for a given vertex :math:`u` is the sum of the</span>
-<span class="sd">        absolute square of the amplitudes of the arcs with tail :math:`u`.</span>
-<span class="sd">        That is, for an arbitrary superposition</span>
-
+<span class="sd">        The probability for a given vertex :math:`u` is calculated as the sum of the</span>
+<span class="sd">        absolute squares of the amplitudes of the arcs originating from :math:`u`.</span>
+<span class="sd">        If the state of the walker is represented by</span>
+<span class="sd">        </span>
 <span class="sd">        .. math::</span>
 <span class="sd">            \sum_{(u, v) \in A(\vec G)} \alpha_{u,v} \ket{u,v},</span>
-
-<span class="sd">        -- where :math:`\vec G` is the graph :math:`G` with each</span>
-<span class="sd">        edge substituted by two arcs (one for each direction) --</span>
-<span class="sd">        the probability associated with vertex :math:`u` is</span>
-
+<span class="sd">        </span>
+<span class="sd">        where :math:`\vec G` denotes the symmetric directed graph formed by</span>
+<span class="sd">        replacing each edge in :math:`G` with two arcs, one for each direction,</span>
+<span class="sd">        then the probability associated with vertex :math:`u` is given by</span>
+<span class="sd">        </span>
 <span class="sd">        .. math::</span>
 <span class="sd">            \sum_{v \in N(u)}|\alpha_{u, v}|^2,</span>
-
-<span class="sd">        where :math:`N(u)` is the set of neighbors of :math:`u`.</span>
+<span class="sd">        </span>
+<span class="sd">        with :math:`N(u)` being the set of neighbors of :math:`u`.</span>
+<span class="sd">        The probability distribution, which is returned by this</span>
+<span class="sd">        method as a ``numpy.ndarray``, is the collection of these</span>
+<span class="sd">        probabilities for all vertices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
