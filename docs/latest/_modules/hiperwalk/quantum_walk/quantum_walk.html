@@ -493,10 +493,10 @@ document.write(`
 <span class="sd">        An example of the uniform state is</span>
 
 <span class="sd">        .. math::</span>
-
 <span class="sd">            \ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}</span>
 
-<span class="sd">        where :math:`N` is the dimension of the Hilbert space.</span>
+<span class="sd">        where :math:`N` is the dimension of the Hilbert space and </span>
+<span class="sd">        :math:`i` is the label of an arc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
                 <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span></div>
