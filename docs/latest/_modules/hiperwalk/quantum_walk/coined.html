@@ -430,13 +430,21 @@ document.write(`
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 
-<span class="sd">    The computational basis is spanned by the set of arcs.</span>
-<span class="sd">    The cardinality is :math:`2|E|`, where :math:`E`</span>
-<span class="sd">    represents the edge set of the graph.</span>
-<span class="sd">    For further information regarding the order of the arcs,</span>
-<span class="sd">    consult the respective graph descriptions.</span>
-<span class="sd">    The Hilbert space of a coined quantum walk is denoted by</span>
-<span class="sd">    :math:`\mathcal{H}^{2|E|}`.</span>
+<span class="sd">    The coined quantum walk model is a quantum analog of </span>
+<span class="sd">    classical random walks, incorporating an additional </span>
+<span class="sd">    quantum coin-toss mechanism. It uses an extra quantum </span>
+<span class="sd">    internal degree of freedom, represented by the coin state,</span>
+<span class="sd">    to determine the direction of the walker&#39;s movement </span>
+<span class="sd">    on a graph.</span>
+
+<span class="sd">    The computational basis comprises the arc set of the graph.</span>
+<span class="sd">    Its cardinality is :math:`2|E|`, where :math:`E`</span>
+<span class="sd">    represents the graph&#39;s edge set.</span>
+<span class="sd">    The arcs are arranged within the computational basis </span>
+<span class="sd">    to ensure that the coin operator adopts a block-diagonal </span>
+<span class="sd">    matrix form.</span>
+<span class="sd">    For additional information on the arc ordering,</span>
+<span class="sd">    please consult the respective graph descriptions.</span>
 
 <span class="sd">    For a more detailed understanding of coined quantum walks,</span>
 <span class="sd">    refer to Section 7.2: Coined Walks on Arbitrary Graphs,</span>

@@ -612,13 +612,20 @@ See <a class="reference internal" href="generated/hiperwalk.Coined.set_evolution
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The computational basis is spanned by the set of arcs.
-The cardinality is <span class="math notranslate nohighlight">\(2|E|\)</span>, where <span class="math notranslate nohighlight">\(E\)</span>
-represents the edge set of the graph.
-For further information regarding the order of the arcs,
-consult the respective graph descriptions.
-The Hilbert space of a coined quantum walk is denoted by
-<span class="math notranslate nohighlight">\(\mathcal{H}^{2|E|}\)</span>.</p>
+<p>The coined quantum walk model is a quantum analog of 
+classical random walks, incorporating an additional 
+quantum coin-toss mechanism. It uses an extra quantum 
+internal degree of freedom, represented by the coin state,
+to determine the direction of the walker’s movement 
+on a graph.</p>
+<p>The computational basis comprises the arc set of the graph.
+Its cardinality is <span class="math notranslate nohighlight">\(2|E|\)</span>, where <span class="math notranslate nohighlight">\(E\)</span>
+represents the graph’s edge set.
+The arcs are arranged within the computational basis 
+to ensure that the coin operator adopts a block-diagonal 
+matrix form.
+For additional information on the arc ordering,
+please consult the respective graph descriptions.</p>
 <p>For a more detailed understanding of coined quantum walks,
 refer to Section 7.2: Coined Walks on Arbitrary Graphs,
 found in the book  ‘Quantum Walks and Search Algorithms’ <a class="reference internal" href="#r2ed72bb1580a-1" id="id1">[1]</a>.</p>
