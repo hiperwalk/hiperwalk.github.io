@@ -652,11 +652,12 @@ See <a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hipe
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>Owing to the selected computational basis (refer to the
-Notes in the <a class="reference internal" href="../hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coined</span></code></a>),
-the outcome is a block diagonal operator.
-Each block is a <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
-As a result, there are <span class="math notranslate nohighlight">\(|V|\)</span> blocks in total.</p>
+<p>The result of this method is a block-diagonal 
+operator, a consequence of the ordering of the arcs 
+in the computational basis 
+(see Notes in <a class="reference internal" href="../hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coined</span></code></a> for details).        
+Each block corresponds to a <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
+Consequently, there are a total of <span class="math notranslate nohighlight">\(|V|\)</span> blocks.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Check if explicit coin is valid.</p>
