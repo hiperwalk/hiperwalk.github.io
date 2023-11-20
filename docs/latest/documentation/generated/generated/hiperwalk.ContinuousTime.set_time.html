@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="hiperwalk.ContinuousTime.simulate" href="hiperwalk.ContinuousTime.simulate.html" />
-    <link rel="prev" title="hiperwalk.ContinuousTime.set_marked" href="hiperwalk.ContinuousTime.set_marked.html" />
+    <link rel="prev" title="hiperwalk.ContinuousTime.set_terms" href="hiperwalk.ContinuousTime.set_terms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -486,7 +486,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_evolution.html">hiperwalk.ContinuousTime.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_gamma.html">hiperwalk.ContinuousTime.get_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian.html">hiperwalk.ContinuousTime.get_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -496,7 +498,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.html">hiperwalk.ContinuousTime.set_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian_type.html">hiperwalk.ContinuousTime.set_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_terms.html">hiperwalk.ContinuousTime.set_terms</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
@@ -583,17 +587,17 @@ document.write(`
 <h1>hiperwalk.ContinuousTime.set_time<a class="headerlink" href="#hiperwalk-continuoustime-set-time" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.set_time">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_time" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_time" title="Link to this definition">#</a></dt>
 <dd><p>Set a time instant.</p>
 <p>Defines a time t and calculates the evolution operator U(t) at
 the specified time (see Notes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>time</strong><span class="classifier">float</span></dt><dd></dd>
-<dt><strong>** kwargs</strong></dt><dd><p>Additional arguments for updating the evolution operator.
-For example, whether to use neblina HPC or not.
-See <a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_evolution()</span></code></a> for more options.</p>
+<dt><strong>time</strong><span class="classifier">float, default=1</span></dt><dd></dd>
+<dt><strong>hpc: bool, default=True</strong></dt><dd><p>Whether or not the evolution operator should be
+updated using nelina’s high-performance computing.
+See <a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.set_evolution()</span></code></a> for details.</p>
 </dd>
 </dl>
 </dd>
@@ -631,12 +635,12 @@ See <a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.h
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.ContinuousTime.set_marked.html"
+       href="hiperwalk.ContinuousTime.set_terms.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.ContinuousTime.set_marked</p>
+        <p class="prev-next-title">hiperwalk.ContinuousTime.set_terms</p>
       </div>
     </a>
     <a class="right-next"

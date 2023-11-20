@@ -32,7 +32,13 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.get_hamiltonian
        
        
+          ~ContinuousTime.get_hamiltonian_type
+       
+       
           ~ContinuousTime.get_marked
+       
+       
+          ~ContinuousTime.get_terms
        
        
           ~ContinuousTime.hilbert_space_dimension
@@ -62,7 +68,13 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.set_hamiltonian
        
        
+          ~ContinuousTime.set_hamiltonian_type
+       
+       
           ~ContinuousTime.set_marked
+       
+       
+          ~ContinuousTime.set_terms
        
        
           ~ContinuousTime.set_time

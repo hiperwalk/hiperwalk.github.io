@@ -478,11 +478,11 @@ document.write(`
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">):</span>
             <span class="c1"># assign static attribute</span>
             <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;shift&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">),</span>
-                <span class="s1">&#39;coin&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">),</span>
-                <span class="s1">&#39;marked&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">),</span>
+                <span class="s1">&#39;shift&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_shift</span><span class="p">),</span>
+                <span class="s1">&#39;coin&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_coin</span><span class="p">),</span>
+                <span class="s1">&#39;marked&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">),</span>
                 <span class="s1">&#39;evolution&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">)</span>
             <span class="p">}</span>
 
         <span class="c1"># dict with valid coins as keys and the respective</span>
@@ -584,35 +584,61 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="n">S</span>
 
-    <span class="k">def</span> <span class="nf">_update_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="n">valid_vals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">,</span> <span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">shift</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_vals</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid `shift` value. Expected one of &quot;</span>
-                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">valid_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. But received &#39;&quot;</span>
-                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; instead.&quot;</span>
-            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_persistent_shift</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;ff&#39;</span>
+        <span class="c1"># check if string</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;ff&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;flipflop&#39;</span>
-        <span class="k">elif</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;persistent&#39;</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_vals</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid `shift` value. Expected one of &quot;</span>
+                    <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">valid_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. But received &#39;&quot;</span>
+                    <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; instead.&quot;</span>
+                <span class="p">)</span>
 
-        
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_set_flipflop_shift</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_set_persistent_shift</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_persistent_shift</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;ff&#39;</span>
 
-        <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;ff&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;flipflop&#39;</span>
+            <span class="k">elif</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;persistent&#39;</span>
+
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">)</span> <span class="o">!=</span> <span class="n">shift</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_flipflop_shift</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_persistent_shift</span><span class="p">()</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># check if explict matrix</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shift</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#if this works, then shift is numpy or list of list</span>
+            <span class="c1"># convert to sparse</span>
+            <span class="n">shift</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="c1"># already sparse</span>
+            <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Explicit coin is not a square matrix.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">(</span><span class="n">shift</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="n">shift</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="Coined.set_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the shift operator.</span>
 
@@ -628,11 +654,10 @@ document.write(`
 <span class="sd">            Argument ``&#39;ff&#39;`` is an alias for ``&#39;flipflop&#39;``.</span>
 <span class="sd">            Argument ``&#39;p&#39;`` is an alias for ``&#39;persistent&#39;``.</span>
 
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -731,8 +756,10 @@ document.write(`
 <span class="sd">            </span>
 <span class="sd">            Add persistent example.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">shift</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.get_shift">
@@ -750,7 +777,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coin</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Explicit coin is not a matrix.&#39;</span><span class="p">)</span>
@@ -776,7 +803,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
@@ -822,11 +849,10 @@ document.write(`
 <span class="sd">            * :class:`scipy.sparse.csr_array`</span>
 <span class="sd">                The explicit coin operator.</span>
 
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -849,12 +875,10 @@ document.write(`
 <span class="sd">            Check if explicit coin is valid.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;evolution&#39;</span><span class="p">]:</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="n">coin</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="n">coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.default_coin">
@@ -993,7 +1017,7 @@ document.write(`
     <span class="k">def</span> <span class="nf">_minus_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_update_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span> <span class="nf">_set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">marked</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#throws exception if list</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -1011,12 +1035,12 @@ document.write(`
         <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">vlist</span> <span class="ow">in</span> <span class="n">vertices</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vlist</span> <span class="p">]</span>
         <span class="n">marked</span> <span class="o">=</span> <span class="n">vertices</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span> <span class="o">=</span> <span class="n">coin_list</span>
 
 <div class="viewcode-block" id="Coined.set_marked">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the marked vertices.</span>
 
@@ -1044,18 +1068,20 @@ document.write(`
 <span class="sd">                ``{coin_type : list_of_vertices}``.</span>
 <span class="sd">                Analogous to the one accepted by :meth:`set_coin`.</span>
 
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_coin</span>
 <span class="sd">        set_evolution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
     <span class="k">def</span> <span class="nf">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin_list</span><span class="p">):</span>
@@ -1144,7 +1170,7 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="n">coin_list</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">U</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pyneblina_imported</span><span class="p">():</span>
             <span class="n">hpc</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1263,10 +1289,10 @@ document.write(`
                               <span class="n">kwargs</span><span class="p">,</span>
                               <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;marked&#39;</span><span class="p">])</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">(</span><span class="o">**</span><span class="n">S_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">(</span><span class="o">**</span><span class="n">C_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="o">**</span><span class="n">R_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_shift</span><span class="p">(</span><span class="o">**</span><span class="n">S_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_coin</span><span class="p">(</span><span class="o">**</span><span class="n">C_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">(</span><span class="o">**</span><span class="n">R_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.probability_distribution">

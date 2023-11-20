@@ -485,7 +485,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_evolution.html">hiperwalk.ContinuousTime.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_gamma.html">hiperwalk.ContinuousTime.get_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian.html">hiperwalk.ContinuousTime.get_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -495,7 +497,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_evolution.html">hiperwalk.ContinuousTime.set_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian_type.html">hiperwalk.ContinuousTime.set_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_terms.html">hiperwalk.ContinuousTime.set_terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
@@ -578,17 +582,18 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.plot_probability_distribution">
 <span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">plot_probability_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probabilities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">animate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/plot/_plot.html#plot_probability_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.plot_probability_distribution" title="Link to this definition">#</a></dt>
-<dd><p>Plots probability distribution of quantum walk.</p>
-<p>The probability distribution of multiple steps of a quantum walk
-may be plotted.
-The generated figures may be shown step-by-step,
-saved in multiple files, animated or saved as animation.</p>
+<dd><p>Plot the probability distributions of quantum walk states.</p>
+<p>This function allows plotting the probability distributions 
+for multiple steps of a quantum walk evolution.
+The generated figures can be displayed step-by-step, 
+saved as individual files, or used to create and save animations.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The probabilities of the walker to be found on each step
-of the quantum walk.
-Columns represent vertices and rows represent the walk steps.</p>
+<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>An array representing the probabilities of the walker being 
+found at each vertex during the quantum walk evolution.
+Each column corresponds to a vertex, 
+while each row represents a step in the walk.</p>
 </dd>
 <dt><strong>plot</strong><span class="classifier">str, default=None</span></dt><dd><p>The plot type.
 The valid options are
@@ -618,7 +623,7 @@ the j-step is saved in the <code class="docutils literal notranslate"><span clas
 if <code class="docutils literal notranslate"><span class="pre">animate==True</span></code>,
 the entire walk is saved in the <code class="docutils literal notranslate"><span class="pre">filename.fig</span></code> file.</p>
 </dd>
-<dt><strong>graph</strong><span class="classifier">optional</span></dt><dd><p>The structure of the graph on which the walk occurs.
+<dt><strong>graph</strong><span class="classifier">optional</span></dt><dd><p>The structure of the graph on which the walk takes place.
 The graph labels are used as plotting labels.
 <strong>Important</strong>: check Graph Plots subsection in other parameters.</p>
 <p>The following types are acceptable.</p>
@@ -626,7 +631,7 @@ The graph labels are used as plotting labels.
 <li><dl class="simple">
 <dt><a class="reference internal" href="hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>Hiperwalk Graph.
 It is used to generate default plotting for specific graphs.
-Does not override values explicited by the user.</p>
+User-specified values are not overridden.</p>
 </dd>
 </dl>
 </li>

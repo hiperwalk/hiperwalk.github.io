@@ -493,16 +493,19 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.__init__">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.ContinuousTime.html#hiperwalk.ContinuousTime.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
 
         <span class="c1"># create attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_terms</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_evolution_time</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># import inspect</span>
 
@@ -510,22 +513,19 @@ document.write(`
             <span class="c1"># assign static attribute</span>
             <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_valid_kwargs</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_gamma</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_gamma</span><span class="p">),</span>
                 <span class="s1">&#39;marked&#39;</span><span class="p">:</span> <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">),</span>
                 <span class="s1">&#39;evolution&#39;</span><span class="p">:</span> <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">),</span>
                 <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_time</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_time</span><span class="p">),</span>
                 <span class="p">}</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;time&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">gamma</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">gamma</span><span class="o">.</span><span class="n">imag</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Value of &#39;gamma&#39; is not float.&quot;</span><span class="p">)</span>
 
@@ -536,7 +536,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.set_gamma">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_gamma.html#hiperwalk.ContinuousTime.set_gamma">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_gamma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set gamma.</span>
 <span class="sd">        </span>
@@ -547,13 +547,13 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gamma : float</span>
+<span class="sd">        gamma : float, default=0.1</span>
 <span class="sd">            The value of gamma.</span>
 
-<span class="sd">        ** kwargs :</span>
-<span class="sd">            Additional arguments for updating the evolution operator.</span>
-<span class="sd">            For example, whether to use neblina HPC or not.</span>
-<span class="sd">            See :meth:`set_evolution` for more options.</span>
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -562,9 +562,10 @@ document.write(`
 <span class="sd">        ValueError</span>
 <span class="sd">            If ``gamma &lt; 0``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_update_hamiltonian</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+                             <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span><span class="p">,</span>
+                             <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                             <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ContinuousTime.get_gamma">
@@ -583,31 +584,41 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.set_marked">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_marked.html#hiperwalk.ContinuousTime.set_marked">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_hamiltonian</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span><span class="p">,</span>
+                             <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span><span class="p">,</span>
+                             <span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">,</span>
+                             <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        If this method is invoked,</span>
-<span class="sd">        The Hamiltonian is recalculated.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">_set_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;adjacency&#39;</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_gamma</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_hamiltonian_type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span> <span class="ow">or</span> <span class="n">update</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">(</span><span class="n">marked</span><span class="p">)</span> <span class="ow">or</span> <span class="n">update</span>
 
-        <span class="c1"># creating oracle</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-            <span class="n">oracle</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span>
-                    <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)),</span>
-                    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span> <span class="o">==</span> <span class="s1">&#39;adjacency&#39;</span><span class="p">:</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">H</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">laplacian_matrix</span><span class="p">()</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">-=</span> <span class="n">oracle</span>
+            <span class="c1"># creating oracle</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+                <span class="n">oracle</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)),</span>
+                        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span>
+
+                <span class="n">H</span> <span class="o">-=</span> <span class="n">oracle</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span> <span class="o">=</span> <span class="n">H</span>
+
+        <span class="k">return</span> <span class="n">update</span>
 
 <div class="viewcode-block" id="ContinuousTime.set_hamiltonian">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;adjacency&quot;</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span>
+                        <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the Hamiltonian.</span>
 
@@ -621,14 +632,21 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        gamma : float</span>
-<span class="sd">            Value of gamma.</span>
+<span class="sd">        gamma : float, default=0.1</span>
+<span class="sd">            The value of gamma.</span>
 
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Used for setting the marked vertices, and</span>
-<span class="sd">            the procedure for updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_marked`, and</span>
-<span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_evolution`.</span>
+<span class="sd">        type: {&#39;adjacency&#39;, &#39;laplacian&#39;}</span>
+<span class="sd">            Two types of Hamiltonian used...</span>
+<span class="sd">            ``&#39;A&#39;`` is shorthand for ``&#39;adjacency&#39;``.</span>
+<span class="sd">            ``&#39;L&#39;`` is shorthand for ``&#39;laplacian&#39;``.</span>
+
+<span class="sd">        marked: TODO</span>
+<span class="sd">            TODO</span>
+
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -640,6 +658,7 @@ document.write(`
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_gamma</span>
+<span class="sd">        set_hamiltonian_type</span>
 <span class="sd">        set_marked</span>
 <span class="sd">        set_evolution</span>
 
@@ -668,14 +687,12 @@ document.write(`
 <span class="sd">            &quot;Spatial search by quantum walk&quot;,</span>
 <span class="sd">            Phys. Rev. A 70, 022314, 2004.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">)</span>
-
-        <span class="n">marked_kwargs</span> <span class="o">=</span> <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_pop_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span>
-                <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;marked&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="o">**</span><span class="n">marked_kwargs</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_hamiltonian</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="p">,</span>
+                           <span class="n">terms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_terms</span><span class="p">,</span>
+                           <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span>
+                           <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ContinuousTime.get_hamiltonian">
@@ -688,24 +705,58 @@ document.write(`
 <span class="sd">        -------</span>
 <span class="sd">        :class:`scipy.sparse.csr_array`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_hamiltonian_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;adjacency&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;adjacency&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;L&#39;</span><span class="p">:</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;laplacian&#39;</span>
+
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span> <span class="o">=</span> <span class="nb">type</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="ContinuousTime.set_hamiltonian_type">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_hamiltonian_type.html#hiperwalk.ContinuousTime.set_hamiltonian_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_hamiltonian_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;adjacency&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        type: {&#39;adjacency&#39;, &#39;laplacian&#39;}</span>
+<span class="sd">            Two types of Hamiltonian used...</span>
+<span class="sd">            ``&#39;A&#39;`` is shorthand for ``&#39;adjacency&#39;``.</span>
+<span class="sd">            ``&#39;L&#39;`` is shorthand for ``&#39;laplacian&#39;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span><span class="p">,</span>
+                             <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+                             <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                             <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ContinuousTime.get_hamiltonian_type">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html#hiperwalk.ContinuousTime.get_hamiltonian_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_hamiltonian_type</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Expected non-negative `time` value.&quot;</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">time</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution_time</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_evolution_time</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="k">if</span> <span class="n">time</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_time</span> <span class="o">=</span> <span class="n">time</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="ContinuousTime.set_time">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set a time instant.</span>
 
@@ -714,12 +765,12 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        time : float</span>
+<span class="sd">        time : float, default=1</span>
 
-<span class="sd">        ** kwargs :</span>
-<span class="sd">            Additional arguments for updating the evolution operator.</span>
-<span class="sd">            For example, whether to use neblina HPC or not.</span>
-<span class="sd">            See :meth:`set_evolution` for more options.</span>
+<span class="sd">        hpc: bool, default=True</span>
+<span class="sd">            Whether or not the evolution operator should be</span>
+<span class="sd">            updated using nelina&#39;s high-performance computing.</span>
+<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -740,16 +791,72 @@ document.write(`
 <span class="sd">        where :math:`H` is the Hamiltonian, and</span>
 <span class="sd">        :math:`t` is the time.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_time</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+                           <span class="n">terms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_terms</span><span class="p">,</span>
+                           <span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span><span class="p">,</span>
+                           <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_terms</span> <span class="o">!=</span> <span class="n">terms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_terms</span> <span class="o">=</span> <span class="n">terms</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="ContinuousTime.set_terms">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_terms.html#hiperwalk.ContinuousTime.set_terms">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the number of terms used to calculate the</span>
+<span class="sd">        evolution operator as a power series.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        terms : int, default=21</span>
+<span class="sd">            Number of terms in the truncated Taylor series expansion.</span>
+
+<span class="sd">        hpc : bool, default = True</span>
+<span class="sd">            Determines whether or not to use neblina HPC </span>
+<span class="sd">            functions to generate the evolution operator.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_evolution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_time</span><span class="p">,</span>
+                           <span class="n">terms</span><span class="o">=</span><span class="n">terms</span><span class="p">,</span>
+                           <span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gamma</span><span class="p">,</span>
+                           <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hamil_type</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">,</span>
+                           <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ContinuousTime.get_terms">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.get_terms.html#hiperwalk.ContinuousTime.get_terms">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Number of terms in the power series used to</span>
+<span class="sd">        calculate the evolution operator.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        get_evolution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_terms</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If this method is invoked,</span>
 <span class="sd">        the evolution is recalculated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution_time</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time</span>
 
         <span class="k">if</span> <span class="n">time</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">)</span>
@@ -816,7 +923,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.set_evolution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the evolution operator.</span>
 
@@ -831,25 +938,22 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        hpc : bool, default = True</span>
+<span class="sd">        hpc : bool, default=True</span>
 <span class="sd">            Determines whether or not to use neblina HPC </span>
 <span class="sd">            functions to generate the evolution operator.</span>
-
-<span class="sd">        terms : int</span>
-<span class="sd">            Number of terms in the truncated Taylor series expansion.</span>
 
 <span class="sd">        **kwargs :</span>
 <span class="sd">            Additional arguments for setting Hamiltonian and time.</span>
 <span class="sd">            If omitted, the default arguments are used.</span>
-<span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_hamiltonian` and</span>
-<span class="sd">            :meth:`hiperwalk.ContinuousTime.set_marked`.</span>
+<span class="sd">            See :meth:`hiperwalk.ContinuousTime.set_hamiltonian`,</span>
+<span class="sd">            :meth:`hiperwalk.ContinuousTime.set_time`, and</span>
+<span class="sd">            :meth:`hiperwalk.ContinuousTime.set_terms`.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_hamiltonian</span>
 <span class="sd">        set_time</span>
-<span class="sd">        set_marked</span>
-<span class="sd">        set_gamma</span>
+<span class="sd">        set_terms</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -881,10 +985,16 @@ document.write(`
 <span class="sd">            &lt;https://github.com/scipy/scipy/issues/18086&gt;`_</span>
 <span class="sd">            is solved.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_time</span><span class="p">(</span><span class="o">**</span><span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_pop_valid_kwargs</span><span class="p">(</span>
-            <span class="n">kwargs</span><span class="p">,</span>
-            <span class="n">ContinuousTime</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="k">def</span> <span class="nf">filter_and_call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="o">**</span><span class="n">filtered</span><span class="p">)</span> <span class="ow">or</span> <span class="n">update</span>
+
+        <span class="n">update</span> <span class="o">=</span> <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_time</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_hamiltonian</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span>
+        <span class="n">update</span> <span class="o">=</span> <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_terms</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">update</span><span class="p">):</span>
+            <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ContinuousTime.simulate">

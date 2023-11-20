@@ -403,19 +403,20 @@ document.write(`
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">animate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots probability distribution of quantum walk.</span>
+<span class="sd">    Plot the probability distributions of quantum walk states.</span>
 
-<span class="sd">    The probability distribution of multiple steps of a quantum walk</span>
-<span class="sd">    may be plotted.</span>
-<span class="sd">    The generated figures may be shown step-by-step,</span>
-<span class="sd">    saved in multiple files, animated or saved as animation.</span>
+<span class="sd">    This function allows plotting the probability distributions </span>
+<span class="sd">    for multiple steps of a quantum walk evolution.</span>
+<span class="sd">    The generated figures can be displayed step-by-step, </span>
+<span class="sd">    saved as individual files, or used to create and save animations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    probabilities : :class:`numpy.ndarray`</span>
-<span class="sd">        The probabilities of the walker to be found on each step</span>
-<span class="sd">        of the quantum walk.</span>
-<span class="sd">        Columns represent vertices and rows represent the walk steps.</span>
+<span class="sd">        An array representing the probabilities of the walker being </span>
+<span class="sd">        found at each vertex during the quantum walk evolution.</span>
+<span class="sd">        Each column corresponds to a vertex, </span>
+<span class="sd">        while each row represents a step in the walk.</span>
 <span class="sd">    plot : str, default=None</span>
 <span class="sd">        The plot type.</span>
 <span class="sd">        The valid options are</span>
@@ -445,7 +446,7 @@ document.write(`
 <span class="sd">        if ``animate==True``,</span>
 <span class="sd">        the entire walk is saved in the ``filename.fig`` file.</span>
 <span class="sd">    graph : optional</span>
-<span class="sd">        The structure of the graph on which the walk occurs.</span>
+<span class="sd">        The structure of the graph on which the walk takes place.</span>
 <span class="sd">        The graph labels are used as plotting labels.</span>
 <span class="sd">        **Important**: check Graph Plots subsection in other parameters.</span>
 
@@ -454,7 +455,7 @@ document.write(`
 <span class="sd">        * :class:`hiperwalk.Graph`</span>
 <span class="sd">            Hiperwalk Graph.</span>
 <span class="sd">            It is used to generate default plotting for specific graphs.</span>
-<span class="sd">            Does not override values explicited by the user.</span>
+<span class="sd">            User-specified values are not overridden.</span>
 <span class="sd">        * :class:`networkx.classes.graph`,</span>
 <span class="sd">            NetworkX Graph</span>
 <span class="sd">        * :class:`scipy.sparse.csr_matrix`</span>
@@ -1319,10 +1320,10 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_success_probability.html#hiperwalk.plot_success_probability">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots the success probability with respect to time.</span>
+<span class="sd">    Plot the success probability over time.</span>
 
-<span class="sd">    The probabilities must have been calculated previously.</span>
-
+<span class="sd">    Assumes that the probabilities have already been calculated.</span>
+<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    time:</span>

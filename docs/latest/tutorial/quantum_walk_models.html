@@ -707,15 +707,75 @@ the evolution operator is defined as</p>
 The <code class="docutils literal notranslate"><span class="pre">time</span></code> may be specified using the constructor, by the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time" title="hiperwalk.ContinuousTime.set_time"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_time()</span></code></a> method or by the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_evolution()</span></code></a>.
-If <code class="docutils literal notranslate"><span class="pre">time</span></code> is omitted, it is set to 0 and
-the evolution operator equals the identity.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span> <span class="c1"># time was omitted on the constructor</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">I</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">U</span> <span class="o">!=</span> <span class="n">I</span><span class="p">)</span>
-<span class="go">True</span>
+If <code class="docutils literal notranslate"><span class="pre">time</span></code> is omitted, it is set to 1.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span> <span class="c1"># time was omitted on the constructor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span>
+<span class="go">array([[ 8.81200889e-01-4.78836889e-13j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j],</span>
+<span class="go">       [-7.51060262e-12+3.28995742e-01j,  8.81200889e-01-4.78836889e-13j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j],</span>
+<span class="go">       [-5.87869444e-02+2.14549088e-10j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">         8.81200889e-01-4.78836889e-13j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j],</span>
+<span class="go">       [ 5.50945412e-09-6.92965483e-03j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j,  8.81200889e-01-4.78836889e-13j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j],</span>
+<span class="go">       [ 6.10097008e-04-1.25715831e-07j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">         8.81200889e-01-4.78836889e-13j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j],</span>
+<span class="go">       [-2.50880717e-06+4.28824071e-05j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j,  8.81200889e-01-4.78836889e-13j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j],</span>
+<span class="go">       [-2.50880717e-06+4.28824071e-05j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">         8.81200889e-01-4.78836889e-13j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j],</span>
+<span class="go">       [ 6.10097008e-04-1.25715831e-07j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j,  8.81200889e-01-4.78836889e-13j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j],</span>
+<span class="go">       [ 5.50945412e-09-6.92965483e-03j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">         8.81200889e-01-4.78836889e-13j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j],</span>
+<span class="go">       [-5.87869444e-02+2.14549088e-10j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j,  8.81200889e-01-4.78836889e-13j,</span>
+<span class="go">        -7.51060262e-12+3.28995742e-01j],</span>
+<span class="go">       [-7.51060262e-12+3.28995742e-01j, -5.87869444e-02+2.14549088e-10j,</span>
+<span class="go">         5.50945412e-09-6.92965483e-03j,  6.10097008e-04-1.25715831e-07j,</span>
+<span class="go">        -2.50880717e-06+4.28824071e-05j, -2.50880717e-06+4.28824071e-05j,</span>
+<span class="go">         6.10097008e-04-1.25715831e-07j,  5.50945412e-09-6.92965483e-03j,</span>
+<span class="go">        -5.87869444e-02+2.14549088e-10j, -7.51060262e-12+3.28995742e-01j,</span>
+<span class="go">         8.81200889e-01-4.78836889e-13j]])</span>
 </pre></div>
 </div>
 </section>
