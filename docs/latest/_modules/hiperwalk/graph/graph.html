@@ -456,7 +456,7 @@ document.write(`
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \begin{align*}</span>
-<span class="sd">            A = \bigcup_{v_k v_\ell \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
+<span class="sd">            A = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
 <span class="sd">        \end{align*}</span>
 
 <span class="sd">    Arcs can be represented using the (tail,head) notation or with numerical labels. </span>
@@ -718,8 +718,8 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the degree of the given vertex.</span>
 
-<span class="sd">        The degree of a vertex :math:`u` in a graph, </span>
-<span class="sd">        which may include a loop, is the number of edges </span>
+<span class="sd">        The degree of a vertex :math:`u` in a graph </span>
+<span class="sd">        is the number of edges </span>
 <span class="sd">        incident to :math:`u`. Loops at :math:`u` are counted once, </span>
 <span class="sd">        reflecting the treatment of a loop at vertex :math:`u` as </span>
 <span class="sd">        a single arc :math:`(u, u)`.</span>
@@ -782,7 +782,8 @@ document.write(`
 <span class="sd">        -----</span>
 <span class="sd">    </span>
 <span class="sd">        In a weightless graph :math:`G(V, E)` with :math:`n` vertices</span>
-<span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix of :math:`G(V, E)` is an </span>
+<span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix </span>
+<span class="sd">        of :math:`G(V, E)` is an </span>
 <span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:</span>
 <span class="sd">        </span>
 <span class="sd">        .. math::</span>
@@ -791,7 +792,9 @@ document.write(`
 <span class="sd">                0, &amp; \text{otherwise.}</span>
 <span class="sd">            \end{cases}</span>
 <span class="sd">    </span>
-<span class="sd">        In weighted graphs, the entries of :math:`A` represent the weights of the edges.</span>
+<span class="sd">        In weighted graphs, the entries of :math:`A` represent </span>
+<span class="sd">        the weights of the edges. The weight is a non-zero</span>
+<span class="sd">        real number.</span>
 
 <span class="sd">        .. todo::</span>
 <span class="sd">            Add other return types depending on the stored matrix type.</span>
