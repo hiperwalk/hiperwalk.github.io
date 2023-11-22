@@ -452,11 +452,11 @@ document.write(`
 
 <span class="sd">    Each edge in the graph :math:`G(V, E)` that connects two distinct</span>
 <span class="sd">    vertices corresponds to a pair of arcs in the associated directed </span>
-<span class="sd">    graph :math:`\vec{G}(V, A)`, where</span>
+<span class="sd">    graph :math:`\vec{G}(V, \mathcal{A})`, where</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \begin{align*}</span>
-<span class="sd">            A = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
+<span class="sd">            \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
 <span class="sd">        \end{align*}</span>
 
 <span class="sd">    Arcs can be represented using the (tail,head) notation or with numerical labels. </span>
@@ -822,7 +822,7 @@ document.write(`
 <span class="sd">        where :math:`D` is the degree matrix</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            D_{i, j} = \begin{case}</span>
+<span class="sd">            D_{i, j} = \begin{cases}</span>
 <span class="sd">                degree(v_i) &amp;\text{if } i = j</span>
 <span class="sd">                0 &amp;\text{otherwise},</span>
 <span class="sd">            \end{cases}</span>

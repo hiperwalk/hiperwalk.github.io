@@ -625,10 +625,10 @@ for well-known graph types, such as hypercubes and lattices.</p>
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.11.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>.</p>
 <p>Each edge in the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> that connects two distinct
 vertices corresponds to a pair of arcs in the associated directed 
-graph <span class="math notranslate nohighlight">\(\vec{G}(V, A)\)</span>, where</p>
+graph <span class="math notranslate nohighlight">\(\vec{G}(V, \mathcal{A})\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[\begin{align*}
-    A = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
+    \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
 \end{align*}\]</div>
 <p>Arcs can be represented using the (tail,head) notation or with numerical labels. 
 In the <a class="reference internal" href="#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a> class, the arc labels are ordered such that for two arcs, 
