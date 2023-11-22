@@ -587,8 +587,11 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Grid.number_of_arcs">
 <span class="sig-prename descclassname"><span class="pre">Grid.</span></span><span class="sig-name descname"><span class="pre">number_of_arcs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Grid.number_of_arcs" title="Link to this definition">#</a></dt>
-<dd><p>Cardinality of arc set.</p>
-<p>For simple graphs, the cardinality is twice the number of edges.</p>
+<dd><p>Determine the cardinality of the arc set.</p>
+<p>In simple graphs, the cardinality of the arc set is 
+equal to twice the number of edges. 
+However, for graphs containing loops, the 
+cardinality is incremented by one for each loop.</p>
 </dd></dl>
 
 </section>

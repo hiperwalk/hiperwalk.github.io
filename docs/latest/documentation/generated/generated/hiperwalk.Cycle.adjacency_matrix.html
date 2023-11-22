@@ -39,6 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Cycle.adjacency_matrix';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.14.3';
@@ -587,7 +588,7 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Cycle.adjacency_matrix">
 <span class="sig-prename descclassname"><span class="pre">Cycle.</span></span><span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Cycle.adjacency_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Returns the graph adjacency matrix.</p>
+<dd><p>Return the graph’s adjacency matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -596,6 +597,15 @@ document.write(`
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<p>In a weightless graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> vertices
+<span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span>, the adjacency matrix of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is an 
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>, defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A_{i,j} = \begin{cases}
+    1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\
+    0, &amp; \text{otherwise.}
+\end{cases}\end{split}\]</div>
+<p>In weighted graphs, the entries of <span class="math notranslate nohighlight">\(A\)</span> represent the weights of the edges.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Add other return types depending on the stored matrix type.</p>

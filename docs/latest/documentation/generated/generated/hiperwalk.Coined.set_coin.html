@@ -655,12 +655,15 @@ See <a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hipe
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The result of this method is a block-diagonal 
-operator, a consequence of the ordering of the arcs 
+<p>The output of this method is a block-diagonal 
+operator, which results from the specific ordering of arcs 
 in the computational basis 
-(see Notes in <a class="reference internal" href="../hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coined</span></code></a> for details).        
-Each block corresponds to a <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
-Consequently, there are a total of <span class="math notranslate nohighlight">\(|V|\)</span> blocks.</p>
+(refer to the Notes in <a class="reference internal" href="../hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coined</span></code></a> for more details).        
+Each block is associated with a <span class="math notranslate nohighlight">\(\deg(v)\)</span>-dimensional <code class="docutils literal notranslate"><span class="pre">coin</span></code>.
+As a result, there are <span class="math notranslate nohighlight">\(|V|\)</span> blocks in total.
+Note that a loop at a vertex <span class="math notranslate nohighlight">\(u\)</span> is treated
+as the arc <span class="math notranslate nohighlight">\((u,u)\)</span>, contributing an additional 
+one to the degree.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Check if explicit coin is valid.</p>

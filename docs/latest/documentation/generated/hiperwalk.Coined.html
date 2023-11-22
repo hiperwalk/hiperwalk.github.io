@@ -622,10 +622,13 @@ quantum coin-toss mechanism. It uses an extra quantum
 internal degree of freedom, represented by the coin state,
 to determine the direction of the walker’s movement 
 on a graph.</p>
-<p>The computational basis comprises the arc set of the graph.
-Its cardinality is <span class="math notranslate nohighlight">\(2|E|\)</span>, where <span class="math notranslate nohighlight">\(E\)</span>
+<p>The computational basis is composed of the graph’s arc set.
+For simple graphs, the cardinality of the computational
+basis is <span class="math notranslate nohighlight">\(2|E|\)</span>, where <span class="math notranslate nohighlight">\(E\)</span>
 represents the graph’s edge set.
-The arcs are arranged within the computational basis 
+When a loop is added to the graph, the cardinality of the 
+computational basis increases by one for each loop.</p>
+<p>The arcs are arranged within the computational basis 
 to ensure that the coin operator adopts a block-diagonal 
 matrix form.
 For additional information on the arc ordering,
@@ -668,7 +671,7 @@ Springer, 2018.</p>
 <td><p>Retrieve the shift operator.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Coined.has_persistent_shift.html#hiperwalk.Coined.has_persistent_shift" title="hiperwalk.Coined.has_persistent_shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_persistent_shift</span></code></a>()</p></td>
-<td><p>Checks whether the persistent shift operator is defined for the current graph.</p></td>
+<td><p>Check whether the persistent shift operator is defined for the current graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Coined.hilbert_space_dimension.html#hiperwalk.Coined.hilbert_space_dimension" title="hiperwalk.Coined.hilbert_space_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hilbert_space_dimension</span></code></a>()</p></td>
 <td><p>Returns dimension of the Hilbert space.</p></td>

@@ -583,8 +583,11 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
-<dd><p>Arbitrary graph.</p>
-<p>The graph on which a quantum walk takes place.</p>
+<dd><p>Represents an arbitrary graph.</p>
+<p>This class defines the graph structure used for implementing a 
+quantum walk. It encapsulates all necessary properties 
+and functionalities of the graph 
+required for the quantum walk dynamics.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -620,22 +623,23 @@ the default graph representation will be used. Specific classes are available
 for well-known graph types, such as hypercubes and lattices.</p>
 <p>The preferred parameter type for the adjacency matrix is
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.11.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>.</p>
-<p>Each edge in the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> corresponds 
-to two arcs in the associated directed 
+<p>Each edge in the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> that connects two distinct
+vertices corresponds to a pair of arcs in the associated directed 
 graph <span class="math notranslate nohighlight">\(\vec{G}(V, A)\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[\begin{align*}
-    A = \bigcup_{(v_k,v_\ell) \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
+    A = \bigcup_{v_k v_\ell \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
 \end{align*}\]</div>
-<p>Arcs can be denoted using the (tail,head) notation or with numerical labels. 
+<p>Arcs can be represented using the (tail,head) notation or with numerical labels. 
 In the <a class="reference internal" href="#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a> class, the arc labels are ordered such that for two arcs, 
 <span class="math notranslate nohighlight">\((v_i, v_j)\)</span> and <span class="math notranslate nohighlight">\((v_k, v_\ell)\)</span>, with labels <span class="math notranslate nohighlight">\(a_1\)</span> and 
 <span class="math notranslate nohighlight">\(a_2\)</span> respectively, <span class="math notranslate nohighlight">\(a_1 &lt; a_2\)</span> if and only if <span class="math notranslate nohighlight">\(i &lt; k\)</span> or 
-(<span class="math notranslate nohighlight">\(i = k\)</span> and <span class="math notranslate nohighlight">\(j &lt; \ell\)</span>).</p>
+(<span class="math notranslate nohighlight">\(i = k\)</span> and <span class="math notranslate nohighlight">\(j &lt; \ell\)</span>). 
+Note that a loop is represented as a single arc.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is specified as a real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, 
 then <span class="math notranslate nohighlight">\(C_{ij}\)</span> represents the weight of the arc <span class="math notranslate nohighlight">\((v_i, v_j)\)</span>. 
 This weight is considered a generalized weight when <span class="math notranslate nohighlight">\(C_{ij}\)</span> is 
-negative or complex.</p>
+negative.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The arc ordering may change for graphs defined using specific classes.</p>
@@ -727,37 +731,37 @@ the arcs are labeled in left-to-right and top-to-bottom fashion.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix" title="hiperwalk.Graph.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>()</p></td>
-<td><p>Returns the graph adjacency matrix.</p></td>
+<td><p>Return the graph's adjacency matrix.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc" title="hiperwalk.Graph.arc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc</span></code></a>(number)</p></td>
-<td><p>Converts the arc number to arc notation.</p></td>
+<td><p>Convert a numerical label to arc notation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number" title="hiperwalk.Graph.arc_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc_number</span></code></a>(*args)</p></td>
-<td><p>Returns the numerical label of the arc.</p></td>
+<td><p>Return the numerical label of the arc.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arcs_with_tail.html#hiperwalk.Graph.arcs_with_tail" title="hiperwalk.Graph.arcs_with_tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arcs_with_tail</span></code></a>(tail)</p></td>
-<td><p>Returns all arcs that have the given tail.</p></td>
+<td><p>Return all arcs that have the given tail.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.degree.html#hiperwalk.Graph.degree" title="hiperwalk.Graph.degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degree</span></code></a>(vertex)</p></td>
-<td><p>Degree of given vertex.</p></td>
+<td><p>Return the degree of the given vertex.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix" title="hiperwalk.Graph.laplacian_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_matrix</span></code></a>()</p></td>
-<td><p>Returns the graph Laplacian matrix.</p></td>
+<td><p>Return the graph's Laplacian matrix.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors" title="hiperwalk.Graph.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code></a>(vertex)</p></td>
-<td><p>Returns all neighbors of the given vertex.</p></td>
+<td><p>Return all neighbors of the given vertex.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_arcs.html#hiperwalk.Graph.number_of_arcs" title="hiperwalk.Graph.number_of_arcs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_arcs</span></code></a>()</p></td>
-<td><p>Cardinality of arc set.</p></td>
+<td><p>Determine the cardinality of the arc set.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges" title="hiperwalk.Graph.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
-<td><p>Cardinality of edge set.</p></td>
+<td><p>Determine the cardinality of the edge set.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices" title="hiperwalk.Graph.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
-<td><p>Cardinality of vertex set.</p></td>
+<td><p>Determine the cardinality of the vertex set.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number" title="hiperwalk.Graph.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
-<td><p>Returns vertex number given any vertex representation.</p></td>
+<td><p>Return the vertex number given any vertex representation.</p></td>
 </tr>
 </tbody>
 </table>
