@@ -469,16 +469,18 @@ document.write(`
 <span class="sd">    or Laplacian matrix, along with the positioning </span>
 <span class="sd">    of the marked vertices.</span>
 
-<span class="sd">    The `ContinuousTime` class enables the simulation of </span>
+<span class="sd">    The ``ContinuousTime`` class enables the simulation of </span>
 <span class="sd">    real Hamiltonians. To specify a particular Hamiltonian :math:`H`, </span>
 <span class="sd">    it can be provided as a real Hermitian matrix :math:`C` </span>
 <span class="sd">    using the `graph=C` parameter. This configuration sets </span>
 <span class="sd">    :math:`H = -\gamma C`. In this case, the adjacency matrix </span>
 <span class="sd">    represents a weighted graph, where the edge weights are </span>
-<span class="sd">    the non-zero real entries of :math:`C`. The adjacency </span>
-<span class="sd">    matrix is adapted accordingly. Additionally, the Laplacian </span>
-<span class="sd">    matrix is computed as :math:`D - A`, with :math:`D` being </span>
-<span class="sd">    the degree matrix.</span>
+<span class="sd">    the non-zero real entries of :math:`C`. </span>
+<span class="sd">    Additionally, the Laplacian matrix is computed </span>
+<span class="sd">    as :math:`D - A`, with :math:`D` being </span>
+<span class="sd">    the degree matrix. </span>
+<span class="sd">    See :meth:`hiperwalk.Graph.adjacency_matrix`</span>
+<span class="sd">    and :meth:`hiperwalk.Graph.laplacian_matrix`.</span>
 <span class="sd">    </span>
 <span class="sd">    For a comprehensive understanding of continuous-time quantum </span>
 <span class="sd">    walks, consult reference [1]_. </span>

@@ -654,16 +654,18 @@ as vertex <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
 depending on the choice between the adjacency 
 or Laplacian matrix, along with the positioning 
 of the marked vertices.</p>
-<p>The <cite>ContinuousTime</cite> class enables the simulation of 
+<p>The <code class="docutils literal notranslate"><span class="pre">ContinuousTime</span></code> class enables the simulation of 
 real Hamiltonians. To specify a particular Hamiltonian <span class="math notranslate nohighlight">\(H\)</span>, 
 it can be provided as a real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span> 
 using the <cite>graph=C</cite> parameter. This configuration sets 
 <span class="math notranslate nohighlight">\(H = -\gamma C\)</span>. In this case, the adjacency matrix 
 represents a weighted graph, where the edge weights are 
-the non-zero real entries of <span class="math notranslate nohighlight">\(C\)</span>. The adjacency 
-matrix is adapted accordingly. Additionally, the Laplacian 
-matrix is computed as <span class="math notranslate nohighlight">\(D - A\)</span>, with <span class="math notranslate nohighlight">\(D\)</span> being 
-the degree matrix.</p>
+the non-zero real entries of <span class="math notranslate nohighlight">\(C\)</span>. 
+Additionally, the Laplacian matrix is computed 
+as <span class="math notranslate nohighlight">\(D - A\)</span>, with <span class="math notranslate nohighlight">\(D\)</span> being 
+the degree matrix. 
+See <a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix" title="hiperwalk.Graph.adjacency_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.adjacency_matrix()</span></code></a>
+and <a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix" title="hiperwalk.Graph.laplacian_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.laplacian_matrix()</span></code></a>.</p>
 <p>For a comprehensive understanding of continuous-time quantum 
 walks, consult reference <a class="reference internal" href="#r93c4d787ae58-1" id="id1">[1]</a>. 
 To examine the differences between utilizing 
