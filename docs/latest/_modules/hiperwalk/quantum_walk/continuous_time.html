@@ -469,15 +469,21 @@ document.write(`
 <span class="sd">    or Laplacian matrix, along with the positioning </span>
 <span class="sd">    of the marked vertices.</span>
 
-<span class="sd">    The ``ContinuousTime`` class also supports simulating </span>
-<span class="sd">    real Hamiltonians. </span>
-<span class="sd">    To use a specific Hamiltonian :math:`H`, provide it directly </span>
-<span class="sd">    via some real Hermitian matrix :math:`C` </span>
-<span class="sd">    using the argument ``graph=C``, </span>
-<span class="sd">    so that :math:`H=-\gamma C`.</span>
-
-<span class="sd">    For a comprehensive understanding of continuous-time quantum walks, consult reference [1]_. </span>
-<span class="sd">    To examine the differences between utilizing the adjacency matrix and the Laplacian matrix, </span>
+<span class="sd">    The `ContinuousTime` class enables the simulation of </span>
+<span class="sd">    real Hamiltonians. To specify a particular Hamiltonian :math:`H`, </span>
+<span class="sd">    it can be provided as a real Hermitian matrix :math:`C` </span>
+<span class="sd">    using the `graph=C` parameter. This configuration sets </span>
+<span class="sd">    :math:`H = -\gamma C`. In this case, the adjacency matrix </span>
+<span class="sd">    represents a weighted graph, where the edge weights are </span>
+<span class="sd">    the non-zero real entries of :math:`C`. The adjacency </span>
+<span class="sd">    matrix is adapted accordingly. Additionally, the Laplacian </span>
+<span class="sd">    matrix is computed as :math:`D - A`, with :math:`D` being </span>
+<span class="sd">    the degree matrix.</span>
+<span class="sd">    </span>
+<span class="sd">    For a comprehensive understanding of continuous-time quantum </span>
+<span class="sd">    walks, consult reference [1]_. </span>
+<span class="sd">    To examine the differences between utilizing </span>
+<span class="sd">    the adjacency matrix and the Laplacian matrix, </span>
 <span class="sd">    refer to reference [2]_.</span>
 <span class="sd">    </span>
 <span class="sd">    References</span>
