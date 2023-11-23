@@ -588,7 +588,7 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.uniform_state">
 <span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">uniform_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.uniform_state" title="Link to this definition">#</a></dt>
-<dd><p>Creates a uniform state.</p>
+<dd><p>Create a uniform state.</p>
 <p>The state is constructed based on the <code class="docutils literal notranslate"><span class="pre">hilb_dim</span></code> attribute.
 The uniform state is a unit vector with entries 
 that have the same real amplitudes.</p>
@@ -603,7 +603,11 @@ that have the same real amplitudes.</p>
 <p>An example of the uniform state is</p>
 <div class="math notranslate nohighlight">
 \[\ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}\]</div>
-<p>where <span class="math notranslate nohighlight">\(N\)</span> is the dimension of the Hilbert space and 
+<p>where <span class="math notranslate nohighlight">\(N\)</span> represents the dimension of the Hilbert space, and 
+<span class="math notranslate nohighlight">\(i\)</span> is a label within the graph. 
+In the continuous-time quantum walk model, 
+<span class="math notranslate nohighlight">\(i\)</span> corresponds to the label of a vertex, 
+while in the coined quantum walk model, 
 <span class="math notranslate nohighlight">\(i\)</span> is the label of an arc.</p>
 </dd></dl>
 

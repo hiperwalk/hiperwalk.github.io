@@ -475,7 +475,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state">[docs]</a>
     <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates a uniform state.</span>
+<span class="sd">        Create a uniform state.</span>
 
 <span class="sd">        The state is constructed based on the ``hilb_dim`` attribute.</span>
 <span class="sd">        The uniform state is a unit vector with entries </span>
@@ -492,7 +492,11 @@ document.write(`
 <span class="sd">        .. math::</span>
 <span class="sd">            \ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}</span>
 
-<span class="sd">        where :math:`N` is the dimension of the Hilbert space and </span>
+<span class="sd">        where :math:`N` represents the dimension of the Hilbert space, and </span>
+<span class="sd">        :math:`i` is a label within the graph. </span>
+<span class="sd">        In the continuous-time quantum walk model, </span>
+<span class="sd">        :math:`i` corresponds to the label of a vertex, </span>
+<span class="sd">        while in the coined quantum walk model, </span>
 <span class="sd">        :math:`i` is the label of an arc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
