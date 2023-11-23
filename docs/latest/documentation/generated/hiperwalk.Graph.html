@@ -612,34 +612,43 @@ sparse or dense.</p>
 <p>The graph <span class="math notranslate nohighlight">\(G(V,E)\)</span> on which the quantum walk 
 takes place is specified by the
 adjacency matrix, Laplacian matrix, or 
-any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.
-Let <span class="math notranslate nohighlight">\(V\)</span> be the vertex set <span class="math notranslate nohighlight">\(\{v_0,...,v_{n-1}\}\)</span>, 
-where <span class="math notranslate nohighlight">\(n=|V|\)</span>.
-Two distinct vertices <span class="math notranslate nohighlight">\(v_i\)</span> and <span class="math notranslate nohighlight">\(v_j\)</span> in <span class="math notranslate nohighlight">\(V\)</span>
-are adjacent if and only if <span class="math notranslate nohighlight">\(C_{ij}\neq 0\)</span>.</p>
+any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(V\)</span> be the vertex set <span class="math notranslate nohighlight">\(\{v_0,...,v_{n-1}\}\)</span>, 
+where <span class="math notranslate nohighlight">\(n=|V|\)</span>.    
+If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is specified as a real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, 
+two distinct vertices <span class="math notranslate nohighlight">\(v_i\)</span> and <span class="math notranslate nohighlight">\(v_j\)</span> in <span class="math notranslate nohighlight">\(V\)</span>
+are adjacent if and only if <span class="math notranslate nohighlight">\(C_{ij}\neq 0\)</span>.
+<span class="math notranslate nohighlight">\(C_{ij}\)</span> represents the weight of the arc <span class="math notranslate nohighlight">\((v_i, v_j)\)</span>. 
+This weight is considered a generalized weight when <span class="math notranslate nohighlight">\(C_{ij}\)</span> is 
+negative.</p>
 <p>The class methods facilitate the construction of a valid quantum walk 
 and can be provided as parameters to plotting functions. For visualizations, 
 the default graph representation will be used. Specific classes are available 
 for well-known graph types, such as hypercubes and lattices.</p>
 <p>The preferred parameter type for the adjacency matrix is
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.11.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>.</p>
-<p>Each edge in the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> that connects two distinct
-vertices corresponds to a pair of arcs in the associated directed 
-graph <span class="math notranslate nohighlight">\(\vec{G}(V, \mathcal{A})\)</span>, where</p>
+<p>The treatment of the graph depends on the quantum walk model. 
+In the coined model, the graph is interpreted 
+as a directed graph as follows:
+Each edge in <span class="math notranslate nohighlight">\(G(V, E)\)</span> connecting two distinct vertices 
+translates into a pair of arcs in the directed graph
+<span class="math notranslate nohighlight">\(\vec{G}(V, \mathcal{A})\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[\begin{align*}
     \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
 \end{align*}\]</div>
-<p>Arcs can be represented using the (tail,head) notation or with numerical labels. 
+<p>Arcs are represented using either
+the (tail,head) notation or numerical labels. 
 In the <a class="reference internal" href="#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a> class, the arc labels are ordered such that for two arcs, 
 <span class="math notranslate nohighlight">\((v_i, v_j)\)</span> and <span class="math notranslate nohighlight">\((v_k, v_\ell)\)</span>, with labels <span class="math notranslate nohighlight">\(a_1\)</span> and 
 <span class="math notranslate nohighlight">\(a_2\)</span> respectively, <span class="math notranslate nohighlight">\(a_1 &lt; a_2\)</span> if and only if <span class="math notranslate nohighlight">\(i &lt; k\)</span> or 
 (<span class="math notranslate nohighlight">\(i = k\)</span> and <span class="math notranslate nohighlight">\(j &lt; \ell\)</span>). 
-Note that a loop is represented as a single arc.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is specified as a real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, 
-then <span class="math notranslate nohighlight">\(C_{ij}\)</span> represents the weight of the arc <span class="math notranslate nohighlight">\((v_i, v_j)\)</span>. 
-This weight is considered a generalized weight when <span class="math notranslate nohighlight">\(C_{ij}\)</span> is 
-negative.</p>
+Loops are depicted as single arcs, 
+affecting the dimension of the associated Hilbert space.
+In coined quantum walks, the weights of arcs do not influence the dynamics.</p>
+<p>In the continuous-time quantum walk model, the graph is treated 
+as a weighted graph without considering edges as composed of two 
+opposite arcs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The arc ordering may change for graphs defined using specific classes.</p>

@@ -437,10 +437,15 @@ document.write(`
 <span class="sd">    takes place is specified by the</span>
 <span class="sd">    adjacency matrix, Laplacian matrix, or </span>
 <span class="sd">    any real Hermitian matrix :math:`C`.</span>
+<span class="sd">    </span>
 <span class="sd">    Let :math:`V` be the vertex set :math:`\{v_0,...,v_{n-1}\}`, </span>
-<span class="sd">    where :math:`n=|V|`.</span>
-<span class="sd">    Two distinct vertices :math:`v_i` and :math:`v_j` in :math:`V`</span>
+<span class="sd">    where :math:`n=|V|`.    </span>
+<span class="sd">    If ``adj_matrix`` is specified as a real Hermitian matrix :math:`C`, </span>
+<span class="sd">    two distinct vertices :math:`v_i` and :math:`v_j` in :math:`V`</span>
 <span class="sd">    are adjacent if and only if :math:`C_{ij}\neq 0`.</span>
+<span class="sd">    :math:`C_{ij}` represents the weight of the arc :math:`(v_i, v_j)`. </span>
+<span class="sd">    This weight is considered a generalized weight when :math:`C_{ij}` is </span>
+<span class="sd">    negative. </span>
 
 <span class="sd">    The class methods facilitate the construction of a valid quantum walk </span>
 <span class="sd">    and can be provided as parameters to plotting functions. For visualizations, </span>
@@ -450,26 +455,31 @@ document.write(`
 <span class="sd">    The preferred parameter type for the adjacency matrix is</span>
 <span class="sd">    :class:`scipy.sparse.csr_matrix` with ``dtype=np.int8``.</span>
 
-<span class="sd">    Each edge in the graph :math:`G(V, E)` that connects two distinct</span>
-<span class="sd">    vertices corresponds to a pair of arcs in the associated directed </span>
-<span class="sd">    graph :math:`\vec{G}(V, \mathcal{A})`, where</span>
+<span class="sd">    The treatment of the graph depends on the quantum walk model. </span>
+<span class="sd">    In the coined model, the graph is interpreted </span>
+<span class="sd">    as a directed graph as follows:</span>
+<span class="sd">    Each edge in :math:`G(V, E)` connecting two distinct vertices </span>
+<span class="sd">    translates into a pair of arcs in the directed graph</span>
+<span class="sd">    :math:`\vec{G}(V, \mathcal{A})`, where</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">        \begin{align*}</span>
 <span class="sd">            \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
 <span class="sd">        \end{align*}</span>
 
-<span class="sd">    Arcs can be represented using the (tail,head) notation or with numerical labels. </span>
+<span class="sd">    Arcs are represented using either</span>
+<span class="sd">    the (tail,head) notation or numerical labels. </span>
 <span class="sd">    In the :obj:`Graph` class, the arc labels are ordered such that for two arcs, </span>
 <span class="sd">    :math:`(v_i, v_j)` and :math:`(v_k, v_\ell)`, with labels :math:`a_1` and </span>
 <span class="sd">    :math:`a_2` respectively, :math:`a_1 &lt; a_2` if and only if :math:`i &lt; k` or </span>
 <span class="sd">    (:math:`i = k` and :math:`j &lt; \ell`). </span>
-<span class="sd">    Note that a loop is represented as a single arc.</span>
+<span class="sd">    Loops are depicted as single arcs, </span>
+<span class="sd">    affecting the dimension of the associated Hilbert space.</span>
+<span class="sd">    In coined quantum walks, the weights of arcs do not influence the dynamics.</span>
 <span class="sd">    </span>
-<span class="sd">    If ``adj_matrix`` is specified as a real Hermitian matrix :math:`C`, </span>
-<span class="sd">    then :math:`C_{ij}` represents the weight of the arc :math:`(v_i, v_j)`. </span>
-<span class="sd">    This weight is considered a generalized weight when :math:`C_{ij}` is </span>
-<span class="sd">    negative. </span>
+<span class="sd">    In the continuous-time quantum walk model, the graph is treated </span>
+<span class="sd">    as a weighted graph without considering edges as composed of two </span>
+<span class="sd">    opposite arcs.</span>
 
 <span class="sd">    .. note::</span>
 <span class="sd">        The arc ordering may change for graphs defined using specific classes.</span>
