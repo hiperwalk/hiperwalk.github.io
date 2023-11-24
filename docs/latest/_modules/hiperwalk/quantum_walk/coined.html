@@ -1527,7 +1527,47 @@ document.write(`
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_number_to_valid_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coined.probability">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability.html#hiperwalk.Coined.probability">[docs]</a>
+    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the sum of probabilities for the specified vertices.</span>
+
+<span class="sd">        Computes the probability of the walker being located on a</span>
+<span class="sd">        vertex within the set of provided vertices, given that the walk </span>
+<span class="sd">        is on specified states.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        states : :class:`numpy.ndarray`</span>
+<span class="sd">            The state(s) used to compute the probability.</span>
+<span class="sd">            ``states`` can be a single state or a list of states.</span>
+
+<span class="sd">        vertices: list of int</span>
+<span class="sd">           The subset of vertices. </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        probabilities : float or :class:`numpy.ndarray`</span>
+<span class="sd">            float:</span>
+<span class="sd">                If ``states`` is a single state.</span>
+<span class="sd">            :class:`numpy.ndarray`:</span>
+<span class="sd">                If ``states`` is a list of states,</span>
+<span class="sd">                ``probabilities[i]`` is the probability</span>
+<span class="sd">                corresponding to the ``i``-th state.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        simulate</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 
