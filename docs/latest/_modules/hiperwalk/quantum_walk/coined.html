@@ -1325,9 +1325,10 @@ document.write(`
 <span class="sd">        More precisely, if the state of the walker is represented by</span>
 <span class="sd">        </span>
 <span class="sd">        .. math::</span>
-<span class="sd">            \sum_{(v, w) \in A(\vec G)} \alpha_{v,w} \ket{v,w},</span>
+<span class="sd">            \sum_{(v, w) \in \mathcal{A}(\vec G)} \alpha_{v,w} \ket{v,w},</span>
 <span class="sd">        </span>
-<span class="sd">        where :math:`\vec G` denotes the symmetric directed graph formed by</span>
+<span class="sd">        where :math:`\mathcal{A}(\vec G)}` is the set of arcs of</span>
+<span class="sd">        the symmetric directed graph formed by</span>
 <span class="sd">        replacing each edge in :math:`G` with two arcs, one for each direction,</span>
 <span class="sd">        then the probability associated with vertex :math:`u` is given by</span>
 <span class="sd">        </span>
@@ -1335,6 +1336,7 @@ document.write(`
 <span class="sd">            \sum_{v \in N(u)}|\alpha_{u, v}|^2,</span>
 <span class="sd">        </span>
 <span class="sd">        with :math:`N(u)` being the set of out neighbors of :math:`u`.</span>
+<span class="sd">        A loop at :math:`u` is the arc :math:`(u,u)`. </span>
 <span class="sd">        The probability distribution, which is returned by this</span>
 <span class="sd">        method as a ``numpy.ndarray``, is the collection of these</span>
 <span class="sd">        probabilities for all vertices.</span>
