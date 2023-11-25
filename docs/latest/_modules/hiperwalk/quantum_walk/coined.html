@@ -779,6 +779,10 @@ document.write(`
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        scipy.sparse.csr_array</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_shift</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span></div>
 
@@ -1114,27 +1118,6 @@ document.write(`
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_coin</span>
-<span class="sd">        </span>
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        The final coin :math:`C&#39;` is obtained by multiplying the</span>
-<span class="sd">        coin operator :math:`C` and the oracle :math:`R`.</span>
-<span class="sd">        That is,</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">            </span>
-<span class="sd">            C&#39; = CR .</span>
-
-<span class="sd">        The oracle is not explicitly saved.</span>
-<span class="sd">        Instead, the oracle coins are saved -- i.e.</span>
-<span class="sd">        which coin is going to be applied to each marked vertices.</span>
-<span class="sd">        To generate :math:`C&#39;` we simply substitute the original coin</span>
-<span class="sd">        by the oracle coin in all marked vertices.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span><span class="p">):</span>
