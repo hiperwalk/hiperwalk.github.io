@@ -621,18 +621,18 @@ walker beign found at vertex <code class="docutils literal notranslate"><span cl
 <p class="rubric">Notes</p>
 <p>The probability for a given vertex <span class="math notranslate nohighlight">\(u\)</span> is calculated as the sum of the
 absolute squares of the amplitudes of the arcs originating from <span class="math notranslate nohighlight">\(u\)</span>.
-More precisely, if the state of the walker is represented by</p>
+More precisely, if the state of the walker is</p>
 <div class="math notranslate nohighlight">
 \[\sum_{(v, w) \in \mathcal{A}(\vec G)} \alpha_{v,w} \ket{v,w},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathcal{A}(\vec G)}\)</span> is the set of arcs of
+<p>where <span class="math notranslate nohighlight">\(\mathcal{A}(\vec G)\)</span> is the set of arcs of
 the symmetric directed graph formed by
 replacing each edge in <span class="math notranslate nohighlight">\(G\)</span> with two arcs, one for each direction,
 then the probability associated with vertex <span class="math notranslate nohighlight">\(u\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\sum_{v \in N(u)}|\alpha_{u, v}|^2,\]</div>
 <p>with <span class="math notranslate nohighlight">\(N(u)\)</span> being the set of out neighbors of <span class="math notranslate nohighlight">\(u\)</span>.
-A loop at <span class="math notranslate nohighlight">\(u\)</span> is the arc <span class="math notranslate nohighlight">\((u,u)\)</span>. 
-The probability distribution, which is returned by this
+A loop at <span class="math notranslate nohighlight">\(u\)</span> is the arc <span class="math notranslate nohighlight">\((u,u)\)</span>.</p>
+<p>The probability distribution, which is returned by this
 method as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, is the collection of these
 probabilities for all vertices.</p>
 </dd></dl>
