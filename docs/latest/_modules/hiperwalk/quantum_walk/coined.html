@@ -1565,11 +1565,15 @@ document.write(`
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        </span>
-<span class="sd">        The probability</span>
+<span class="sd">        The probability of finding the walker on vertex </span>
+<span class="sd">        :math:`v`, given the state of the walk</span>
+<span class="sd">        :math:`\psi`, is calculated as</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">        \sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \! \left|\braket{a}{\psi}\right|^2.</span>
-<span class="sd">        </span>
+<span class="sd">            \sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \, </span>
+<span class="sd">            \left|\braket{a}{\psi}\right|^2,</span>
+
+<span class="sd">        where :math:`\mathcal{A}` denotes the set of arcs.        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">)</span></div>
 </div>
