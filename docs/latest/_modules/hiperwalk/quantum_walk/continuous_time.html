@@ -716,6 +716,10 @@ document.write(`
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        :class:`scipy.sparse.csr_array`</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_hamiltonian</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span></div>
 
@@ -863,7 +867,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.get_terms.html#hiperwalk.ContinuousTime.get_terms">[docs]</a>
     <span class="k">def</span> <span class="nf">get_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Number of terms in the power series used to</span>
+<span class="sd">        Retrieve the number of terms in the power series used to</span>
 <span class="sd">        calculate the evolution operator.</span>
 
 <span class="sd">        Returns</span>
@@ -872,7 +876,8 @@ document.write(`
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
-<span class="sd">        get_evolution</span>
+<span class="sd">        set_terms</span>
+<span class="sd">        set_evolution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_terms</span></div>
 
