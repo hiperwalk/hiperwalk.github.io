@@ -50,6 +50,8 @@ params:
       column1:
         title: ""
         links:
+          - text: Contact
+            link: mailto:hiperwalk@gmail.com
           - text: About Us
             link: /about/
       column2:
