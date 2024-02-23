@@ -23,6 +23,9 @@ hiperwalk.Hypercube
           ~Hypercube.adjacency_matrix
        
        
+          ~Hypercube.adjacent
+       
+       
           ~Hypercube.arc
        
        
@@ -32,22 +35,19 @@ hiperwalk.Hypercube
           ~Hypercube.arc_number
        
        
-          ~Hypercube.arcs_with_tail
-       
-       
           ~Hypercube.degree
        
        
           ~Hypercube.dimension
        
        
+          ~Hypercube.is_simple
+       
+       
           ~Hypercube.laplacian_matrix
        
        
           ~Hypercube.neighbors
-       
-       
-          ~Hypercube.number_of_arcs
        
        
           ~Hypercube.number_of_edges

@@ -1,6 +1,0 @@
-hiperwalk.Lattice.adjacency\_matrix
-===================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.adjacency_matrix

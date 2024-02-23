@@ -1,6 +1,0 @@
-hiperwalk.Lattice.vertex\_number
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.vertex_number

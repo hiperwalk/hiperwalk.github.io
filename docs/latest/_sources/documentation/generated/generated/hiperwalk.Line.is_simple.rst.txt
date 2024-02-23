@@ -1,0 +1,6 @@
+hiperwalk.Line.is\_simple
+=========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Line.is_simple

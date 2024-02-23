@@ -378,11 +378,11 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.cycle</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
-<span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.square_lattice</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="Cycle">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Cycle.html#hiperwalk.Cycle">[docs]</a>
-<span class="k">class</span> <span class="nc">Cycle</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cycle</span><span class="p">(</span><span class="n">SquareLattice</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cycle graph.</span>
 
@@ -430,9 +430,7 @@ document.write(`
 
 <div class="viewcode-block" id="Cycle.arc_number">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Cycle.arc_number.html#hiperwalk.Cycle.arc_number">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
+    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
 

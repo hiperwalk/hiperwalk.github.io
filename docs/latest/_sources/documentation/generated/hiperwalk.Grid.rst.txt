@@ -23,6 +23,9 @@ hiperwalk.Grid
           ~Grid.adjacency_matrix
        
        
+          ~Grid.adjacent
+       
+       
           ~Grid.arc
        
        
@@ -41,6 +44,9 @@ hiperwalk.Grid
           ~Grid.dimensions
        
        
+          ~Grid.is_simple
+       
+       
           ~Grid.laplacian_matrix
        
        
@@ -48,9 +54,6 @@ hiperwalk.Grid
        
        
           ~Grid.next_arc
-       
-       
-          ~Grid.number_of_arcs
        
        
           ~Grid.number_of_edges

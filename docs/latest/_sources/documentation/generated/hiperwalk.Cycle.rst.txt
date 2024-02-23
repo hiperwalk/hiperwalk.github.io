@@ -23,16 +23,19 @@ hiperwalk.Cycle
           ~Cycle.adjacency_matrix
        
        
+          ~Cycle.adjacent
+       
+       
           ~Cycle.arc
        
        
           ~Cycle.arc_number
        
        
-          ~Cycle.arcs_with_tail
-       
-       
           ~Cycle.degree
+       
+       
+          ~Cycle.is_simple
        
        
           ~Cycle.laplacian_matrix
@@ -42,9 +45,6 @@ hiperwalk.Cycle
        
        
           ~Cycle.next_arc
-       
-       
-          ~Cycle.number_of_arcs
        
        
           ~Cycle.number_of_edges

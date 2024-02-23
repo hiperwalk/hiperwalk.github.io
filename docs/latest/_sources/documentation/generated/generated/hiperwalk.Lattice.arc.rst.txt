@@ -1,6 +1,0 @@
-hiperwalk.Lattice.arc
-=====================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.arc

@@ -23,25 +23,19 @@ hiperwalk.Graph
           ~Graph.adjacency_matrix
        
        
-          ~Graph.arc
-       
-       
-          ~Graph.arc_number
-       
-       
-          ~Graph.arcs_with_tail
+          ~Graph.adjacent
        
        
           ~Graph.degree
+       
+       
+          ~Graph.is_simple
        
        
           ~Graph.laplacian_matrix
        
        
           ~Graph.neighbors
-       
-       
-          ~Graph.number_of_arcs
        
        
           ~Graph.number_of_edges

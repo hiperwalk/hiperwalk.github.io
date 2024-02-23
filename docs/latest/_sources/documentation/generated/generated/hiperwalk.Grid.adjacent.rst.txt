@@ -1,0 +1,6 @@
+hiperwalk.Grid.adjacent
+=======================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Grid.adjacent

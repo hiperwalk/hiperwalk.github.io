@@ -1,6 +1,0 @@
-hiperwalk.Line.arcs\_with\_tail
-===============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.arcs_with_tail

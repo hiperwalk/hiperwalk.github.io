@@ -1,0 +1,6 @@
+hiperwalk.Graph.adjacent
+========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.adjacent

@@ -1,6 +1,0 @@
-hiperwalk.Graph.arc\_number
-===========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Graph.arc_number

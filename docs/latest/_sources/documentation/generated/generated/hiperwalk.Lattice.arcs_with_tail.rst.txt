@@ -1,6 +1,0 @@
-hiperwalk.Lattice.arcs\_with\_tail
-==================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.arcs_with_tail

@@ -402,16 +402,8 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    graph</span>
+<span class="sd">    graph: :class:`hiperwalk.graph.Graph`</span>
 <span class="sd">        Graph on which the quantum walk takes place.</span>
-<span class="sd">        It can be the graph itself (:class:`hiperwalk.graph.Graph`) or</span>
-<span class="sd">        its adjacency matrix (:class:`scipy.sparse.csr_array`).</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    TypeError</span>
-<span class="sd">        if ``adj_matrix`` is not an instance of</span>
-<span class="sd">        :class:`scipy.sparse.csr_array`.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -443,32 +435,7 @@ document.write(`
         <span class="c1"># Should be different from None during simulation only.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="kc">None</span>
 
-
-        <span class="c1"># TODO: create sparse matrix from graph or dense adjacency matrix</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;_adj_matrix&#39;</span><span class="p">)</span>
-               <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">!=</span><span class="mi">2</span>
-               <span class="ow">or</span> <span class="n">graph</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">graph</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-               <span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;Adjacency matrix is not a square matrix.&quot;</span>
-                <span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;_adj_matrix&#39;</span><span class="p">)):</span>
-                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-                    <span class="s2">&quot;Graph does not have an adjacency matrix as attribute.&quot;</span>
-                <span class="p">)</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">graph</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid `graph` type.&quot;</span>
-                <span class="o">+</span> <span class="s2">&quot; Expected &#39;hiperwalk.Graph&#39; or &quot;</span>
-                <span class="o">+</span> <span class="s2">&quot;&#39;scipy.sparse.csr_array&#39;, but received &quot;</span>
-                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;, instead.&#39;</span>
-            <span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span> <span class="o">=</span> <span class="n">graph</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 
@@ -812,7 +779,7 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.state">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.state.html#hiperwalk.QuantumWalk.state">[docs]</a>
-    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a state in the Hilbert space.</span>
 
@@ -822,10 +789,9 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        *args</span>
+<span class="sd">        entries : list of entry</span>
 <span class="sd">            Each entry is a 2-tuple or array with format</span>
 <span class="sd">            ``(amplitude, vertex)``.</span>
-<span class="sd">            An entry may be an array of such tuples.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -838,33 +804,30 @@ document.write(`
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
+<span class="sd">        .. TODO:</span>
+<span class="sd">            Consider the Graph...</span>
+
 <span class="sd">        The following commands generate the same state.</span>
 
-<span class="sd">        &gt;&gt;&gt; psi = qw.state([1, 0], (1, 1), (1, 2)) #doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; psi1 = qw.state([1, 0], [(1, 1), (1, 2)]) #doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; psi2 = qw.state(([1, 0], (1, 1)), (1, 2)) #doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; psi3 = qw.state([[1, 0], (1, 1), (1, 2)]) #doctest: +SKIP</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi == ps1) #doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; psi = qw.state([[1, 0], [1, 1], [1, 2]])</span>
+<span class="sd">        &gt;&gt;&gt; psi1 = qw.state([[1, 0], (1, 1), (1, 2)])</span>
+<span class="sd">        &gt;&gt;&gt; psi2 = qw.state(([1, 0], (1, 1), (1, 2)))</span>
+<span class="sd">        &gt;&gt;&gt; psi3 = qw.state(((1, 0), (1, 1), (1, 2)))</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi == ps1)</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi1 == ps2) #doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi1 == ps2)</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi2 == ps3) #doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi2 == ps3)</span>
 <span class="sd">        True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
-        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
-                    <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">ampl</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">arg</span>
-                <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
+        <span class="k">for</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
 
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
 

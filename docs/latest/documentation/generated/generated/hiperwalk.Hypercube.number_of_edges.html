@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="hiperwalk.Hypercube.number_of_vertices" href="hiperwalk.Hypercube.number_of_vertices.html" />
-    <link rel="prev" title="hiperwalk.Hypercube.number_of_arcs" href="hiperwalk.Hypercube.number_of_arcs.html" />
+    <link rel="prev" title="hiperwalk.Hypercube.neighbors" href="hiperwalk.Hypercube.neighbors.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -338,13 +338,11 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../graph.html">Graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arc_number.html">hiperwalk.Graph.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.arcs_with_tail.html">hiperwalk.Graph.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacent.html">hiperwalk.Graph.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.degree.html">hiperwalk.Graph.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.is_simple.html">hiperwalk.Graph.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.laplacian_matrix.html">hiperwalk.Graph.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.neighbors.html">hiperwalk.Graph.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_arcs.html">hiperwalk.Graph.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_edges.html">hiperwalk.Graph.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.number_of_vertices.html">hiperwalk.Graph.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.vertex_number.html">hiperwalk.Graph.vertex_number</a></li>
@@ -352,14 +350,14 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Cycle.html">hiperwalk.Cycle</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.adjacency_matrix.html">hiperwalk.Cycle.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.adjacent.html">hiperwalk.Cycle.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arc.html">hiperwalk.Cycle.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arc_number.html">hiperwalk.Cycle.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.arcs_with_tail.html">hiperwalk.Cycle.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.degree.html">hiperwalk.Cycle.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.is_simple.html">hiperwalk.Cycle.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.laplacian_matrix.html">hiperwalk.Cycle.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.neighbors.html">hiperwalk.Cycle.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.next_arc.html">hiperwalk.Cycle.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.number_of_arcs.html">hiperwalk.Cycle.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.number_of_edges.html">hiperwalk.Cycle.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.number_of_vertices.html">hiperwalk.Cycle.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Cycle.previous_arc.html">hiperwalk.Cycle.previous_arc</a></li>
@@ -368,16 +366,17 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Grid.html">hiperwalk.Grid</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.adjacency_matrix.html">hiperwalk.Grid.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.adjacent.html">hiperwalk.Grid.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc.html">hiperwalk.Grid.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc_direction.html">hiperwalk.Grid.arc_direction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arc_number.html">hiperwalk.Grid.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.arcs_with_tail.html">hiperwalk.Grid.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.degree.html">hiperwalk.Grid.degree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.dimensions.html">hiperwalk.Grid.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.is_simple.html">hiperwalk.Grid.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.laplacian_matrix.html">hiperwalk.Grid.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.neighbors.html">hiperwalk.Grid.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.next_arc.html">hiperwalk.Grid.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.number_of_arcs.html">hiperwalk.Grid.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.number_of_edges.html">hiperwalk.Grid.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.number_of_vertices.html">hiperwalk.Grid.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Grid.previous_arc.html">hiperwalk.Grid.previous_arc</a></li>
@@ -387,46 +386,30 @@ document.write(`
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.adjacency_matrix.html">hiperwalk.Hypercube.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.adjacent.html">hiperwalk.Hypercube.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc.html">hiperwalk.Hypercube.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_direction.html">hiperwalk.Hypercube.arc_direction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arc_number.html">hiperwalk.Hypercube.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.arcs_with_tail.html">hiperwalk.Hypercube.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.degree.html">hiperwalk.Hypercube.degree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.dimension.html">hiperwalk.Hypercube.dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.is_simple.html">hiperwalk.Hypercube.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.laplacian_matrix.html">hiperwalk.Hypercube.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.neighbors.html">hiperwalk.Hypercube.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.number_of_arcs.html">hiperwalk.Hypercube.number_of_arcs</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.Hypercube.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.number_of_vertices.html">hiperwalk.Hypercube.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Hypercube.vertex_number.html">hiperwalk.Hypercube.vertex_number</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Lattice.html">hiperwalk.Lattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.adjacency_matrix.html">hiperwalk.Lattice.adjacency_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arc.html">hiperwalk.Lattice.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arc_number.html">hiperwalk.Lattice.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.arcs_with_tail.html">hiperwalk.Lattice.arcs_with_tail</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.degree.html">hiperwalk.Lattice.degree</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.laplacian_matrix.html">hiperwalk.Lattice.laplacian_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.neighbors.html">hiperwalk.Lattice.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.next_arc.html">hiperwalk.Lattice.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.number_of_arcs.html">hiperwalk.Lattice.number_of_arcs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.number_of_edges.html">hiperwalk.Lattice.number_of_edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.number_of_vertices.html">hiperwalk.Lattice.number_of_vertices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.previous_arc.html">hiperwalk.Lattice.previous_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Lattice.vertex_number.html">hiperwalk.Lattice.vertex_number</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.adjacency_matrix.html">hiperwalk.Line.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.adjacent.html">hiperwalk.Line.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arc.html">hiperwalk.Line.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arc_number.html">hiperwalk.Line.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.arcs_with_tail.html">hiperwalk.Line.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.degree.html">hiperwalk.Line.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.is_simple.html">hiperwalk.Line.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.laplacian_matrix.html">hiperwalk.Line.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.neighbors.html">hiperwalk.Line.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.next_arc.html">hiperwalk.Line.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.number_of_arcs.html">hiperwalk.Line.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.number_of_edges.html">hiperwalk.Line.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.number_of_vertices.html">hiperwalk.Line.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Line.previous_arc.html">hiperwalk.Line.previous_arc</a></li>
@@ -435,8 +418,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.fit_sin_squared.html">hiperwalk.QuantumWalk.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.get_evolution.html">hiperwalk.QuantumWalk.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.get_marked.html">hiperwalk.QuantumWalk.get_marked</a></li>
@@ -454,7 +437,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Coined.html">hiperwalk.Coined</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Coined.html">hiperwalk.Coined</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.default_coin.html">hiperwalk.Coined.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.fit_sin_squared.html">hiperwalk.Coined.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.get_coin.html">hiperwalk.Coined.get_coin</a></li>
@@ -478,7 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.ContinuousTime.html">hiperwalk.ContinuousTime</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.ContinuousTime.html">hiperwalk.ContinuousTime</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.fit_sin_squared.html">hiperwalk.ContinuousTime.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_evolution.html">hiperwalk.ContinuousTime.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_gamma.html">hiperwalk.ContinuousTime.get_gamma</a></li>
@@ -507,7 +490,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
@@ -601,12 +584,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.Hypercube.number_of_arcs.html"
+       href="hiperwalk.Hypercube.neighbors.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.Hypercube.number_of_arcs</p>
+        <p class="prev-next-title">hiperwalk.Hypercube.neighbors</p>
       </div>
     </a>
     <a class="right-next"

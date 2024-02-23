@@ -39,7 +39,6 @@
     <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.Graph';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
@@ -339,13 +338,11 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../graph.html">Graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">hiperwalk.Graph</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arc.html">hiperwalk.Graph.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arc_number.html">hiperwalk.Graph.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.arcs_with_tail.html">hiperwalk.Graph.arcs_with_tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacent.html">hiperwalk.Graph.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.degree.html">hiperwalk.Graph.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.is_simple.html">hiperwalk.Graph.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html">hiperwalk.Graph.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html">hiperwalk.Graph.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_arcs.html">hiperwalk.Graph.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html">hiperwalk.Graph.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html">hiperwalk.Graph.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html">hiperwalk.Graph.vertex_number</a></li>
@@ -353,14 +350,14 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Cycle.html">hiperwalk.Cycle</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.adjacency_matrix.html">hiperwalk.Cycle.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.adjacent.html">hiperwalk.Cycle.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arc.html">hiperwalk.Cycle.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arc_number.html">hiperwalk.Cycle.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.arcs_with_tail.html">hiperwalk.Cycle.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.degree.html">hiperwalk.Cycle.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.is_simple.html">hiperwalk.Cycle.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.laplacian_matrix.html">hiperwalk.Cycle.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.neighbors.html">hiperwalk.Cycle.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.next_arc.html">hiperwalk.Cycle.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_arcs.html">hiperwalk.Cycle.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_edges.html">hiperwalk.Cycle.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.number_of_vertices.html">hiperwalk.Cycle.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Cycle.previous_arc.html">hiperwalk.Cycle.previous_arc</a></li>
@@ -369,16 +366,17 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Grid.html">hiperwalk.Grid</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.adjacency_matrix.html">hiperwalk.Grid.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.adjacent.html">hiperwalk.Grid.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc.html">hiperwalk.Grid.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc_direction.html">hiperwalk.Grid.arc_direction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arc_number.html">hiperwalk.Grid.arc_number</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.arcs_with_tail.html">hiperwalk.Grid.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.degree.html">hiperwalk.Grid.degree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.dimensions.html">hiperwalk.Grid.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.is_simple.html">hiperwalk.Grid.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.laplacian_matrix.html">hiperwalk.Grid.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.neighbors.html">hiperwalk.Grid.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.next_arc.html">hiperwalk.Grid.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_arcs.html">hiperwalk.Grid.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_edges.html">hiperwalk.Grid.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.number_of_vertices.html">hiperwalk.Grid.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Grid.previous_arc.html">hiperwalk.Grid.previous_arc</a></li>
@@ -388,46 +386,30 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Hypercube.html">hiperwalk.Hypercube</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.adjacency_matrix.html">hiperwalk.Hypercube.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.adjacent.html">hiperwalk.Hypercube.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc.html">hiperwalk.Hypercube.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc_direction.html">hiperwalk.Hypercube.arc_direction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arc_number.html">hiperwalk.Hypercube.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.arcs_with_tail.html">hiperwalk.Hypercube.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.degree.html">hiperwalk.Hypercube.degree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.dimension.html">hiperwalk.Hypercube.dimension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.is_simple.html">hiperwalk.Hypercube.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.laplacian_matrix.html">hiperwalk.Hypercube.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.neighbors.html">hiperwalk.Hypercube.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_arcs.html">hiperwalk.Hypercube.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_edges.html">hiperwalk.Hypercube.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.number_of_vertices.html">hiperwalk.Hypercube.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Hypercube.vertex_number.html">hiperwalk.Hypercube.vertex_number</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Lattice.html">hiperwalk.Lattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.adjacency_matrix.html">hiperwalk.Lattice.adjacency_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc.html">hiperwalk.Lattice.arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arc_number.html">hiperwalk.Lattice.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.arcs_with_tail.html">hiperwalk.Lattice.arcs_with_tail</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.degree.html">hiperwalk.Lattice.degree</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.laplacian_matrix.html">hiperwalk.Lattice.laplacian_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.neighbors.html">hiperwalk.Lattice.neighbors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.next_arc.html">hiperwalk.Lattice.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_arcs.html">hiperwalk.Lattice.number_of_arcs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_edges.html">hiperwalk.Lattice.number_of_edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.number_of_vertices.html">hiperwalk.Lattice.number_of_vertices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.previous_arc.html">hiperwalk.Lattice.previous_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Lattice.vertex_number.html">hiperwalk.Lattice.vertex_number</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Line.html">hiperwalk.Line</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.adjacency_matrix.html">hiperwalk.Line.adjacency_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.adjacent.html">hiperwalk.Line.adjacent</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arc.html">hiperwalk.Line.arc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arc_number.html">hiperwalk.Line.arc_number</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.arcs_with_tail.html">hiperwalk.Line.arcs_with_tail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.degree.html">hiperwalk.Line.degree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.is_simple.html">hiperwalk.Line.is_simple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.laplacian_matrix.html">hiperwalk.Line.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.neighbors.html">hiperwalk.Line.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.next_arc.html">hiperwalk.Line.next_arc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_arcs.html">hiperwalk.Line.number_of_arcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_edges.html">hiperwalk.Line.number_of_edges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.number_of_vertices.html">hiperwalk.Line.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Line.previous_arc.html">hiperwalk.Line.previous_arc</a></li>
@@ -436,8 +418,8 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.QuantumWalk.html">hiperwalk.QuantumWalk</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.fit_sin_squared.html">hiperwalk.QuantumWalk.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_evolution.html">hiperwalk.QuantumWalk.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.get_marked.html">hiperwalk.QuantumWalk.get_marked</a></li>
@@ -455,7 +437,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.QuantumWalk.uniform_state.html">hiperwalk.QuantumWalk.uniform_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Coined.html">hiperwalk.Coined</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Coined.html">hiperwalk.Coined</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.default_coin.html">hiperwalk.Coined.default_coin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.fit_sin_squared.html">hiperwalk.Coined.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.get_coin.html">hiperwalk.Coined.get_coin</a></li>
@@ -479,7 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Coined.uniform_state.html">hiperwalk.Coined.uniform_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.ContinuousTime.html">hiperwalk.ContinuousTime</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.ContinuousTime.html">hiperwalk.ContinuousTime</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.fit_sin_squared.html">hiperwalk.ContinuousTime.fit_sin_squared</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_evolution.html">hiperwalk.ContinuousTime.get_evolution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_gamma.html">hiperwalk.ContinuousTime.get_gamma</a></li>
@@ -508,7 +490,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
@@ -580,17 +562,38 @@ document.write(`
 <h1>hiperwalk.Graph<a class="headerlink" href="#hiperwalk-graph" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
 <dd><p>Constructs an arbitrary graph.</p>
 <p>This class defines the graph structure used for implementing a 
 quantum walk. It encapsulates all necessary properties 
 and functionalities of the graph 
 required for the quantum walk dynamics.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>adj_matrix</strong><span class="classifier"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a></span></dt><dd><p>Adjacency matrix, Laplacian matrix, or any real Hermitian matrix.</p>
-<p>If <code class="xref py py-class docutils literal notranslate"><span class="pre">network.Graph</span></code>, the adjacency matrix of the graph is used.</p>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>adj_matrix</strong></dt><dd><p>The adjacency matrix of the graph
+(any integer Hermitian matrix).
+Two input types are accepted:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Any matrix – for instance,</dt><dd><ul>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
+<li><p>list of lists.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">network.Graph</span></code>.</dt><dd><ul>
+<li><p>The adjacency matrix is extracted from the graph.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a hard copy of <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.</p>
 </dd>
 </dl>
 </dd>
@@ -602,138 +605,31 @@ required for the quantum walk dynamics.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Check if it is more efficient to store the adjacency matrix as
-sparse or dense.</p>
-</div>
-<p>The graph <span class="math notranslate nohighlight">\(G(V,E)\)</span> on which the quantum walk 
-takes place is specified by the
-adjacency matrix, Laplacian matrix, or 
-any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(V\)</span> denote the vertex set <span class="math notranslate nohighlight">\(\{v_0,...,v_{n-1}\}\)</span>, 
-where <span class="math notranslate nohighlight">\(n = |V|\)</span>. If the <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is defined as a real 
-Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>, then two distinct vertices <span class="math notranslate nohighlight">\(v_i\)</span> and 
-<span class="math notranslate nohighlight">\(v_j\)</span> in <span class="math notranslate nohighlight">\(V\)</span> are considered adjacent if and only if 
-<span class="math notranslate nohighlight">\(C_{ij} \neq 0\)</span>. In this matrix, <span class="math notranslate nohighlight">\(C_{ij}\)</span> represents 
-the weight of the edge connecting <span class="math notranslate nohighlight">\(v_i\)</span> and <span class="math notranslate nohighlight">\(v_j\)</span>. 
-Diagonal entries <span class="math notranslate nohighlight">\(C_{ii}\)</span> correspond to the weights of loops 
-at vertex <span class="math notranslate nohighlight">\(v_i\)</span>.
-This weight is considered a generalized weight when <span class="math notranslate nohighlight">\(C_{ij}\)</span> is 
-negative.</p>
 <p>The class methods facilitate the construction of a valid quantum walk 
-and can be provided as parameters to plotting functions. For visualizations, 
-the default graph representation will be used. Specific classes are available 
-for well-known graph types, such as hypercubes and lattices.</p>
-<p>The preferred parameter type for the adjacency matrix is
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a> with <code class="docutils literal notranslate"><span class="pre">dtype=np.int8</span></code>.</p>
+and can be provided as parameters to plotting functions.
+For visualizations, the default graph representation will be used.
+Specific classes are available for well-known graph types,
+such as hypercubes and lattices.</p>
+<p>The adjacency matrix is always stored as a
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
+If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is sparse and <code class="docutils literal notranslate"><span class="pre">copy=False</span></code>,
+the argument will be changed for more efficient manipulation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To reduce memory usage, <code class="docutils literal notranslate"><span class="pre">adj_matrix.data</span></code> is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+This is possible because <code class="docutils literal notranslate"><span class="pre">adj_matrix.data</span></code> should be an
+array of ones.</p>
+<p>If the user wishes to keep the original <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code>,
+the argument <code class="docutils literal notranslate"><span class="pre">copy</span></code> must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
 <p>The treatment of the graph depends on the quantum walk model. 
-In the coined model, the graph is interpreted 
-as a directed graph as follows:
-Each edge in <span class="math notranslate nohighlight">\(G(V, E)\)</span> connecting two distinct vertices 
-translates into a pair of arcs in the directed graph
-<span class="math notranslate nohighlight">\(\vec{G}(V, \mathcal{A})\)</span>, where</p>
-<div class="math notranslate nohighlight">
-\[\begin{align*}
-    \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.
-\end{align*}\]</div>
-<p>Arcs are represented using either
-the (tail,head) notation or numerical labels. 
-In the <a class="reference internal" href="#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a> class, the arc labels are ordered such that for two arcs, 
-<span class="math notranslate nohighlight">\((v_i, v_j)\)</span> and <span class="math notranslate nohighlight">\((v_k, v_\ell)\)</span>, with labels <span class="math notranslate nohighlight">\(a_1\)</span> and 
-<span class="math notranslate nohighlight">\(a_2\)</span> respectively, <span class="math notranslate nohighlight">\(a_1 &lt; a_2\)</span> if and only if <span class="math notranslate nohighlight">\(i &lt; k\)</span> or 
-(<span class="math notranslate nohighlight">\(i = k\)</span> and <span class="math notranslate nohighlight">\(j &lt; \ell\)</span>). 
-Loops are depicted as single arcs, 
-affecting the dimension of the associated Hilbert space.
-In coined quantum walks, the weights of arcs do not influence the dynamics.</p>
-<p>In the continuous-time quantum walk model, the graph is treated 
-as a weighted graph without considering edges as composed of two 
-opposite arcs.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The arc ordering may change for graphs defined using specific classes.</p>
-</div>
-<p>For example, the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> shown in
-Figure 1 has an adjacency matrix <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span>
-<span class="go">array([[0, 1, 0, 0],</span>
-<span class="go">       [1, 0, 1, 1],</span>
-<span class="go">       [0, 1, 0, 1],</span>
-<span class="go">       [0, 1, 1, 0]])</span>
+.. todo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reference</span> <span class="n">new</span> <span class="n">part</span> <span class="n">of</span> <span class="n">documentation</span><span class="o">.</span>
 </pre></div>
 </div>
-<figure class="align-center" id="id2">
-<div class="graphviz"><img src="../../_images/graphviz-e5b10aac86d507de3ccf8b826d0e040a20d7084b.png" alt="graph {
-	0 [pos=&quot;0,0!&quot;];
-	1 [pos=&quot;2,0!&quot;];
-	2 [pos=&quot;3.5,-1!&quot;];
-	3 [pos=&quot;3.5,1!&quot;];
-	0 -- 1;
-	1 -- 2;
-	1 -- 3;
-	2 -- 3;
-}" class="graphviz" /></div>
-<figcaption>
-<p><span class="caption-text">Figure 1</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The arcs of the associated digraph in the arc notation are</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">... </span>               <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span>
-<span class="go">[(0, 1), (1, 0), (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
-</pre></div>
-</div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">arcs</span></code> is already sorted, hence the associated 
-numeric labels are</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arcs_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">arcs</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arcs</span><span class="p">))}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arcs_labels</span>
-<span class="go">{(0, 1): 0, (1, 0): 1, (1, 2): 2, (1, 3): 3, (2, 1): 4, (2, 3): 5, (3, 1): 6, (3, 2): 7}</span>
-</pre></div>
-</div>
-<p>The numeric labels are depicted in Figure 2.</p>
-<figure class="align-center" id="id3">
-<div class="graphviz"><img src="../../_images/graphviz-d291529b74dd776e3eb45c7c6835af0344323c8f.png" alt="digraph {
-	0 [pos=&quot;0,0!&quot;];
-	1 [pos=&quot;2,0!&quot;];
-	2 [pos=&quot;3.5,-1!&quot;];
-	3 [pos=&quot;3.5,1!&quot;];
-	0 -&gt; 1 [headlabel=0 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 0 [headlabel=1 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 2 [headlabel=2 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 3 [headlabel=3 labeldistance=4.75 labelangle=-10];
-	2 -&gt; 1 [headlabel=4 labeldistance=4.75 labelangle=-10];
-	2 -&gt; 3 [headlabel=5 labeldistance=5.5 labelangle=-7];
-	3 -&gt; 1 [headlabel=6 labeldistance=4.25 labelangle=-10];
-	3 -&gt; 2 [headlabel=7 labeldistance=5.5 labelangle=-7];
-}" class="graphviz" /></div>
-<figcaption>
-<p><span class="caption-text">Figure 2</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>If we insert the labels of the arcs into the adjacency matrix,
-we obtain matrix <code class="docutils literal notranslate"><span class="pre">adj_labels</span></code> as follows:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span> <span class="o">=</span> <span class="p">[[</span><span class="n">arcs_labels</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcs_labels</span>
-<span class="gp">... </span>                                  <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-<span class="gp">... </span>              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">adj_labels</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span>
-<span class="go">matrix([[&#39;&#39;, &#39;0&#39;, &#39;&#39;, &#39;&#39;],</span>
-<span class="go">        [&#39;1&#39;, &#39;&#39;, &#39;2&#39;, &#39;3&#39;],</span>
-<span class="go">        [&#39;&#39;, &#39;4&#39;, &#39;&#39;, &#39;5&#39;],</span>
-<span class="go">        [&#39;&#39;, &#39;6&#39;, &#39;7&#39;, &#39;&#39;]], dtype=&#39;&lt;U21&#39;)</span>
-</pre></div>
-</div>
-<p>Note that, intuitively,
-the arcs are labeled in left-to-right and top-to-bottom fashion.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Graph.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph.__init__" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -742,26 +638,20 @@ the arcs are labeled in left-to-right and top-to-bottom fashion.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix" title="hiperwalk.Graph.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>()</p></td>
 <td><p>Return the graph's adjacency matrix.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc" title="hiperwalk.Graph.arc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc</span></code></a>(number)</p></td>
-<td><p>Convert a numerical label to arc notation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number" title="hiperwalk.Graph.arc_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arc_number</span></code></a>(*args)</p></td>
-<td><p>Return the numerical label of the arc.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.arcs_with_tail.html#hiperwalk.Graph.arcs_with_tail" title="hiperwalk.Graph.arcs_with_tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arcs_with_tail</span></code></a>(tail)</p></td>
-<td><p>Return all arcs that have the given tail.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.adjacent.html#hiperwalk.Graph.adjacent" title="hiperwalk.Graph.adjacent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent</span></code></a>(u, v)</p></td>
+<td><p>Return True if vertex <code class="docutils literal notranslate"><span class="pre">u</span></code> is adjacent to <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.degree.html#hiperwalk.Graph.degree" title="hiperwalk.Graph.degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degree</span></code></a>(vertex)</p></td>
 <td><p>Return the degree of the given vertex.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix" title="hiperwalk.Graph.laplacian_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_matrix</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.is_simple.html#hiperwalk.Graph.is_simple" title="hiperwalk.Graph.is_simple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_simple</span></code></a>()</p></td>
+<td><p>Return True if instance of simple graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix" title="hiperwalk.Graph.laplacian_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_matrix</span></code></a>()</p></td>
 <td><p>Return the graph's Laplacian matrix.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors" title="hiperwalk.Graph.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code></a>(vertex)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors" title="hiperwalk.Graph.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neighbors</span></code></a>(vertex)</p></td>
 <td><p>Return all neighbors of the given vertex.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_arcs.html#hiperwalk.Graph.number_of_arcs" title="hiperwalk.Graph.number_of_arcs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_arcs</span></code></a>()</p></td>
-<td><p>Determine the cardinality of the arc set.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges" title="hiperwalk.Graph.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
 <td><p>Determine the cardinality of the edge set.</p></td>

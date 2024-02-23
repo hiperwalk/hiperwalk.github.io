@@ -1,6 +1,0 @@
-hiperwalk.Lattice.previous\_arc
-===============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.previous_arc

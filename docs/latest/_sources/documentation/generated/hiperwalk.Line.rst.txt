@@ -23,16 +23,19 @@ hiperwalk.Line
           ~Line.adjacency_matrix
        
        
+          ~Line.adjacent
+       
+       
           ~Line.arc
        
        
           ~Line.arc_number
        
        
-          ~Line.arcs_with_tail
-       
-       
           ~Line.degree
+       
+       
+          ~Line.is_simple
        
        
           ~Line.laplacian_matrix
@@ -42,9 +45,6 @@ hiperwalk.Line
        
        
           ~Line.next_arc
-       
-       
-          ~Line.number_of_arcs
        
        
           ~Line.number_of_edges

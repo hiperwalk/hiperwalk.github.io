@@ -1,0 +1,6 @@
+hiperwalk.Hypercube.is\_simple
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Hypercube.is_simple
