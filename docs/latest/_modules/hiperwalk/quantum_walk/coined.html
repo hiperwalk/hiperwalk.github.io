@@ -382,6 +382,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">.quantum_walk</span> <span class="kn">import</span> <span class="n">QuantumWalk</span>
+<span class="c1">#from ..graph import _sym_dir_multigraph</span>
+<span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">SDMultigraph</span>
 <span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
 <span class="k">try</span><span class="p">:</span>
@@ -409,8 +411,12 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    graph</span>
 <span class="sd">        Graph on which the quantum walk takes place.</span>
-<span class="sd">        It can be the graph itself (:class:`hiperwalk.graph.Graph`) or</span>
-<span class="sd">        its adjacency matrix (:class:`scipy.sparse.csr_array`).</span>
+<span class="sd">        Two types of entries are accepted:</span>
+
+<span class="sd">        * Simple graph (:class:`hiperwalk.graph.Graph`);</span>
+<span class="sd">        * Multigraph (:class:`hiperwalk.graph.Multigraph`);</span>
+
+<span class="sd">        A symmetric directed multigraph is created based on the input.</span>
 
 <span class="sd">    **kwargs : optional</span>
 <span class="sd">        Optional arguments for setting the non-default evolution operator.</span>
@@ -557,16 +563,19 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
+        <span class="c1"># create symmetric directed multigraph from input</span>
+        <span class="n">sdmg</span> <span class="o">=</span> <span class="n">SDMultigraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">sdmg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
+
+        <span class="c1"># Specific coined quantum walk attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_coin</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
 
-        <span class="c1"># Expects adjacency matrix with only 0 and 1 as entries</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-
+        <span class="c1"># create static dicts</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">):</span>
-            <span class="c1"># assign static attribute</span>
             <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;shift&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_shift</span><span class="p">),</span>
                 <span class="s1">&#39;coin&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_coin</span><span class="p">),</span>
