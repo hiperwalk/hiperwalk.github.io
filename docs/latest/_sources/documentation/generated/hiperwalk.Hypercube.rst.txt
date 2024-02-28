@@ -1,63 +1,6 @@
-﻿.. comment
-    adapted from networkx
-
-hiperwalk.Hypercube
+﻿hiperwalk.Hypercube
 ===================
 
 .. currentmodule:: hiperwalk
 
-.. autoclass:: Hypercube
-
-   
-   .. automethod:: __init__
-
-   
-   .. rubric:: Methods
-
-   .. autosummary::
-      :toctree: generated
-
-   
-       
-       
-          ~Hypercube.adjacency_matrix
-       
-       
-          ~Hypercube.adjacent
-       
-       
-          ~Hypercube.arc
-       
-       
-          ~Hypercube.arc_direction
-       
-       
-          ~Hypercube.arc_number
-       
-       
-          ~Hypercube.degree
-       
-       
-          ~Hypercube.dimension
-       
-       
-          ~Hypercube.is_simple
-       
-       
-          ~Hypercube.laplacian_matrix
-       
-       
-          ~Hypercube.neighbors
-       
-       
-          ~Hypercube.number_of_edges
-       
-       
-          ~Hypercube.number_of_vertices
-       
-       
-          ~Hypercube.vertex_number
-       
-
-   
-   
+.. autofunction:: Hypercube

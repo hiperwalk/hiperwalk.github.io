@@ -379,6 +379,7 @@ document.write(`
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span><span class="p">,</span> <span class="n">diags</span>
+<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -536,9 +537,12 @@ document.write(`
             <span class="k">return</span> <span class="n">index</span> <span class="o">-</span> <span class="n">start</span>
 
         <span class="c1"># indices is not in ascending order</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">neigh</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">neigh</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index</span> <span class="o">-</span> <span class="n">start</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vertices &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; and &quot;</span>
+                         <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">neigh</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; are not adjacent.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Graph.neighbors">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors">[docs]</a>

@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.adjacent
-============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.adjacent

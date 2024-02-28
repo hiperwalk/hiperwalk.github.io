@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.vertex\_number
-==================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.vertex_number
