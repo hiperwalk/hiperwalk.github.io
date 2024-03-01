@@ -458,7 +458,9 @@ document.write(`
 <span class="sd">        If the user wishes to keep the original ``adj_matrix``,</span>
 <span class="sd">        the argument ``copy`` must be set to ``True``.</span>
 
-
+<span class="sd">    .. todo::</span>
+<span class="sd">        check if it is more efficient to store adj_matrix as numpy array.</span>
+<span class="sd">        Add numpy array manipulation</span>
 
 <span class="sd">    The treatment of the graph depends on the quantum walk model. </span>
 <span class="sd">    .. todo::</span>
@@ -499,11 +501,8 @@ document.write(`
         <span class="c1"># if adj_matrix.has_sorted_index, probably scipy is more efficient.</span>
         <span class="c1"># if indices are not sorted, scipy probably does a linear search,</span>
         <span class="c1"># and a graph-dependent implementation may be more efficient.</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span> <span class="c1"># u or v is not a valid vertex</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
         <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 

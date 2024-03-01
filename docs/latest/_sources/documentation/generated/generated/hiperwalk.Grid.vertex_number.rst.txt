@@ -1,6 +1,0 @@
-hiperwalk.Grid.vertex\_number
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.vertex_number

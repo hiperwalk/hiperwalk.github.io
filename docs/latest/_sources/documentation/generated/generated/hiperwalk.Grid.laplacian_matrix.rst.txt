@@ -1,6 +1,0 @@
-hiperwalk.Grid.laplacian\_matrix
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.laplacian_matrix

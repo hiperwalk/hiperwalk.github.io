@@ -1,6 +1,0 @@
-hiperwalk.Grid.neighbors
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.neighbors

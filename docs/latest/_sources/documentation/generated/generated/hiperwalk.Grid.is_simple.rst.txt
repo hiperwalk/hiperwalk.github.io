@@ -1,6 +1,0 @@
-hiperwalk.Grid.is\_simple
-=========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.is_simple

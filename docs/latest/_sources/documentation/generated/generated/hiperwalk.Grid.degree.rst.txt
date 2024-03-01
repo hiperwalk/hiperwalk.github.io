@@ -1,6 +1,0 @@
-hiperwalk.Grid.degree
-=====================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.degree

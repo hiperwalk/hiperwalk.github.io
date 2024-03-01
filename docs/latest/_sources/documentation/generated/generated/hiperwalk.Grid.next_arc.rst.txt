@@ -1,6 +1,0 @@
-hiperwalk.Grid.next\_arc
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.next_arc
