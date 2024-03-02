@@ -405,7 +405,7 @@ document.write(`
 <span class="k">def</span> <span class="nf">__number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span>
 
-<span class="k">def</span> <span class="nf">__number_of_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">__number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span>
 
 <span class="k">def</span> <span class="nf">__degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
@@ -493,6 +493,7 @@ document.write(`
     <span class="n">g</span><span class="o">.</span><span class="n">_neighbor_index</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__neighbor_index</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">number_of_vertices</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_vertices</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_edges</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__dimension</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 

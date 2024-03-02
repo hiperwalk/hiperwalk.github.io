@@ -733,33 +733,39 @@ document.write(`
 
     <span class="n">graph</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
 
-    <span class="c1"># hiperwalk graph</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">Grid</span><span class="p">):</span>
+    <span class="c1"># Hiperwalk Grid</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;_euc_dim&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">graph</span><span class="o">.</span><span class="n">_euc_dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;plane&#39;</span>
         <span class="k">if</span> <span class="n">plot</span> <span class="o">==</span> <span class="s1">&#39;plane&#39;</span> <span class="ow">and</span> <span class="s1">&#39;dimensions&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">plot</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">Hypercube</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;graph&#39;</span>
+    <span class="c1"># Hiperwalk Hypercube</span>
+    <span class="n">is_hypercube</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">is_hypercube</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">graph</span><span class="o">.</span><span class="n">dimension</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
 
-            <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span>
-            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nx_graph</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">nx_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s2">&quot;subset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">bit_count</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                    <span class="n">nx_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s2">&quot;subset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_hypercube</span> <span class="ow">and</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;graph&#39;</span>
 
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">multipartite_layout</span><span class="p">(</span><span class="n">nx_graph</span><span class="p">)</span>
-            <span class="n">dim</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">dimension</span><span class="p">()</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx_graph</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;edge_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.002</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">dim</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;min_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;max_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nx_graph</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">nx_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s2">&quot;subset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">bit_count</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">nx_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s2">&quot;subset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">multipartite_layout</span><span class="p">(</span><span class="n">nx_graph</span><span class="p">)</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">dimension</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx_graph</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;edge_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.002</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">dim</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;min_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;max_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="s1">&#39;graph&#39;</span> <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">plot</span>
 
