@@ -1,6 +1,0 @@
-hiperwalk.Line.number\_of\_vertices
-===================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.number_of_vertices

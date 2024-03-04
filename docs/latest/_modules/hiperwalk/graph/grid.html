@@ -381,59 +381,6 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.square_lattice</span> <span class="kn">import</span> <span class="n">SquareLattice</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
 
-<span class="k">def</span> <span class="nf">_neighbor_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return arc direction.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    arc</span>
-<span class="sd">        Any of the following notations are acceptable.</span>
-<span class="sd">        </span>
-<span class="sd">        * ((int, int), (int, int))</span>
-<span class="sd">            Arc notation with vertices&#39; coordinates.</span>
-<span class="sd">        * (int, int)</span>
-<span class="sd">            Arc notation with vertices&#39; labels.</span>
-<span class="sd">        * int</span>
-<span class="sd">            Arc label.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    int</span>
-<span class="sd">        If natural (not diagonal) grid:</span>
-<span class="sd">            * 0: right</span>
-<span class="sd">            * 1: left</span>
-<span class="sd">            * 2: up</span>
-<span class="sd">            * 3: down</span>
-
-<span class="sd">        If diagonal grid:</span>
-<span class="sd">            * 0: right, up</span>
-<span class="sd">            * 1: right, down</span>
-<span class="sd">            * 2: left, up</span>
-<span class="sd">            * 3: left, down</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    Does not check if arc exists.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># dealing with coordinates</span>
-    <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-    <span class="n">neigh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">neigh</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="p">:</span>
-        <span class="n">x_diff</span> <span class="o">=</span> <span class="n">neigh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">y_diff</span> <span class="o">=</span> <span class="n">neigh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="p">(</span><span class="n">x_diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x_diff</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="p">(</span><span class="n">y_diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">y_diff</span> <span class="o">==</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span>
-
-    <span class="n">y</span> <span class="o">=</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">neigh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">neigh</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
-         <span class="k">if</span> <span class="n">y</span> <span class="k">else</span>
-         <span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">neigh</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
-
 <div class="viewcode-block" id="Grid">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Grid.html#hiperwalk.Grid">[docs]</a>
 <span class="k">def</span> <span class="nf">Grid</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -619,7 +566,7 @@ document.write(`
                           <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 
     <span class="n">g</span> <span class="o">=</span> <span class="n">SquareLattice</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">periodic</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">_neighbor_index</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">_neighbor_index</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="c1"># g._neighbor_index = MethodType(_neighbor_index, g)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="n">diagonal</span>
 
     <span class="k">return</span> <span class="n">g</span></div>

@@ -1,6 +1,0 @@
-hiperwalk.Cycle.vertex\_number
-==============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.vertex_number

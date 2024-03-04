@@ -1,6 +1,0 @@
-hiperwalk.Line.next\_arc
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.next_arc

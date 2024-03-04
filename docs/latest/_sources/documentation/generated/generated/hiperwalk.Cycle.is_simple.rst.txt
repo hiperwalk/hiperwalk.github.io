@@ -1,6 +1,0 @@
-hiperwalk.Cycle.is\_simple
-==========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.is_simple

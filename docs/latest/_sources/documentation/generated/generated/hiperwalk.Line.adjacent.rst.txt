@@ -1,6 +1,0 @@
-hiperwalk.Line.adjacent
-=======================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.adjacent

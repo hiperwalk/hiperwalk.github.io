@@ -1,6 +1,0 @@
-hiperwalk.Cycle.laplacian\_matrix
-=================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.laplacian_matrix

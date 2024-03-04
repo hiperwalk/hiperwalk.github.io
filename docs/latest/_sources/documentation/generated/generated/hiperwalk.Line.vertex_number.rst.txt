@@ -1,6 +1,0 @@
-hiperwalk.Line.vertex\_number
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.vertex_number

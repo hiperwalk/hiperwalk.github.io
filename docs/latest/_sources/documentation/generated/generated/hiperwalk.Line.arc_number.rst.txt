@@ -1,6 +1,0 @@
-hiperwalk.Line.arc\_number
-==========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.arc_number

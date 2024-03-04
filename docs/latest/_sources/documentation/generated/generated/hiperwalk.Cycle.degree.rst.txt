@@ -1,6 +1,0 @@
-hiperwalk.Cycle.degree
-======================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.degree

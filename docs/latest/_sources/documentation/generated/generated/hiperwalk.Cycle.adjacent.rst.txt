@@ -1,6 +1,0 @@
-hiperwalk.Cycle.adjacent
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.adjacent

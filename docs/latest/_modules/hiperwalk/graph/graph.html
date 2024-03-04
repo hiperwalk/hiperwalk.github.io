@@ -422,7 +422,7 @@ document.write(`
 <span class="sd">    It is used to improve the time complexity of the search process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">elem</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The element is less than&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The element is less than &quot;</span>
                          <span class="o">+</span> <span class="s2">&quot;the minimum value in the array.&quot;</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -542,11 +542,39 @@ document.write(`
         <span class="c1"># if adj_matrix.has_sorted_index, probably scipy is more efficient.</span>
         <span class="c1"># if indices are not sorted, scipy probably does a linear search,</span>
         <span class="c1"># and a graph-dependent implementation may be more efficient.</span>
+        <span class="c1"># If adj_matrix.has_sorted_index and</span>
+        <span class="c1"># scipy does not do binary search, implement it.</span>
+
+        <span class="c1"># this function is reimplemented because data=None</span>
+        <span class="c1"># to use less memory</span>
         <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
+
+        <span class="k">if</span> <span class="n">has_sorted_indices</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">],</span>
+                                    <span class="n">end</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+
         <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 
+
+    <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the corresponding line and columns of the given entry.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The adjacency matrix is not stored as a list of 1&#39;s.</span>
+<span class="sd">        Instead, each entry represents the number of ones up</span>
+<span class="sd">        to that point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
+
+        <span class="n">head</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">_interval_binary_search</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_neighbor_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
