@@ -559,6 +559,17 @@ document.write(`
         <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 
 
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;entry&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">lin</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">lin</span><span class="p">])</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">lin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;indptr&quot;</span><span class="p">)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">entry</span> <span class="o">+</span> <span class="n">offset</span>
+
     <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the corresponding line and columns of the given entry.</span>
