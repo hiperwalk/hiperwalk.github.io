@@ -1,0 +1,6 @@
+hiperwalk.Graph.number\_of\_loops
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.number_of_loops

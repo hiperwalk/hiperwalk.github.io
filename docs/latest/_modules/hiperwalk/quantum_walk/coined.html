@@ -618,13 +618,19 @@ document.write(`
 <span class="sd">        The operator is configured for future use. If an evolution</span>
 <span class="sd">        operator was set earlier, it will be unset to maintain coherence.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
+        <span class="n">num_vert</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+        <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
 
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-
-        <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
-                  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">is_underlying_simple</span><span class="p">():</span>
+            <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_multiedges</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))]</span>
 
         <span class="c1"># Using csr_array((data, indices, indptr), shape)</span>
         <span class="c1"># Note that there is only one entry per row and column</span>

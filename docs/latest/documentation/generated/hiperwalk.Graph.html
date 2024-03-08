@@ -344,6 +344,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html">hiperwalk.Graph.laplacian_matrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.neighbors.html">hiperwalk.Graph.neighbors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html">hiperwalk.Graph.number_of_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_loops.html">hiperwalk.Graph.number_of_loops</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html">hiperwalk.Graph.number_of_vertices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html">hiperwalk.Graph.vertex_number</a></li>
 </ul>
@@ -499,7 +500,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
-<dd><p>Constructs an arbitrary graph.</p>
+<dd><p>Constructs an arbitrary simple graph with loops.</p>
 <p>This class defines the graph structure used for implementing a 
 quantum walk. It encapsulates all necessary properties 
 and functionalities of the graph 
@@ -550,6 +551,7 @@ such as hypercubes and lattices.</p>
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is sparse and <code class="docutils literal notranslate"><span class="pre">copy=False</span></code>,
 the argument will be changed for more efficient manipulation.</p>
+<p>Each vertex has at most one loop.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>To reduce memory usage, <code class="docutils literal notranslate"><span class="pre">adj_matrix.data</span></code> is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.
@@ -597,10 +599,13 @@ Add numpy array manipulation</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges" title="hiperwalk.Graph.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
 <td><p>Determine the cardinality of the edge set.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices" title="hiperwalk.Graph.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_loops.html#hiperwalk.Graph.number_of_loops" title="hiperwalk.Graph.number_of_loops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_loops</span></code></a>()</p></td>
+<td><p>Return the number of loops in the graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices" title="hiperwalk.Graph.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
 <td><p>Determine the cardinality of the vertex set.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number" title="hiperwalk.Graph.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number" title="hiperwalk.Graph.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
 <td><p>Return the vertex number given any vertex representation.</p></td>
 </tr>
 </tbody>

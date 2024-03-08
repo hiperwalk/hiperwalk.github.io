@@ -41,6 +41,9 @@ hiperwalk.Graph
           ~Graph.number_of_edges
        
        
+          ~Graph.number_of_loops
+       
+       
           ~Graph.number_of_vertices
        
        

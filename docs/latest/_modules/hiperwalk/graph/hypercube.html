@@ -488,6 +488,7 @@ document.write(`
     <span class="c1"># Binding particular attributes and methods</span>
     <span class="c1"># TODO: add to docs</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="n">g</span><span class="o">.</span><span class="n">adjacent</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__adjacent</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_neighbor_index</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__neighbor_index</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>

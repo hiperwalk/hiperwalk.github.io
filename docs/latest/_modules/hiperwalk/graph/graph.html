@@ -383,14 +383,14 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function expects a sorted array and performs a binary search on the subarray </span>
-<span class="sd">    v[start:end], looking for the element &#39;elem&#39;. </span>
-<span class="sd">    If the element is found, the function returns the index of the element. </span>
-<span class="sd">    If the element is not found, the function returns -1.    </span>
-<span class="sd">    This is an implementation of binary search following Cormen&#39;s algorithm. </span>
+<span class="sd">    This function expects a sorted array and</span>
+<span class="sd">    performs a binary search on the subarray</span>
+<span class="sd">    v[start:end], looking for the element &#39;elem&#39;.</span>
+<span class="sd">    If the element is found, the function returns the index of the element.</span>
+<span class="sd">    If the element is not found, the function returns -1.</span>
+<span class="sd">    This binary search implementation follows Cormen&#39;s algorithm.</span>
 <span class="sd">    It is used to improve the time complexity of the search process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">end</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     
@@ -413,17 +413,14 @@ document.write(`
 <span class="sd">    and less than the element of index i+1,</span>
 <span class="sd">    the function returns i.</span>
 <span class="sd">    If the element is less than the minimum value in the array,</span>
-<span class="sd">    the function raises a ValueError.</span>
+<span class="sd">    the function `start - 1`.</span>
 <span class="sd">    If the element is greater or equal than the maximum</span>
 <span class="sd">    value in the array,</span>
 <span class="sd">    the function returns the index of the maximum value.</span>
-<span class="sd">    If, for some reason, the element is not found,</span>
-<span class="sd">    the function returns -1.</span>
 <span class="sd">    It is used to improve the time complexity of the search process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">elem</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The element is less than &quot;</span>
-                         <span class="o">+</span> <span class="s2">&quot;the minimum value in the array.&quot;</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
     
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -441,14 +438,13 @@ document.write(`
             <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span>
-    <span class="k">return</span> <span class="n">index</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-
+    <span class="k">return</span> <span class="n">index</span>
 
 <div class="viewcode-block" id="Graph">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph">[docs]</a>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary graph.</span>
+<span class="sd">    Constructs an arbitrary simple graph with loops.</span>
 
 <span class="sd">    This class defines the graph structure used for implementing a </span>
 <span class="sd">    quantum walk. It encapsulates all necessary properties </span>
@@ -490,6 +486,8 @@ document.write(`
 <span class="sd">    If ``adj_matrix`` is sparse and ``copy=False``,</span>
 <span class="sd">    the argument will be changed for more efficient manipulation.</span>
 
+<span class="sd">    Each vertex has at most one loop.</span>
+
 <span class="sd">    .. warning::</span>
 
 <span class="sd">        To reduce memory usage, ``adj_matrix.data`` is set to ``None``.</span>
@@ -526,6 +524,11 @@ document.write(`
 
         <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
             <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+                 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">loops</span>
 
         <span class="k">del</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span>
         <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
@@ -645,7 +648,18 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determine the cardinality of the edge set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></div>
+        <span class="n">non_loops</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span>
+        <span class="n">num_edges</span> <span class="o">=</span> <span class="n">non_loops</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+        <span class="k">return</span>  <span class="n">num_edges</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
+
+
+<div class="viewcode-block" id="Graph.number_of_loops">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_loops.html#hiperwalk.Graph.number_of_loops">[docs]</a>
+    <span class="k">def</span> <span class="nf">number_of_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of loops in the graph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
 
 
 <div class="viewcode-block" id="Graph.degree">
