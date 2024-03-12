@@ -390,18 +390,12 @@ document.write(`
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
-<span class="c1"># TODO: move to constants</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
-
-
-<span class="c1"># TODO: add option for changing dpi</span>
 <span class="c1"># histogram is alias for bar width=1</span>
 <div class="viewcode-block" id="plot_probability_distribution">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_probability_distribution</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">animate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot the probability distributions of quantum walk states.</span>
 
@@ -479,8 +473,10 @@ document.write(`
 <span class="sd">        If ``True``, each quantum walk step is used as an animation frame.</span>
 <span class="sd">    interval : int, default=250</span>
 <span class="sd">        Time in milliseconds that each frame is shown if ``animate==True``.</span>
-<span class="sd">    figsize : tuple, default=None</span>
+<span class="sd">    figsize : tuple, default=(12, 10)</span>
 <span class="sd">        Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</span>
+<span class="sd">    dpi : float, default=100</span>
+<span class="sd">        Figure resolution in dots-per-inch.</span>
 
 <span class="sd">    **kwargs : dict, optional</span>
 <span class="sd">        Extra arguments to further customize plotting.</span>
@@ -584,14 +580,12 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Figure size</span>
 
-    <span class="n">fig_width</span> <span class="o">=</span> <span class="n">fig_height</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">figsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span> <span class="o">=</span> <span class="n">figsize</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s1">&#39;figsize must be a tuple in the format (WIDTH, HEIGHT)&#39;</span>
-            <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span> <span class="o">=</span> <span class="n">figsize</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;figsize must be a tuple in the format (WIDTH, HEIGHT)&#39;</span>
+        <span class="p">)</span>
 
     <span class="c1"># passes kwargs by reference to be updated accordingly</span>
 
@@ -652,9 +646,9 @@ document.write(`
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)):</span>
             <span class="c1"># TODO: set figure size according to graph dimensions</span>
             <span class="c1"># TODO: check for kwargs</span>
-            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">configs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                    <span class="n">fig_width</span><span class="o">=</span><span class="n">fig_width</span><span class="p">,</span>
-                                    <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">)</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">configs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">fig_width</span><span class="o">=</span><span class="n">fig_width</span><span class="p">,</span>
+                                    <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">,</span>
+                                    <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
 
             <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -671,9 +665,9 @@ document.write(`
                 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">configs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                <span class="n">fig_width</span><span class="o">=</span><span class="n">fig_width</span><span class="p">,</span>
-                                <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">)</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">configs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">fig_width</span><span class="o">=</span><span class="n">fig_width</span><span class="p">,</span>
+                                <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">,</span>
+                                <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">plot</span> <span class="o">==</span> <span class="s1">&#39;plane&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
@@ -841,7 +835,7 @@ document.write(`
     <span class="n">_configure_nodes</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">],</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_configure_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set basic figure configuration.</span>
 
@@ -862,24 +856,18 @@ document.write(`
 <span class="sd">    ax : current figure axes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1">#TODO: set figure size according to graph dimensions</span>
-    <span class="k">if</span> <span class="n">fig_width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig_width</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">fig_height</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig_height</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">))</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
 
-<span class="k">def</span> <span class="nf">_configure_plot_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_configure_plot_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set basic figure configuration for matplotlib plots.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">_configure_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Vertex&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -889,21 +877,20 @@ document.write(`
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
 
-<span class="k">def</span> <span class="nf">_configure_graph_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">fig_height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">_configure_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_configure_graph_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span>
+                            <span class="n">fig_height</span><span class="p">,</span>
+                            <span class="n">dpi</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_configure_plane_figure</span><span class="p">(</span><span class="n">num_vert</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                           <span class="n">fig_height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">fig_width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig_width</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">fig_height</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig_height</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">_configure_plane_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span>
+                            <span class="n">fig_height</span><span class="p">,</span>
+                            <span class="n">dpi</span><span class="p">):</span>
 
     <span class="c1">#fig, ax =_configure_figure(num_vert, fig_width, fig_height) </span>
     <span class="c1">#ax = fig.add_subplot(projection=&#39;3d&#39;)</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">),</span>
-                           <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="s2">&quot;3d&quot;</span><span class="p">})</span>
+                           <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="s2">&quot;3d&quot;</span><span class="p">},</span>
+                           <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Vertex X&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -1347,7 +1334,7 @@ document.write(`
 
 <div class="viewcode-block" id="plot_success_probability">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_success_probability.html#hiperwalk.plot_success_probability">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot the success probability over time.</span>
 
@@ -1363,6 +1350,10 @@ document.write(`
 <span class="sd">        Success probabilities with respect to ``time``,</span>
 <span class="sd">        such that ``probabilities[i]`` corresponds to ``i``-th</span>
 <span class="sd">        timestamp described by ``time``.</span>
+<span class="sd">    figsize : tuple, default=(12, 10)</span>
+<span class="sd">        Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</span>
+<span class="sd">    dpi : float, default=100</span>
+<span class="sd">        Figure resolution in dots-per-inch.</span>
 
 <span class="sd">    **kwargs:</span>
 <span class="sd">        Additional arguments to customize plot.</span>
@@ -1374,6 +1365,17 @@ document.write(`
 <span class="sd">    QuantumWalk.success_probability</span>
 <span class="sd">    matplotlib.pyplot.plot</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Figure size</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span> <span class="o">=</span> <span class="n">figsize</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;figsize must be a tuple in the format (WIDTH, HEIGHT)&#39;</span>
+        <span class="p">)</span>
+
+    <span class="n">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>
 
     <span class="n">time</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_time_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
     <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -1398,13 +1400,24 @@ document.write(`
 <div class="viewcode-block" id="plot_function">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_function.html#hiperwalk.plot_function">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="n">y_label</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
-                  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                  <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># TODO: any situation where *y_args and **y_kwargs are iterable?</span>
 
     <span class="c1"># y_vals = [y_func(qw, *y_args, **y_kwargs) for qw in qw_gen]</span>
     <span class="c1"># plt.plot(x_arg, y_vals)</span>
     <span class="c1"># plt.show()</span>
     <span class="c1">#######################################</span>
+    <span class="c1"># Figure size</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span> <span class="o">=</span> <span class="n">figsize</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;figsize must be a tuple in the format (WIDTH, HEIGHT)&#39;</span>
+        <span class="p">)</span>
+
+    <span class="n">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
         <span class="n">x_vals</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
 
