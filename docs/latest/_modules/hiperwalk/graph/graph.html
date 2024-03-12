@@ -420,7 +420,7 @@ document.write(`
 <span class="sd">    It is used to improve the time complexity of the search process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">elem</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
-        <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
     
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -467,6 +467,9 @@ document.write(`
 
 <span class="sd">    copy : bool, default=False</span>
 <span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
+<span class="sd">        If ``False``,</span>
+<span class="sd">        the pointer to ``adj_matrix`` is stored and</span>
+<span class="sd">        the ``adj_matrix``&#39;s data is changed.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -525,7 +528,7 @@ document.write(`
         <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
             <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
                  <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">loops</span>

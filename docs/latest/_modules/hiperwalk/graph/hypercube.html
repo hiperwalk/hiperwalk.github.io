@@ -397,6 +397,11 @@ document.write(`
 
     <span class="c1"># it is supposed that vertex and neigh are adjacent</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">vertex</span> <span class="o">^</span> <span class="n">neigh</span>
+
+    <span class="c1"># numpy integers do not have bit_length</span>
+    <span class="c1"># TODO: check if it is faster fo convert or to calculate</span>
+    <span class="c1"># np.ceil(np.log2(x + 1)).astype(int)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
 
 <span class="k">def</span> <span class="nf">__degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
