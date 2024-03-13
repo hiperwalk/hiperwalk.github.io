@@ -517,7 +517,7 @@ document.write(`
                  <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__manipulate_adj_matrix_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
         <span class="k">del</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span>
         <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
@@ -545,7 +545,7 @@ document.write(`
             <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__count_loops</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__manipulate_adj_matrix_data</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_adj_matrix</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Graph.adjacent">
@@ -555,7 +555,8 @@ document.write(`
 <span class="sd">        Return True if vertex ``u`` is adjacent to ``v``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: check implementation of adj_matrix[u, v]</span>
-        <span class="c1"># if adj_matrix.has_sorted_index, probably scipy is more efficient.</span>
+        <span class="c1"># if adj_matrix.has_sorted_indices,</span>
+        <span class="c1"># probably scipy is more efficient.</span>
         <span class="c1"># if indices are not sorted, scipy probably does a linear search,</span>
         <span class="c1"># and a graph-dependent implementation may be more efficient.</span>
         <span class="c1"># If adj_matrix.has_sorted_index and</span>
@@ -808,10 +809,6 @@ document.write(`
 <span class="sd">                \deg(v_i), &amp; \text{if } i = j\\</span>
 <span class="sd">                0, &amp; \text{otherwise}.</span>
 <span class="sd">            \end{cases}</span>
-
-<span class="sd">        The degree is calculated by the :meth:`hiperwalk.Graph.degree`</span>
-<span class="sd">        method.</span>
-<span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
         <span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -835,7 +832,40 @@ document.write(`
 <span class="sd">            Decide if simple graph implementation accepts loops.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span></div>
-</div>
+
+
+    <span class="k">def</span> <span class="nf">__rearrange_matrix_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rearrange `matrix.indices` accoring to the</span>
+<span class="sd">        Graph&#39;s neighbor order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check if `has_sorted_indices` changes&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">has_sorted_indices</span><span class="p">)</span>
+
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">indices</span>
+        <span class="n">adj_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="c1"># find right position</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="c1"># swap indices</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+
+                    <span class="c1"># swap data</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">has_sorted_indices</span><span class="p">)</span></div>
 
 </pre></div>
 
