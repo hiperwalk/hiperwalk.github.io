@@ -504,7 +504,7 @@ document.write(`
 <h1>hiperwalk.QuantumWalk.max_success_probability<a class="headerlink" href="#hiperwalk-quantumwalk-max-success-probability" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.QuantumWalk.max_success_probability">
-<span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">max_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.max_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.max_success_probability" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">max_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HPC.CPU</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.max_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.max_success_probability" title="Link to this definition">#</a></dt>
 <dd><p>Find the maximum success probability.</p>
 <p>This method returns the success probability that corresponds 
 to the optimal running time.</p>
@@ -518,9 +518,9 @@ If <code class="docutils literal notranslate"><span class="pre">None</span></cod
 to be saved by the simulation.
 See <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in <a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
 </dd>
-<dt><strong>hpc</strong><span class="classifier">boolean</span></dt><dd><p>Whether or not to use high-performance computing
-to perform matrix multiplications.
-If <code class="docutils literal notranslate"><span class="pre">hpc=False</span></code> uses standalone python.</p>
+<dt><strong>hpc</strong><span class="classifier">Enum</span></dt><dd><p>Whether or not to use high-performance computing
+to perform matrix multiplications using CPU or GPU.
+If <code class="docutils literal notranslate"><span class="pre">hpc=HPC.NONE</span></code> uses standalone python.</p>
 </dd>
 </dl>
 </dd>
