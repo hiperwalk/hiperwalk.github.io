@@ -382,9 +382,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">.quantum_walk</span> <span class="kn">import</span> <span class="n">QuantumWalk</span>
-<span class="c1">#from ..graph import _sym_dir_multigraph</span>
 <span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">SDMultigraph</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span><span class="p">,</span> <span class="n">HPC</span>
+<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
@@ -743,7 +742,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="n">HPC</span><span class="o">.</span><span class="n">CPU</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the shift operator.</span>
 
@@ -759,10 +758,11 @@ document.write(`
 <span class="sd">            Argument ``&#39;ff&#39;`` is an alias for ``&#39;flipflop&#39;``.</span>
 <span class="sd">            Argument ``&#39;p&#39;`` is an alias for ``&#39;persistent&#39;``.</span>
 
-<span class="sd">        hpc: Enum, default=HPC.CPU</span>
+<span class="sd">        hpc: str, default=None</span>
 <span class="sd">            Whether or not the evolution operator should be</span>
 <span class="sd">            updated using nelina&#39;s high-performance computing with</span>
 <span class="sd">            CPU or GPU.</span>
+<span class="sd">            If ``None``, Python&#39;s matrix multiplation is used.</span>
 <span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        Raises</span>
@@ -913,7 +913,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="n">HPC</span><span class="o">.</span><span class="n">CPU</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
@@ -959,10 +959,11 @@ document.write(`
 <span class="sd">            * :class:`scipy.sparse.csr_array`</span>
 <span class="sd">                The explicit coin operator.</span>
 
-<span class="sd">        hpc: Enum, default=HPC.CPU</span>
+<span class="sd">        hpc: str, default=None</span>
 <span class="sd">            Whether or not the evolution operator should be</span>
 <span class="sd">            updated using nelina&#39;s high-performance computing</span>
 <span class="sd">            CPU or GPU.</span>
+<span class="sd">            If ``None``, Python&#39;s matrix multiplation is used.</span>
 <span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        See Also</span>
@@ -1154,7 +1155,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_marked">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="n">hpc</span><span class="o">=</span><span class="n">HPC</span><span class="o">.</span><span class="n">CPU</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the marked vertices.</span>
 
@@ -1182,10 +1183,11 @@ document.write(`
 <span class="sd">                ``{coin_type : list_of_vertices}``.</span>
 <span class="sd">                Analogous to the one accepted by :meth:`set_coin`.</span>
 
-<span class="sd">        hpc: Enum, default=HPC.CPU</span>
+<span class="sd">        hpc: str, default=None</span>
 <span class="sd">            Whether or not the evolution operator should be</span>
 <span class="sd">            updated using nelina&#39;s high-performance computing</span>
 <span class="sd">            using CPU or GPU.</span>
+<span class="sd">            If ``None``, Python&#39;s matrix multiplation is used.</span>
 <span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for details.</span>
 
 <span class="sd">        See Also</span>
@@ -1266,18 +1268,20 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="n">coin_list</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="n">HPC</span><span class="o">.</span><span class="n">CPU</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># TODO: Check if matrix is sparse in pynelibna interface</span>
+        <span class="c1"># TODO: Check if matrices are deleted from memory and GPU.</span>
         <span class="n">U</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pyneblina_imported</span><span class="p">():</span>
-            <span class="n">hpc</span> <span class="o">=</span> <span class="n">HPC</span><span class="o">.</span><span class="n">NONE</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pyneblina_imported</span><span class="p">():</span>
+            <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">()</span>
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">hpc</span> <span class="o">!=</span> <span class="n">HPC</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
 
+            <span class="c1"># TODO: implement sparse matrix multiplication with hpc</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
             <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
 
@@ -1301,7 +1305,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_evolution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="n">HPC</span><span class="o">.</span><span class="n">CPU</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the evolution operator.</span>
 
@@ -1327,10 +1331,11 @@ document.write(`
 <span class="sd">            Accepts any valid keywords from</span>
 <span class="sd">            :meth:`set_shift` :meth:`set_coin`, and :meth:`set_marked`.</span>
 
-<span class="sd">        hpc : Enum, default=HPC.CPU</span>
+<span class="sd">        hpc : str, default=None</span>
 <span class="sd">            Whether or not the evolution operator should be</span>
 <span class="sd">            constructed using nelina&#39;s high-performance computing</span>
 <span class="sd">            using CPU or GPU.</span>
+<span class="sd">            If ``None``, Python&#39;s matrix multiplation is used.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1357,13 +1362,12 @@ document.write(`
 <span class="sd">        vertex will be substituted based on the most recent </span>
 <span class="sd">        :meth:`set_marked` invocation.</span>
 
-<span class="sd">        .. todo::</span>
-<span class="sd">            * Sparse matrix multipliation is not supported yet.</span>
-<span class="sd">              Converting all matrices to dense.</span>
-<span class="sd">              Then converting back to sparse.</span>
-<span class="sd">              This uses unnecessary memory and computational time.</span>
-<span class="sd">            * Check if matrix is sparse in pynelibna interface</span>
-<span class="sd">            * Check if matrices are deleted from memory and GPU.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            Sparse matrix multipliation is not supported yet.</span>
+<span class="sd">            Converting all matrices to dense.</span>
+<span class="sd">            Then converting back to sparse.</span>
+<span class="sd">            This uses unnecessary memory and computational time.</span>
 
 
 <span class="sd">        References</span>
@@ -1577,7 +1581,7 @@ document.write(`
 
 
     <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="o">!=</span> <span class="n">HPC</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">())</span>
             <span class="n">C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">())</span>
@@ -1590,13 +1594,11 @@ document.write(`
 
             <span class="k">return</span> <span class="n">dtype</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_simulate_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="o">!=</span> <span class="n">HPC</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
-            <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>

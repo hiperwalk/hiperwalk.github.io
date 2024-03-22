@@ -505,7 +505,7 @@ document.write(`
 <h1>hiperwalk.Coined.set_shift<a class="headerlink" href="#hiperwalk-coined-set-shift" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.set_shift">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">set_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HPC.CPU</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.set_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.set_shift" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">set_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.set_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.set_shift" title="Link to this definition">#</a></dt>
 <dd><p>Set the shift operator.</p>
 <p>Defines either the flipflop or the persistent shift operator.
 Following this, the evolution operator updates accordingly.</p>
@@ -518,9 +518,10 @@ otherwise creates the flip flop shift.
 Argument <code class="docutils literal notranslate"><span class="pre">'ff'</span></code> is an alias for <code class="docutils literal notranslate"><span class="pre">'flipflop'</span></code>.
 Argument <code class="docutils literal notranslate"><span class="pre">'p'</span></code> is an alias for <code class="docutils literal notranslate"><span class="pre">'persistent'</span></code>.</p>
 </dd>
-<dt><strong>hpc: Enum, default=HPC.CPU</strong></dt><dd><p>Whether or not the evolution operator should be
+<dt><strong>hpc: str, default=None</strong></dt><dd><p>Whether or not the evolution operator should be
 updated using nelina’s high-performance computing with
 CPU or GPU.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, Python’s matrix multiplation is used.
 See <a class="reference internal" href="hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution" title="hiperwalk.Coined.set_evolution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.set_evolution()</span></code></a> for details.</p>
 </dd>
 </dl>

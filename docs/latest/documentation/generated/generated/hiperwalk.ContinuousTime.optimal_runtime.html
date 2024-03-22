@@ -504,7 +504,7 @@ document.write(`
 <h1>hiperwalk.ContinuousTime.optimal_runtime<a class="headerlink" href="#hiperwalk-continuoustime-optimal-runtime" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.optimal_runtime">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">optimal_runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HPC.CPU</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.optimal_runtime" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">optimal_runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.optimal_runtime" title="Link to this definition">#</a></dt>
 <dd><p>Find the optimal running time of a quantum-walk-based search.</p>
 <p>This method simulates the use of the <code class="docutils literal notranslate"><span class="pre">set_evolution</span></code> operator,
 taking the <code class="docutils literal notranslate"><span class="pre">state</span></code> as an input for the simulation. It then
@@ -522,9 +522,9 @@ If <code class="docutils literal notranslate"><span class="pre">None</span></cod
 to be saved by the simulation.
 See <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in <a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate" title="hiperwalk.ContinuousTime.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
 </dd>
-<dt><strong>hpc</strong><span class="classifier">Enum</span></dt><dd><p>Whether or not to use high-performance computing
+<dt><strong>hpc</strong><span class="classifier">str, default=None</span></dt><dd><p>Whether or not to use high-performance computing
 to perform matrix multiplications using CPU or GPU.
-If <code class="docutils literal notranslate"><span class="pre">hpc=HPC.NONE</span></code> uses standalone python.</p>
+If <code class="docutils literal notranslate"><span class="pre">hpc=None</span></code> uses standalone python.</p>
 </dd>
 </dl>
 </dd>
