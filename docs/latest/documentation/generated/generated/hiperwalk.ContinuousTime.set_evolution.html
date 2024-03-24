@@ -505,7 +505,7 @@ document.write(`
 <h1>hiperwalk.ContinuousTime.set_evolution<a class="headerlink" href="#hiperwalk-continuoustime-set-evolution" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.set_evolution">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_evolution" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_evolution" title="Link to this definition">#</a></dt>
 <dd><p>Set the evolution operator.</p>
 <p>This method defines the evolution operator for a specified 
 time t via the argument <code class="docutils literal notranslate"><span class="pre">time=t</span></code>.
@@ -518,11 +518,6 @@ and gamma is less than 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>hpc</strong><span class="classifier">str, default=None</span></dt><dd><p>Determines whether or not to use neblina HPC 
-functions to generate the evolution operator
-using CPU or GPU.
-If <code class="docutils literal notranslate"><span class="pre">None</span></code>, Python’s matrix multiplation is used.</p>
-</dd>
 <dt><strong>**kwargs</strong></dt><dd><p>Additional arguments for setting Hamiltonian and time.
 If omitted, the default arguments are used.
 See <a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.set_hamiltonian()</span></code></a>,

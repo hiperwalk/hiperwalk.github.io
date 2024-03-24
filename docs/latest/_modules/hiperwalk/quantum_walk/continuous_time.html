@@ -925,7 +925,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.set_evolution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the evolution operator.</span>
 
@@ -940,12 +940,6 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        hpc : str, default=None</span>
-<span class="sd">            Determines whether or not to use neblina HPC </span>
-<span class="sd">            functions to generate the evolution operator</span>
-<span class="sd">            using CPU or GPU.</span>
-<span class="sd">            If ``None``, Python&#39;s matrix multiplation is used.</span>
-
 <span class="sd">        **kwargs :</span>
 <span class="sd">            Additional arguments for setting Hamiltonian and time.</span>
 <span class="sd">            If omitted, the default arguments are used.</span>
@@ -1005,8 +999,7 @@ document.write(`
 
 <div class="viewcode-block" id="ContinuousTime.simulate">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate">[docs]</a>
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analogous to :meth:`hiperwalk.QuantumWalk.simulate`,</span>
 <span class="sd">        which accepts float entries for the ``time`` parameter.</span>
@@ -1051,7 +1044,7 @@ document.write(`
                 <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
                 <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">time</span><span class="p">]</span>
 
-        <span class="n">states</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">)</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">states</span></div>
 
 
