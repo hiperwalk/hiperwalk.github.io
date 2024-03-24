@@ -1303,12 +1303,12 @@ document.write(`
                            <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
                            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
-    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmap</span> <span class="c1"># reinserts into kwargs</span>
 
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmap</span> <span class="c1"># reinserts into kwargs</span>
     <span class="k">if</span> <span class="n">cbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">mappable</span><span class="p">,</span>
                             <span class="n">shrink</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-                            <span class="n">pad</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+                            <span class="n">pad</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cbar</span><span class="o">.</span><span class="n">update_normal</span><span class="p">(</span><span class="n">mappable</span><span class="p">)</span>
 
