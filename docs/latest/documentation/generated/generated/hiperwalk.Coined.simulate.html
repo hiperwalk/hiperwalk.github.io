@@ -505,7 +505,7 @@ document.write(`
 <h1>hiperwalk.Coined.simulate<a class="headerlink" href="#hiperwalk-coined-simulate" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.simulate">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hpc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.simulate" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.simulate" title="Link to this definition">#</a></dt>
 <dd><p>Simulates the quantum walk.</p>
 <p>The simulation progresses by iteratively applying 
 the evolution operator to the outcome of its prior 
@@ -539,10 +539,6 @@ that is a multiple of <code class="docutils literal notranslate"><span class="pr
 </dd>
 <dt><strong>state</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>, default=None</span></dt><dd><p>The starting state onto which the evolution operator
 will be applied.</p>
-</dd>
-<dt><strong>hpc</strong><span class="classifier">str, default=None</span></dt><dd><p>Indicates whether to utilize high-performance computing
-for matrix multiplication using CPU or GPU.
-If set to <code class="docutils literal notranslate"><span class="pre">hpc=None</span></code>, it will use standalone Python.</p>
 </dd>
 <dt><strong>initial_state</strong></dt><dd></dd>
 </dl>

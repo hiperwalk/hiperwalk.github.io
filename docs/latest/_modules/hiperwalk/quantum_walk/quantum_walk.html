@@ -382,14 +382,11 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">modules</span> <span class="k">as</span> <span class="n">sys_modules</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span>
+<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
-<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-    <span class="n">warn</span><span class="p">(</span><span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
 
 <div class="viewcode-block" id="QuantumWalk">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.QuantumWalk.html#hiperwalk.QuantumWalk">[docs]</a>
@@ -852,24 +849,15 @@ document.write(`
         <span class="k">return</span> <span class="n">ket</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_pyneblina_imported</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Expects pyneblina interface to be imported as nbl</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;hiperwalk.quantum_walk._pyneblina_interface&#39;</span>
-                <span class="ow">in</span> <span class="n">sys_modules</span><span class="p">)</span>
-
-
     <span class="c1">######################################</span>
     <span class="c1">### Auxiliary Simulation functions ###</span>
     <span class="c1">######################################</span>
 
     <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
@@ -918,8 +906,7 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.simulate">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
@@ -949,11 +936,6 @@ document.write(`
 <span class="sd">        state : :class:`numpy.array`, default=None</span>
 <span class="sd">            The starting state onto which the evolution operator</span>
 <span class="sd">            will be applied.</span>
-
-<span class="sd">        hpc : str, default=None</span>
-<span class="sd">            Indicates whether to utilize high-performance computing</span>
-<span class="sd">            for matrix multiplication using CPU or GPU.</span>
-<span class="sd">            If set to ``hpc=None``, it will use standalone Python.</span>
 
 <span class="sd">        initial_state :</span>
 <span class="sd">            .. deprecated: 2.0</span>
@@ -1045,14 +1027,7 @@ document.write(`
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`time` has non-int entry.&quot;</span><span class="p">)</span>
 
         <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">time</span>
-
-        
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pyneblina_imported</span><span class="p">():</span>
-            <span class="n">hpc</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">nbl</span><span class="o">.</span><span class="n">set_hpc_type</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
-
+        <span class="n">hpc</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
         <span class="c1"># number of states to save</span>
@@ -1204,7 +1179,7 @@ document.write(`
     <span class="k">def</span> <span class="nf">_number_to_valid_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        .. todo::</span>
 <span class="sd">            Returns all arguments.</span>
@@ -1219,8 +1194,7 @@ document.write(`
         <span class="c1"># it is better to use classical computing.</span>
         <span class="n">final_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_to_valid_time</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">final_time</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">),</span>
-                               <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span>
-                               <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
+                               <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
         <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">states</span>
 
@@ -1234,7 +1208,7 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.optimal_runtime">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.optimal_runtime.html#hiperwalk.QuantumWalk.optimal_runtime">[docs]</a>
-    <span class="k">def</span> <span class="nf">optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the optimal running time of a quantum-walk-based search.</span>
 
@@ -1256,11 +1230,6 @@ document.write(`
 <span class="sd">            to be saved by the simulation.</span>
 <span class="sd">            See ``time`` argument in :meth:`simulate` for details.</span>
 
-<span class="sd">        hpc : str, default=None</span>
-<span class="sd">            Whether or not to use high-performance computing</span>
-<span class="sd">            to perform matrix multiplications using CPU or GPU.</span>
-<span class="sd">            If ``hpc=None`` uses standalone python.</span>
-
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int or float</span>
@@ -1276,13 +1245,13 @@ document.write(`
 <span class="sd">        success_probability</span>
 <span class="sd">        fit_sin_squared</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">t_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+        <span class="n">t_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">t_opt</span></div>
 
 
 <div class="viewcode-block" id="QuantumWalk.max_success_probability">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.max_success_probability.html#hiperwalk.QuantumWalk.max_success_probability">[docs]</a>
-    <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the maximum success probability.</span>
 <span class="sd">        </span>
@@ -1299,11 +1268,6 @@ document.write(`
 <span class="sd">            Time difference between two consecutive states</span>
 <span class="sd">            to be saved by the simulation.</span>
 <span class="sd">            See ``time`` argument in :meth:`simulate` for details.</span>
-
-<span class="sd">        hpc : str, default=None</span>
-<span class="sd">            Whether or not to use high-performance computing</span>
-<span class="sd">            to perform matrix multiplications using CPU or GPU.</span>
-<span class="sd">            If ``hpc=None`` uses standalone python.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1324,8 +1288,7 @@ document.write(`
 <span class="sd">            the max success probability was not obtained in the simulation.</span>
 <span class="sd">            The simulation must be rerun or interpolated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span>
-                                              <span class="n">delta_time</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+        <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">)</span>
         <span class="n">opt_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span> <span class="o">/</span> <span class="n">delta_time</span><span class="p">)</span>
         <span class="c1"># TODO: if t_opt / delta_time is not close to an integer,</span>
         <span class="c1"># max_sucess_probability is not in p_succ.</span>
