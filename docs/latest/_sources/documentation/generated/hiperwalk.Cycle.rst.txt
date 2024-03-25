@@ -1,6 +1,0 @@
-﻿hiperwalk.Cycle
-===============
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: Cycle

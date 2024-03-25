@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.degree
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.degree

@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.vertex\_number
+===================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.vertex_number

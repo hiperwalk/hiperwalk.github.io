@@ -1,6 +1,0 @@
-﻿hiperwalk.Line
-==============
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: Line

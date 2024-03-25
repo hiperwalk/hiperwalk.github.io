@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -282,6 +289,13 @@ document.write(`
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../tutorial/index.html">
                         Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
                       </a>
                     </li>
                 
@@ -1477,7 +1491,7 @@ document.write(`
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
         <span class="n">state</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">psi0</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">psi0</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
@@ -1485,8 +1499,7 @@ document.write(`
                     <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span>
-                                  <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">,</span>
-                                  <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
+                                  <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">)</span>
 
     <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Optimal runtime&#39;</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span>
                   <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
@@ -1502,7 +1515,7 @@ document.write(`
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
         <span class="n">state</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">qw</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">psi0</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">psi0</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">(</span><span class="n">qw</span><span class="p">)</span>
@@ -1510,8 +1523,7 @@ document.write(`
                     <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">qw</span><span class="o">.</span><span class="n">max_success_probability</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">psi0</span><span class="p">,</span>
-                                          <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">,</span>
-                                          <span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span>
+                                          <span class="n">delta_time</span><span class="o">=</span><span class="n">delta_time</span><span class="p">)</span>
 
     <span class="n">plot_function</span><span class="p">(</span><span class="n">qw_iter</span><span class="p">,</span> <span class="n">x_label</span><span class="p">,</span> <span class="s1">&#39;Max success probability&#39;</span><span class="p">,</span>
                   <span class="n">x_vals</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>

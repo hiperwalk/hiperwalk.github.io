@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.laplacian\_matrix
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.laplacian_matrix

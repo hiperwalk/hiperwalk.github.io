@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.laplacian\_matrix
+=========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.laplacian_matrix

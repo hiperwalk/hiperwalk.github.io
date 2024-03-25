@@ -1,6 +1,0 @@
-﻿hiperwalk.Hypercube
-===================
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: Hypercube

@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.is\_simple
+==================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.is_simple

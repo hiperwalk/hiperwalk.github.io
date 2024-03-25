@@ -1,6 +1,0 @@
-﻿hiperwalk.Grid
-==============
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: Grid

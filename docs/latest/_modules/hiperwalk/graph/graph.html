@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -282,6 +289,13 @@ document.write(`
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../tutorial/index.html">
                         Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
                       </a>
                     </li>
                 
@@ -448,7 +462,7 @@ document.write(`
 <span class="sd">    Constructs an arbitrary simple graph with loops.</span>
 
 <span class="sd">    This class defines the graph structure used for implementing a </span>
-<span class="sd">    quantum walk. It encapsulates all necessary properties </span>
+<span class="sd">    quantum walk. It encapsulates all necessary properties</span>
 <span class="sd">    and functionalities of the graph </span>
 <span class="sd">    required for the quantum walk dynamics.</span>
 
@@ -506,6 +520,7 @@ document.write(`
 <span class="sd">        Add numpy array manipulation</span>
 
 <span class="sd">    The treatment of the graph depends on the quantum walk model. </span>
+
 <span class="sd">    .. todo::</span>
 <span class="sd">        Reference new part of documentation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -644,6 +659,13 @@ document.write(`
     <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all neighbors of the given vertex.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of int:</span>
+<span class="sd">            The neighbors of ``vertex``.</span>
+<span class="sd">            The order of the neighbors varies depending on</span>
+<span class="sd">            the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>

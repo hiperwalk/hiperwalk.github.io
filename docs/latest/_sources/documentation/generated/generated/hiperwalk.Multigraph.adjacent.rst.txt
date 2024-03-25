@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.adjacent
+=============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.adjacent

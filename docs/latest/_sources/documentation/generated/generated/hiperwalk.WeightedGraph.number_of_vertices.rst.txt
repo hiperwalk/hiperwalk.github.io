@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.number\_of\_vertices
+============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.number_of_vertices

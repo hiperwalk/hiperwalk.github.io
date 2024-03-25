@@ -1,0 +1,6 @@
+﻿hiperwalk.graph.hypercube.dimension
+===================================
+
+.. currentmodule:: hiperwalk.graph.hypercube
+
+.. autofunction:: dimension
