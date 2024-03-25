@@ -558,8 +558,8 @@ document.write(`
 both quantum walk models.</p>
 </section>
 <section id="graph-constructors">
-<h2>Graph Constructors<a class="headerlink" href="#graph-constructors" title="Link to this heading">#</a></h2>
-<p>The graph constructors <a class="footnote-reference brackets" href="#fn1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>
+<span id="id1"></span><h2>Graph Constructors<a class="headerlink" href="#graph-constructors" title="Link to this heading">#</a></h2>
+<p>The graph constructors <a class="footnote-reference brackets" href="#fn1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>
 return an instance of commonly used graphs.</p>
 <p>The graph constructors are used to change the default behavior of
 specific graphs.
@@ -569,14 +569,27 @@ the graph.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">GraphConstructor</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> are optinal arguments
+<p>where <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> are optional arguments
 whose default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.
-If neither <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> nor <code class="docutils literal notranslate"><span class="pre">weights</span></code> are set,
-an instance of <a class="reference internal" href="generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> is returned.
-If <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> is set,
-an instance of <a class="reference internal" href="generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a> is returned.
-If <code class="docutils literal notranslate"><span class="pre">weights</span></code> is set,
-an instance of <a class="reference internal" href="generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a> is returned.</p>
+Every graph constructor returns an instance of</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> if <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">None</span></code>
+and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p></li>
+<li><p><a class="reference internal" href="generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a> if <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>
+and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p></li>
+<li><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a> if <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">None</span></code>
+and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>.</p></li>
+</ul>
+<p>Both <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> are expected to be
+instances of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> such that</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiedges[u,</span> <span class="pre">v]</span></code> is the number of edges
+incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weights[u,</span> <span class="pre">v]</span></code> is the weight of the edge
+incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>,
+a ValueError exception is raised.</p>
 <p>The following is a list of the available graph constructors.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -585,7 +598,7 @@ an instance of <a class="reference internal" href="generated/hiperwalk.WeightedG
 </div>
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="fn1" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
 <p>NetworkX uses <a class="reference external" href="https://networkx.org/documentation/stable/reference/generators.html">graph generators</a>
 for the same concept.
 However, both <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__init__">constructor</a>

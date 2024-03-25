@@ -540,8 +540,8 @@ document.write(`
 <h1>hiperwalk.Hypercube<a class="headerlink" href="#hiperwalk-hypercube" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Hypercube">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Hypercube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/hypercube.html#Hypercube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Hypercube" title="Link to this definition">#</a></dt>
-<dd><p>Hypercube graph.</p>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Hypercube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/hypercube.html#Hypercube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Hypercube" title="Link to this definition">#</a></dt>
+<dd><p>Hypercube graph constructor.</p>
 <p>The hypercube graph consists of <code class="docutils literal notranslate"><span class="pre">2**dim</span></code> vertices.
 The numerical labels of these vertices  are
 <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, …, <code class="docutils literal notranslate"><span class="pre">2**dim</span> <span class="pre">-</span> <span class="pre">1</span></code>.
@@ -553,23 +553,23 @@ differ by only one bit, indicating a Hamming distance of 1.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>dim</strong><span class="classifier">int</span></dt><dd><p>The dimension of the hypercube.</p>
 </dd>
-<dt><strong>weights: :class:`scipy.sparse.csr_array`, default=None</strong></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">==</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">==</span> <span class="pre">None</span></code>,
-an instance of <a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> is created.
-if <code class="docutils literal notranslate"><span class="pre">weights!=None</span></code>, an instance of
-<a class="reference internal" href="../generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a> is created.
-The weight of each edge is specified by the
-entries of <code class="docutils literal notranslate"><span class="pre">weights</span></code>.</p>
+<dt><strong>multiedges, weights: :class:`scipy.sparse.csr_array`, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
 </dd>
-<dt><strong>multiedges: :class:`scipy.sparse.csr_array`, default=None</strong></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">==</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">==</span> <span class="pre">None</span></code>,
-an instance of <a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> is created.
-if <code class="docutils literal notranslate"><span class="pre">multiedges!=None</span></code>, an instance of
-<a class="reference internal" href="../generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a> is created.
-The weight of each edge is specified by the
-entries of <code class="docutils literal notranslate"><span class="pre">multiedges</span></code>.</p>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
 <p>A vertex <span class="math notranslate nohighlight">\(v\)</span> in the hypercube is adjacent to all other vertices
 that have a Hamming distance of 1. To put it differently, <span class="math notranslate nohighlight">\(v\)</span>
@@ -601,6 +601,8 @@ For example,</p>
 <h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
 <p>Besides all methods inherited from
 <a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>,
+<a class="reference internal" href="../generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a>,
+or <a class="reference internal" href="../generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a>,
 a hypercube instance also has the following method.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>

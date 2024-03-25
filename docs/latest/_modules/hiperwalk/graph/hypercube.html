@@ -463,9 +463,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 <div class="viewcode-block" id="Hypercube">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/hypercube.html#hiperwalk.graph.hypercube.Hypercube">[docs]</a>
-<span class="k">def</span> <span class="nf">Hypercube</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Hypercube</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Hypercube graph.</span>
+<span class="sd">    Hypercube graph constructor.</span>
 
 <span class="sd">    The hypercube graph consists of ``2**dim`` vertices.</span>
 <span class="sd">    The numerical labels of these vertices  are</span>
@@ -478,21 +478,17 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    dim : int</span>
 <span class="sd">        The dimension of the hypercube.</span>
-<span class="sd">    weights: :class:`scipy.sparse.csr_array`, default=None</span>
-<span class="sd">        If ``weights == None`` and ``multiedges == None``,</span>
-<span class="sd">        an instance of :class:`hiperwalk.Graph` is created.</span>
-<span class="sd">        if ``weights!=None``, an instance of</span>
-<span class="sd">        :class:`hiperwalk.WeightedGraph` is created.</span>
-<span class="sd">        The weight of each edge is specified by the</span>
-<span class="sd">        entries of ``weights``.</span>
+<span class="sd">    multiedges, weights: :class:`scipy.sparse.csr_array`, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
 
-<span class="sd">    multiedges: :class:`scipy.sparse.csr_array`, default=None</span>
-<span class="sd">        If ``multiedges == None`` and ``multiedges == None``,</span>
-<span class="sd">        an instance of :class:`hiperwalk.Graph` is created.</span>
-<span class="sd">        if ``multiedges!=None``, an instance of</span>
-<span class="sd">        :class:`hiperwalk.WeightedGraph` is created.</span>
-<span class="sd">        The weight of each edge is specified by the</span>
-<span class="sd">        entries of ``multiedges``.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
