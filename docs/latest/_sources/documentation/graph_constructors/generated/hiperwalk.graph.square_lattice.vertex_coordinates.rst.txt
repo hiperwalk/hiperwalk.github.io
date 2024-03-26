@@ -1,0 +1,6 @@
+﻿hiperwalk.graph.square\_lattice.vertex\_coordinates
+===================================================
+
+.. currentmodule:: hiperwalk.graph.square_lattice
+
+.. autofunction:: vertex_coordinates
