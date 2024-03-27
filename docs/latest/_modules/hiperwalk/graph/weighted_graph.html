@@ -426,10 +426,6 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    .. todo::</span>
-<span class="sd">        Check if it is more efficient to store the adjacency matrix as</span>
-<span class="sd">        sparse or dense.</span>
-<span class="sd">    </span>
 <span class="sd">    The graph :math:`G(V,E)` on which the quantum walk </span>
 <span class="sd">    takes place is specified by</span>
 <span class="sd">    any real Hermitian matrix :math:`C`.</span>
@@ -444,6 +440,8 @@ document.write(`
 <div class="viewcode-block" id="WeightedGraph.__init__">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># TODO: Check if it is more efficient to store the</span>
+        <span class="c1"># adjacency matrix as sparse or dense.</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span></div>
 
 

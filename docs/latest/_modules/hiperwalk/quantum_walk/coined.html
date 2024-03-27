@@ -423,8 +423,8 @@ document.write(`
 <span class="sd">        Graph on which the quantum walk takes place.</span>
 <span class="sd">        Two types of entries are accepted:</span>
 
-<span class="sd">        * Simple graph (:class:`hiperwalk.graph.Graph`);</span>
-<span class="sd">        * Multigraph (:class:`hiperwalk.graph.Multigraph`);</span>
+<span class="sd">        * Simple graph (:class:`hiperwalk.Graph`);</span>
+<span class="sd">        * Multigraph (:class:`hiperwalk.Multigraph`);</span>
 
 <span class="sd">        A symmetric directed multigraph is created based on the input.</span>
 
@@ -466,7 +466,7 @@ document.write(`
 <span class="sd">        \end{align*}</span>
 
 <span class="sd">    .. note::</span>
-<span class="sd">        The arc ordering may change for graphs defined using specific classes.</span>
+<span class="sd">        The order of arcs depends on the order of neighbors.</span>
 
 <span class="sd">    Arcs are represented using either</span>
 <span class="sd">    the (tail,head) notation or numerical labels.</span>
@@ -495,7 +495,6 @@ document.write(`
 <span class="sd">    refer to Section 7.2: Coined Walks on Arbitrary Graphs,</span>
 <span class="sd">    found in the book  &#39;Quantum Walks and Search Algorithms&#39; [1]_.</span>
 
-
 <span class="sd">    For example, the graph :math:`G(V, E)` shown in</span>
 <span class="sd">    Figure 1 has an adjacency matrix ``adj_matrix``.</span>
 
@@ -519,7 +518,10 @@ document.write(`
 <span class="sd">        :layout: neato</span>
 <span class="sd">        :caption: Figure 1</span>
 
-<span class="sd">    The arcs of the associated digraph in the arc notation are</span>
+<span class="sd">    Suppose that, for this graph,</span>
+<span class="sd">    the neighbors are given in ascending order.</span>
+<span class="sd">    Then,</span>
+<span class="sd">    the arcs of the associated digraph in the arc notation are</span>
 
 <span class="sd">    &gt;&gt;&gt; arcs = [(i, j) for i in range(4)</span>
 <span class="sd">    ...                for j in range(4) if adj_matrix[i,j] == 1]</span>

@@ -519,7 +519,47 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/graph_constructors/generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html#hiperwalk.graph.integer_lattice.vertex_coordinates">[docs]</a>
 <span class="k">def</span> <span class="nf">vertex_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    TODO docs</span>
+<span class="sd">    Return the coordinates of the given vertex.</span>
+
+<span class="sd">    Given the number of a vertex,</span>
+<span class="sd">    return the corresponding coordinates in the integer lattice.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple of int</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    hiperwalk.Graph.vertex_number</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The vertex number depends on its coordinates and the</span>
+<span class="sd">    dimension of the lattice ``dim``.</span>
+<span class="sd">    If the coordinates of a vertex are ``(v[0], ..., v[n-1])``,</span>
+<span class="sd">    its number is</span>
+<span class="sd">    ``v[n-1] + dim[n-1]*v[n-2] + ... + dim[n-1]*...*dim[1]*v[0]``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import hiperwalk as hpw</span>
+
+<span class="sd">    The methods ``vertex_coordinates`` is the inverse of</span>
+<span class="sd">    ``vertex_number``, and vice versa.</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; g = hpw.IntegerLattice((3, 3, 3))</span>
+<span class="sd">        &gt;&gt;&gt; g.vertex_coordinates(0)</span>
+<span class="sd">        (0, 0, 0)</span>
+<span class="sd">        &gt;&gt;&gt; g.vertex_number((0, 0, 0))</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; g.vertex_coordinates(13)</span>
+<span class="sd">        (1, 1, 1)</span>
+<span class="sd">        &gt;&gt;&gt; g.vertex_number((1, 1, 1))</span>
+<span class="sd">        13</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_valid_vertex</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -562,7 +602,12 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/graph_constructors/generated/hiperwalk.graph.integer_lattice.dimensions.html#hiperwalk.graph.integer_lattice.dimensions">[docs]</a>
 <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    TODO docs dimensions</span>
+<span class="sd">    Dimensions of integer lattice.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dim : tuple of int</span>
+<span class="sd">        ``dim[i]`` is the number of vertices in the ``i``-th axis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span></div>
 

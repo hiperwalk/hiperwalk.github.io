@@ -563,8 +563,8 @@ refer to the Notes Section.</p>
 <dt><strong>graph</strong></dt><dd><p>Graph on which the quantum walk takes place.
 Two types of entries are accepted:</p>
 <ul class="simple">
-<li><p>Simple graph (<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Graph</span></code>);</p></li>
-<li><p>Multigraph (<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.graph.Multigraph</span></code>);</p></li>
+<li><p>Simple graph (<a class="reference internal" href="hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>);</p></li>
+<li><p>Multigraph (<a class="reference internal" href="hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a>);</p></li>
 </ul>
 <p>A symmetric directed multigraph is created based on the input.</p>
 </dd>
@@ -607,7 +607,7 @@ translates into a pair of arcs in the directed graph
 \end{align*}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The arc ordering may change for graphs defined using specific classes.</p>
+<p>The order of arcs depends on the order of neighbors.</p>
 </div>
 <p>Arcs are represented using either
 the (tail,head) notation or numerical labels.
@@ -661,7 +661,10 @@ Figure 1 has an adjacency matrix <code class="docutils literal notranslate"><spa
 <p><span class="caption-text">Figure 1</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The arcs of the associated digraph in the arc notation are</p>
+<p>Suppose that, for this graph,
+the neighbors are given in ascending order.
+Then,
+the arcs of the associated digraph in the arc notation are</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">... </span>               <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span>
