@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.SquareLattice &#8212; Hiperwalk latest documentation</title>
+    <title>hiperwalk.IntegerLattice &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -39,7 +39,7 @@
     <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/graph_constructors/square_lattice';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/graph_constructors/integer_lattice';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -48,8 +48,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="hiperwalk.graph.square_lattice.dimensions" href="generated/hiperwalk.graph.square_lattice.dimensions.html" />
-    <link rel="prev" title="hiperwalk.Line" href="line.html" />
+    <link rel="next" title="hiperwalk.graph.integer_lattice.dimensions" href="generated/hiperwalk.graph.integer_lattice.dimensions.html" />
+    <link rel="prev" title="hiperwalk.graph.hypercube.dimension" href="generated/hiperwalk.graph.hypercube.dimension.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -397,12 +397,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">hiperwalk.SquareLattice</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">hiperwalk.IntegerLattice</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -528,7 +528,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../graph.html" class="nav-link">Graphs</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">hiperwalk.Sq...</li>
+    <li class="breadcrumb-item active" aria-current="page">hiperwalk.In...</li>
   </ul>
 </nav>
 </div>
@@ -545,12 +545,109 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hiperwalk-squarelattice">
-<h1>hiperwalk.SquareLattice<a class="headerlink" href="#hiperwalk-squarelattice" title="Link to this heading">#</a></h1>
+  <section id="hiperwalk-integerlattice">
+<h1>hiperwalk.IntegerLattice<a class="headerlink" href="#hiperwalk-integerlattice" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="hiperwalk.SquareLattice">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">SquareLattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/square_lattice.html#SquareLattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.SquareLattice" title="Link to this definition">#</a></dt>
-<dd><p>TODO docs</p>
+<dt class="sig sig-object py" id="hiperwalk.IntegerLattice">
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">IntegerLattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/integer_lattice.html#IntegerLattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.IntegerLattice" title="Link to this definition">#</a></dt>
+<dd><p>Integer lattice graph.</p>
+<p>An integer lattice is a lattice in an euclidean space
+such that every point is a tuple of integers.
+In the integer lattice graph,
+every vertex corresponds to a lattice point.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>dim</strong><span class="classifier">tuple of int</span></dt><dd><p>Lattice dimensions where
+<code class="docutils literal notranslate"><span class="pre">dim[i]</span></code> is the number of vertices in the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th-axis.</p>
+</dd>
+<dt><strong>basis</strong><span class="classifier">list of int or matrix, default=None</span></dt><dd><p>Vectors used to determine the graph adjacency and
+the corresponding order of neighbors.
+<code class="docutils literal notranslate"><span class="pre">basis</span></code> can be specified in three different ways.
+Let <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">len(dim)</span></code>.</p>
+<ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">None</span></code></dt><dd><p>Equivalent to the argument <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">...,</span> <span class="pre">n]</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>list of int</dt><dd><p>Adjacency is described by the standard basis where
+<code class="docutils literal notranslate"><span class="pre">i</span></code> corresponds to the array with all entries
+equal to <code class="docutils literal notranslate"><span class="pre">0</span></code> and the <code class="docutils literal notranslate"><span class="pre">i-1</span></code>-th entry equal to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Analogously, <code class="docutils literal notranslate"><span class="pre">-i</span></code> corresponds to the same array
+but in the opposite direction (<code class="docutils literal notranslate"><span class="pre">-1</span></code> instead of <code class="docutils literal notranslate"><span class="pre">1</span></code>).</p>
+<p>The values of <code class="docutils literal notranslate"><span class="pre">basis</span></code> must satisfy
+<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;=</span> <span class="pre">abs(basis)</span> <span class="pre">&lt;=</span> <span class="pre">n</span></code>.
+Note that 0 is not a valid value because
+<code class="docutils literal notranslate"><span class="pre">-0</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p>
+<p>It is expected that <code class="docutils literal notranslate"><span class="pre">len(basis)</span> <span class="pre">==</span> <span class="pre">2*n</span></code> or
+<code class="docutils literal notranslate"><span class="pre">len(basis)</span> <span class="pre">==</span> <span class="pre">n</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">len(basis)</span> <span class="pre">==</span> <span class="pre">n</span></code>,
+the equivalent argument is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="n">basis</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+ <span class="o">-</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="n">basis</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>matrix</dt><dd><p>A matrix with <code class="docutils literal notranslate"><span class="pre">2*n</span></code> rows and <code class="docutils literal notranslate"><span class="pre">n</span></code> columns.
+The <code class="docutils literal notranslate"><span class="pre">i</span></code>-th neighbor of the
+vertex with coordinates <code class="docutils literal notranslate"><span class="pre">(v[0],</span> <span class="pre">...,</span> <span class="pre">v[n-1])</span></code> is
+<code class="docutils literal notranslate"><span class="pre">(v[0]</span> <span class="pre">+</span> <span class="pre">basis[i][0],</span> <span class="pre">...,</span> <span class="pre">v[n-1]</span> <span class="pre">+</span> <span class="pre">basis[i][n-1])</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>periodic</strong><span class="classifier">bool, default=True</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the grid has cyclic boundary conditions,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> if it has borders.</p>
+</dd>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <strong>order of neighbors</strong> depends on the value of <code class="docutils literal notranslate"><span class="pre">basis</span></code>.</p>
+<p>The vertex number depends on its coordinates and <code class="docutils literal notranslate"><span class="pre">dim</span></code>.
+If the coordinates of a vertex are <code class="docutils literal notranslate"><span class="pre">(v[0],</span> <span class="pre">...,</span> <span class="pre">v[n-1])</span></code>,
+its number is
+<code class="docutils literal notranslate"><span class="pre">v[n-1]</span> <span class="pre">+</span> <span class="pre">dim[n-1]*v[n-2]</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">dim[n-1]*...*dim[1]*v[0]</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">IntegerLattice</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(2, 1), (1, 2), (0, 1), (1, 0)]</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">IntegerLattice</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">basis</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(0, 1), (1, 0), (2, 1), (1, 2)]</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">IntegerLattice</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(1, 2), (0, 2), (2, 0), (1, 0)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <section id="methods">
@@ -562,10 +659,10 @@ or <a class="reference internal" href="../generated/hiperwalk.WeightedGraph.html
 a hypercube instance also has the following method.</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html#hiperwalk.graph.square_lattice.dimensions" title="hiperwalk.graph.square_lattice.dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimensions</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html#hiperwalk.graph.integer_lattice.dimensions" title="hiperwalk.graph.integer_lattice.dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimensions</span></code></a>(self)</p></td>
 <td><p>TODO docs dimensions</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html#hiperwalk.graph.square_lattice.vertex_coordinates" title="hiperwalk.graph.square_lattice.vertex_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_coordinates</span></code></a>(self, vertex)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html#hiperwalk.graph.integer_lattice.vertex_coordinates" title="hiperwalk.graph.integer_lattice.vertex_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_coordinates</span></code></a>(self, vertex)</p></td>
 <td><p>TODO docs</p></td>
 </tr>
 </tbody>
@@ -584,20 +681,20 @@ a hypercube instance also has the following method.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="line.html"
+       href="generated/hiperwalk.graph.hypercube.dimension.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.Line</p>
+        <p class="prev-next-title">hiperwalk.graph.hypercube.dimension</p>
       </div>
     </a>
     <a class="right-next"
-       href="generated/hiperwalk.graph.square_lattice.dimensions.html"
+       href="generated/hiperwalk.graph.integer_lattice.dimensions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.graph.square_lattice.dimensions</p>
+        <p class="prev-next-title">hiperwalk.graph.integer_lattice.dimensions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -619,7 +716,7 @@ a hypercube instance also has the following method.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.SquareLattice"><code class="docutils literal notranslate"><span class="pre">SquareLattice()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.IntegerLattice"><code class="docutils literal notranslate"><span class="pre">IntegerLattice()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 </ul>
   </nav></div>
@@ -627,7 +724,7 @@ a hypercube instance also has the following method.</p>
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/documentation/graph_constructors/square_lattice.rst.txt">
+    <a href="../../_sources/documentation/graph_constructors/integer_lattice.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

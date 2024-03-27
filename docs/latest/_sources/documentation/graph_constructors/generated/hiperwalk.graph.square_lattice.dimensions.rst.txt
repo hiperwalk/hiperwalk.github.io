@@ -1,6 +1,0 @@
-﻿hiperwalk.graph.square\_lattice.dimensions
-==========================================
-
-.. currentmodule:: hiperwalk.graph.square_lattice
-
-.. autofunction:: dimensions

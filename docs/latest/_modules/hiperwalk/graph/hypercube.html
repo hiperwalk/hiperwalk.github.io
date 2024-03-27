@@ -461,6 +461,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+
 <div class="viewcode-block" id="Hypercube">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/hypercube.html#hiperwalk.graph.hypercube.Hypercube">[docs]</a>
 <span class="k">def</span> <span class="nf">Hypercube</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -478,7 +479,7 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    dim : int</span>
 <span class="sd">        The dimension of the hypercube.</span>
-<span class="sd">    multiedges, weights: :class:`scipy.sparse.csr_array`, default=None</span>
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
 <span class="sd">        See :ref:`graph_constructors`.</span>
 
 <span class="sd">    Returns</span>
@@ -500,13 +501,14 @@ document.write(`
 <span class="sd">    Here, :math:`\oplus` represents the bitwise XOR operation,</span>
 <span class="sd">    and :math:`n` signifies the dimension of the hypercube.</span>
 
-<span class="sd">    The **order of the neighbors** is determined by the XOR operation.</span>
+<span class="sd">    The **order of neighbors** is determined by the XOR operation.</span>
 <span class="sd">    The neighbors of vertex :math:`u` are given in the following order:</span>
 <span class="sd">    :math:`u \oplus 2^0`, :math:`u \oplus 2^1, \ldots,`</span>
 <span class="sd">    :math:`u \oplus 2^{n - 1}`.</span>
 <span class="sd">    For example,</span>
 
 <span class="sd">    .. testsetup::</span>
+
 <span class="sd">        import hiperwalk as hpw</span>
 
 <span class="sd">    .. doctest::</span>

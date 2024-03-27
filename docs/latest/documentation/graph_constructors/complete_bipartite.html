@@ -397,12 +397,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -549,22 +549,36 @@ document.write(`
 <h1>hiperwalk.CompleteBipartite<a class="headerlink" href="#hiperwalk-completebipartite" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.CompleteBipartite">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">CompleteBipartite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_vert2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/complete_bipartite.html#CompleteBipartite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CompleteBipartite" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">CompleteBipartite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_vert2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/complete_bipartite.html#CompleteBipartite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CompleteBipartite" title="Link to this definition">#</a></dt>
 <dd><p>Complete bipartite graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>num_vert1: int</strong></dt><dd><p>Number of vertices of the first partition.</p>
+<dt><strong>num_vert1: int</strong></dt><dd><p>Number of vertices of the first part.</p>
 </dd>
-<dt><strong>num_vert2: int</strong></dt><dd><p>Number of vertices of the second partition.</p>
+<dt><strong>num_vert2: int</strong></dt><dd><p>Number of vertices of the second part.</p>
+</dd>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
-<p>The vertices in the first partition are labeled from
+<p>The vertices in the first part are labeled from
 0 to <code class="docutils literal notranslate"><span class="pre">num_vert1</span> <span class="pre">-</span> <span class="pre">1</span></code> and the vertices of the
-second partition are labeled from
+second part are labeled from
 <code class="docutils literal notranslate"><span class="pre">num_vert1</span></code> to <code class="docutils literal notranslate"><span class="pre">num_vert1</span> <span class="pre">+</span> <span class="pre">num_vert2</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
 </dd></dl>
 

@@ -461,7 +461,7 @@ document.write(`
 
 <div class="viewcode-block" id="Complete">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/complete.html#hiperwalk.Complete">[docs]</a>
-<span class="k">def</span> <span class="nf">Complete</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Complete</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complete graph.</span>
 
@@ -472,6 +472,18 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert : int</span>
 <span class="sd">        Number of vertices in the complete graph.</span>
+
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>

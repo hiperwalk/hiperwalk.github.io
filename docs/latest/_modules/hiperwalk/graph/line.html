@@ -391,11 +391,11 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for hiperwalk.graph.line</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.square_lattice</span> <span class="kn">import</span> <span class="n">SquareLattice</span>
+<span></span><span class="kn">from</span> <span class="nn">.integer_lattice</span> <span class="kn">import</span> <span class="n">IntegerLattice</span>
 
 <div class="viewcode-block" id="Line">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/line.html#hiperwalk.Line">[docs]</a>
-<span class="k">def</span> <span class="nf">Line</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Line</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finite line graph (path graph).</span>
 
@@ -404,35 +404,46 @@ document.write(`
 <span class="sd">    num_vert : int</span>
 <span class="sd">        The number of vertices on the line.</span>
 
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
+
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    In the :obj:`Line` class, directions can be assigned to the arcs. </span>
-<span class="sd">    An arc pointing to the right has direction 0 (e.g., (1, 2)), </span>
-<span class="sd">    and an arc pointing to the left has direction 1 (e.g., (2, 1)).</span>
+<span class="sd">    The **order of neighbors** is</span>
+<span class="sd">    the neighbor to the right first,</span>
+<span class="sd">    followed by the neighbor to the left.</span>
+<span class="sd">    In other words, for any vertex :math:`v`,</span>
+<span class="sd">    the neighbors are given in the order :math:`[v + 1, v - 1]`.</span>
 
-<span class="sd">    The order of the arcs is determined by their direction. </span>
-<span class="sd">    Thus, for a vertex :math:`v \in V`, </span>
-<span class="sd">    the arcs :math:`(v, v + 1)` and :math:`(v, v - 1)` </span>
-<span class="sd">    have labels :math:`a_0` and :math:`a_1` respectively, </span>
-<span class="sd">    with :math:`a_0 &lt; a_1`. </span>
-<span class="sd">    The only exceptions to this rule are the extreme vertices 0 </span>
-<span class="sd">    and :math:`|V| - 1`, as they have outdegree 1. </span>
+<span class="sd">    .. testsetup::</span>
 
-<span class="sd">    Apart from these exceptions, </span>
-<span class="sd">    for any two vertices :math:`v_1 &lt; v_2`, </span>
-<span class="sd">    any arc with tail :math:`v_1` will have a label smaller than the </span>
-<span class="sd">    label of any arc with tail :math:`v_2`.</span>
+<span class="sd">        &gt;&gt;&gt; import hiperwalk as hpw</span>
 
-<span class="sd">    For instance, Figure 1 illustrates the labels of the arcs of a path graph with 4 vertices.</span>
-<span class="sd">    </span>
-<span class="sd">    .. graphviz:: ../../graphviz/line-arcs.dot</span>
-<span class="sd">        :align: center</span>
-<span class="sd">        :layout: neato</span>
-<span class="sd">        :caption: Figure 1.</span>
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; g = hpw.Line(10)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0) # 0 and 9 are not adjacent</span>
+<span class="sd">        [1]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        [2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(8)</span>
+<span class="sd">        [9, 7]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(9) # 0 and 9 are not adjacent</span>
+<span class="sd">        [8]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">SquareLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">g</span></div>
 
 </pre></div>

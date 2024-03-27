@@ -398,12 +398,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -563,7 +563,7 @@ differ by only one bit, indicating a Hamming distance of 1.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>dim</strong><span class="classifier">int</span></dt><dd><p>The dimension of the hypercube.</p>
 </dd>
-<dt><strong>multiedges, weights: :class:`scipy.sparse.csr_array`, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
 </dd>
 </dl>
 </dd>
@@ -588,7 +588,7 @@ is adjacent to <span class="math notranslate nohighlight">\(v \oplus 2^0\)</span
 <span class="math notranslate nohighlight">\(v \oplus 2^{n - 1}\)</span>.
 Here, <span class="math notranslate nohighlight">\(\oplus\)</span> represents the bitwise XOR operation,
 and <span class="math notranslate nohighlight">\(n\)</span> signifies the dimension of the hypercube.</p>
-<p>The <strong>order of the neighbors</strong> is determined by the XOR operation.
+<p>The <strong>order of neighbors</strong> is determined by the XOR operation.
 The neighbors of vertex <span class="math notranslate nohighlight">\(u\)</span> are given in the following order:
 <span class="math notranslate nohighlight">\(u \oplus 2^0\)</span>, <span class="math notranslate nohighlight">\(u \oplus 2^1, \ldots,\)</span>
 <span class="math notranslate nohighlight">\(u \oplus 2^{n - 1}\)</span>.

@@ -398,12 +398,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -550,7 +550,7 @@ document.write(`
 <h1>hiperwalk.Grid<a class="headerlink" href="#hiperwalk-grid" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Grid">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/grid.html#Grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Grid" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/grid.html#Grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Grid" title="Link to this definition">#</a></dt>
 <dd><p>Two-dimensionsal grid.</p>
 <p>The grid can be designed with either
 cyclic boundary conditions or borders.
@@ -563,8 +563,10 @@ they lie along the diagonals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>dimensions</strong><span class="classifier">int or tuple of int</span></dt><dd><p>Grid dimensions in <code class="docutils literal notranslate"><span class="pre">(_dim[0],</span> <span class="pre">_dim[1])</span></code> format.
-If <code class="docutils literal notranslate"><span class="pre">dimensions</span></code> is an integer, creates a square grid.</p>
+<dt><strong>dim</strong><span class="classifier">int or tuple of int</span></dt><dd><p>Grid dimensions in <code class="docutils literal notranslate"><span class="pre">(dim[0],</span> <span class="pre">dim[1])</span></code> format,
+where <code class="docutils literal notranslate"><span class="pre">dim[0]</span></code> is the number of vertices in the X-axis,
+and <code class="docutils literal notranslate"><span class="pre">dim[1]</span></code> is the number of vertices in the Y-axis.
+If <code class="docutils literal notranslate"><span class="pre">dim</span></code> is an integer, creates a square grid.</p>
 </dd>
 <dt><strong>periodic</strong><span class="classifier">bool, default=True</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the grid has cyclic boundary conditions,
 <code class="docutils literal notranslate"><span class="pre">False</span></code> if it has borders.</p>
@@ -572,21 +574,28 @@ If <code class="docutils literal notranslate"><span class="pre">dimensions</span
 <dt><strong>diagonal</strong><span class="classifier">bool, default=False</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the grid has the diagonal representation,
 <code class="docutils literal notranslate"><span class="pre">False</span></code> if it has the natural representation.</p>
 </dd>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
-<p>The order of the arcs is determined according to
-the order of the vertices.
-The order of the vertices is defined as follows:
-if <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and <span class="math notranslate nohighlight">\((x_2, y_2)\)</span> are two valid vertices,
-we say that <span class="math notranslate nohighlight">\((x_1, y_1) &lt; (x_2, y_2)\)</span> if <span class="math notranslate nohighlight">\(y_1 &lt; y_2\)</span> or
-if <span class="math notranslate nohighlight">\(y_1 = y_2\)</span> and <span class="math notranslate nohighlight">\(x_1 &lt; x_2\)</span>.
-The order of the arcs also depends on the grid representation
-(natural or diagonal).</p>
+<p>The <strong>order of neighbors</strong> depends on the grid.</p>
 <dl>
-<dt>Natural Grid:</dt><dd><p>In the natural grid,
-the directions are described as follows:</p>
+<dt>Natural Grid:</dt><dd><p>The natural grid is created when <code class="docutils literal notranslate"><span class="pre">diagonal=False</span></code>.
+The neighbors are given in the following order.</p>
 <ul class="simple">
 <li><p>00 = 0: right;</p></li>
 <li><p>01 = 1: left;</p></li>
@@ -595,42 +604,36 @@ the directions are described as follows:</p>
 </ul>
 <p>The most significant bit corresponds to the axis:
 0 represents the X-axis and 1 represents the Y-axis.
-The least significant bit indicates the direction of
-movement along the given axis, with 0 signifying
-forward movement and 1 signifying backward movement.</p>
-<p>The order of arcs corresponds with the order of vertices
-and their respective directions. For example,
-consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
+The least significant bit indicates the direction
+along the given axis, with 0 signifying
+forward and 1 signifying backward.</p>
+<p>Consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
 <span class="math notranslate nohighlight">\((x \pm 1, y)\)</span> and <span class="math notranslate nohighlight">\((x, y \pm 1)\)</span>
 are adjacent vertices.
-The order of these arcs is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}((x, y), (x + 1, y)) &amp;&lt; ((x, y), (x - 1, y)) \\
-                     &amp;&lt; ((x, y), (x, y + 1)) \\
-                     &amp;&lt; ((x, y), (x, y - 1)).\end{split}\]</div>
-<p>The directions are depicted in <a class="reference internal" href="#fig-natural-dir"><span class="std std-ref">Figure: Directions in the natural representation.</span></a>.</p>
-<figure class="align-center" id="fig-natural-dir">
-<div class="graphviz"><img src="../../_images/graphviz-0bc4480d5e8033324491c6b3d6db47cb732f5a3a.png" alt="digraph {
+The order of neighbors is depicted in
+<a class="reference internal" href="#fig-natural-grid-order"><span class="std std-ref">Figure: The order of neighbors in the natural grid.</span></a>.</p>
+<figure class="align-center" id="fig-natural-grid-order">
+<div class="graphviz"><img src="../../_images/graphviz-e98ea5dc95b7028c5d07a236d9d923928d40126d.png" alt="graph {
 	4 [pos=&quot;0,0!&quot; label=&quot;(x, y)&quot; width=1 height=1 fixedsize=True;]
 	0 [pos=&quot;2,0!&quot; label=&quot;(x + 1, y)&quot; width=1 height=1 fixedsize=True;]
 	1 [pos=&quot;-2,0!&quot; label=&quot;(x - 1, y)&quot; width=1 height=1 fixedsize=True;]
 	2 [pos=&quot;0,2!&quot; label=&quot;(x, y + 1)&quot; width=1 height=1 fixedsize=True;]
 	3 [pos=&quot;0,-2!&quot; label=&quot;(x, y - 1)&quot; width=1 height=1 fixedsize=True;]
 
-	4 -&gt; 0 [headlabel=0 labeldistance=4 labelangle=-10];
-	4 -&gt; 1 [headlabel=1 labeldistance=4 labelangle=10];
-	4 -&gt; 2 [headlabel=2 labeldistance=4 labelangle=10];
-	4 -&gt; 3 [headlabel=3 labeldistance=4 labelangle=-10];
+	4 -- 0 [headlabel=0 labeldistance=4 labelangle=-10];
+	4 -- 1 [headlabel=1 labeldistance=4 labelangle=10];
+	4 -- 2 [headlabel=2 labeldistance=4 labelangle=10];
+	4 -- 3 [headlabel=3 labeldistance=4 labelangle=-10];
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure: Directions in the natural representation.</span><a class="headerlink" href="#fig-natural-dir" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure: The order of neighbors in the natural grid.</span><a class="headerlink" href="#fig-natural-grid-order" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For example, the labels of the arcs for
-the <span class="math notranslate nohighlight">\(3 \times 3\)</span>-grid with periodic boundary
-conditions are depicted in <a class="reference internal" href="#fig-periodic-natural-grid"><span class="std std-ref">Figure: 3x3-grid with cyclic boundary conditions.</span></a>.</p>
-<figure class="align-center" id="fig-periodic-natural-grid">
-<div class="graphviz"><img src="../../_images/graphviz-9cf53bb16a99740b16a3223943a2b39d445f4ec4.png" alt="digraph {
+<p>For example,
+consider the <span class="math notranslate nohighlight">\(3 \times 3\)</span> periodic natural grid
+(<a class="reference internal" href="#fig-3x3-natural-grid"><span class="std std-ref">Figure: Periodic natural 3x3-grid.</span></a>).</p>
+<figure class="align-center" id="fig-3x3-natural-grid">
+<div class="graphviz"><img src="../../_images/graphviz-62aa536fe2a51f681915f448ca3e0c1ad05af318.png" alt="graph {
 	&quot;(0, -1)&quot; [pos=&quot;0.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 2)&quot;]
 	&quot;(1, -1)&quot; [pos=&quot;1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 2)&quot;]
 	&quot;(2, -1)&quot; [pos=&quot;3.5,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 2)&quot;]
@@ -653,119 +656,68 @@ conditions are depicted in <a class="reference internal" href="#fig-periodic-nat
 	&quot;(1, 3)&quot; [pos=&quot;1.75,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 0)&quot;]
 	&quot;(2, 3)&quot; [pos=&quot;3.5,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 0)&quot;]
 
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=0 labeldistance=4 labelangle=-20];
-	 &quot;(0, 0)&quot; -&gt; &quot;(-1, 0)&quot;[headlabel=1 labeldistance=4 labelangle=-20];
-	 &quot;(0, 0)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=2 labeldistance=4 labelangle=-20];
-	 &quot;(0, 0)&quot; -&gt; &quot;(0, -1)&quot;[headlabel=3 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=4 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=5 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=6 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(1, -1)&quot;[headlabel=7 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(3, 0)&quot;[headlabel=8 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=9 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=10 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(2, -1)&quot;[headlabel=11 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=12 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(-1, 1)&quot;[headlabel=13 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=14 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=15 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=16 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=17 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=18 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=19 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(3, 1)&quot;[headlabel=20 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=21 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=22 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=23 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=24 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(-1, 2)&quot;[headlabel=25 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(0, 3)&quot;[headlabel=26 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=27 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=28 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=29 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(1, 3)&quot;[headlabel=30 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=31 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(3, 2)&quot;[headlabel=32 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=33 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(2, 3)&quot;[headlabel=34 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=35 labeldistance=4 labelangle=-20];
+	 &quot;(0, 0)&quot; -- &quot;(1, 0)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(0, 1)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(-1, 0)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(0, -1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(2, 0)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(1, -1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(3, 0)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(2, 1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(2, -1)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(0, 2)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(-1, 1)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(2, 1)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(1, 2)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(3, 1)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(2, 2)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(1, 2)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(0, 3)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(-1, 2)&quot;;
+	 &quot;(1, 2)&quot; -- &quot;(2, 2)&quot;;
+	 &quot;(1, 2)&quot; -- &quot;(1, 3)&quot;;
+	 &quot;(2, 2)&quot; -- &quot;(3, 2)&quot;;
+	 &quot;(2, 2)&quot; -- &quot;(2, 3)&quot;;
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure: 3x3-grid with cyclic boundary conditions.</span><a class="headerlink" href="#fig-periodic-natural-grid" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure: Periodic natural 3x3-grid.</span><a class="headerlink" href="#fig-3x3-natural-grid" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In the case of a natural grid with borders, the labels of the
-arcs maintain the same sequence but with some modifications
-due to the presence of vertices with degrees 2 and 3.
-Figure :ref:fig-bounded-natural-Grid provides an illustration
-of a bounded natural grid.</p>
-<figure class="align-center" id="fig-bounded-natural-grid">
-<div class="graphviz"><img src="../../_images/graphviz-8ac5e171684107b763a5de36a35fa73898e2ae5b.png" alt="digraph {
-	&quot;(0, 0)&quot; [pos=&quot;0.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(1, 0)&quot; [pos=&quot;1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(2, 0)&quot; [pos=&quot;3.5,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(0, 1)&quot; [pos=&quot;0.0,1.75!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(1, 1)&quot; [pos=&quot;1.75,1.75!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(2, 1)&quot; [pos=&quot;3.5,1.75!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(0, 2)&quot; [pos=&quot;0.0,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(1, 2)&quot; [pos=&quot;1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(2, 2)&quot; [pos=&quot;3.5,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
-
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=0 labeldistance=4 labelangle=-20];
-	 &quot;(0, 0)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=1 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=2 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=3 labeldistance=4 labelangle=-20];
-	 &quot;(1, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=4 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=5 labeldistance=4 labelangle=-20];
-	 &quot;(2, 0)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=6 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=7 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=8 labeldistance=4 labelangle=-20];
-	 &quot;(0, 1)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=9 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=10 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=11 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=12 labeldistance=4 labelangle=-20];
-	 &quot;(1, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=13 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=14 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=15 labeldistance=4 labelangle=-20];
-	 &quot;(2, 1)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=16 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=17 labeldistance=4 labelangle=-20];
-	 &quot;(0, 2)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=18 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=19 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=20 labeldistance=4 labelangle=-20];
-	 &quot;(1, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=21 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=22 labeldistance=4 labelangle=-20];
-	 &quot;(2, 2)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=23 labeldistance=4 labelangle=-20];
-}" class="graphviz" /></div>
-<figcaption>
-<p><span class="caption-text">Figure: Bounded natural 3x3-grid.</span><a class="headerlink" href="#fig-bounded-natural-grid" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+<p>The neighbors of <span class="math notranslate nohighlight">\((0, 0)\)</span> and <span class="math notranslate nohighlight">\((1, 1)\)</span> with
+respect to the order of neighbors are</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nat</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">nat</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nat</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(1, 0), (2, 0), (0, 1), (0, 2)]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">nat</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nat</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(2, 1), (0, 1), (1, 2), (1, 0)]</span>
+</pre></div>
+</div>
 </dd>
-<dt>Diagonal Grid:</dt><dd><p>In the diagonal grid,
-the directions are described as follows:</p>
+<dt>Diagonal Grid:</dt><dd><p>The diagonal grid is created when <code class="docutils literal notranslate"><span class="pre">diagonal=True</span></code>.
+The neighbors are given in the following order.</p>
 <ul class="simple">
 <li><p>00 = 0: right, up;</p></li>
 <li><p>01 = 1: right, down;</p></li>
 <li><p>10 = 2: left, up;</p></li>
 <li><p>11 = 3: left, down.</p></li>
 </ul>
-<p>Each binary value indicates the direction of movement,
-with 0 representing forward motion and 1 representing
-backward motion. The most significant bit corresponds to
-movement along the X-axis, while the least significant bit
-corresponds to movement along the Y-axis.</p>
-<p>The order of arcs corresponds with the order of vertices
-and their respective directions. For example,
-consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
-<span class="math notranslate nohighlight">\((x \pm 1, y)\)</span> and <span class="math notranslate nohighlight">\((x, y \pm 1)\)</span>
-are adjacent vertices.
-The order of these arcs is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}((x, y), (x + 1, y + 1)) &amp;&lt; ((x, y), (x + 1, y - 1)) \\
-                         &amp;&lt; ((x, y), (x - 1, y + 1)) \\
-                         &amp;&lt; ((x, y), (x - 1, y - 1)).\end{split}\]</div>
-<p>The directions are depicted in <a class="reference internal" href="#fig-diagonal-dir"><span class="std std-ref">Figure: Directions in the diagonal representation.</span></a>.</p>
-<figure class="align-center" id="fig-diagonal-dir">
+<p>Each binary value indicates the direction along
+a given axis,
+with 0 representing forward and 1 representing backward.
+The most significant bit corresponds to the
+direction along the X-axis,
+while the least significant bit corresponds to the
+direction along the Y-axis.</p>
+<p>Consider a vertex <span class="math notranslate nohighlight">\((x, y)\)</span>. Then,
+its four neighbors are <span class="math notranslate nohighlight">\((x \pm 1, y \pm 1)\)</span>.
+The order of neighbors is depicted in
+<a class="reference internal" href="#fig-diagonal-grid-order"><span class="std std-ref">Figure: The order of neighbors in the diagonal grid.</span></a>.</p>
+<figure class="align-center" id="fig-diagonal-grid-order">
 <div class="graphviz"><img src="../../_images/graphviz-e3e9bd72d7635036eb1d289b97dbb30a1361be5f.png" alt="digraph {
 	4 [pos=&quot;0,0!&quot; label=&quot;(x, y)&quot; width=1.5 height=1.5 fixedsize=True]
 	0 [pos=&quot;2,2!&quot; label=&quot;(x + 1, y + 1)&quot; width=1.5 height=1.5 fixedsize=True]
@@ -779,14 +731,14 @@ The order of these arcs is</p>
 	4 -&gt; 3 [headlabel=3 labeldistance=5 labelangle=10];
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure: Directions in the diagonal representation.</span><a class="headerlink" href="#fig-diagonal-dir" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure: The order of neighbors in the diagonal grid.</span><a class="headerlink" href="#fig-diagonal-grid-order" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For example, the labels of the arcs for
-the <span class="math notranslate nohighlight">\(3 \times 3\)</span>-grid with periodic boundary
-conditions are depicted in <a class="reference internal" href="#fig-periodic-diagonal-grid"><span class="std std-ref">Figure: Periodic diagonal 3x3-grid.</span></a></p>
-<figure class="align-center" id="fig-periodic-diagonal-grid">
-<div class="graphviz"><img src="../../_images/graphviz-339285f02529027543dc30e75f9d214772b02bfc.png" alt="digraph {
+<p>For example,
+consider the <span class="math notranslate nohighlight">\(3 \times 3\)</span> periodic diagonal grid
+(<a class="reference internal" href="#fig-3x3-diagonal-grid"><span class="std std-ref">Figure: Periodic diagonal 3x3-grid.</span></a>).</p>
+<figure class="align-center" id="fig-3x3-diagonal-grid">
+<div class="graphviz"><img src="../../_images/graphviz-0af3d3fc83504b323282327aa9d82de9c6f11ddd.png" alt="graph {
 	&quot;(-1, -1)&quot; [pos=&quot;-1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 2)&quot;]
 	&quot;(0, -1)&quot; [pos=&quot;0.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 2)&quot;]
 	&quot;(1, -1)&quot; [pos=&quot;1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 2)&quot;]
@@ -813,53 +765,57 @@ conditions are depicted in <a class="reference internal" href="#fig-periodic-dia
 	&quot;(2, 3)&quot; [pos=&quot;3.5,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 0)&quot;]
 	&quot;(3, 3)&quot; [pos=&quot;5.25,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 0)&quot;]
 
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=0 labeldistance=2 labelangle=-50];
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, -1)&quot;[headlabel=1 labeldistance=2 labelangle=-50];
-	 &quot;(0, 0)&quot; -&gt; &quot;(-1, 1)&quot;[headlabel=2 labeldistance=2 labelangle=-50];
-	 &quot;(0, 0)&quot; -&gt; &quot;(-1, -1)&quot;[headlabel=3 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=4 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, -1)&quot;[headlabel=5 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=6 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, -1)&quot;[headlabel=7 labeldistance=2 labelangle=-50];
-	 &quot;(2, 0)&quot; -&gt; &quot;(3, 1)&quot;[headlabel=8 labeldistance=2 labelangle=-50];
-	 &quot;(2, 0)&quot; -&gt; &quot;(3, -1)&quot;[headlabel=9 labeldistance=2 labelangle=-50];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=10 labeldistance=2 labelangle=-50];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, -1)&quot;[headlabel=11 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=12 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=13 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(-1, 2)&quot;[headlabel=14 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(-1, 0)&quot;[headlabel=15 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=16 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=17 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=18 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=19 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(3, 2)&quot;[headlabel=20 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(3, 0)&quot;[headlabel=21 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=22 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=23 labeldistance=2 labelangle=-50];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 3)&quot;[headlabel=24 labeldistance=2 labelangle=-50];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=25 labeldistance=2 labelangle=-50];
-	 &quot;(0, 2)&quot; -&gt; &quot;(-1, 3)&quot;[headlabel=26 labeldistance=2 labelangle=-50];
-	 &quot;(0, 2)&quot; -&gt; &quot;(-1, 1)&quot;[headlabel=27 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 3)&quot;[headlabel=28 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=29 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 3)&quot;[headlabel=30 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=31 labeldistance=2 labelangle=-50];
-	 &quot;(2, 2)&quot; -&gt; &quot;(3, 3)&quot;[headlabel=32 labeldistance=2 labelangle=-50];
-	 &quot;(2, 2)&quot; -&gt; &quot;(3, 1)&quot;[headlabel=33 labeldistance=2 labelangle=-50];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 3)&quot;[headlabel=34 labeldistance=2 labelangle=-50];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=35 labeldistance=2 labelangle=-50];
+	 &quot;(0, 0)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(-1, 1)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(-1, -1)&quot;;
+	 &quot;(0, 0)&quot; -- &quot;(1, -1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(2, 1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(0, 1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(0, -1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(2, -1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(3, 1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(1, -1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(3, -1)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(1, 2)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(-1, 2)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(-1, 0)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(2, 2)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(0, 2)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(3, 2)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(1, 2)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(3, 0)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(1, 3)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(-1, 3)&quot;;
+	 &quot;(0, 2)&quot; -- &quot;(-1, 1)&quot;;
+	 &quot;(1, 2)&quot; -- &quot;(2, 3)&quot;;
+	 &quot;(1, 2)&quot; -- &quot;(0, 3)&quot;;
+	 &quot;(2, 2)&quot; -- &quot;(3, 3)&quot;;
+	 &quot;(2, 2)&quot; -- &quot;(1, 3)&quot;;
+	 &quot;(2, 2)&quot; -- &quot;(3, 1)&quot;;
 }" class="graphviz" /></div>
 <figcaption>
-<p><span class="caption-text">Figure: Periodic diagonal 3x3-grid.</span><a class="headerlink" href="#fig-periodic-diagonal-grid" title="Link to this image">#</a></p>
+<p><span class="caption-text">Figure: Periodic diagonal 3x3-grid.</span><a class="headerlink" href="#fig-3x3-diagonal-grid" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In the case of a diagonal grid with borders, the labels of the
-arcs maintain the same sequence but with some modifications.
-Figure <a class="reference internal" href="#fig-bounded-diagonal-grid"><span class="std std-ref">Figure: Bounded 3x3-grid in the diagonal representation.</span></a> provides
-an illustration of a bounded diagonal grid.</p>
+<p>The neighbors of <span class="math notranslate nohighlight">\((0, 0)\)</span> and <span class="math notranslate nohighlight">\((1, 1)\)</span> with
+respect to the order of neighbors are</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nat</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">nat</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nat</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(1, 1), (1, 2), (2, 1), (2, 2)]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">nat</span><span class="o">.</span><span class="n">neighbors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">nat</span><span class="o">.</span><span class="n">vertex_coordinates</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
+<span class="go">[(2, 2), (2, 0), (0, 2), (0, 0)]</span>
+</pre></div>
+</div>
+<p>In the case of a diagonal grid with borders,
+there exist two independent subgrids.
+In other words, a vertex in one subgrid is not accessible from
+a vertex in the other subgrid.</p>
 <figure class="align-center" id="fig-bounded-diagonal-grid">
-<div class="graphviz"><img src="../../_images/graphviz-b6955c115b3cd614d90f1c0182cf8b26558a0238.png" alt="digraph {
+<div class="graphviz"><img src="../../_images/graphviz-6dad536c549436ca53c9c6c3eefe32bd55ec891e.png" alt="graph {
 	&quot;(0, 0)&quot; [pos=&quot;0.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
 	&quot;(1, 0)&quot; [pos=&quot;1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
 	&quot;(2, 0)&quot; [pos=&quot;3.5,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
@@ -870,138 +826,109 @@ an illustration of a bounded diagonal grid.</p>
 	&quot;(1, 2)&quot; [pos=&quot;1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
 	&quot;(2, 2)&quot; [pos=&quot;3.5,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
 
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=0 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=1 labeldistance=2 labelangle=-50];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=2 labeldistance=2 labelangle=-50];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=3 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=4 labeldistance=2 labelangle=-50];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=5 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 2)&quot;[headlabel=6 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 0)&quot;[headlabel=7 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 2)&quot;[headlabel=8 labeldistance=2 labelangle=-50];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 0)&quot;[headlabel=9 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 2)&quot;[headlabel=10 labeldistance=2 labelangle=-50];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 0)&quot;[headlabel=11 labeldistance=2 labelangle=-50];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=12 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 1)&quot;[headlabel=13 labeldistance=2 labelangle=-50];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 1)&quot;[headlabel=14 labeldistance=2 labelangle=-50];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 1)&quot;[headlabel=15 labeldistance=2 labelangle=-50];
+	 &quot;(0, 0)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(2, 1)&quot;;
+	 &quot;(1, 0)&quot; -- &quot;(0, 1)&quot;;
+	 &quot;(2, 0)&quot; -- &quot;(1, 1)&quot;;
+	 &quot;(0, 1)&quot; -- &quot;(1, 2)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(2, 2)&quot;;
+	 &quot;(1, 1)&quot; -- &quot;(0, 2)&quot;;
+	 &quot;(2, 1)&quot; -- &quot;(1, 2)&quot;;
 }" class="graphviz" /></div>
 <figcaption>
 <p><span class="caption-text">Figure: Bounded 3x3-grid in the diagonal representation.</span><a class="headerlink" href="#fig-bounded-diagonal-grid" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Note that in this context,
-there exist two independent subgrids.
-In other words, a vertex in one subgrid is not accessible from
-a vertex in the other subgrid. This situation also arises
-if the diagonal grid has periodic boundary conditions and both
+<p>Two independent subgrids also occur if
+the diagonal grid has periodic boundary conditions and both
 dimensions are even.
 Figure <a class="reference internal" href="#fig-even-dim-diagonal"><span class="std std-ref">Figure: 4x4-grid with cyclic boundary conditions.</span></a> illustrates
 an example of this case.</p>
 <figure class="align-center" id="fig-even-dim-diagonal">
-<div class="graphviz"><img src="../../_images/graphviz-c459f85aae1ea1f6e11f58f0438be5d399136d46.png" alt="digraph {
+<div class="graphviz"><img src="../../_images/graphviz-c0aa20556f319240c9f85249b192cf8c0dbaaede.png" alt="graph {
 	&quot;(-1, -1)&quot; [pos=&quot;-1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 3)&quot;]
-	&quot;(0, -1)&quot; [pos=&quot;0.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(0, -1)&quot; [pos=&quot;0.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(1, -1)&quot; [pos=&quot;1.75,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 3)&quot;]
-	&quot;(2, -1)&quot; [pos=&quot;3.5,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(2, -1)&quot; [pos=&quot;3.5,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(3, -1)&quot; [pos=&quot;5.25,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 3)&quot;]
-	&quot;(4, -1)&quot; [pos=&quot;7.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
-	&quot;(-1, 0)&quot; [pos=&quot;-1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(4, -1)&quot; [pos=&quot;7.0,-1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
+	&quot;(-1, 0)&quot; [pos=&quot;-1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(0, 0)&quot; [pos=&quot;0.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(1, 0)&quot; [pos=&quot;1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(1, 0)&quot; [pos=&quot;1.75,0.0!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(2, 0)&quot; [pos=&quot;3.5,0.0!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(3, 0)&quot; [pos=&quot;5.25,0.0!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(3, 0)&quot; [pos=&quot;5.25,0.0!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(4, 0)&quot; [pos=&quot;7.0,0.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 0)&quot;]
 	&quot;(-1, 1)&quot; [pos=&quot;-1.75,1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 1)&quot;]
-	&quot;(0, 1)&quot; [pos=&quot;0.0,1.75!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(0, 1)&quot; [pos=&quot;0.0,1.75!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(1, 1)&quot; [pos=&quot;1.75,1.75!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(2, 1)&quot; [pos=&quot;3.5,1.75!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(2, 1)&quot; [pos=&quot;3.5,1.75!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(3, 1)&quot; [pos=&quot;5.25,1.75!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(4, 1)&quot; [pos=&quot;7.0,1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 1)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
-	&quot;(-1, 2)&quot; [pos=&quot;-1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 2)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(4, 1)&quot; [pos=&quot;7.0,1.75!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 1)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
+	&quot;(-1, 2)&quot; [pos=&quot;-1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 2)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(0, 2)&quot; [pos=&quot;0.0,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(1, 2)&quot; [pos=&quot;1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(1, 2)&quot; [pos=&quot;1.75,3.5!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(2, 2)&quot; [pos=&quot;3.5,3.5!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(3, 2)&quot; [pos=&quot;5.25,3.5!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(3, 2)&quot; [pos=&quot;5.25,3.5!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(4, 2)&quot; [pos=&quot;7.0,3.5!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 2)&quot;]
 	&quot;(-1, 3)&quot; [pos=&quot;-1.75,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 3)&quot;]
-	&quot;(0, 3)&quot; [pos=&quot;0.0,5.25!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(0, 3)&quot; [pos=&quot;0.0,5.25!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(1, 3)&quot; [pos=&quot;1.75,5.25!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(2, 3)&quot; [pos=&quot;3.5,5.25!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled&quot;]
+	&quot;(2, 3)&quot; [pos=&quot;3.5,5.25!&quot; width=0.75 height=0.75 fixedsize=True fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled&quot;]
 	&quot;(3, 3)&quot; [pos=&quot;5.25,5.25!&quot; width=0.75 height=0.75 fixedsize=True]
-	&quot;(4, 3)&quot; [pos=&quot;7.0,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
-	&quot;(-1, 4)&quot; [pos=&quot;-1.75,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(4, 3)&quot; [pos=&quot;7.0,5.25!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 3)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
+	&quot;(-1, 4)&quot; [pos=&quot;-1.75,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(0, 4)&quot; [pos=&quot;0.0,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 0)&quot;]
-	&quot;(1, 4)&quot; [pos=&quot;1.75,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(1, 4)&quot; [pos=&quot;1.75,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(1, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(2, 4)&quot; [pos=&quot;3.5,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(2, 0)&quot;]
-	&quot;(3, 4)&quot; [pos=&quot;5.25,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;red&quot; style=&quot;filled,dashed&quot; penwidth=2]
+	&quot;(3, 4)&quot; [pos=&quot;5.25,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(3, 0)&quot; fontcolor=&quot;white&quot; fillcolor=&quot;darkgray&quot; style=&quot;filled,dashed&quot;]
 	&quot;(4, 4)&quot; [pos=&quot;7.0,7.0!&quot; width=0.75 height=0.75 fixedsize=True style=&quot;dashed&quot; label=&quot;(0, 0)&quot;]
 
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 0)&quot; -&gt; &quot;(1, -1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 0)&quot; -&gt; &quot;(-1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 0)&quot; -&gt; &quot;(-1, -1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 0)&quot; -&gt; &quot;(2, -1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 0)&quot; -&gt; &quot;(0, -1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 0)&quot; -&gt; &quot;(3, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 0)&quot; -&gt; &quot;(3, -1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 0)&quot; -&gt; &quot;(1, -1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 0)&quot; -&gt; &quot;(4, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 0)&quot; -&gt; &quot;(4, -1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 0)&quot; -&gt; &quot;(2, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 0)&quot; -&gt; &quot;(2, -1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 1)&quot; -&gt; &quot;(1, 0)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 1)&quot; -&gt; &quot;(-1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 1)&quot; -&gt; &quot;(-1, 0)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 1)&quot; -&gt; &quot;(2, 0)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 1)&quot; -&gt; &quot;(0, 0)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 1)&quot; -&gt; &quot;(3, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 1)&quot; -&gt; &quot;(3, 0)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 1)&quot; -&gt; &quot;(1, 0)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 1)&quot; -&gt; &quot;(4, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 1)&quot; -&gt; &quot;(4, 0)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 1)&quot; -&gt; &quot;(2, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 1)&quot; -&gt; &quot;(2, 0)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 3)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 2)&quot; -&gt; &quot;(1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 2)&quot; -&gt; &quot;(-1, 3)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 2)&quot; -&gt; &quot;(-1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 3)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 2)&quot; -&gt; &quot;(2, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 3)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 2)&quot; -&gt; &quot;(0, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 2)&quot; -&gt; &quot;(3, 3)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 2)&quot; -&gt; &quot;(3, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 3)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 2)&quot; -&gt; &quot;(1, 1)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 2)&quot; -&gt; &quot;(4, 3)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 2)&quot; -&gt; &quot;(4, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 2)&quot; -&gt; &quot;(2, 3)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 2)&quot; -&gt; &quot;(2, 1)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 3)&quot; -&gt; &quot;(1, 4)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 3)&quot; -&gt; &quot;(1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 3)&quot; -&gt; &quot;(-1, 4)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(0, 3)&quot; -&gt; &quot;(-1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 3)&quot; -&gt; &quot;(2, 4)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 3)&quot; -&gt; &quot;(2, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 3)&quot; -&gt; &quot;(0, 4)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(1, 3)&quot; -&gt; &quot;(0, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 3)&quot; -&gt; &quot;(3, 4)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 3)&quot; -&gt; &quot;(3, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 3)&quot; -&gt; &quot;(1, 4)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(2, 3)&quot; -&gt; &quot;(1, 2)&quot;[ color=&quot;red&quot; style=&quot;dashed&quot; labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 3)&quot; -&gt; &quot;(4, 4)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 3)&quot; -&gt; &quot;(4, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 3)&quot; -&gt; &quot;(2, 4)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
-	 &quot;(3, 3)&quot; -&gt; &quot;(2, 2)&quot;[ labeldistance=2 labelangle=-50 penwidth=2];
+	 &quot;(-1, -1)&quot; -- &quot;(0, 0)&quot;[];
+	 &quot;(0, -1)&quot; -- &quot;(1, 0)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(1, -1)&quot; -- &quot;(2, 0)&quot;[];
+	 &quot;(1, -1)&quot; -- &quot;(0, 0)&quot;[];
+	 &quot;(2, -1)&quot; -- &quot;(3, 0)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(2, -1)&quot; -- &quot;(1, 0)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(3, -1)&quot; -- &quot;(2, 0)&quot;[];
+	 &quot;(4, -1)&quot; -- &quot;(3, 0)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(-1, 0)&quot; -- &quot;(0, 1)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(0, 0)&quot; -- &quot;(1, 1)&quot;[];
+	 &quot;(0, 0)&quot; -- &quot;(-1, 1)&quot;[];
+	 &quot;(1, 0)&quot; -- &quot;(2, 1)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(1, 0)&quot; -- &quot;(0, 1)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(2, 0)&quot; -- &quot;(3, 1)&quot;[];
+	 &quot;(2, 0)&quot; -- &quot;(1, 1)&quot;[];
+	 &quot;(3, 0)&quot; -- &quot;(4, 1)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(3, 0)&quot; -- &quot;(2, 1)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(4, 0)&quot; -- &quot;(3, 1)&quot;[];
+	 &quot;(-1, 1)&quot; -- &quot;(0, 2)&quot;[];
+	 &quot;(0, 1)&quot; -- &quot;(1, 2)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(0, 1)&quot; -- &quot;(-1, 2)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(1, 1)&quot; -- &quot;(2, 2)&quot;[];
+	 &quot;(1, 1)&quot; -- &quot;(0, 2)&quot;[];
+	 &quot;(2, 1)&quot; -- &quot;(3, 2)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(2, 1)&quot; -- &quot;(1, 2)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(3, 1)&quot; -- &quot;(4, 2)&quot;[];
+	 &quot;(3, 1)&quot; -- &quot;(2, 2)&quot;[];
+	 &quot;(4, 1)&quot; -- &quot;(3, 2)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(-1, 2)&quot; -- &quot;(0, 3)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(0, 2)&quot; -- &quot;(1, 3)&quot;[];
+	 &quot;(0, 2)&quot; -- &quot;(-1, 3)&quot;[];
+	 &quot;(1, 2)&quot; -- &quot;(2, 3)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(1, 2)&quot; -- &quot;(0, 3)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(2, 2)&quot; -- &quot;(3, 3)&quot;[];
+	 &quot;(2, 2)&quot; -- &quot;(1, 3)&quot;[];
+	 &quot;(3, 2)&quot; -- &quot;(4, 3)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(3, 2)&quot; -- &quot;(2, 3)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(4, 2)&quot; -- &quot;(3, 3)&quot;[];
+	 &quot;(0, 3)&quot; -- &quot;(1, 4)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(0, 3)&quot; -- &quot;(-1, 4)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(1, 3)&quot; -- &quot;(2, 4)&quot;[];
+	 &quot;(1, 3)&quot; -- &quot;(0, 4)&quot;[];
+	 &quot;(2, 3)&quot; -- &quot;(3, 4)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(2, 3)&quot; -- &quot;(1, 4)&quot;[ color=&quot;black&quot; style=&quot;dashed&quot;];
+	 &quot;(3, 3)&quot; -- &quot;(4, 4)&quot;[];
+	 &quot;(3, 3)&quot; -- &quot;(2, 4)&quot;[];
 }" class="graphviz" /></div>
 <figcaption>
 <p><span class="caption-text">Figure: 4x4-grid with cyclic boundary conditions.</span><a class="headerlink" href="#fig-even-dim-diagonal" title="Link to this image">#</a></p>
@@ -1014,7 +941,7 @@ an example of this case.</p>
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
 <p>All methods are inherited from
-<a class="reference internal" href="square_lattice.html#hiperwalk.SquareLattice" title="hiperwalk.SquareLattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code>.</p>
 </section>
 </section>
 

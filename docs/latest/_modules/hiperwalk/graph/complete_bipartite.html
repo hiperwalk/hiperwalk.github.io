@@ -476,22 +476,35 @@ document.write(`
 
 <div class="viewcode-block" id="CompleteBipartite">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/complete_bipartite.html#hiperwalk.CompleteBipartite">[docs]</a>
-<span class="k">def</span> <span class="nf">CompleteBipartite</span><span class="p">(</span><span class="n">num_vert1</span><span class="p">,</span> <span class="n">num_vert2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">CompleteBipartite</span><span class="p">(</span><span class="n">num_vert1</span><span class="p">,</span> <span class="n">num_vert2</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complete bipartite graph.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert1: int</span>
-<span class="sd">        Number of vertices of the first partition.</span>
+<span class="sd">        Number of vertices of the first part.</span>
+
 <span class="sd">    num_vert2: int</span>
-<span class="sd">        Number of vertices of the second partition.</span>
+<span class="sd">        Number of vertices of the second part.</span>
+
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The vertices in the first partition are labeled from</span>
+<span class="sd">    The vertices in the first part are labeled from</span>
 <span class="sd">    0 to ``num_vert1 - 1`` and the vertices of the</span>
-<span class="sd">    second partition are labeled from</span>
+<span class="sd">    second part are labeled from</span>
 <span class="sd">    ``num_vert1`` to ``num_vert1 + num_vert2 - 1``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -500,7 +513,7 @@ document.write(`
 
     <span class="k">if</span> <span class="n">num_vert1</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num_vert2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;There must be at least one vertex &quot;</span>
-                         <span class="o">+</span> <span class="s2">&quot;in each partition.&quot;</span><span class="p">)</span>
+                         <span class="o">+</span> <span class="s2">&quot;in each part.&quot;</span><span class="p">)</span>
 
     <span class="c1"># toy graph</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="n">num_vert1</span> <span class="o">+</span> <span class="n">num_vert2</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">())</span>

@@ -49,8 +49,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="hiperwalk.SquareLattice" href="square_lattice.html" />
-    <link rel="prev" title="hiperwalk.graph.hypercube.dimension" href="generated/hiperwalk.graph.hypercube.dimension.html" />
+    <link rel="next" title="Quantum Walk Models" href="../quantum_walk.html" />
+    <link rel="prev" title="hiperwalk.graph.integer_lattice.vertex_coordinates" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -398,12 +398,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -550,55 +550,53 @@ document.write(`
 <h1>hiperwalk.Line<a class="headerlink" href="#hiperwalk-line" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Line">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/line.html#Line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Line" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/line.html#Line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Line" title="Link to this definition">#</a></dt>
 <dd><p>Finite line graph (path graph).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>The number of vertices on the line.</p>
 </dd>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
-<p>In the <a class="reference internal" href="#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Line</span></code></a> class, directions can be assigned to the arcs. 
-An arc pointing to the right has direction 0 (e.g., (1, 2)), 
-and an arc pointing to the left has direction 1 (e.g., (2, 1)).</p>
-<p>The order of the arcs is determined by their direction. 
-Thus, for a vertex <span class="math notranslate nohighlight">\(v \in V\)</span>, 
-the arcs <span class="math notranslate nohighlight">\((v, v + 1)\)</span> and <span class="math notranslate nohighlight">\((v, v - 1)\)</span> 
-have labels <span class="math notranslate nohighlight">\(a_0\)</span> and <span class="math notranslate nohighlight">\(a_1\)</span> respectively, 
-with <span class="math notranslate nohighlight">\(a_0 &lt; a_1\)</span>. 
-The only exceptions to this rule are the extreme vertices 0 
-and <span class="math notranslate nohighlight">\(|V| - 1\)</span>, as they have outdegree 1.</p>
-<p>Apart from these exceptions, 
-for any two vertices <span class="math notranslate nohighlight">\(v_1 &lt; v_2\)</span>, 
-any arc with tail <span class="math notranslate nohighlight">\(v_1\)</span> will have a label smaller than the 
-label of any arc with tail <span class="math notranslate nohighlight">\(v_2\)</span>.</p>
-<p>For instance, Figure 1 illustrates the labels of the arcs of a path graph with 4 vertices.</p>
-<figure class="align-center" id="id1">
-<div class="graphviz"><img src="../../_images/graphviz-260860a2e5459277c7ee76e57ffeb3788d5f8127.png" alt="digraph {
-	0 [pos=&quot;0,0!&quot;];
-	1 [pos=&quot;2,0!&quot;];
-	2 [pos=&quot;4,0!&quot;];
-	3 [pos=&quot;6,0!&quot;];
-	0 -&gt; 1 [headlabel=0 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 2 [headlabel=1 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 0 [headlabel=2 labeldistance=4.75 labelangle=-10];
-	2 -&gt; 3 [headlabel=3 labeldistance=4.75 labelangle=-10];
-	2 -&gt; 1 [headlabel=4 labeldistance=4.75 labelangle=-10];
-	3 -&gt; 2 [headlabel=5 labeldistance=5.5 labelangle=-7];
-}" class="graphviz" /></div>
-<figcaption>
-<p><span class="caption-text">Figure 1.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+<p>The <strong>order of neighbors</strong> is
+the neighbor to the right first,
+followed by the neighbor to the left.
+In other words, for any vertex <span class="math notranslate nohighlight">\(v\)</span>,
+the neighbors are given in the order <span class="math notranslate nohighlight">\([v + 1, v - 1]\)</span>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 0 and 9 are not adjacent</span>
+<span class="go">[1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[2, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">[9, 7]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="c1"># 0 and 9 are not adjacent</span>
+<span class="go">[8]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
 <p>All methods are inherited from
-<a class="reference internal" href="square_lattice.html#hiperwalk.SquareLattice" title="hiperwalk.SquareLattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code>.</p>
 </section>
 </section>
 
@@ -613,20 +611,20 @@ label of any arc with tail <span class="math notranslate nohighlight">\(v_2\)</s
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="generated/hiperwalk.graph.hypercube.dimension.html"
+       href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.graph.hypercube.dimension</p>
+        <p class="prev-next-title">hiperwalk.graph.integer_lattice.vertex_coordinates</p>
       </div>
     </a>
     <a class="right-next"
-       href="square_lattice.html"
+       href="../quantum_walk.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.SquareLattice</p>
+        <p class="prev-next-title">Quantum Walk Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

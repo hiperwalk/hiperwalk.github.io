@@ -397,12 +397,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="graph_constructors/generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="graph_constructors/line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="graph_constructors/square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="graph_constructors/generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="graph_constructors/generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="graph_constructors/integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="graph_constructors/generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_constructors/generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="graph_constructors/line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -599,19 +599,8 @@ incident to both vertices <code class="docutils literal notranslate"><span class
 incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
 </ul>
 <p>If <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>,
-a ValueError exception is raised.</p>
-<p>The following is a list of the available graph constructors.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/complete.html">hiperwalk.Complete</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/complete_bipartite.html">hiperwalk.CompleteBipartite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/cycle.html">hiperwalk.Cycle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/grid.html">hiperwalk.Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/hypercube.html">hiperwalk.Hypercube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/line.html">hiperwalk.Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_constructors/square_lattice.html">hiperwalk.SquareLattice</a></li>
-</ul>
-</div>
+a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError exception</a>
+is raised.</p>
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="fn1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
@@ -624,6 +613,21 @@ Thus, we decided to use the word <em>constructor</em> because
 it conveys the idea that an instance is going to be returned.</p>
 </aside>
 </aside>
+<section id="list-of-graph-constructors">
+<h3>List of Graph Constructors<a class="headerlink" href="#list-of-graph-constructors" title="Link to this heading">#</a></h3>
+<p>The following is the list of all available graph constructors.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/complete.html">hiperwalk.Complete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/complete_bipartite.html">hiperwalk.CompleteBipartite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/cycle.html">hiperwalk.Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/grid.html">hiperwalk.Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/hypercube.html">hiperwalk.Hypercube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/integer_lattice.html">hiperwalk.IntegerLattice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors/line.html">hiperwalk.Line</a></li>
+</ul>
+</div>
+</section>
 </section>
 </section>
 
@@ -674,7 +678,10 @@ it conveys the idea that an instance is going to be returned.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-constructors">Graph Constructors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-constructors">Graph Constructors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-of-graph-constructors">List of Graph Constructors</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -398,12 +398,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.hypercube.dimension.html">hiperwalk.graph.hypercube.dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="square_lattice.html">hiperwalk.SquareLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.dimensions.html">hiperwalk.graph.square_lattice.dimensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.square_lattice.vertex_coordinates.html">hiperwalk.graph.square_lattice.vertex_coordinates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="integer_lattice.html">hiperwalk.IntegerLattice</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.dimensions.html">hiperwalk.graph.integer_lattice.dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.graph.integer_lattice.vertex_coordinates.html">hiperwalk.graph.integer_lattice.vertex_coordinates</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">hiperwalk.Line</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum_walk.html">Quantum Walk Models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -550,50 +550,56 @@ document.write(`
 <h1>hiperwalk.Cycle<a class="headerlink" href="#hiperwalk-cycle" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Cycle">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/cycle.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/cycle.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle" title="Link to this definition">#</a></dt>
 <dd><p>Cycle graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>Number of vertices in the cycle.</p>
 </dd>
+<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
 <p>The cycle can be interpreted as being embedded on the line
 with a cyclic boundary condition.
 In this context,
-we assign the direction <code class="docutils literal notranslate"><span class="pre">0</span></code> to the right and <code class="docutils literal notranslate"><span class="pre">1</span></code> to the left.
-This assignment alters the order of the arcs.
-Any arc with a tail denoted by <span class="math notranslate nohighlight">\(v\)</span>
-has the numerical label <span class="math notranslate nohighlight">\(2v\)</span> if it points to the right,
-and the numerical label <span class="math notranslate nohighlight">\(2v + 1\)</span> if it points to the left.
-Figure 1 illustrates the arc numbers of a cycle with 3 vertices.</p>
-<figure class="align-center" id="id1">
-<div class="graphviz"><img src="../../_images/graphviz-0517a8341e4f8e72035479c10008a45f8bb4d68f.png" alt="digraph {
-	l0 [pos=&quot;-2,0!&quot; style=&quot;dashed&quot; label=&quot;2&quot;];
-	0 [pos=&quot;0,0!&quot;];
-	1 [pos=&quot;2,0!&quot;];
-	2 [pos=&quot;4,0!&quot;];
-	r2 [pos=&quot;6,0!&quot; style=&quot;dashed&quot; label=&quot;0&quot;];
-	0 -&gt; 1 [headlabel=0 labeldistance=4.75 labelangle=-10];
-	0 -&gt; l0 [headlabel=1 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 2 [headlabel=2 labeldistance=4.75 labelangle=-10];
-	1 -&gt; 0 [headlabel=3 labeldistance=4.75 labelangle=-10];
-	2 -&gt; r2 [headlabel=4 labeldistance=4.75 labelangle=-10];
-	2 -&gt; 1 [headlabel=5 labeldistance=4.75 labelangle=-10];
-}" class="graphviz" /></div>
-<figcaption>
-<p><span class="caption-text">Figure 1.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+the <strong>order of neighbors</strong> is
+the neighbor to the right first,
+followed by the neighbor to the left.
+In other words, for any vertex <span class="math notranslate nohighlight">\(v\)</span>,
+the neighbors are given in the order <span class="math notranslate nohighlight">\([v + 1, v - 1]\)</span>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">[1, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[2, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">[9, 7]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="go">[0, 8]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <section id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
 <p>All methods are inherited from
-<a class="reference internal" href="square_lattice.html#hiperwalk.SquareLattice" title="hiperwalk.SquareLattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.SquareLattice</span></code>.</p>
 </section>
 </section>
 

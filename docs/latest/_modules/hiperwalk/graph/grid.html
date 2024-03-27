@@ -392,13 +392,13 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.grid</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span> <span class="k">as</span> <span class="n">np_array</span>
-<span class="kn">from</span> <span class="nn">.square_lattice</span> <span class="kn">import</span> <span class="n">SquareLattice</span>
+<span class="kn">from</span> <span class="nn">.integer_lattice</span> <span class="kn">import</span> <span class="n">IntegerLattice</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
 
 <div class="viewcode-block" id="Grid">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/grid.html#hiperwalk.Grid">[docs]</a>
 <span class="k">def</span> <span class="nf">Grid</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-         <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+         <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Two-dimensionsal grid.</span>
 
@@ -413,9 +413,11 @@ document.write(`
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dimensions : int or tuple of int</span>
-<span class="sd">        Grid dimensions in ``(_dim[0], _dim[1])`` format.</span>
-<span class="sd">        If ``dimensions`` is an integer, creates a square grid.</span>
+<span class="sd">    dim : int or tuple of int</span>
+<span class="sd">        Grid dimensions in ``(dim[0], dim[1])`` format,</span>
+<span class="sd">        where ``dim[0]`` is the number of vertices in the X-axis,</span>
+<span class="sd">        and ``dim[1]`` is the number of vertices in the Y-axis.</span>
+<span class="sd">        If ``dim`` is an integer, creates a square grid.</span>
 
 <span class="sd">    periodic : bool, default=True</span>
 <span class="sd">        ``True`` if the grid has cyclic boundary conditions,</span>
@@ -425,20 +427,29 @@ document.write(`
 <span class="sd">        ``True`` if the grid has the diagonal representation,</span>
 <span class="sd">        ``False`` if it has the natural representation.</span>
 
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
+
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The order of the arcs is determined according to</span>
-<span class="sd">    the order of the vertices.</span>
-<span class="sd">    The order of the vertices is defined as follows:</span>
-<span class="sd">    if :math:`(x_1, y_1)` and :math:`(x_2, y_2)` are two valid vertices,</span>
-<span class="sd">    we say that :math:`(x_1, y_1) &lt; (x_2, y_2)` if :math:`y_1 &lt; y_2` or</span>
-<span class="sd">    if :math:`y_1 = y_2` and :math:`x_1 &lt; x_2`.</span>
-<span class="sd">    The order of the arcs also depends on the grid representation</span>
-<span class="sd">    (natural or diagonal).</span>
+<span class="sd">    The **order of neighbors** depends on the grid.</span>
+
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import hiperwalk as hpw</span>
 
 <span class="sd">    Natural Grid:</span>
-<span class="sd">        In the natural grid,</span>
-<span class="sd">        the directions are described as follows:</span>
+<span class="sd">        The natural grid is created when ``diagonal=False``.</span>
+<span class="sd">        The neighbors are given in the following order.</span>
 
 <span class="sd">        * 00 = 0: right;</span>
 <span class="sd">        * 01 = 1: left;</span>
@@ -447,101 +458,102 @@ document.write(`
 <span class="sd">        </span>
 <span class="sd">        The most significant bit corresponds to the axis:</span>
 <span class="sd">        0 represents the X-axis and 1 represents the Y-axis.</span>
-<span class="sd">        The least significant bit indicates the direction of</span>
-<span class="sd">        movement along the given axis, with 0 signifying</span>
-<span class="sd">        forward movement and 1 signifying backward movement.</span>
+<span class="sd">        The least significant bit indicates the direction</span>
+<span class="sd">        along the given axis, with 0 signifying</span>
+<span class="sd">        forward and 1 signifying backward.</span>
 
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
+<span class="sd">        Consider a vertex :math:`(x, y)`. Then,</span>
 <span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
 <span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
+<span class="sd">        The order of neighbors is depicted in</span>
+<span class="sd">        :ref:`fig-natural-grid-order`.</span>
 
-<span class="sd">        .. math::</span>
-<span class="sd">            ((x, y), (x + 1, y)) &amp;&lt; ((x, y), (x - 1, y)) \\</span>
-<span class="sd">                                 &amp;&lt; ((x, y), (x, y + 1)) \\</span>
-<span class="sd">                                 &amp;&lt; ((x, y), (x, y - 1)).</span>
-
-<span class="sd">        The directions are depicted in :ref:`fig-natural-dir`.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/grid/natural-directions.dot</span>
+<span class="sd">        .. graphviz:: ../../graphviz/grid/natural-grid-neigh-order.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-natural-dir</span>
-<span class="sd">            :caption: Figure: Directions in the natural representation.</span>
+<span class="sd">            :name: fig-natural-grid-order</span>
+<span class="sd">            :caption: Figure: The order of neighbors in the natural grid.</span>
 
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-grid with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-natural-grid`.</span>
+<span class="sd">        For example,</span>
+<span class="sd">        consider the :math:`3 \times 3` periodic natural grid</span>
+<span class="sd">        (:ref:`fig-3x3-natural-grid`).</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/grid/periodic-natural.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-periodic-natural-grid</span>
-<span class="sd">            :caption: Figure: 3x3-grid with cyclic boundary conditions.</span>
+<span class="sd">            :name: fig-3x3-natural-grid</span>
+<span class="sd">            :caption: Figure: Periodic natural 3x3-grid.</span>
 
-<span class="sd">        In the case of a natural grid with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications</span>
-<span class="sd">        due to the presence of vertices with degrees 2 and 3.</span>
-<span class="sd">        Figure :ref:fig-bounded-natural-Grid provides an illustration</span>
-<span class="sd">        of a bounded natural grid.</span>
+<span class="sd">        The neighbors of :math:`(0, 0)` and :math:`(1, 1)` with</span>
+<span class="sd">        respect to the order of neighbors are</span>
 
-<span class="sd">        .. graphviz:: ../../graphviz/grid/bounded-natural.dot</span>
-<span class="sd">            :align: center</span>
-<span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-bounded-natural-grid</span>
-<span class="sd">            :caption: Figure: Bounded natural 3x3-grid.</span>
+<span class="sd">        .. doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; nat = hpw.Grid(3, diagonal=False, periodic=True)</span>
+<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((0, 0))</span>
+<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            [(1, 0), (2, 0), (0, 1), (0, 2)]</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            [(2, 1), (0, 1), (1, 2), (1, 0)]</span>
 
 <span class="sd">    Diagonal Grid:</span>
-<span class="sd">        In the diagonal grid,</span>
-<span class="sd">        the directions are described as follows:</span>
+<span class="sd">        The diagonal grid is created when ``diagonal=True``.</span>
+<span class="sd">        The neighbors are given in the following order.</span>
 
 <span class="sd">        * 00 = 0: right, up;</span>
 <span class="sd">        * 01 = 1: right, down;</span>
 <span class="sd">        * 10 = 2: left, up;</span>
 <span class="sd">        * 11 = 3: left, down.</span>
 
-<span class="sd">        Each binary value indicates the direction of movement,</span>
-<span class="sd">        with 0 representing forward motion and 1 representing</span>
-<span class="sd">        backward motion. The most significant bit corresponds to</span>
-<span class="sd">        movement along the X-axis, while the least significant bit</span>
-<span class="sd">        corresponds to movement along the Y-axis.</span>
+<span class="sd">        Each binary value indicates the direction along</span>
+<span class="sd">        a given axis,</span>
+<span class="sd">        with 0 representing forward and 1 representing backward.</span>
+<span class="sd">        The most significant bit corresponds to the</span>
+<span class="sd">        direction along the X-axis,</span>
+<span class="sd">        while the least significant bit corresponds to the</span>
+<span class="sd">        direction along the Y-axis.</span>
 
-<span class="sd">        The order of arcs corresponds with the order of vertices</span>
-<span class="sd">        and their respective directions. For example,</span>
-<span class="sd">        consider a vertex :math:`(x, y)`. Then,</span>
-<span class="sd">        :math:`(x \pm 1, y)` and :math:`(x, y \pm 1)`</span>
-<span class="sd">        are adjacent vertices.</span>
-<span class="sd">        The order of these arcs is</span>
-<span class="sd">        </span>
-<span class="sd">        .. math::</span>
-<span class="sd">            ((x, y), (x + 1, y + 1)) &amp;&lt; ((x, y), (x + 1, y - 1)) \\</span>
-<span class="sd">                                     &amp;&lt; ((x, y), (x - 1, y + 1)) \\</span>
-<span class="sd">                                     &amp;&lt; ((x, y), (x - 1, y - 1)).</span>
+<span class="sd">        Consider a vertex :math:`(x, y)`. Then,</span>
+<span class="sd">        its four neighbors are :math:`(x \pm 1, y \pm 1)`.</span>
+<span class="sd">        The order of neighbors is depicted in</span>
+<span class="sd">        :ref:`fig-diagonal-grid-order`.</span>
 
-<span class="sd">        The directions are depicted in :ref:`fig-diagonal-dir`.</span>
-
-<span class="sd">        .. graphviz:: ../../graphviz/grid/diagonal-directions.dot</span>
+<span class="sd">        .. graphviz:: ../../graphviz/grid/diagonal-grid-neigh-order.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-diagonal-dir</span>
-<span class="sd">            :caption: Figure: Directions in the diagonal representation.</span>
+<span class="sd">            :name: fig-diagonal-grid-order</span>
+<span class="sd">            :caption: Figure: The order of neighbors in the diagonal grid.</span>
 
-<span class="sd">        For example, the labels of the arcs for</span>
-<span class="sd">        the :math:`3 \times 3`-grid with periodic boundary</span>
-<span class="sd">        conditions are depicted in :ref:`fig-periodic-diagonal-grid`</span>
+<span class="sd">        For example,</span>
+<span class="sd">        consider the :math:`3 \times 3` periodic diagonal grid</span>
+<span class="sd">        (:ref:`fig-3x3-diagonal-grid`).</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/grid/periodic-diagonal.dot</span>
 <span class="sd">            :align: center</span>
 <span class="sd">            :layout: neato</span>
-<span class="sd">            :name: fig-periodic-diagonal-grid</span>
+<span class="sd">            :name: fig-3x3-diagonal-grid</span>
 <span class="sd">            :caption: Figure: Periodic diagonal 3x3-grid.</span>
 
-<span class="sd">        In the case of a diagonal grid with borders, the labels of the</span>
-<span class="sd">        arcs maintain the same sequence but with some modifications.</span>
-<span class="sd">        Figure :ref:`fig-bounded-diagonal-Grid` provides</span>
-<span class="sd">        an illustration of a bounded diagonal grid.</span>
+<span class="sd">        The neighbors of :math:`(0, 0)` and :math:`(1, 1)` with</span>
+<span class="sd">        respect to the order of neighbors are</span>
+
+<span class="sd">        .. doctest::</span>
+
+<span class="sd">            &gt;&gt;&gt; nat = hpw.Grid(3, diagonal=False, periodic=True)</span>
+<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((0, 0))</span>
+<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            [(1, 1), (1, 2), (2, 1), (2, 2)]</span>
+<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            [(2, 2), (2, 0), (0, 2), (0, 0)]</span>
+
+<span class="sd">        In the case of a diagonal grid with borders,</span>
+<span class="sd">        there exist two independent subgrids.</span>
+<span class="sd">        In other words, a vertex in one subgrid is not accessible from</span>
+<span class="sd">        a vertex in the other subgrid.</span>
 
 <span class="sd">        .. graphviz:: ../../graphviz/grid/bounded-diagonal.dot</span>
 <span class="sd">            :align: center</span>
@@ -549,11 +561,8 @@ document.write(`
 <span class="sd">            :name: fig-bounded-diagonal-grid</span>
 <span class="sd">            :caption: Figure: Bounded 3x3-grid in the diagonal representation.</span>
 
-<span class="sd">        Note that in this context,</span>
-<span class="sd">        there exist two independent subgrids.</span>
-<span class="sd">        In other words, a vertex in one subgrid is not accessible from</span>
-<span class="sd">        a vertex in the other subgrid. This situation also arises</span>
-<span class="sd">        if the diagonal grid has periodic boundary conditions and both</span>
+<span class="sd">        Two independent subgrids also occur if</span>
+<span class="sd">        the diagonal grid has periodic boundary conditions and both</span>
 <span class="sd">        dimensions are even.</span>
 <span class="sd">        Figure :ref:`fig-even-dim-diagonal` illustrates</span>
 <span class="sd">        an example of this case.</span>
@@ -579,7 +588,7 @@ document.write(`
         <span class="n">basis</span> <span class="o">=</span> <span class="n">np_array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
                           <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">SquareLattice</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">periodic</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">periodic</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
     <span class="c1"># g._neighbor_index = MethodType(_neighbor_index, g)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="n">diagonal</span>
 
