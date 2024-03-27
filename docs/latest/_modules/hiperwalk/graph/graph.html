@@ -516,6 +516,50 @@ document.write(`
 <span class="sd">        the argument ``copy`` must be set to ``True``.</span>
 
 <span class="sd">    The treatment of the graph depends on the quantum walk model. </span>
+
+<span class="sd">    The default **order of neighbors** is the ascending order.</span>
+<span class="sd">    A different order of neighbors can be specified using a</span>
+<span class="sd">    sparse matrix where</span>
+<span class="sd">    :obj:`scipy.sparse.csr_array.has_sorted_indices` is ``False``.</span>
+<span class="sd">    In this case,</span>
+<span class="sd">    the neighbors of ``u`` are given by</span>
+<span class="sd">    ``adj_matrix.indices[adj_matrix.indptr[u]:adj_matrix.indptr[u+1]]``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import hiperwalk as hpw</span>
+<span class="sd">        import scipy.sparse</span>
+
+<span class="sd">    Creating a complete graph with loops and</span>
+<span class="sd">    the default order of neighbors (ascending order).</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; num_vert = 4</span>
+<span class="sd">        &gt;&gt;&gt; A = scipy.sparse.csr_array([[1]*num_vert]*num_vert)</span>
+<span class="sd">        &gt;&gt;&gt; g = hpw.Graph(A)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0)</span>
+<span class="sd">        array([0, 1, 2, 3], dtype=int32)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        array([0, 1, 2, 3], dtype=int32)</span>
+
+<span class="sd">    Creating a complete graph with loops and</span>
+<span class="sd">    the descending order of neighbors.</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; data = [1]*(num_vert**2)</span>
+<span class="sd">        &gt;&gt;&gt; indices = list(range(num_vert - 1, -1, -1))*num_vert</span>
+<span class="sd">        &gt;&gt;&gt; indptr = list(range(0, num_vert*(num_vert + 1), num_vert))</span>
+<span class="sd">        &gt;&gt;&gt; A = scipy.sparse.csr_array((data, indices, indptr))</span>
+<span class="sd">        &gt;&gt;&gt; g = hpw.Graph(A)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0)</span>
+<span class="sd">        array([3, 2, 1, 0])</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        array([3, 2, 1, 0])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
