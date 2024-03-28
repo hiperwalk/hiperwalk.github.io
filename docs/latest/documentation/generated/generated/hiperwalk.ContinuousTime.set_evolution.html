@@ -558,7 +558,7 @@ document.write(`
 <span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_evolution" title="Link to this definition">#</a></dt>
 <dd><p>Set the evolution operator.</p>
 <p>This method defines the evolution operator for a specified 
-time t via the argument <code class="docutils literal notranslate"><span class="pre">time=t</span></code>.
+<code class="docutils literal notranslate"><span class="pre">time</span></code>.
 It first determines the 
 Hamiltonian and subsequently derives the evolution operator 
 via a truncated Taylor series. The default number of terms 
@@ -595,8 +595,10 @@ See <a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian
 the Taylor series expansion is given by</p>
 <div class="math notranslate nohighlight">
 \[\text{e}^{-\text{i}tH} \approx
-\sum_{j = 0}^{n} (-\text{i}tH)^j / j!\]</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">terms</span></code><span class="math notranslate nohighlight">\(=n+1\)</span>.</p>
+\sum_{j = 0}^{n-1} (-\text{i}tH)^j / j!\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">terms</span></code><span class="math notranslate nohighlight">\(=n\)</span>.
+This choice reflects default Python loops over integers,
+such as <code class="docutils literal notranslate"><span class="pre">range</span></code> and <code class="docutils literal notranslate"><span class="pre">np.arange</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>For non-integer time (floating number),

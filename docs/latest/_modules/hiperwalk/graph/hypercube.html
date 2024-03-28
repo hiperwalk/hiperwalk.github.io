@@ -444,6 +444,9 @@ document.write(`
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    .. testsetup::</span>
+
+<span class="sd">        from sys import path</span>
+<span class="sd">        path.append(&#39;..&#39;)</span>
 <span class="sd">        import hiperwalk as hpw</span>
 
 <span class="sd">    .. doctest::</span>
@@ -513,14 +516,15 @@ document.write(`
 
 <span class="sd">    .. doctest::</span>
 
+<span class="sd">        &gt;&gt;&gt; g = hpw.Hypercube(4)</span>
 <span class="sd">        &gt;&gt;&gt; u = 10</span>
 <span class="sd">        &gt;&gt;&gt; bin(u)</span>
 <span class="sd">        &#39;0b1010&#39;</span>
-<span class="sd">        &gt;&gt;&gt; neigh = neighbors(u)</span>
+<span class="sd">        &gt;&gt;&gt; neigh = g.neighbors(u)</span>
 <span class="sd">        &gt;&gt;&gt; neigh</span>
-<span class="sd">        [11, 8, 14, 2]</span>
+<span class="sd">        array([11,  8, 14,  2])</span>
 <span class="sd">        &gt;&gt;&gt; [bin(v) for v in neigh]</span>
-<span class="sd">        [&#39;0b1011&#39;, &#39;0b1000&#39;, &#39;0b1110&#39;, &#39;0b0010&#39;]</span>
+<span class="sd">        [&#39;0b1011&#39;, &#39;0b1000&#39;, &#39;0b1110&#39;, &#39;0b10&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; [u^v for v in neigh]</span>
 <span class="sd">        [1, 2, 4, 8]</span>
 <span class="sd">    &quot;&quot;&quot;</span>

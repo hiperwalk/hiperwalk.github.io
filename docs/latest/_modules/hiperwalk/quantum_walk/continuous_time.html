@@ -621,9 +621,8 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the Hamiltonian.</span>
 
-<span class="sd">        The Hamiltonian takes the form of -gamma A, -gamma L, </span>
-<span class="sd">        or -gamma C, where A is the adjacency matrix, L is </span>
-<span class="sd">        the Laplacian matrix, and C is any real Hermitian matrix.</span>
+<span class="sd">        The Hamiltonian takes the form of ``-gamma*C`` wheres</span>
+<span class="sd">        ``C`` is either the adjacency matrix or the Laplacian matrix.</span>
 <span class="sd">        If marked vertices are specified, the Hamiltonian </span>
 <span class="sd">        is modified as described in the Notes section. </span>
 <span class="sd">        Once the Hamiltonian has been established, </span>
@@ -639,7 +638,7 @@ document.write(`
 <span class="sd">            ``&#39;A&#39;`` is shorthand for ``&#39;adjacency&#39;`` (default).</span>
 <span class="sd">            ``&#39;L&#39;`` is shorthand for ``&#39;laplacian&#39;``.</span>
 
-<span class="sd">        marked : list of vertices</span>
+<span class="sd">        marked : list of vertices, default=[]</span>
 <span class="sd">            List of vertices to be marked.</span>
 <span class="sd">            If empty list, no vertex is marked.</span>
 
@@ -664,15 +663,12 @@ document.write(`
 <span class="sd">        .. math::</span>
 <span class="sd">            H = -\gamma C  - \sum_{m \in M} \ket m \bra m,</span>
 
-<span class="sd">        where :math:`C` is the adjacency matrix, Laplacian</span>
-<span class="sd">        matrix, or any real Hermitian matrix. The set</span>
-<span class="sd">        :math:`M` specifies the marked vertices via</span>
+<span class="sd">        where :math:`C` is either the adjacency matrix or</span>
+<span class="sd">        the Laplacian matrix.</span>
+<span class="sd">        The set :math:`M` specifies the marked vertices via</span>
 <span class="sd">        the argument ``marked=M``. For instance, ``marked={0}``</span>
 <span class="sd">        specifies that :math:`v_0` is the marked vertex.</span>
 <span class="sd">        The default is :math:`M=\emptyset`.</span>
-
-<span class="sd">        If the type of the Hamiltonian is set ``&#39;adjacency&#39;`` </span>
-<span class="sd">        (default), </span>
 <span class="sd">        </span>
 <span class="sd">        References</span>
 <span class="sd">        ----------</span>
@@ -822,7 +818,7 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        terms : int, default=21</span>
+<span class="sd">        terms : int, default=20</span>
 <span class="sd">            Number of terms in the truncated Taylor series expansion.</span>
 
 <span class="sd">        See Also</span>
@@ -931,7 +927,7 @@ document.write(`
 <span class="sd">        Set the evolution operator.</span>
 
 <span class="sd">        This method defines the evolution operator for a specified </span>
-<span class="sd">        time t via the argument ``time=t``.</span>
+<span class="sd">        ``time``.</span>
 <span class="sd">        It first determines the </span>
 <span class="sd">        Hamiltonian and subsequently derives the evolution operator </span>
 <span class="sd">        via a truncated Taylor series. The default number of terms </span>
@@ -969,9 +965,11 @@ document.write(`
 <span class="sd">        </span>
 <span class="sd">        .. math::</span>
 <span class="sd">            \text{e}^{-\text{i}tH} \approx</span>
-<span class="sd">            \sum_{j = 0}^{n} (-\text{i}tH)^j / j!</span>
+<span class="sd">            \sum_{j = 0}^{n-1} (-\text{i}tH)^j / j!</span>
 
-<span class="sd">        where ``terms``:math:`=n+1`.</span>
+<span class="sd">        where ``terms``:math:`=n`.</span>
+<span class="sd">        This choice reflects default Python loops over integers,</span>
+<span class="sd">        such as ``range`` and ``np.arange``.</span>
 
 <span class="sd">        .. warning::</span>
 <span class="sd">            For non-integer time (floating number),</span>
@@ -996,61 +994,7 @@ document.write(`
         <span class="n">update</span> <span class="o">=</span> <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_terms</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">update</span><span class="p">):</span>
             <span class="n">filter_and_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="ContinuousTime.simulate">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate">[docs]</a>
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analogous to :meth:`hiperwalk.QuantumWalk.simulate`,</span>
-<span class="sd">        which accepts float entries for the ``time`` parameter.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        time : float or tuple of floats</span>
-<span class="sd">            This parameter is analogous to those in</span>
-<span class="sd">            :meth:`hiperwalk.QuantumWalk.simulate`,</span>
-<span class="sd">            with the distinction that it accepts float inputs.</span>
-<span class="sd">            The ``step`` parameter is used to construct the evolution operator.</span>
-<span class="sd">            The states within the interval</span>
-<span class="sd">            **[** ``start/step``, ``end/step`` **]** are stored.</span>
-<span class="sd">            The values describing this interval are</span>
-<span class="sd">            rounded up if the decimal part exceeds ``1 - 1e-5``,</span>
-<span class="sd">            and rounded down otherwise.</span>
-
-<span class="sd">        Other Parameters</span>
-<span class="sd">        ----------------</span>
-<span class="sd">        See :meth:`hiperwalk.QuantumWalk.simulate`.</span>
-
-<span class="sd">        See Also</span>
-<span class="sd">        --------</span>
-<span class="sd">        set_evolution</span>
-<span class="sd">        get_evolution</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid `time_range`. Expected a float, 2-tuple, &quot;</span>
-                <span class="o">+</span> <span class="s2">&quot;or 3-tuple of float.&quot;</span>
-            <span class="p">)</span>
-
-        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_time_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
-        <span class="c1"># cleaning time_range to int</span>
-        <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-                   <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">tol</span>
-                <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">val</span><span class="o">/</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
-                <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">time</span><span class="p">]</span>
-
-        <span class="n">states</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">states</span></div>
-
-
-    <span class="k">def</span> <span class="nf">_number_to_valid_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">number</span></div>
+</div>
 
 </pre></div>
 

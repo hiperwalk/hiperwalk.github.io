@@ -802,7 +802,9 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        entries : list of entry</span>
 <span class="sd">            Each entry is a 2-tuple or array with format</span>
-<span class="sd">            ``(amplitude, vertex)``.</span>
+<span class="sd">            ``(amplitude, label)``.</span>
+<span class="sd">            That is, an amplitude and the corresponding label of</span>
+<span class="sd">            the computational basis.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -820,15 +822,21 @@ document.write(`
 
 <span class="sd">        The following commands generate the same state.</span>
 
+<span class="sd">        .. testsetup::</span>
+
+<span class="sd">            import numpy as np</span>
+<span class="sd">            import hiperwalk as hpw</span>
+<span class="sd">            qw = hpw.Coined(hpw.Cycle(5))</span>
+
 <span class="sd">        &gt;&gt;&gt; psi = qw.state([[1, 0], [1, 1], [1, 2]])</span>
 <span class="sd">        &gt;&gt;&gt; psi1 = qw.state([[1, 0], (1, 1), (1, 2)])</span>
 <span class="sd">        &gt;&gt;&gt; psi2 = qw.state(([1, 0], (1, 1), (1, 2)))</span>
 <span class="sd">        &gt;&gt;&gt; psi3 = qw.state(((1, 0), (1, 1), (1, 2)))</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi == ps1)</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi == psi1)</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi1 == ps2)</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi1 == psi2)</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; np.all(psi2 == ps3)</span>
+<span class="sd">        &gt;&gt;&gt; np.all(psi2 == psi3)</span>
 <span class="sd">        True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1191,7 +1199,7 @@ document.write(`
 
 
     <span class="k">def</span> <span class="nf">_number_to_valid_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>

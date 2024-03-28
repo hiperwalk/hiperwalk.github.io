@@ -581,13 +581,13 @@ followed by the neighbor to the left.
 In other words, for any vertex <span class="math notranslate nohighlight">\(v\)</span>,
 the neighbors are given in the order <span class="math notranslate nohighlight">\([v + 1, v - 1]\)</span>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 0 and 9 are not adjacent</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># 0 and 9 are not adjacent</span>
 <span class="go">[1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 <span class="go">[2, 0]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
 <span class="go">[9, 7]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="c1"># 0 and 9 are not adjacent</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span> <span class="c1"># 0 and 9 are not adjacent</span>
 <span class="go">[8]</span>
 </pre></div>
 </div>

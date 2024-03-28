@@ -458,24 +458,28 @@ the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional
 <span class="gp">&gt;&gt;&gt; </span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
-<span class="gp">... </span>                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span>
-<span class="go">array([[0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
-<span class="go">        0.0078125, 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
-<span class="go">        0.0390625, 0.0390625, 0.0078125, 0.015625 , 0.0078125, 0.1953125,</span>
-<span class="go">        0.0078125, 0.0078125, 0.1953125, 0.0078125, 0.       , 0.0078125,</span>
-<span class="go">        0.0390625, 0.0390625, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,</span>
+<span class="go">array([[0.       , 0.       , 0.       , 0.015625 , 0.       , 0.       ,</span>
+<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.0078125,</span>
+<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.1953125,</span>
+<span class="go">        0.0390625, 0.0078125, 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
+<span class="go">        0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.0078125, 0.0390625,</span>
+<span class="go">        0.0390625, 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
+<span class="go">        0.0078125, 0.0390625, 0.1953125, 0.0390625, 0.0078125, 0.       ,</span>
+<span class="go">        0.       , 0.       , 0.0078125, 0.0078125, 0.0078125, 0.       ,</span>
 <span class="go">        0.       ]])</span>
 </pre></div>
 </div>
 <section id="bar-plot">
 <h4>Bar Plot<a class="headerlink" href="#bar-plot" title="Link to this heading">#</a></h4>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Fix plots</p>
+</div>
 <p>The vertices are represented on the x-axis.
 The respective probabilities are represented on the y-axis.
 Each vertex is associated with a bar.</p>

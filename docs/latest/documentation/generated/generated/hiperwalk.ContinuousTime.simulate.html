@@ -39,6 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.ContinuousTime.simulate';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
@@ -554,37 +555,89 @@ document.write(`
 <h1>hiperwalk.ContinuousTime.simulate<a class="headerlink" href="#hiperwalk-continuoustime-simulate" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.ContinuousTime.simulate">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.simulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.simulate" title="Link to this definition">#</a></dt>
-<dd><p>Analogous to <a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a>,
-which accepts float entries for the <code class="docutils literal notranslate"><span class="pre">time</span></code> parameter.</p>
-<dl class="field-list simple">
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.simulate" title="Link to this definition">#</a></dt>
+<dd><p>Simulates the quantum walk.</p>
+<p>The simulation progresses by iteratively applying 
+the evolution operator to the outcome of its prior 
+application, initiating from the specified initial state.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>time</strong><span class="classifier">float or tuple of floats</span></dt><dd><p>This parameter is analogous to those in
-<a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a>,
-with the distinction that it accepts float inputs.
-The <code class="docutils literal notranslate"><span class="pre">step</span></code> parameter is used to construct the evolution operator.
-The states within the interval
-<strong>[</strong> <code class="docutils literal notranslate"><span class="pre">start/step</span></code>, <code class="docutils literal notranslate"><span class="pre">end/step</span></code> <strong>]</strong> are stored.
-The values describing this interval are
-rounded up if the decimal part exceeds <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">1e-5</span></code>,
-and rounded down otherwise.</p>
+<dd class="field-odd"><dl>
+<dt><strong>time</strong><span class="classifier">int, tuple of int, default=None</span></dt><dd><p>Specifies the time instances when the state should be saved.
+It can be defined in three distinct ways:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>end</dt><dd><p>Saves the state at the <code class="docutils literal notranslate"><span class="pre">end</span></code> time.
+Only the final state is retained.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>(end, step)</dt><dd><p>Retains every state from time 0 to <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive)
+that corresponds to a multiple of <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>(start, end, step)</dt><dd><p>Stores every state from time <code class="docutils literal notranslate"><span class="pre">start</span></code> (inclusive)
+to <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive)
+that is a multiple of <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>state</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>, default=None</span></dt><dd><p>The starting state onto which the evolution operator
+will be applied.</p>
+</dd>
+<dt><strong>initial_state</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>states</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>.</span></dt><dd><p>States retained during the simulation where
+<code class="docutils literal notranslate"><span class="pre">states[i]</span></code> is the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th saved state.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Other Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>See :meth:`hiperwalk.QuantumWalk.simulate`.</strong></dt><dd></dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>Triggered if:
+* <code class="docutils literal notranslate"><span class="pre">time=None</span></code>.
+* <code class="docutils literal notranslate"><span class="pre">state=None</span></code>.
+* <code class="docutils literal notranslate"><span class="pre">evolution_operator=None</span></code> and hasn’t been set before.</p>
+</dd>
 </dl>
 </dd>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a></dt><dd></dd>
-<dt><a class="reference internal" href="hiperwalk.ContinuousTime.get_evolution.html#hiperwalk.ContinuousTime.get_evolution" title="hiperwalk.ContinuousTime.get_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_evolution</span></code></a></dt><dd></dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">evolution_operator</span></code></dt><dd></dd>
+<dt><a class="reference internal" href="hiperwalk.ContinuousTime.state.html#hiperwalk.ContinuousTime.state" title="hiperwalk.ContinuousTime.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a></dt><dd></dd>
 </dl>
 </div>
+<p class="rubric">Notes</p>
+<p>The states computed and saved during the simulation 
+are determined by the parameter <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.</p>
+<p>The simulation of the walk is based on the expression
+<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
+<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> denotes the initial state.        
+The values for <span class="math notranslate nohighlight">\(t\)</span> progress as 
+<span class="math notranslate nohighlight">\(t=0,\,\text{step},\,2\cdot\text{step},...\)</span>, 
+until reaching the highest multiple of step that is less than or equal to 
+<span class="math notranslate nohighlight">\(\text{end}-\text{start}\)</span>.</p>
+<p>Specifically, the simulation begins from the state 
+<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> and 
+sequentially calculates and saves states in the form of 
+<span class="math notranslate nohighlight">\(|\psi(\text{start}+j\cdot\text{step})\rangle\)</span>,
+where <span class="math notranslate nohighlight">\(j=0,1,...\)</span> and the maximum value of <span class="math notranslate nohighlight">\(j\)</span>
+ensures that 
+<span class="math notranslate nohighlight">\(\text{start}+j\cdot\text{step}\le \text{end}\)</span>.</p>
+<p class="rubric">Examples</p>
+<p>Given <code class="docutils literal notranslate"><span class="pre">time=(0,</span> <span class="pre">13,</span> <span class="pre">3)</span></code>, the saved states would include:
+the initial state (t=0), intermediate states (t=3, 6, and 9),
+and the concluding state (t=12).</p>
 </dd></dl>
 
 </section>

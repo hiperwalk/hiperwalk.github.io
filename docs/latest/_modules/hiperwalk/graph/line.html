@@ -426,18 +426,18 @@ document.write(`
 
 <span class="sd">    .. testsetup::</span>
 
-<span class="sd">        &gt;&gt;&gt; import hiperwalk as hpw</span>
+<span class="sd">        import hiperwalk as hpw</span>
 
 <span class="sd">    .. doctest::</span>
 
 <span class="sd">        &gt;&gt;&gt; g = hpw.Line(10)</span>
-<span class="sd">        &gt;&gt;&gt; g.neighbors(0) # 0 and 9 are not adjacent</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(0)) # 0 and 9 are not adjacent</span>
 <span class="sd">        [1]</span>
-<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(1))</span>
 <span class="sd">        [2, 0]</span>
-<span class="sd">        &gt;&gt;&gt; g.neighbors(8)</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(8))</span>
 <span class="sd">        [9, 7]</span>
-<span class="sd">        &gt;&gt;&gt; g.neighbors(9) # 0 and 9 are not adjacent</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(9)) # 0 and 9 are not adjacent</span>
 <span class="sd">        [8]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>

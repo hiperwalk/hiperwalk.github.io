@@ -491,11 +491,11 @@ document.write(`
 
 <span class="sd">            &gt;&gt;&gt; nat = hpw.Grid(3, diagonal=False, periodic=True)</span>
 <span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((0, 0))</span>
-<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            &gt;&gt;&gt; [tuple(nat.vertex_coordinates(v)) for v in neigh]</span>
 <span class="sd">            [(1, 0), (2, 0), (0, 1), (0, 2)]</span>
 <span class="sd">            &gt;&gt;&gt; </span>
 <span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            &gt;&gt;&gt; [tuple(nat.vertex_coordinates(v)) for v in neigh]</span>
 <span class="sd">            [(2, 1), (0, 1), (1, 2), (1, 0)]</span>
 
 <span class="sd">    Diagonal Grid:</span>
@@ -541,13 +541,13 @@ document.write(`
 
 <span class="sd">        .. doctest::</span>
 
-<span class="sd">            &gt;&gt;&gt; nat = hpw.Grid(3, diagonal=False, periodic=True)</span>
-<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((0, 0))</span>
-<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            &gt;&gt;&gt; diag = hpw.Grid(3, diagonal=True, periodic=True)</span>
+<span class="sd">            &gt;&gt;&gt; neigh = diag.neighbors((0, 0))</span>
+<span class="sd">            &gt;&gt;&gt; [tuple(diag.vertex_coordinates(v)) for v in neigh]</span>
 <span class="sd">            [(1, 1), (1, 2), (2, 1), (2, 2)]</span>
 <span class="sd">            &gt;&gt;&gt; </span>
-<span class="sd">            &gt;&gt;&gt; neigh = nat.neighbors((1, 1))</span>
-<span class="sd">            &gt;&gt;&gt; [nat.vertex_coordinates(v) for v in neigh]</span>
+<span class="sd">            &gt;&gt;&gt; neigh = diag.neighbors((1, 1))</span>
+<span class="sd">            &gt;&gt;&gt; [tuple(diag.vertex_coordinates(v)) for v in neigh]</span>
 <span class="sd">            [(2, 2), (2, 0), (0, 2), (0, 0)]</span>
 
 <span class="sd">        In the case of a diagonal grid with borders,</span>

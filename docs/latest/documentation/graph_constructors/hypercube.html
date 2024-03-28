@@ -593,14 +593,15 @@ The neighbors of vertex <span class="math notranslate nohighlight">\(u\)</span> 
 <span class="math notranslate nohighlight">\(u \oplus 2^0\)</span>, <span class="math notranslate nohighlight">\(u \oplus 2^1, \ldots,\)</span>
 <span class="math notranslate nohighlight">\(u \oplus 2^{n - 1}\)</span>.
 For example,</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bin</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="go">&#39;0b1010&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span>
-<span class="go">[11, 8, 14, 2]</span>
+<span class="go">array([11,  8, 14,  2])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
-<span class="go">[&#39;0b1011&#39;, &#39;0b1000&#39;, &#39;0b1110&#39;, &#39;0b0010&#39;]</span>
+<span class="go">[&#39;0b1011&#39;, &#39;0b1000&#39;, &#39;0b1110&#39;, &#39;0b10&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">u</span><span class="o">^</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neigh</span><span class="p">]</span>
 <span class="go">[1, 2, 4, 8]</span>
 </pre></div>
