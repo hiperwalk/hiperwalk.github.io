@@ -39,7 +39,6 @@
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/graphs';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
@@ -412,25 +411,31 @@ document.write(`
                   
   <section id="graphs">
 <h1>Graphs<a class="headerlink" href="#graphs" title="Link to this heading">#</a></h1>
-<p>You have the option to either generate arbitrary graphs or create specific,
-well-known graphs.</p>
-<section id="arbitrary-graphs">
-<h2>Arbitrary Graphs<a class="headerlink" href="#arbitrary-graphs" title="Link to this heading">#</a></h2>
-<p>Currently, Hiperwalk supports only simple graphs.
-You can create any graph by passing the adjacency matrix to
-the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> constructor.</p>
-<p>You can obtain the adjacency matrix using <a class="reference external" href="https://networkx.org/">NetworkX</a>.
+<p>Hiperwalk gives support to three different types of graphs:
+simples graphs, multigraphs and weighted graphs.
+There is a class for each of these types of graph:
+<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>,
+<a class="reference internal" href="../documentation/generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a>, and
+<a class="reference internal" href="../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a>, respectively.</p>
+<section id="simple-graphs">
+<h2>Simple Graphs<a class="headerlink" href="#simple-graphs" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class is used for
+handling simple graphs with self-loops.</p>
+<p>You can create any graph by passing the adjacency matrix to
+the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> constructor.
+You can obtain the adjacency matrix using <a class="reference external" href="https://networkx.org/">NetworkX</a>’s
+<code class="xref py py-func docutils literal notranslate"><span class="pre">networkx.adjacency_matrix()</span></code> function.
 For instance, to generate the adjacency matrix of a ladder graph,
 you would execute the following commands:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ladder</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ladder_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx_ladder</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ladder_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> 
 <span class="go">&lt;20x20 sparse array of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;</span>
 <span class="go">    with 56 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
-<p>Once you have the adjacency matrix, you can then generate a
+<p>Once you have the adjacency matrix, you can then create a
 Hiperwalk graph.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
@@ -438,67 +443,39 @@ Hiperwalk graph.</p>
 <span class="go">&lt;hiperwalk.graph.graph.Graph object at 0x7f3bd0627eb0&gt;</span>
 </pre></div>
 </div>
-<p>After accomplishing this, it’s advisable to delete the NetworkX graph.
+<p>Alternativaly, you can create a Hiperwalk graph by
+passing an instance of <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder2</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder2</span> 
+<span class="go">&lt;hiperwalk.graph.graph.Graph object at 0x74f25e41d4e0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if the adjacency matrices are equal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx_adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_adj1</span> <span class="o">=</span> <span class="n">hpw_ladder</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_adj2</span> <span class="o">=</span> <span class="n">hpw_ladder2</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">nx_adj</span> <span class="o">-</span> <span class="n">hpw_adj1</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">hpw_adj1</span> <span class="o">-</span> <span class="n">hpw_adj2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>After instantiating a Hiperwalk graph,
+it’s advisable to delete the NetworkX graph.
 This step is particularly important when dealing with large graphs,
-as it helps prevent memory overload.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">ladder</span>
+as it helps to prevent memory overload.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">nx_ladder</span>
 </pre></div>
 </div>
-<p>Following this, we can use <code class="docutils literal notranslate"><span class="pre">hpw_ladder</span></code> to simulate a quantum walk.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>In the meantime,
-we only accept the adjacency matrix for creating a graph.
-In the future,
-we will accept NetworkX graphs.
-Although the process of deleting the NetworkX is still recommended.</p>
-</div>
+<p>Following this, you can use <code class="docutils literal notranslate"><span class="pre">hpw_ladder</span></code> to simulate any quantum walk,
+regardless of the model.</p>
+<section id="order-of-neighbors">
+<h3>Order of Neighbors<a class="headerlink" href="#order-of-neighbors" title="Link to this heading">#</a></h3>
 </section>
-<section id="specific-graphs">
-<h2>Specific Graphs<a class="headerlink" href="#specific-graphs" title="Link to this heading">#</a></h2>
-<p>Hiperwalk includes classes for well-known specific graphs,
-such as Line, Cycle, and Grid.
-For a complete list of specific graphs,
-refer to <a class="reference internal" href="../documentation/graph.html#docs-documentation-graph"><span class="std std-ref">Graphs</span></a>.</p>
-<p>The key difference between creating an
-arbitrary graph and a specific graph is
-that for the former, you must explicitly provide the adjacency matrix.
-However, for the latter, the adjacency matrix is automatically generated
-based on the number of vertices.
-Consequently, you can create a line with 10 vertices,
-a cycle with 10 vertices,
-and a grid of dimensions <span class="math notranslate nohighlight">\(10 \times 10\)</span> using
-valid commands, respectively.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.line.Line object at 0x7f0a6bb700d0&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.cycle.Cycle object at 0x7f0a6bbb32e0&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.grid.Grid object at 0x7f0a6bbb2da0&gt;</span>
-</pre></div>
-</div>
-<p>Naturally, you can create specific graphs using NetworkX and
-the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.
-However, this approach is not recommended, especially when dealing with
-coined quantum walks, as it may result in undesirable behavior.</p>
-<p>As an example, let’s consider a Line with 10 vertices.
-First, we create the line using the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arbitrary_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Next, we create the line using the <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">specific_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>In a simple graph, we associate each edge with two arcs. Suppose we wish
-to know the label of the arc that links vertex 1 to 2. This information
-can be obtained using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_number()</span></code> method.
-Observe the following results:</p>
-<p>For further details on arc labels for each graph, refer to the Notes
-section of each graph class, in this case,
-<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> and <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a>.</p>
+</section>
+<section id="multigraphs">
+<h2>Multigraphs<a class="headerlink" href="#multigraphs" title="Link to this heading">#</a></h2>
+</section>
+<section id="weighted-graphs">
+<h2>Weighted Graphs<a class="headerlink" href="#weighted-graphs" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -548,8 +525,12 @@ section of each graph class, in this case,
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitrary-graphs">Arbitrary Graphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specific-graphs">Specific Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-graphs">Simple Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-neighbors">Order of Neighbors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigraphs">Multigraphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graphs">Weighted Graphs</a></li>
 </ul>
   </nav></div>
 
