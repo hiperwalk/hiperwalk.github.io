@@ -48,7 +48,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum Walk Models" href="quantum_walk_models.html" />
+    <link rel="next" title="Graph Constructors" href="graph_constructors.html" />
     <link rel="prev" title="Tutorial" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -350,6 +350,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors.html">Graph Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
@@ -473,6 +474,27 @@ regardless of the model.</p>
 </section>
 <section id="multigraphs">
 <h2>Multigraphs<a class="headerlink" href="#multigraphs" title="Link to this heading">#</a></h2>
+<p>You can create a multigraph by passing its adjacency matrix.
+The entries the adjacency matrix entries are the number of edges
+simultaneously incident to pairs of vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the adjacency matrix of a complete multigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating multigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Multigraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if multigraph was created properly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
+<span class="gp">... </span>      <span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </section>
 <section id="weighted-graphs">
 <h2>Weighted Graphs<a class="headerlink" href="#weighted-graphs" title="Link to this heading">#</a></h2>
@@ -499,11 +521,11 @@ regardless of the model.</p>
       </div>
     </a>
     <a class="right-next"
-       href="quantum_walk_models.html"
+       href="graph_constructors.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quantum Walk Models</p>
+        <p class="prev-next-title">Graph Constructors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
