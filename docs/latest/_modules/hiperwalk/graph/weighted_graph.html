@@ -458,6 +458,13 @@ document.write(`
         <span class="c1"># this should not be invoked</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;WeightedGraph has no `_find_entry` method.&quot;</span><span class="p">)</span>
 
+<div class="viewcode-block" id="WeightedGraph.adjacency_matrix">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.WeightedGraph.adjacency_matrix.html#hiperwalk.WeightedGraph.adjacency_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: return a copy?</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span></div>
+
+
 <div class="viewcode-block" id="WeightedGraph.laplacian_matrix">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.WeightedGraph.laplacian_matrix.html#hiperwalk.WeightedGraph.laplacian_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">laplacian_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -500,8 +507,6 @@ document.write(`
         <span class="k">return</span> <span class="kc">False</span></div>
 </div>
 
-
-    <span class="c1"># TODO: add functions to manage weights</span>
 </pre></div>
 
                 </article>

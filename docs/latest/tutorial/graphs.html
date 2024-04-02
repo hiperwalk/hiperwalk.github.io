@@ -470,34 +470,131 @@ as it helps to prevent memory overload.</p>
 regardless of the model.</p>
 <section id="order-of-neighbors">
 <h3>Order of Neighbors<a class="headerlink" href="#order-of-neighbors" title="Link to this heading">#</a></h3>
+<p>By default, the neighbors of a vertex are listed in ascending order.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 0,  2, 11])</span>
+</pre></div>
+</div>
+<p>Depending on the graph,
+you may wish to specify a different order of neighbors.
+This is particularly useful for the coined quantum walk model
+(<a class="reference internal" href="../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Coined</span></code></a>).
+To specify an order of neighbors,
+create the adjacency matrix using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>
+such that <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.12.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+This can be done by expliciting
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.12.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">indices</span></code>.
+Then, the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are listed in the order
+<code class="docutils literal notranslate"><span class="pre">indices[indptr[u]:indptr[u+1]]</span></code>.
+For example,
+the following commands create a
+complete graph with self-loops where the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are
+listed in the order <code class="docutils literal notranslate"><span class="pre">[u,</span> <span class="pre">u+1,</span> <span class="pre">...,</span> <span class="pre">u-1]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.sparse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the csr_array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_vert</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="n">num_vert</span>
+<span class="gp">... </span>           <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>           <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_vert</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating graph with non-default order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># testing the order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<span class="go">[0 1 2 3 4]</span>
+<span class="go">[1 2 3 4 0]</span>
+<span class="go">[2 3 4 0 1]</span>
+<span class="go">[3 4 0 1 2]</span>
+<span class="go">[4 0 1 2 3]</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="multigraphs">
 <h2>Multigraphs<a class="headerlink" href="#multigraphs" title="Link to this heading">#</a></h2>
 <p>You can create a multigraph by passing its adjacency matrix.
-The entries the adjacency matrix entries are the number of edges
+The adjacency matrix entries are the number of edges
 simultaneously incident to pairs of vertices.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the adjacency matrix of a complete multigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating multigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Multigraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if multigraph was created properly</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="gp">... </span>        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
-<span class="gp">... </span>      <span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)])</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Multigraphs are used to create coined quantum walks
+(<a class="reference internal" href="../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Coined</span></code></a>).</p>
+<section id="id1">
+<h3>Order of Neighbors<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>To specify a non-default order of neighbors,
+you can follow the same steps used for simple graphs.
+But be aware that the values of <code class="docutils literal notranslate"><span class="pre">data</span></code> must be rearranged
+with respect to <code class="docutils literal notranslate"><span class="pre">indices</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating data with the appropriate values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">[</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create multigraph with desired order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Multigraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<span class="go">[0 1 2 3 4]</span>
+<span class="go">[1 2 3 4 0]</span>
+<span class="go">[2 3 4 0 1]</span>
+<span class="go">[3 4 0 1 2]</span>
+<span class="go">[4 0 1 2 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if multigraph was created properly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)])</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="weighted-graphs">
 <h2>Weighted Graphs<a class="headerlink" href="#weighted-graphs" title="Link to this heading">#</a></h2>
+<p>You can create a weighted graph by passing its adjacency matrix.
+The adjacency matrix entries are real values that
+represent the edge weights.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the adjacency matrix of a complete weighted graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating weighted</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">WeightedGraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">adj_matrix2</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Weighted graphs are used to create continuous-time quantum walks
+(<a class="reference internal" href="../documentation/generated/hiperwalk.ContinuousTime.html#hiperwalk.ContinuousTime" title="hiperwalk.ContinuousTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime</span></code></a>).</p>
+<section id="id2">
+<h3>Order of Neighbors<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>The order of neighbors does not play a crucial role in
+the continuous-time quantum walk.
+Even so,
+you can specify the order of neighbors in weighted graphs
+using commands akin to those used for multigraphs.</p>
+</section>
 </section>
 </section>
 
@@ -551,8 +648,14 @@ simultaneously incident to pairs of vertices.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-neighbors">Order of Neighbors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigraphs">Multigraphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graphs">Weighted Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigraphs">Multigraphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Order of Neighbors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graphs">Weighted Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Order of Neighbors</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
