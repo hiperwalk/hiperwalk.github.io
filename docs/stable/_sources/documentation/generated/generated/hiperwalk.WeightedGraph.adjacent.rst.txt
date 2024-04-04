@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.adjacent
+================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.adjacent

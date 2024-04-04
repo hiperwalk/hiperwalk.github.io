@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.set\_hamiltonian\_type
+===============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.set_hamiltonian_type

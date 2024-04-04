@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -287,6 +294,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -378,323 +392,377 @@ document.write(`
                   
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span><span class="p">,</span> <span class="n">diags</span>
+<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function expects a sorted array and performs a binary search on the subarray </span>
-<span class="sd">    v[start:end], looking for the element &#39;elem&#39;. </span>
-<span class="sd">    If the element is found, the function returns the index of the element. </span>
-<span class="sd">    If the element is not found, the function returns -1.    </span>
-<span class="sd">    This is an implementation of binary search following Cormen&#39;s algorithm. </span>
+<span class="sd">    This function expects a sorted array and</span>
+<span class="sd">    performs a binary search on the subarray</span>
+<span class="sd">    v[start:end], looking for the element &#39;elem&#39;.</span>
+<span class="sd">    If the element is found, the function returns the index of the element.</span>
+<span class="sd">    If the element is not found, the function returns -1.</span>
+<span class="sd">    This binary search implementation follows Cormen&#39;s algorithm.</span>
 <span class="sd">    It is used to improve the time complexity of the search process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">end</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     
-    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">end</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">start</span> <span class="o">+</span> <span class="n">index</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">elem</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">end</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">elem</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">index</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">elem</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">_interval_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function expects a sorted array and performs a</span>
+<span class="sd">    binary search on the subarray v[start:end],</span>
+<span class="sd">    looking for the interval with minimum length that</span>
+<span class="sd">    contains the element.</span>
+<span class="sd">    If the element is greater or equal than the element of index i</span>
+<span class="sd">    and less than the element of index i+1,</span>
+<span class="sd">    the function returns i.</span>
+<span class="sd">    If the element is less than the minimum value in the array,</span>
+<span class="sd">    the function `start - 1`.</span>
+<span class="sd">    If the element is greater or equal than the maximum</span>
+<span class="sd">    value in the array,</span>
+<span class="sd">    the function returns the index of the maximum value.</span>
+<span class="sd">    It is used to improve the time complexity of the search process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">elem</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">elem</span> <span class="o">&gt;=</span> <span class="n">v</span><span class="p">[</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">elem</span> <span class="o">&gt;=</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="ow">and</span> <span class="n">elem</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">start</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">elem</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">elem</span><span class="p">):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">v</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">elem</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span>
+    <span class="k">return</span> <span class="n">index</span>
 
 <div class="viewcode-block" id="Graph">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph">[docs]</a>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Arbitrary graph.</span>
+<span class="sd">    Constructs an arbitrary simple graph with loops.</span>
 
-<span class="sd">    The graph on which a quantum walk takes place.</span>
+<span class="sd">    This class defines the graph structure used for implementing a </span>
+<span class="sd">    quantum walk. It encapsulates all necessary properties</span>
+<span class="sd">    and functionalities of the graph </span>
+<span class="sd">    required for the quantum walk dynamics.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix : :class:`scipy.sparse.csr_array` or :class:`numpy.ndarray`</span>
-<span class="sd">        Adjacency matrix of the graph on</span>
-<span class="sd">        which the quantum walk takes place.</span>
+<span class="sd">    adj_matrix :</span>
+<span class="sd">        The adjacency matrix of the graph</span>
+<span class="sd">        (any integer Hermitian matrix).</span>
+<span class="sd">        Two input types are accepted:</span>
+
+<span class="sd">        * Any matrix -- for instance,</span>
+<span class="sd">            * :class:`scipy.sparse.csr_array`,</span>
+<span class="sd">            * :class:`numpy.ndarray`,</span>
+<span class="sd">            * list of lists.</span>
+<span class="sd">        * :class:`networkx.Graph`.</span>
+<span class="sd">            * The adjacency matrix is extracted from the graph.</span>
+
+<span class="sd">    copy : bool, default=False</span>
+<span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
+<span class="sd">        If ``False``,</span>
+<span class="sd">        the pointer to ``adj_matrix`` is stored and</span>
+<span class="sd">        the ``adj_matrix``&#39;s data is changed.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    TypeError</span>
-<span class="sd">        if ``adj_matrix`` is not an square matrix.</span>
+<span class="sd">        If ``adj_matrix`` is not a square matrix.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    .. todo::</span>
-<span class="sd">        Check if it is more efficient to store the adjacency matrix as</span>
-<span class="sd">        sparse or dense.</span>
+<span class="sd">    The class methods facilitate the construction of a valid quantum walk </span>
+<span class="sd">    and can be provided as parameters to plotting functions.</span>
+<span class="sd">    For visualizations, the default graph representation will be used.</span>
+<span class="sd">    Specific classes are available for well-known graph types,</span>
+<span class="sd">    such as hypercubes and lattices.</span>
 
-<span class="sd">    A wide range of methods are available. </span>
-<span class="sd">    These methods can be used by a quantum walk model </span>
-<span class="sd">    to generate a valid quantum walk.</span>
-<span class="sd">    </span>
-<span class="sd">    This class can be passed as an argument to plotting functions.</span>
+<span class="sd">    The adjacency matrix is always stored as a</span>
+<span class="sd">    :class:`scipy.sparse.csr_array`.</span>
+<span class="sd">    If ``adj_matrix`` is sparse and ``copy=False``,</span>
+<span class="sd">    the argument will be changed for more efficient manipulation.</span>
+
+<span class="sd">    Each vertex has at most one loop.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        To reduce memory usage, ``adj_matrix.data`` is set to ``None``.</span>
+<span class="sd">        This is possible because ``adj_matrix.data`` should be an</span>
+<span class="sd">        array of ones.</span>
+
+<span class="sd">        If the user wishes to keep the original ``adj_matrix``,</span>
+<span class="sd">        the argument ``copy`` must be set to ``True``.</span>
+
+<span class="sd">    The treatment of the graph depends on the quantum walk model. </span>
+
+<span class="sd">    The default **order of neighbors** is the ascending order.</span>
+<span class="sd">    A different order of neighbors can be specified using a</span>
+<span class="sd">    sparse matrix where</span>
+<span class="sd">    :obj:`scipy.sparse.csr_array.has_sorted_indices` is ``False``.</span>
 <span class="sd">    In this case,</span>
-<span class="sd">    the default representation for the graph will be displayed.</span>
+<span class="sd">    the neighbors of ``u`` are given by</span>
+<span class="sd">    ``adj_matrix.indices[adj_matrix.indptr[u]:adj_matrix.indptr[u+1]]``.</span>
 
-<span class="sd">    The recommended parameter type is</span>
-<span class="sd">    :class:`scipy.sparse.csr_array` with ``dtype=np.int8``,</span>
-<span class="sd">    where 1 denotes adjacency and 0 denotes non-adjacency.</span>
-<span class="sd">    If any entry differs from 0 or 1,</span>
-<span class="sd">    some methods may not operate as expected.</span>
-
-<span class="sd">    Each edge of a given graph :math:`G(V, E)` is associated with</span>
-<span class="sd">    two arcs in the symmetric digraph :math:`\vec{G}(V, A)`,</span>
-<span class="sd">    where</span>
-
-<span class="sd">    .. math::</span>
-<span class="sd">        \begin{align*}</span>
-<span class="sd">            A = \bigcup_{(v,u) \in E} \{(v, u), (u, v)\}.</span>
-<span class="sd">        \end{align*}</span>
-
-<span class="sd">    An arc can be described either in the arc notation as (tail,head) </span>
-<span class="sd">    or through a numerical label. The ordering of the labels in </span>
-<span class="sd">    the :obj:`Graph` class is as follows: </span>
-<span class="sd">    Consider two arcs, :math:`(v_1, u_1)` and :math:`(v_2, u_2&#39;)`, </span>
-<span class="sd">    with numerical labels :math:`a_1` and :math:`a_2` respectively. </span>
-<span class="sd">    Then, :math:`a_1 &lt; a_2` if and only if either :math:`v_1 &lt; v_2` </span>
-<span class="sd">    or :math:`v_1 = v_2` and :math:`u_1 &lt; u_2`.</span>
-
-<span class="sd">    .. note::</span>
-<span class="sd">        The arc ordering may change for graphs defined using specific classes.</span>
-
-<span class="sd">    For example, the graph :math:`G(V, E)` shown in</span>
-<span class="sd">    Figure 1 has an adjacency matrix ``adj_matrix``.</span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
 
 <span class="sd">    .. testsetup::</span>
 
-<span class="sd">        import numpy as np</span>
+<span class="sd">        import hiperwalk as hpw</span>
+<span class="sd">        import scipy.sparse</span>
 
-<span class="sd">    &gt;&gt;&gt; adj_matrix = np.array([</span>
-<span class="sd">    ...     [0, 1, 0, 0],</span>
-<span class="sd">    ...     [1, 0, 1, 1],</span>
-<span class="sd">    ...     [0, 1, 0, 1],</span>
-<span class="sd">    ...     [0, 1, 1, 0]])</span>
-<span class="sd">    &gt;&gt;&gt; adj_matrix</span>
-<span class="sd">    array([[0, 1, 0, 0],</span>
-<span class="sd">           [1, 0, 1, 1],</span>
-<span class="sd">           [0, 1, 0, 1],</span>
-<span class="sd">           [0, 1, 1, 0]])</span>
+<span class="sd">    Creating a complete graph with loops and</span>
+<span class="sd">    the default order of neighbors (ascending order).</span>
 
-<span class="sd">    .. graphviz:: ../../graphviz/graph-example.dot</span>
-<span class="sd">        :align: center</span>
-<span class="sd">        :layout: neato</span>
-<span class="sd">        :caption: Figure 1</span>
+<span class="sd">    .. doctest::</span>
 
-<span class="sd">    The arcs of the associated digraph in the arc notation are</span>
+<span class="sd">        &gt;&gt;&gt; num_vert = 4</span>
+<span class="sd">        &gt;&gt;&gt; A = scipy.sparse.csr_array([[1]*num_vert]*num_vert)</span>
+<span class="sd">        &gt;&gt;&gt; g = hpw.Graph(A)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0)</span>
+<span class="sd">        array([0, 1, 2, 3], dtype=int32)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        array([0, 1, 2, 3], dtype=int32)</span>
 
-<span class="sd">    &gt;&gt;&gt; arcs = [(i, j) for i in range(4)</span>
-<span class="sd">    ...                for j in range(4) if adj_matrix[i,j] == 1]</span>
-<span class="sd">    &gt;&gt;&gt; arcs</span>
-<span class="sd">    [(0, 1), (1, 0), (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
+<span class="sd">    Creating a complete graph with loops and</span>
+<span class="sd">    the descending order of neighbors.</span>
 
-<span class="sd">    Note that ``arcs`` is already sorted, hence the associated </span>
-<span class="sd">    numeric labels are</span>
+<span class="sd">    .. doctest::</span>
 
-<span class="sd">    &gt;&gt;&gt; arcs_labels = {arcs[i]: i for i in range(len(arcs))}</span>
-<span class="sd">    &gt;&gt;&gt; arcs_labels</span>
-<span class="sd">    {(0, 1): 0, (1, 0): 1, (1, 2): 2, (1, 3): 3, (2, 1): 4, (2, 3): 5, (3, 1): 6, (3, 2): 7}</span>
-
-<span class="sd">    The numeric labels are depicted in Figure 2.</span>
-
-<span class="sd">    .. graphviz:: ../../graphviz/graph-arcs.dot</span>
-<span class="sd">        :align: center</span>
-<span class="sd">        :layout: neato</span>
-<span class="sd">        :caption: Figure 2</span>
-
-<span class="sd">    If we insert the labels of the arcs into the adjacency matrix,</span>
-<span class="sd">    we obtain matrix ``adj_labels`` as follows:</span>
-
-<span class="sd">    &gt;&gt;&gt; adj_labels = [[arcs_labels[(i,j)] if (i,j) in arcs_labels</span>
-<span class="sd">    ...                                   else &#39;&#39; for j in range(4)]</span>
-<span class="sd">    ...               for i in range(4)]</span>
-<span class="sd">    &gt;&gt;&gt; adj_labels = np.matrix(adj_labels)</span>
-<span class="sd">    &gt;&gt;&gt; adj_labels</span>
-<span class="sd">    matrix([[&#39;&#39;, &#39;0&#39;, &#39;&#39;, &#39;&#39;],</span>
-<span class="sd">            [&#39;1&#39;, &#39;&#39;, &#39;2&#39;, &#39;3&#39;],</span>
-<span class="sd">            [&#39;&#39;, &#39;4&#39;, &#39;&#39;, &#39;5&#39;],</span>
-<span class="sd">            [&#39;&#39;, &#39;6&#39;, &#39;7&#39;, &#39;&#39;]], dtype=&#39;&lt;U21&#39;)</span>
-
-<span class="sd">    Note that, intuitively,</span>
-<span class="sd">    the arcs are labeled in left-to-right and top-to-bottom fashion.</span>
+<span class="sd">        &gt;&gt;&gt; data = [1]*(num_vert**2)</span>
+<span class="sd">        &gt;&gt;&gt; indices = list(range(num_vert - 1, -1, -1))*num_vert</span>
+<span class="sd">        &gt;&gt;&gt; indptr = list(range(0, num_vert*(num_vert + 1), num_vert))</span>
+<span class="sd">        &gt;&gt;&gt; A = scipy.sparse.csr_array((data, indices, indptr))</span>
+<span class="sd">        &gt;&gt;&gt; g = hpw.Graph(A)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0)</span>
+<span class="sd">        array([3, 2, 1, 0])</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        array([3, 2, 1, 0])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span>
+
+    <span class="k">def</span> <span class="nf">_count_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
+        <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
+                 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
 
 <div class="viewcode-block" id="Graph.__init__">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
-        <span class="c1"># TODO:</span>
-        <span class="c1"># * Check if valid adjacency matrix</span>
-        <span class="c1"># * Add option: numpy dense matrix as parameters.</span>
-        <span class="c1"># * Add option: networkx graph as parameter.</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># TODO: check if it is more efficient to store adj_matrix</span>
+        <span class="c1"># as numpy array. Add numpy array manipulation</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">adj_matrix</span><span class="o">.</span><span class="n">adj</span> <span class="c1">#throws AttributeError if not networkx graph</span>
+            <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span>
+                                             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># TODO: store numpy matrix</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">issparse</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">):</span>
-            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span>
+                                   <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">())</span>
 
         <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Adjacency matrix is not square.&quot;</span><span class="p">)</span>
 
-        <span class="c1"># the following is commented because the current way to</span>
-        <span class="c1"># implement Laplacian in ContinuousTime quantum walks is by</span>
-        <span class="c1"># passing the Laplacian as adjacency matrix</span>
-        <span class="c1"># if adj_matrix.data.min() != 1 or adj_matrix.data.max() != 1:</span>
-        <span class="c1">#     raise ValueError(&quot;Adjacency matrix must only have 0&#39;s &quot;</span>
-        <span class="c1">#                      + &quot;and 1&#39;s as entries.&quot;)</span>
+        <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_coloring</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_count_loops</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_adj_matrix</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Graph.arc_number">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.adjacent">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacent.html#hiperwalk.Graph.adjacent">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjacent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the numerical label of the arc.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        *args:</span>
-<span class="sd">            int:</span>
-<span class="sd">                The numerical arc label itself is passed</span>
-<span class="sd">                as argument.</span>
-<span class="sd">            (tail, head):</span>
-<span class="sd">                Arc in arc notation.</span>
-<span class="sd">            tail, head:</span>
-<span class="sd">                Arc in arc notation,</span>
-<span class="sd">                but ``tail`` and ``head`` are passed as</span>
-<span class="sd">                different arguments, not as a tuple.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        label: int</span>
-<span class="sd">            Arc label.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        If arc ``(0, 1)`` exists, the following commands return</span>
-<span class="sd">        the same result.</span>
-
-<span class="sd">        .. testsetup::</span>
-
-<span class="sd">            import networkx as nx</span>
-<span class="sd">            from sys import path</span>
-<span class="sd">            path.append(&#39;../..&#39;)</span>
-<span class="sd">            import hiperwalk as hpw</span>
-<span class="sd">            nxg = nx.cycle_graph(10)</span>
-<span class="sd">            adj_matrix = nx.adjacency_matrix(nxg)</span>
-<span class="sd">            graph = hpw.Graph(adj_matrix)</span>
-
-<span class="sd">        &gt;&gt;&gt; graph.arc_number(0) #arc number 0</span>
-<span class="sd">        0</span>
-<span class="sd">        &gt;&gt;&gt; graph.arc_number((0, 1)) #arc as tuple</span>
-<span class="sd">        0</span>
-<span class="sd">        &gt;&gt;&gt; graph.arc_number(0, 1) #tail and head in separate arguments</span>
-<span class="sd">        0</span>
+<span class="sd">        Return True if vertex ``u`` is adjacent to ``v``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># TODO: check implementation of adj_matrix[u, v]</span>
+        <span class="c1"># if adj_matrix.has_sorted_indices,</span>
+        <span class="c1"># probably scipy is more efficient.</span>
+        <span class="c1"># if indices are not sorted, scipy probably does a linear search,</span>
+        <span class="c1"># and a graph-dependent implementation may be more efficient.</span>
+        <span class="c1"># If adj_matrix.has_sorted_index and</span>
+        <span class="c1"># scipy does not do binary search, implement it.</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">arc</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arc</span> <span class="o">&gt;=</span> <span class="n">num_arcs</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arc value out of range. &quot;</span>
-                                 <span class="o">+</span> <span class="s2">&quot;Expected arc value from 0 to &quot;</span>
-                                 <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+        <span class="c1"># this function is reimplemented because data=None</span>
+        <span class="c1"># to use less memory</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
 
-        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="n">arc_number</span> <span class="o">=</span> <span class="n">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span>
-                                   <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span>
-                                   <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">arc_number</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inexistent arc &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">arc_number</span></div>
+        <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">has_sorted_indices</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">],</span>
+                                    <span class="n">end</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 
 
-<div class="viewcode-block" id="Graph.arc">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arc.html#hiperwalk.Graph.arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">lin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">entry</span> <span class="o">+</span> <span class="n">offset</span>
+
+    <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts the arc number to arc notation.</span>
+<span class="sd">        Find the corresponding line and columns of the given entry.</span>
 
-<span class="sd">        Given the arc number,</span>
-<span class="sd">        returns the arc in the ``(tail, head)`` notation.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        number: int</span>
-<span class="sd">            The arc number</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        (int, int)</span>
-<span class="sd">            Arc in the arc notation ``(tail, head)``.</span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The adjacency matrix is not stored as a list of 1&#39;s.</span>
+<span class="sd">        Instead, each entry represents the number of ones up</span>
+<span class="sd">        to that point.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
-        <span class="c1">#TODO: binary search</span>
-        <span class="k">for</span> <span class="n">tail</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
-                <span class="k">break</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
 
+        <span class="n">head</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">_interval_binary_search</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_neighbor_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the index of `neigh` in the neihborhood list of `vertex`.</span>
+
+<span class="sd">        The returned index satisfies</span>
+<span class="sd">        ``adj_matrix.indices[adj_matrix.indptr[vertex] + index] == neigh``.</span>
+
+<span class="sd">        This is useful for graphs where the adjacency is not listed in</span>
+<span class="sd">        ascending order.</span>
+<span class="sd">        It is recommended to override this method for specific graphs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO test this function</span>
+        <span class="c1"># TODO write unitary tests</span>
+        <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">)</span>
+
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># if indices is in ascending order</span>
+        <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">has_sorted_indices</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">_binary_search</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span>
+                                   <span class="n">neigh</span><span class="p">,</span>
+                                   <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
+                                   <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">end</span> <span class="c1"># will raise ValueError down below</span>
+
+        <span class="c1"># indices is not in ascending order</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">neigh</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index</span> <span class="o">-</span> <span class="n">start</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vertices &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; and &quot;</span>
+                         <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">neigh</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; are not adjacent.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Graph.neighbors">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors">[docs]</a>
     <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns all neighbors of the given vertex.</span>
+<span class="sd">        Return all neighbors of the given vertex.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of int:</span>
+<span class="sd">            The neighbors of ``vertex``.</span>
+<span class="sd">            The order of the neighbors varies depending on</span>
+<span class="sd">            the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
         <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="Graph.arcs_with_tail">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.arcs_with_tail.html#hiperwalk.Graph.arcs_with_tail">[docs]</a>
-    <span class="k">def</span> <span class="nf">arcs_with_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns all arcs that have the given tail.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">arcs_lim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">arcs_lim</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span> <span class="n">arcs_lim</span><span class="p">[</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Graph.number_of_vertices">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cardinality of vertex set.</span>
+<span class="sd">        Determine the cardinality of the vertex set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="Graph.number_of_arcs">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_arcs.html#hiperwalk.Graph.number_of_arcs">[docs]</a>
-    <span class="k">def</span> <span class="nf">number_of_arcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cardinality of arc set.</span>
-
-<span class="sd">        For simple graphs, the cardinality is twice the number of edges.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Graph.number_of_edges">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cardinality of edge set.</span>
+<span class="sd">        Determine the cardinality of the edge set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></div>
+        <span class="n">non_loops</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span>
+        <span class="n">num_edges</span> <span class="o">=</span> <span class="n">non_loops</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+        <span class="k">return</span>  <span class="n">num_edges</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
+
+
+<div class="viewcode-block" id="Graph.number_of_loops">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_loops.html#hiperwalk.Graph.number_of_loops">[docs]</a>
+    <span class="k">def</span> <span class="nf">number_of_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of loops in the graph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
 
 
 <div class="viewcode-block" id="Graph.degree">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.degree.html#hiperwalk.Graph.degree">[docs]</a>
     <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Degree of given vertex.</span>
+<span class="sd">        Return the degree of the given vertex.</span>
+
+<span class="sd">        The degree of a vertex :math:`u` in a graph </span>
+<span class="sd">        is the number of edges  incident to :math:`u`.</span>
+<span class="sd">        Loops at :math:`u` are counted once.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertex :</span>
+<span class="sd">            Any valid vertex representation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        .. todo::</span>
+<span class="sd">            Will we accept loops in simple graphs?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
         <span class="k">return</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span></div>
 
@@ -703,14 +771,14 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number">[docs]</a>
     <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns vertex number given any vertex representation.</span>
+<span class="sd">        Return the vertex number given any vertex representation.</span>
 
-<span class="sd">        By invoking this method,</span>
-<span class="sd">        the vertex number is returned regardless of its representation.</span>
+<span class="sd">        This method returns the numerical label of the vertex </span>
+<span class="sd">        regardless of its representation.</span>
 <span class="sd">        There are some graphs in which a vertex may have multiple</span>
 <span class="sd">        representations.</span>
 <span class="sd">        For example, coordinates in a grid.</span>
-<span class="sd">        For general graphs,</span>
+<span class="sd">        For arbitrary graphs,</span>
 <span class="sd">        this function returns the argument itself if valid.</span>
 
 <span class="sd">        Parameters</span>
@@ -725,6 +793,11 @@ document.write(`
 <span class="sd">        int</span>
 <span class="sd">            Vertex number.</span>
 
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``vertex`` is not valid.</span>
+
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        It is useful to have this function implemented for general graphs</span>
@@ -734,7 +807,7 @@ document.write(`
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">vertex</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">vertex</span> <span class="o">&gt;=</span> <span class="n">num_vert</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vertex label out of range. &quot;</span> <span class="o">+</span>
-                             <span class="s2">&quot;Expected integer value from 0 to&quot;</span> <span class="o">+</span>
+                             <span class="s2">&quot;Expected integer value from 0 to &quot;</span> <span class="o">+</span>
                              <span class="nb">str</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">vertex</span></div>
 
@@ -743,7 +816,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the graph adjacency matrix.</span>
+<span class="sd">        Return the graph&#39;s adjacency matrix.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -751,11 +824,111 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
+<span class="sd">    </span>
+<span class="sd">        In a weightless graph :math:`G(V, E)` with :math:`n` vertices</span>
+<span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix </span>
+<span class="sd">        of :math:`G(V, E)` is an </span>
+<span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:</span>
+<span class="sd">        </span>
+<span class="sd">        .. math::</span>
+<span class="sd">            A_{i,j} = \begin{cases}</span>
+<span class="sd">                1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\</span>
+<span class="sd">                0, &amp; \text{otherwise.}</span>
+<span class="sd">            \end{cases}</span>
+<span class="sd">    </span>
+<span class="sd">        In weighted graphs, the entries of :math:`A` represent </span>
+<span class="sd">        the weights of the edges. The weight is a non-zero</span>
+<span class="sd">        real number.</span>
+
 <span class="sd">        .. todo::</span>
 <span class="sd">            Add other return types depending on the stored matrix type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span></div>
-</div>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
+        <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
+        <span class="c1"># TODO: copy or not?</span>
+        <span class="k">return</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Graph.laplacian_matrix">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">laplacian_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the graph&#39;s Laplacian matrix.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        adjacency_matrix</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The Laplacian matrix is given by</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            L = D - A,</span>
+
+<span class="sd">        where :math:`A` is the graph&#39;s adjacency matrix</span>
+<span class="sd">        and :math:`D` is the degree matrix</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            D_{i, j} = \begin{cases}</span>
+<span class="sd">                \deg(v_i), &amp; \text{if } i = j\\</span>
+<span class="sd">                0, &amp; \text{otherwise}.</span>
+<span class="sd">            \end{cases}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">diags</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span></div>
+
+
+<div class="viewcode-block" id="Graph.is_simple">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.is_simple.html#hiperwalk.Graph.is_simple">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if instance of simple graph.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        .. todo::</span>
+<span class="sd">            Decide if simple graph implementation accepts loops.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_rearrange_matrix_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rearrange `matrix.indices` accoring to the</span>
+<span class="sd">        Graph&#39;s neighbor order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Check if ´has_sorted_indices&#39; changes</span>
+
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">indices</span>
+        <span class="n">adj_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="c1"># find right position</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="c1"># swap indices</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+
+                    <span class="c1"># swap data</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span></div>
 
 </pre></div>
 
@@ -800,7 +973,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

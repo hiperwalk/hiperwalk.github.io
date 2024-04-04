@@ -20,6 +20,9 @@ hiperwalk.ContinuousTime
    
        
        
+          ~ContinuousTime.fit_sin_squared
+       
+       
           ~ContinuousTime.get_evolution
        
        
@@ -29,13 +32,25 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.get_hamiltonian
        
        
+          ~ContinuousTime.get_hamiltonian_type
+       
+       
           ~ContinuousTime.get_marked
+       
+       
+          ~ContinuousTime.get_terms
        
        
           ~ContinuousTime.hilbert_space_dimension
        
        
           ~ContinuousTime.ket
+       
+       
+          ~ContinuousTime.max_success_probability
+       
+       
+          ~ContinuousTime.optimal_runtime
        
        
           ~ContinuousTime.probability
@@ -53,7 +68,13 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.set_hamiltonian
        
        
+          ~ContinuousTime.set_hamiltonian_type
+       
+       
           ~ContinuousTime.set_marked
+       
+       
+          ~ContinuousTime.set_terms
        
        
           ~ContinuousTime.set_time

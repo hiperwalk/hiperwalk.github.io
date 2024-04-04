@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.is\_simple
+===============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.is_simple

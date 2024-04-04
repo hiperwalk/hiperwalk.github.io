@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -287,6 +294,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -377,29 +391,108 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for hiperwalk.graph.hypercube</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse</span>
-<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span></span><span class="k">def</span> <span class="nf">__adjacent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">u</span> <span class="o">^</span> <span class="n">v</span> <span class="c1">#bitwise xor</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="c1"># TODO: check if the following strategy is faster</span>
+    <span class="c1"># try:</span>
+    <span class="c1">#     # python &gt;= 3.10</span>
+    <span class="c1">#     count = x.bit_count()</span>
+    <span class="c1"># except:</span>
+    <span class="c1">#     count = bin(x).count(&#39;1&#39;)</span>
+    <span class="c1"># return count == 1</span>
+
+<span class="k">def</span> <span class="nf">__neighbor_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">):</span>
+    <span class="c1"># TODO: how to use __debug__?</span>
+    <span class="c1"># how to unable __debug__ when uploading to pip?</span>
+    <span class="c1"># TODO: throw value error if not adjacent</span>
+    <span class="k">if</span> <span class="n">__debug__</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">)</span>
+
+    <span class="c1"># it is supposed that vertex and neigh are adjacent</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">vertex</span> <span class="o">^</span> <span class="n">neigh</span>
+
+    <span class="c1"># numpy integers do not have bit_length</span>
+    <span class="c1"># TODO: check if it is faster fo convert or to calculate</span>
+    <span class="c1"># np.ceil(np.log2(x + 1)).astype(int)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">__degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span>
+
+<span class="k">def</span> <span class="nf">__number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span>
+
+<span class="k">def</span> <span class="nf">__number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span>
+
+<span class="k">def</span> <span class="nf">__degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span>
+
+<div class="viewcode-block" id="dimension">
+<a class="viewcode-back" href="../../../documentation/graph_constructors/generated/hiperwalk.graph.hypercube.dimension.html#hiperwalk.graph.hypercube.dimension">[docs]</a>
+<span class="k">def</span> <span class="nf">dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The dimension of the Hypercube.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        from sys import path</span>
+<span class="sd">        path.append(&#39;..&#39;)</span>
+<span class="sd">        import hiperwalk as hpw</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; n = 10</span>
+<span class="sd">        &gt;&gt;&gt; g = hpw.Hypercube(10)</span>
+<span class="sd">        &gt;&gt;&gt; g.dimension() == n</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dim</span></div>
+
+
+<span class="c1"># graph constructor</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
+<span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 
 <div class="viewcode-block" id="Hypercube">
-<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube">[docs]</a>
-<span class="k">class</span> <span class="nc">Hypercube</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../documentation/graph_constructors/hypercube.html#hiperwalk.graph.hypercube.Hypercube">[docs]</a>
+<span class="k">def</span> <span class="nf">Hypercube</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Hypercube graph.</span>
+<span class="sd">    Hypercube graph constructor.</span>
 
-<span class="sd">    The hypercube graph consists of ``2**n`` vertices,</span>
-<span class="sd">    where ``n`` is the hypercube *dimension*.</span>
+<span class="sd">    The hypercube graph consists of ``2**dim`` vertices.</span>
 <span class="sd">    The numerical labels of these vertices  are</span>
-<span class="sd">    ``0``, ``1``, ..., ``2**n - 1``.</span>
+<span class="sd">    ``0``, ``1``, ..., ``2**dim - 1``.</span>
 <span class="sd">    Two vertices are adjacent</span>
 <span class="sd">    if and only if the corresponding binary tuples</span>
 <span class="sd">    differ by only one bit, indicating a Hamming distance of 1.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dimension : int</span>
+<span class="sd">    dim : int</span>
 <span class="sd">        The dimension of the hypercube.</span>
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -411,113 +504,75 @@ document.write(`
 <span class="sd">    Here, :math:`\oplus` represents the bitwise XOR operation,</span>
 <span class="sd">    and :math:`n` signifies the dimension of the hypercube.</span>
 
-<span class="sd">    The order of the arcs is determined by the XOR operation.</span>
-<span class="sd">    Consider two arcs, :math:`(u, u \oplus 2^i)` and :math:`(v, v \oplus 2^j)`,</span>
-<span class="sd">    labeled numerically as :math:`a_1` and :math:`a_2`, respectively.</span>
-<span class="sd">    The condition :math:`a_1 &lt; a_2` is true if and only</span>
-<span class="sd">    if either :math:`u &lt; v` is true, or</span>
-<span class="sd">    both :math:`u = v` and :math:`i &lt; j` are true.</span>
+<span class="sd">    The **order of neighbors** is determined by the XOR operation.</span>
+<span class="sd">    The neighbors of vertex :math:`u` are given in the following order:</span>
+<span class="sd">    :math:`u \oplus 2^0`, :math:`u \oplus 2^1, \ldots,`</span>
+<span class="sd">    :math:`u \oplus 2^{n - 1}`.</span>
+<span class="sd">    For example,</span>
+
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import hiperwalk as hpw</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; g = hpw.Hypercube(4)</span>
+<span class="sd">        &gt;&gt;&gt; u = 10</span>
+<span class="sd">        &gt;&gt;&gt; bin(u)</span>
+<span class="sd">        &#39;0b1010&#39;</span>
+<span class="sd">        &gt;&gt;&gt; neigh = g.neighbors(u)</span>
+<span class="sd">        &gt;&gt;&gt; neigh</span>
+<span class="sd">        array([11,  8, 14,  2])</span>
+<span class="sd">        &gt;&gt;&gt; [bin(v) for v in neigh]</span>
+<span class="sd">        [&#39;0b1011&#39;, &#39;0b1000&#39;, &#39;0b1110&#39;, &#39;0b10&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; [u^v for v in neigh]</span>
+<span class="sd">        [1, 2, 4, 8]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Hypercube.__init__">
-<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Hypercube.html#hiperwalk.Hypercube.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">):</span>
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">dimension</span>
-        <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">dimension</span><span class="o">*</span><span class="n">num_vert</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Both `weights` and `multiedges` arguments were set. &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;Cannot decide whether to create a weighted graph or &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;a multigraph.&quot;</span>
+        <span class="p">)</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-        <span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_arcs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dimension</span><span class="p">)</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span> <span class="o">^</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
-                                           <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dimension</span><span class="p">)])</span>
+    <span class="c1"># adjacency matrix</span>
+    <span class="n">num_vert</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">dim</span>
+    <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">dim</span><span class="o">*</span><span class="n">num_vert</span>
 
-        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span>
-                                            <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+    <span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_arcs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span> <span class="o">^</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+                                       <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)])</span>
+    <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span>
+                           <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span></div>
+    <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">_rearrange_matrix_indices</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">weights</span>
+        <span class="k">del</span> <span class="n">g</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">WeightedGraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">_rearrange_matrix_indices</span><span class="p">(</span><span class="n">multiedges</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">multiedges</span>
+        <span class="k">del</span> <span class="n">g</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">Multigraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
+    <span class="c1"># Binding particular attributes and methods</span>
+    <span class="c1"># TODO: add to docs</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="Hypercube.arc_direction">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_direction.html#hiperwalk.Hypercube.arc_direction">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the arc direction.</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">adjacent</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__adjacent</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">_neighbor_index</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__neighbor_index</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">number_of_vertices</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_vertices</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_edges</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 
-<span class="sd">        The arc direction of ``(tail, head)`` is the number ``i``</span>
-<span class="sd">        such that ``tail == head ^ 2**i``.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        arc</span>
-<span class="sd">            The arc can be represented in either arc notation (``(tail, head)``)</span>
-<span class="sd">            or by using the numerical label  (``int``).</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="n">direction</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">^</span> <span class="n">head</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># python &gt;= 3.10</span>
-            <span class="n">count</span> <span class="o">=</span> <span class="n">direction</span><span class="o">.</span><span class="n">bit_count</span><span class="p">()</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">count</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">direction</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">direction</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arc &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; does not exist.&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">direction</span></div>
-
-
-<div class="viewcode-block" id="Hypercube.arc_number">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc_number.html#hiperwalk.Hypercube.arc_number">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arc_direction</span><span class="p">((</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">tail</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span> <span class="o">+</span> <span class="n">direction</span></div>
-
-
-<div class="viewcode-block" id="Hypercube.arc">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.arc.html#hiperwalk.Hypercube.arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="n">tail</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">^</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">direction</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Hypercube.degree">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.degree.html#hiperwalk.Hypercube.degree">[docs]</a>
-    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span></div>
-
-
-<div class="viewcode-block" id="Hypercube.dimension">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Hypercube.dimension.html#hiperwalk.Hypercube.dimension">[docs]</a>
-    <span class="k">def</span> <span class="nf">dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Hypercube dimension.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dimension</span></div>
-</div>
+    <span class="k">return</span> <span class="n">g</span></div>
 
 </pre></div>
 
@@ -562,7 +617,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

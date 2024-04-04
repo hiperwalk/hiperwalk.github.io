@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.get\_terms
+===================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.get_terms

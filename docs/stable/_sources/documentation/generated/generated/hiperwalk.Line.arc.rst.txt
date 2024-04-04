@@ -1,6 +1,0 @@
-hiperwalk.Line.arc
-==================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.arc

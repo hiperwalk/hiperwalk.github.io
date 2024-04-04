@@ -1,0 +1,6 @@
+﻿hiperwalk.plot\_success\_probability
+====================================
+
+.. currentmodule:: hiperwalk
+
+.. autofunction:: plot_success_probability

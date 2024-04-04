@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.degree
-==========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.degree

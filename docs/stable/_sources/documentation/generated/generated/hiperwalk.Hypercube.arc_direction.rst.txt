@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.arc\_direction
-==================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.arc_direction

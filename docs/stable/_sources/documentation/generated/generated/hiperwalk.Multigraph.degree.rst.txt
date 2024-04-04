@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.degree
+===========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.degree

@@ -1,6 +1,0 @@
-hiperwalk.Lattice.degree
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.degree

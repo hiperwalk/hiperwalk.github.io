@@ -1,6 +1,0 @@
-hiperwalk.Line.neighbors
-========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.neighbors

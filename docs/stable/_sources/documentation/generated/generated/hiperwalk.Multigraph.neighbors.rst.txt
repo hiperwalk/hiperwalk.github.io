@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.neighbors
+==============================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.neighbors

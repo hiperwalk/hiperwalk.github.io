@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.adjacency\_matrix
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.adjacency_matrix

@@ -1,0 +1,6 @@
+hiperwalk.QuantumWalk.optimal\_runtime
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: QuantumWalk.optimal_runtime

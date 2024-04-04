@@ -39,7 +39,6 @@
     <script src="../_static/documentation_options.js?v=ea3bebfc"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/graphs';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
@@ -49,7 +48,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum Walk Models" href="quantum_walk_models.html" />
+    <link rel="next" title="Graph Constructors" href="graph_constructors.html" />
     <link rel="prev" title="Tutorial" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,6 +183,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -293,6 +299,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -337,6 +350,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors.html">Graph Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
@@ -398,25 +412,31 @@ document.write(`
                   
   <section id="graphs">
 <h1>Graphs<a class="headerlink" href="#graphs" title="Link to this heading">#</a></h1>
-<p>You have the option to either generate arbitrary graphs or create specific,
-well-known graphs.</p>
-<section id="arbitrary-graphs">
-<h2>Arbitrary Graphs<a class="headerlink" href="#arbitrary-graphs" title="Link to this heading">#</a></h2>
-<p>Currently, Hiperwalk supports only simple graphs.
-You can create any graph by passing the adjacency matrix to
-the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> constructor.</p>
-<p>You can obtain the adjacency matrix using <a class="reference external" href="https://networkx.org/">NetworkX</a>.
+<p>Hiperwalk gives support to three different types of graphs:
+simples graphs, multigraphs and weighted graphs.
+There is a class for each of these types of graph:
+<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a>,
+<a class="reference internal" href="../documentation/generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a>, and
+<a class="reference internal" href="../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a>, respectively.</p>
+<section id="simple-graphs">
+<h2>Simple Graphs<a class="headerlink" href="#simple-graphs" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class is used for
+handling simple graphs with self-loops.</p>
+<p>You can create any graph by passing the adjacency matrix to
+the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> constructor.
+You can obtain the adjacency matrix using <a class="reference external" href="https://networkx.org/">NetworkX</a>’s
+<code class="xref py py-func docutils literal notranslate"><span class="pre">networkx.adjacency_matrix()</span></code> function.
 For instance, to generate the adjacency matrix of a ladder graph,
 you would execute the following commands:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ladder</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ladder_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx_ladder</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ladder_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj</span> 
 <span class="go">&lt;20x20 sparse array of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;</span>
 <span class="go">    with 56 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
-<p>Once you have the adjacency matrix, you can then generate a
+<p>Once you have the adjacency matrix, you can then create a
 Hiperwalk graph.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
@@ -424,73 +444,157 @@ Hiperwalk graph.</p>
 <span class="go">&lt;hiperwalk.graph.graph.Graph object at 0x7f3bd0627eb0&gt;</span>
 </pre></div>
 </div>
-<p>After accomplishing this, it’s advisable to delete the NetworkX graph.
-This step is particularly important when dealing with large graphs,
-as it helps prevent memory overload.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">ladder</span>
+<p>Alternativaly, you can create a Hiperwalk graph by
+passing an instance of <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder2</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder2</span> 
+<span class="go">&lt;hiperwalk.graph.graph.Graph object at 0x74f25e41d4e0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if the adjacency matrices are equal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx_adj</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">nx_ladder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_adj1</span> <span class="o">=</span> <span class="n">hpw_ladder</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_adj2</span> <span class="o">=</span> <span class="n">hpw_ladder2</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">nx_adj</span> <span class="o">-</span> <span class="n">hpw_adj1</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">hpw_adj1</span> <span class="o">-</span> <span class="n">hpw_adj2</span><span class="p">)</span><span class="o">.</span><span class="n">nnz</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>Following this, we can use <code class="docutils literal notranslate"><span class="pre">hpw_ladder</span></code> to simulate a quantum walk.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>In the meantime,
-we only accept the adjacency matrix for creating a graph.
-In the future,
-we will accept NetworkX graphs.
-Although the process of deleting the NetworkX is still recommended.</p>
+<p>After instantiating a Hiperwalk graph,
+it’s advisable to delete the NetworkX graph.
+This step is particularly important when dealing with large graphs,
+as it helps to prevent memory overload.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">nx_ladder</span>
+</pre></div>
+</div>
+<p>Following this, you can use <code class="docutils literal notranslate"><span class="pre">hpw_ladder</span></code> to simulate any quantum walk,
+regardless of the model.</p>
+<section id="order-of-neighbors">
+<h3>Order of Neighbors<a class="headerlink" href="#order-of-neighbors" title="Link to this heading">#</a></h3>
+<p>By default, the neighbors of a vertex are listed in ascending order.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw_ladder</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 0,  2, 11])</span>
+</pre></div>
+</div>
+<p>Depending on the graph,
+you may wish to specify a different order of neighbors.
+This is particularly useful for the coined quantum walk model
+(<a class="reference internal" href="../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Coined</span></code></a>).
+To specify an order of neighbors,
+create the adjacency matrix using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>
+such that <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.13.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+This can be done by expliciting
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">indices</span></code>.
+Then, the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are listed in the order
+<code class="docutils literal notranslate"><span class="pre">indices[indptr[u]:indptr[u+1]]</span></code>.
+For example,
+the following commands create a
+complete graph with self-loops where the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are
+listed in the order <code class="docutils literal notranslate"><span class="pre">[u,</span> <span class="pre">u+1,</span> <span class="pre">...,</span> <span class="pre">u-1]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.sparse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the csr_array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_vert</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="n">num_vert</span>
+<span class="gp">... </span>           <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>           <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_vert</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating graph with non-default order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># testing the order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<span class="go">[0 1 2 3 4]</span>
+<span class="go">[1 2 3 4 0]</span>
+<span class="go">[2 3 4 0 1]</span>
+<span class="go">[3 4 0 1 2]</span>
+<span class="go">[4 0 1 2 3]</span>
+</pre></div>
 </div>
 </section>
-<section id="specific-graphs">
-<h2>Specific Graphs<a class="headerlink" href="#specific-graphs" title="Link to this heading">#</a></h2>
-<p>Hiperwalk includes classes for well-known specific graphs,
-such as Line, Cycle, and Grid.
-For a complete list of specific graphs,
-refer to <a class="reference internal" href="../documentation/graph.html#docs-documentation-graph"><span class="std std-ref">Graphs</span></a>.</p>
-<p>The key difference between creating an
-arbitrary graph and a specific graph is
-that for the former, you must explicitly provide the adjacency matrix.
-However, for the latter, the adjacency matrix is automatically generated
-based on the number of vertices.
-Consequently, you can create a line with 10 vertices,
-a cycle with 10 vertices,
-and a grid of dimensions <span class="math notranslate nohighlight">\(10 \times 10\)</span> using
-valid commands, respectively.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.line.Line object at 0x7f0a6bb700d0&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.cycle.Cycle object at 0x7f0a6bbb32e0&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
-<span class="go">&lt;hiperwalk.graph.grid.Grid object at 0x7f0a6bbb2da0&gt;</span>
+</section>
+<section id="multigraphs">
+<h2>Multigraphs<a class="headerlink" href="#multigraphs" title="Link to this heading">#</a></h2>
+<p>You can create a multigraph by passing its adjacency matrix.
+The adjacency matrix entries are the number of edges
+simultaneously incident to pairs of vertices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the adjacency matrix of a complete multigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating multigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Multigraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if multigraph was created properly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)])</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>Naturally, you can create specific graphs using NetworkX and
-the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.
-However, this approach is not recommended, especially when dealing with
-coined quantum walks, as it may result in undesirable behavior.</p>
-<p>As an example, let’s consider a Line with 10 vertices.
-First, we create the line using the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">arbitrary_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<p>Multigraphs are used to create coined quantum walks
+(<a class="reference internal" href="../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined" title="hiperwalk.Coined"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Coined</span></code></a>).</p>
+<section id="id1">
+<h3>Order of Neighbors<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>To specify a non-default order of neighbors,
+you can follow the same steps used for simple graphs.
+But be aware that the values of <code class="docutils literal notranslate"><span class="pre">data</span></code> must be rearranged
+with respect to <code class="docutils literal notranslate"><span class="pre">indices</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating data with the appropriate values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">[</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create multigraph with desired order of neighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Multigraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<span class="go">[0 1 2 3 4]</span>
+<span class="go">[1 2 3 4 0]</span>
+<span class="go">[2 3 4 0 1]</span>
+<span class="go">[3 4 0 1 2]</span>
+<span class="go">[4 0 1 2 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking if multigraph was created properly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)])</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>Next, we create the line using the <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">specific_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</section>
+</section>
+<section id="weighted-graphs">
+<h2>Weighted Graphs<a class="headerlink" href="#weighted-graphs" title="Link to this heading">#</a></h2>
+<p>You can create a weighted graph by passing its adjacency matrix.
+The adjacency matrix entries are real values that
+represent the edge weights.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating the adjacency matrix of a complete weighted graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">num_vert</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creating weighted</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">WeightedGraph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span> <span class="n">adj_matrix2</span><span class="p">))</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>In a simple graph, we associate each edge with two arcs. Suppose we wish
-to know the label of the arc that links vertex 1 to 2. This information
-can be obtained using the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Graph.arc_number.html#hiperwalk.Graph.arc_number" title="hiperwalk.Graph.arc_number"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_number()</span></code></a> method.
-Observe the following results:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arbitrary_line</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">specific_line</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-<p>For further details on arc labels for each graph, refer to the Notes
-section of each graph class, in this case,
-<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> and <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a>.</p>
+<p>Weighted graphs are used to create continuous-time quantum walks
+(<a class="reference internal" href="../documentation/generated/hiperwalk.ContinuousTime.html#hiperwalk.ContinuousTime" title="hiperwalk.ContinuousTime"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime</span></code></a>).</p>
+<section id="id2">
+<h3>Order of Neighbors<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>The order of neighbors does not play a crucial role in
+the continuous-time quantum walk.
+Even so,
+you can specify the order of neighbors in weighted graphs
+using commands akin to those used for multigraphs.</p>
+</section>
 </section>
 </section>
 
@@ -514,11 +618,11 @@ section of each graph class, in this case,
       </div>
     </a>
     <a class="right-next"
-       href="quantum_walk_models.html"
+       href="graph_constructors.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quantum Walk Models</p>
+        <p class="prev-next-title">Graph Constructors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -540,8 +644,18 @@ section of each graph class, in this case,
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitrary-graphs">Arbitrary Graphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specific-graphs">Specific Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-graphs">Simple Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-neighbors">Order of Neighbors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigraphs">Multigraphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Order of Neighbors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graphs">Weighted Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Order of Neighbors</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -579,7 +693,7 @@ section of each graph class, in this case,
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

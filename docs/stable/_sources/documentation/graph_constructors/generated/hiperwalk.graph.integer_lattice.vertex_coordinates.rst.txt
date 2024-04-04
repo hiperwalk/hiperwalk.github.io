@@ -1,0 +1,6 @@
+﻿hiperwalk.graph.integer\_lattice.vertex\_coordinates
+====================================================
+
+.. currentmodule:: hiperwalk.graph.integer_lattice
+
+.. autofunction:: vertex_coordinates

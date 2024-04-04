@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.adjacency\_matrix
-=====================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.adjacency_matrix

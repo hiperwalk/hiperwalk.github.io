@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.get\_hamiltonian\_type
+===============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.get_hamiltonian_type

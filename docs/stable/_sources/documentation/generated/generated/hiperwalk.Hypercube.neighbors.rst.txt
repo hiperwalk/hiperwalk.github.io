@@ -1,6 +1,0 @@
-hiperwalk.Hypercube.neighbors
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Hypercube.neighbors

@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.vertex\_number
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.vertex_number

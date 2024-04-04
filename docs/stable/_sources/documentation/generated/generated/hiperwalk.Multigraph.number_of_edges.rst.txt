@@ -1,0 +1,6 @@
+hiperwalk.Multigraph.number\_of\_edges
+======================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Multigraph.number_of_edges

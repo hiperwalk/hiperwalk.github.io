@@ -1,6 +1,0 @@
-hiperwalk.Grid.vertex\_coordinates
-==================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.vertex_coordinates

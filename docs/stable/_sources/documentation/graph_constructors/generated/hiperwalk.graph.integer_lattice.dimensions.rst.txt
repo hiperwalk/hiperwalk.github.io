@@ -1,0 +1,6 @@
+﻿hiperwalk.graph.integer\_lattice.dimensions
+===========================================
+
+.. currentmodule:: hiperwalk.graph.integer_lattice
+
+.. autofunction:: dimensions

@@ -1,6 +1,0 @@
-hiperwalk.Cycle.arcs\_with\_tail
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.arcs_with_tail

@@ -1,0 +1,6 @@
+hiperwalk.Graph.laplacian\_matrix
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.laplacian_matrix

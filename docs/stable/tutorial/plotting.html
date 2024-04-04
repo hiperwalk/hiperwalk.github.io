@@ -49,7 +49,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Documentation" href="../documentation/index.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
     <link rel="prev" title="Quantum Walk Models" href="quantum_walk_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,6 +184,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -293,6 +300,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -337,6 +351,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors.html">Graph Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting</a></li>
 </ul>
@@ -444,24 +459,28 @@ the <span class="math notranslate nohighlight">\(7 \times 7\)</span>-dimensional
 <span class="gp">&gt;&gt;&gt; </span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;grover&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
-<span class="gp">... </span>                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi0</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">state</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">right</span><span class="p">)],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">center</span><span class="p">)]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span>
-<span class="go">array([[0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
-<span class="go">        0.0078125, 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
-<span class="go">        0.0390625, 0.0390625, 0.0078125, 0.015625 , 0.0078125, 0.1953125,</span>
-<span class="go">        0.0078125, 0.0078125, 0.1953125, 0.0078125, 0.       , 0.0078125,</span>
-<span class="go">        0.0390625, 0.0390625, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
-<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,</span>
+<span class="go">array([[0.       , 0.       , 0.       , 0.015625 , 0.       , 0.       ,</span>
+<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.0078125,</span>
+<span class="go">        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.1953125,</span>
+<span class="go">        0.0390625, 0.0078125, 0.       , 0.0078125, 0.0390625, 0.0390625,</span>
+<span class="go">        0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.0078125, 0.0390625,</span>
+<span class="go">        0.0390625, 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,</span>
+<span class="go">        0.0078125, 0.0390625, 0.1953125, 0.0390625, 0.0078125, 0.       ,</span>
+<span class="go">        0.       , 0.       , 0.0078125, 0.0078125, 0.0078125, 0.       ,</span>
 <span class="go">        0.       ]])</span>
 </pre></div>
 </div>
 <section id="bar-plot">
 <h4>Bar Plot<a class="headerlink" href="#bar-plot" title="Link to this heading">#</a></h4>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Fix plots</p>
+</div>
 <p>The vertices are represented on the x-axis.
 The respective probabilities are represented on the y-axis.
 Each vertex is associated with a bar.</p>
@@ -484,6 +503,10 @@ The respective valid matplotlib keywords can be used to customize the plot.</p>
 <h4>Histogram Plot<a class="headerlink" href="#histogram-plot" title="Link to this heading">#</a></h4>
 <p>This is essentially the same as the bar plot
 but the <code class="docutils literal notranslate"><span class="pre">width</span></code> kwarg is <em>overriden</em> so the bars are not separated.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">plot</span><span class="o">=</span><span class="s1">&#39;histogram&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
 <img alt="../_images/histogram.png" src="../_images/histogram.png" />
 </section>
 <section id="line-plot">
@@ -498,12 +521,6 @@ A line is drawn between adjacent markers.</p>
 <img alt="../_images/line.png" src="../_images/line.png" />
 <p>It is built on top of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.8.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a>.
 The respective valid matplotlib keywords can be used to customize the plot.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">prob</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">tick_label</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)]</span>
-<span class="gp">... </span><span class="p">)</span> 
-</pre></div>
-</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">prob</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
@@ -592,7 +609,7 @@ The following is a list of specific Hiperwalk keywords.</p>
 <code class="docutils literal notranslate"><span class="pre">animate</span></code> and <code class="docutils literal notranslate"><span class="pre">rescale</span></code>.
 For better comprehension and visualization,
 the probabilities of the intermediate simulation steps are saved.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">dim</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">state</span><span class="o">=</span><span class="n">psi0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">probability_distribution</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -619,6 +636,10 @@ it may be hard to visualize the probabilities.
 If <code class="docutils literal notranslate"><span class="pre">rescale</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, each plot is rescaled such that
 the maximum probability of the current plot corresponds to
 the maximum value on the axis.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hpw</span><span class="o">.</span><span class="n">plot_probability_distribution</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">prob</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">animate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rescale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
 <img alt="../_images/rescale.gif" src="../_images/rescale.gif" />
 </section>
 </section>
@@ -645,11 +666,11 @@ the maximum value on the axis.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../documentation/index.html"
+       href="../examples/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Documentation</p>
+        <p class="prev-next-title">Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -725,7 +746,7 @@ the maximum value on the axis.</p>
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

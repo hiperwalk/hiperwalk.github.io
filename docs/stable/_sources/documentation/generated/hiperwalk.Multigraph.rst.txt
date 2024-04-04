@@ -1,0 +1,54 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.Multigraph
+====================
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: Multigraph
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~Multigraph.adjacency_matrix
+       
+       
+          ~Multigraph.adjacent
+       
+       
+          ~Multigraph.degree
+       
+       
+          ~Multigraph.is_simple
+       
+       
+          ~Multigraph.laplacian_matrix
+       
+       
+          ~Multigraph.neighbors
+       
+       
+          ~Multigraph.number_of_edges
+       
+       
+          ~Multigraph.number_of_loops
+       
+       
+          ~Multigraph.number_of_vertices
+       
+       
+          ~Multigraph.vertex_number
+       
+
+   
+   

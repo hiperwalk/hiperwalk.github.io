@@ -1,0 +1,54 @@
+﻿.. comment
+    adapted from networkx
+
+hiperwalk.WeightedGraph
+=======================
+
+.. currentmodule:: hiperwalk
+
+.. autoclass:: WeightedGraph
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree: generated
+
+   
+       
+       
+          ~WeightedGraph.adjacency_matrix
+       
+       
+          ~WeightedGraph.adjacent
+       
+       
+          ~WeightedGraph.degree
+       
+       
+          ~WeightedGraph.is_simple
+       
+       
+          ~WeightedGraph.laplacian_matrix
+       
+       
+          ~WeightedGraph.neighbors
+       
+       
+          ~WeightedGraph.number_of_edges
+       
+       
+          ~WeightedGraph.number_of_loops
+       
+       
+          ~WeightedGraph.number_of_vertices
+       
+       
+          ~WeightedGraph.vertex_number
+       
+
+   
+   

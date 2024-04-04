@@ -55,23 +55,27 @@ the :math:`7 \times 7`-dimensional natural grid.
 >>> center = (dim//2, dim//2)
 >>> right = (center[0] + 1, center[1])
 >>> qw = hpw.Coined(lat, shift='persistent', coin='grover')
->>> psi0 = qw.state([0.5, (center, right)],
-...                 [0.5, (right, center)])
->>> psi = qw.simulate(time=dim//2, initial_state=psi0)
+>>> psi0 = qw.state([[0.5, (center, right)],
+...                  [0.5, (right, center)]])
+>>> psi = qw.simulate(time=dim//2, state=psi0)
 >>> prob = qw.probability_distribution(psi)
 >>> prob
-array([[0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,
-        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,
-        0.0078125, 0.       , 0.       , 0.0078125, 0.0390625, 0.0390625,
-        0.0390625, 0.0390625, 0.0078125, 0.015625 , 0.0078125, 0.1953125,
-        0.0078125, 0.0078125, 0.1953125, 0.0078125, 0.       , 0.0078125,
-        0.0390625, 0.0390625, 0.0390625, 0.0390625, 0.0078125, 0.       ,
-        0.       , 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,
-        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.       ,
+array([[0.       , 0.       , 0.       , 0.015625 , 0.       , 0.       ,
+        0.       , 0.       , 0.       , 0.0078125, 0.0078125, 0.0078125,
+        0.       , 0.       , 0.       , 0.0078125, 0.0390625, 0.1953125,
+        0.0390625, 0.0078125, 0.       , 0.0078125, 0.0390625, 0.0390625,
+        0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.0078125, 0.0390625,
+        0.0390625, 0.0078125, 0.0390625, 0.0390625, 0.0078125, 0.       ,
+        0.0078125, 0.0390625, 0.1953125, 0.0390625, 0.0078125, 0.       ,
+        0.       , 0.       , 0.0078125, 0.0078125, 0.0078125, 0.       ,
         0.       ]])
 
 Bar Plot
 ''''''''
+
+.. todo::
+
+   Fix plots
 
 The vertices are represented on the x-axis.
 The respective probabilities are represented on the y-axis.
@@ -99,6 +103,10 @@ Histogram Plot
 This is essentially the same as the bar plot
 but the ``width`` kwarg is *overriden* so the bars are not separated.
 
+>>> hpw.plot_probability_distribution(prob,
+...                                   plot='histogram') #doctest: +SKIP
+
+
 .. image:: histogram.png
 
 Line Plot
@@ -115,11 +123,6 @@ A line is drawn between adjacent markers.
 
 It is built on top of :obj:`matplotlib.pyplot.plot`.
 The respective valid matplotlib keywords can be used to customize the plot.
-
->>> hpw.plot_probability_distribution(
-...     prob, plot='bar', color='red', edgecolor='black', linewidth=3,
-...     tick_label=[str((x, y)) for x in range(dim) for y in range(dim)]
-... ) #doctest: +SKIP
 
 >>> hpw.plot_probability_distribution(
 ...     prob, plot='line', linewidth=3, color='black', linestyle='--',
@@ -215,7 +218,7 @@ In this tutorial, only two keywords are detailed:
 For better comprehension and visualization,
 the probabilities of the intermediate simulation steps are saved.
 
->>> psi = qw.simulate(time=(dim//2, 1), initial_state=psi0)
+>>> psi = qw.simulate(time=(dim//2, 1), state=psi0)
 >>> prob = qw.probability_distribution(psi)
 
 ``animate``
@@ -244,5 +247,8 @@ it may be hard to visualize the probabilities.
 If ``rescale`` is set to ``True``, each plot is rescaled such that
 the maximum probability of the current plot corresponds to
 the maximum value on the axis.
+
+>>> hpw.plot_probability_distribution(
+...     prob, graph=lat, animate=True, rescale=True) #doctest: +SKIP
 
 .. image:: rescale.gif

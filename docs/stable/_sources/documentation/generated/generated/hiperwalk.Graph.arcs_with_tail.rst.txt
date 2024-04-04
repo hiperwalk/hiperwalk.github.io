@@ -1,6 +1,0 @@
-hiperwalk.Graph.arcs\_with\_tail
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Graph.arcs_with_tail

@@ -1,6 +1,0 @@
-hiperwalk.Lattice.arc\_number
-=============================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Lattice.arc_number

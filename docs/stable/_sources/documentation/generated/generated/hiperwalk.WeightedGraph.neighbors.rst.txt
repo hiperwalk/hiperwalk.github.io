@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.neighbors
+=================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.neighbors

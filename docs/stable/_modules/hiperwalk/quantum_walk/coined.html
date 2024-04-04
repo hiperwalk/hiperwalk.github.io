@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -287,6 +294,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -382,12 +396,10 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">.quantum_walk</span> <span class="kn">import</span> <span class="n">QuantumWalk</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span><span class="p">,</span> <span class="n">PYNEBLINA_IMPORT_ERROR_MSG</span>
+<span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">SDMultigraph</span>
+<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="k">pass</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
 
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span> <span class="k">as</span> <span class="n">now</span>
@@ -396,12 +408,11 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined">[docs]</a>
 <span class="k">class</span> <span class="nc">Coined</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Manage an instance of a coined quantum walk on</span>
-<span class="sd">    any simple graph.</span>
+<span class="sd">    Manage instances of coined quantum walks on arbitrary graphs.</span>
 
-<span class="sd">    This class provides methods for handling, simulating, and generating</span>
-<span class="sd">    operators within the coined quantum walk model for</span>
-<span class="sd">    various types of graphs.</span>
+<span class="sd">    The class provides methods to handle and generate operators in the </span>
+<span class="sd">    coined quantum walk model. It also facilitates the simulation of </span>
+<span class="sd">    coined quantum walks on graphs.</span>
 <span class="sd">    </span>
 <span class="sd">    For additional details about coined quantum walks,</span>
 <span class="sd">    refer to the Notes Section.</span>
@@ -410,8 +421,12 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    graph</span>
 <span class="sd">        Graph on which the quantum walk takes place.</span>
-<span class="sd">        It can be the graph itself (:class:`hiperwalk.graph.Graph`) or</span>
-<span class="sd">        its adjacency matrix (:class:`scipy.sparse.csr_array`).</span>
+<span class="sd">        Two types of entries are accepted:</span>
+
+<span class="sd">        * Simple graph (:class:`hiperwalk.Graph`);</span>
+<span class="sd">        * Multigraph (:class:`hiperwalk.Multigraph`);</span>
+
+<span class="sd">        A symmetric directed multigraph is created based on the input.</span>
 
 <span class="sd">    **kwargs : optional</span>
 <span class="sd">        Optional arguments for setting the non-default evolution operator.</span>
@@ -426,21 +441,122 @@ document.write(`
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    set_evolution</span>
+<span class="sd">    set_shift</span>
+<span class="sd">    set_coin</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 
-<span class="sd">    The computational basis is spanned by the set of arcs.</span>
-<span class="sd">    The cardinality is :math:`2|E|`, where :math:`E`</span>
-<span class="sd">    represents the edge set of the graph.</span>
-<span class="sd">    For further information regarding the order of the arcs,</span>
-<span class="sd">    consult the respective graph descriptions.</span>
-<span class="sd">    The Hilbert space of a coined quantum walk is denoted by</span>
-<span class="sd">    :math:`\mathcal{H}^{2|E|}`.</span>
+<span class="sd">    The coined quantum walk model is a quantum analog of </span>
+<span class="sd">    classical random walks, incorporating an additional </span>
+<span class="sd">    quantum coin-toss mechanism. It uses an extra quantum </span>
+<span class="sd">    internal degree of freedom, represented by the coin state,</span>
+<span class="sd">    to determine the direction of the walker&#39;s movement </span>
+<span class="sd">    on a graph.</span>
+
+<span class="sd">    In the coined model, the graph is interpreted</span>
+<span class="sd">    as a directed graph as follows:</span>
+<span class="sd">    Each edge in :math:`G(V, E)` connecting two distinct vertices</span>
+<span class="sd">    translates into a pair of arcs in the directed graph</span>
+<span class="sd">    :math:`\vec{G}(V, \mathcal{A})`, where</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \begin{align*}</span>
+<span class="sd">            \mathcal{A} = \bigcup_{v_k v_\ell\, \in E} \{(v_k, v_\ell), (v_\ell, v_k)\}.</span>
+<span class="sd">        \end{align*}</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        The order of arcs depends on the order of neighbors.</span>
+
+<span class="sd">    Arcs are represented using either</span>
+<span class="sd">    the (tail,head) notation or numerical labels.</span>
+<span class="sd">    In the :obj:`Graph` class, the arc labels are ordered such that for two arcs,</span>
+<span class="sd">    :math:`(v_i, v_j)` and :math:`(v_k, v_\ell)`, with labels :math:`a_1` and</span>
+<span class="sd">    :math:`a_2` respectively, :math:`a_1 &lt; a_2` if and only if :math:`i &lt; k` or</span>
+<span class="sd">    (:math:`i = k` and :math:`j &lt; \ell`).</span>
+<span class="sd">    Loops are depicted as single arcs,</span>
+<span class="sd">    affecting the dimension of the associated Hilbert space.</span>
+<span class="sd">    In coined quantum walks, the weights of arcs do not influence the dynamics.</span>
+
+<span class="sd">    The computational basis is composed of the graph&#39;s arc set.</span>
+<span class="sd">    For simple graphs, the cardinality of the computational</span>
+<span class="sd">    basis is :math:`2|E|`, where :math:`E`</span>
+<span class="sd">    represents the graph&#39;s edge set.</span>
+<span class="sd">    When a loop is added to the graph, the cardinality of the </span>
+<span class="sd">    computational basis increases by one for each loop.</span>
+<span class="sd">    </span>
+<span class="sd">    The arcs are arranged within the computational basis </span>
+<span class="sd">    to ensure that the coin operator adopts a block-diagonal </span>
+<span class="sd">    matrix form.</span>
+<span class="sd">    For additional information on the arc ordering,</span>
+<span class="sd">    please consult the respective graph descriptions.</span>
 
 <span class="sd">    For a more detailed understanding of coined quantum walks,</span>
 <span class="sd">    refer to Section 7.2: Coined Walks on Arbitrary Graphs,</span>
 <span class="sd">    found in the book  &#39;Quantum Walks and Search Algorithms&#39; [1]_.</span>
+
+<span class="sd">    For example, the graph :math:`G(V, E)` shown in</span>
+<span class="sd">    Figure 1 has an adjacency matrix ``adj_matrix``.</span>
+
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import numpy as np</span>
+
+<span class="sd">    &gt;&gt;&gt; adj_matrix = np.array([</span>
+<span class="sd">    ...     [0, 1, 0, 0],</span>
+<span class="sd">    ...     [1, 0, 1, 1],</span>
+<span class="sd">    ...     [0, 1, 0, 1],</span>
+<span class="sd">    ...     [0, 1, 1, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; adj_matrix</span>
+<span class="sd">    array([[0, 1, 0, 0],</span>
+<span class="sd">           [1, 0, 1, 1],</span>
+<span class="sd">           [0, 1, 0, 1],</span>
+<span class="sd">           [0, 1, 1, 0]])</span>
+
+<span class="sd">    .. graphviz:: ../../graphviz/graph-example.dot</span>
+<span class="sd">        :align: center</span>
+<span class="sd">        :layout: neato</span>
+<span class="sd">        :caption: Figure 1</span>
+
+<span class="sd">    Suppose that, for this graph,</span>
+<span class="sd">    the neighbors are given in ascending order.</span>
+<span class="sd">    Then,</span>
+<span class="sd">    the arcs of the associated digraph in the arc notation are</span>
+
+<span class="sd">    &gt;&gt;&gt; arcs = [(i, j) for i in range(4)</span>
+<span class="sd">    ...                for j in range(4) if adj_matrix[i,j] == 1]</span>
+<span class="sd">    &gt;&gt;&gt; arcs</span>
+<span class="sd">    [(0, 1), (1, 0), (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
+
+<span class="sd">    Note that ``arcs`` is already sorted, hence the associated</span>
+<span class="sd">    numeric labels are</span>
+
+<span class="sd">    &gt;&gt;&gt; arcs_labels = {arcs[i]: i for i in range(len(arcs))}</span>
+<span class="sd">    &gt;&gt;&gt; arcs_labels</span>
+<span class="sd">    {(0, 1): 0, (1, 0): 1, (1, 2): 2, (1, 3): 3, (2, 1): 4, (2, 3): 5, (3, 1): 6, (3, 2): 7}</span>
+
+<span class="sd">    The numeric labels are depicted in Figure 2.</span>
+
+<span class="sd">    .. graphviz:: ../../graphviz/graph-arcs.dot</span>
+<span class="sd">        :align: center</span>
+<span class="sd">        :layout: neato</span>
+<span class="sd">        :caption: Figure 2</span>
+
+<span class="sd">    If we insert the labels of the arcs into the adjacency matrix,</span>
+<span class="sd">    we obtain matrix ``adj_labels`` as follows:</span>
+
+<span class="sd">    &gt;&gt;&gt; adj_labels = [[arcs_labels[(i,j)] if (i,j) in arcs_labels</span>
+<span class="sd">    ...                                   else &#39;&#39; for j in range(4)]</span>
+<span class="sd">    ...               for i in range(4)]</span>
+<span class="sd">    &gt;&gt;&gt; adj_labels = np.matrix(adj_labels)</span>
+<span class="sd">    &gt;&gt;&gt; adj_labels</span>
+<span class="sd">    matrix([[&#39;&#39;, &#39;0&#39;, &#39;&#39;, &#39;&#39;],</span>
+<span class="sd">            [&#39;1&#39;, &#39;&#39;, &#39;2&#39;, &#39;3&#39;],</span>
+<span class="sd">            [&#39;&#39;, &#39;4&#39;, &#39;&#39;, &#39;5&#39;],</span>
+<span class="sd">            [&#39;&#39;, &#39;6&#39;, &#39;7&#39;, &#39;&#39;]], dtype=&#39;&lt;U21&#39;)</span>
+
+<span class="sd">    Note that, intuitively,</span>
+<span class="sd">    the arcs are labeled in left-to-right and top-to-bottom fashion.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
@@ -459,22 +575,25 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
+        <span class="c1"># create symmetric directed multigraph from input</span>
+        <span class="n">sdmg</span> <span class="o">=</span> <span class="n">SDMultigraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">sdmg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
+
+        <span class="c1"># Specific coined quantum walk attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_coin</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">)</span>
 
-        <span class="c1"># Expects adjacency matrix with only 0 and 1 as entries</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-
+        <span class="c1"># create static dicts</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">):</span>
-            <span class="c1"># assign static attribute</span>
             <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;shift&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">),</span>
-                <span class="s1">&#39;coin&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">),</span>
-                <span class="s1">&#39;marked&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">),</span>
+                <span class="s1">&#39;shift&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_shift</span><span class="p">),</span>
+                <span class="s1">&#39;coin&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_coin</span><span class="p">),</span>
+                <span class="s1">&#39;marked&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">),</span>
                 <span class="s1">&#39;evolution&#39;</span><span class="p">:</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">)</span>
             <span class="p">}</span>
 
         <span class="c1"># dict with valid coins as keys and the respective</span>
@@ -505,19 +624,25 @@ document.write(`
 
     <span class="k">def</span> <span class="nf">_set_flipflop_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create the flipflop shift operator (:math:`S`) based on</span>
+<span class="sd">        Creates the flipflop shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
 
 <span class="sd">        The operator is configured for future use. If an evolution</span>
 <span class="sd">        operator was set earlier, it will be unset to maintain coherence.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
+        <span class="n">num_vert</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+        <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
 
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-
-        <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
-                  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">is_underlying_simple</span><span class="p">():</span>
+            <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">))]</span>
 
         <span class="c1"># Using csr_array((data, indices, indptr), shape)</span>
         <span class="c1"># Note that there is only one entry per row and column</span>
@@ -533,7 +658,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.has_persistent_shift.html#hiperwalk.Coined.has_persistent_shift">[docs]</a>
     <span class="k">def</span> <span class="nf">has_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Checks whether the persistent shift operator is defined</span>
+<span class="sd">        Check whether the persistent shift operator is defined</span>
 <span class="sd">        for the current graph.</span>
 
 <span class="sd">        Returns</span>
@@ -546,16 +671,16 @@ document.write(`
 
 <span class="sd">        The persistent shift operator can only be defined in a</span>
 <span class="sd">        meaningful way for certain specific graphs. For instance,</span>
-<span class="sd">        for graphs that can be embedded onto a plane,</span>
+<span class="sd">        for graphs that can be embedded onto a plane so that</span>
 <span class="sd">        directions such as left, right, up, and down</span>
 <span class="sd">        can be referred to naturally.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;previous_arc&#39;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">previous_arc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
 
     <span class="k">def</span> <span class="nf">_set_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create the persistent shift operator (:math:`S`) based on</span>
+<span class="sd">        Creates the persistent shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
 
 <span class="sd">        The operator is set for future usage.</span>
@@ -576,40 +701,66 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="n">S</span>
 
-    <span class="k">def</span> <span class="nf">_update_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="n">valid_vals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">,</span> <span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">shift</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_vals</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid `shift` value. Expected one of &quot;</span>
-                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">valid_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. But received &#39;&quot;</span>
-                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; instead.&quot;</span>
-            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_persistent_shift</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;ff&#39;</span>
+        <span class="c1"># check if string</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;ff&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;flipflop&#39;</span>
-        <span class="k">elif</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
-            <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;persistent&#39;</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_vals</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid `shift` value. Expected one of &quot;</span>
+                    <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">valid_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. But received &#39;&quot;</span>
+                    <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; instead.&quot;</span>
+                <span class="p">)</span>
 
-        
-        <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_set_flipflop_shift</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_set_persistent_shift</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;p&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_persistent_shift</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;ff&#39;</span>
 
-        <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
+            <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;ff&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;flipflop&#39;</span>
+            <span class="k">elif</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+                <span class="n">shift</span> <span class="o">=</span> <span class="s1">&#39;persistent&#39;</span>
+
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">)</span> <span class="o">!=</span> <span class="n">shift</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_flipflop_shift</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_set_persistent_shift</span><span class="p">()</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># check if explict matrix</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shift</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#if this works, then shift is numpy or list of list</span>
+            <span class="c1"># convert to sparse</span>
+            <span class="n">shift</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="c1"># already sparse</span>
+            <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">shift</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Explicit coin is not a square matrix.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">(</span><span class="n">shift</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="n">shift</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="Coined.set_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the shift operator.</span>
 
-<span class="sd">        Sets either the flipflop or the persistent shift operator.</span>
-<span class="sd">        Afterwards, the evolution operator is updated accordingly.</span>
+<span class="sd">        Defines either the flipflop or the persistent shift operator.</span>
+<span class="sd">        Following this, the evolution operator updates accordingly.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -619,12 +770,6 @@ document.write(`
 <span class="sd">            otherwise creates the flip flop shift.</span>
 <span class="sd">            Argument ``&#39;ff&#39;`` is an alias for ``&#39;flipflop&#39;``.</span>
 <span class="sd">            Argument ``&#39;p&#39;`` is an alias for ``&#39;persistent&#39;``.</span>
-
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -643,21 +788,25 @@ document.write(`
 <span class="sd">            Check :class:`Coined` Notes for details</span>
 <span class="sd">            about the computational basis.</span>
 
-<span class="sd">        The persistent shift is sometimes called *moving shift*.</span>
-
-<span class="sd">        The flip-flop shift operator :math:`S` is defined such that</span>
+<span class="sd">        The flip-flop shift operator :math:`S` is defined as</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            \begin{align*}</span>
-<span class="sd">                S \ket{(v, u)} &amp;= \ket{(u, v)} \\</span>
-<span class="sd">                \implies S\ket i &amp;= \ket j</span>
-<span class="sd">            \end{align*}</span>
+<span class="sd">            S \ket{v, u} = \ket{u, v},</span>
 
-<span class="sd">        where :math:`i` is the label of the edge :math:`(v, u)` and</span>
-<span class="sd">        :math:`j` is the label of the edge :math:`(u, v)`.</span>
+<span class="sd">        in the context of arc notation, where :math:`(v, u)` and</span>
+<span class="sd">        :math:`(u, v)` represent opposite arcs. This can be equivalently </span>
+<span class="sd">        expressed as :math:`S\ket{i} = \ket{j}`, where :math:`i` is the </span>
+<span class="sd">        label of the arc :math:`(v, u)` and :math:`j` is the label of </span>
+<span class="sd">        the arc :math:`(u, v)`. The flip-flop shift satisfies the </span>
+<span class="sd">        property :math:`S^2 = I`.</span>
 
-
-<span class="sd">        For a more comprehensive understanding of the flipflop</span>
+<span class="sd">        The persistent shift, also known as the *moving shift*, </span>
+<span class="sd">        is defined for graphs with a clear notion of direction or rotation.</span>
+<span class="sd">        When the shift operator is applied repeatedly, it causes the walker </span>
+<span class="sd">        to continue moving persistently in the same direction. Unlike the </span>
+<span class="sd">        flip-flop shift, the persistent shift does not satisfy :math:`S^2 = I`.</span>
+<span class="sd">        </span>
+<span class="sd">        For a more comprehensive understanding of the </span>
 <span class="sd">        shift operator, refer to Section 7.2: Coined Walks on Arbitrary</span>
 <span class="sd">        Graphs in the book &quot;Quantum Walks and Search Algorithms&quot; [1]_.</span>
 <span class="sd">        </span>
@@ -677,6 +826,8 @@ document.write(`
 
 <span class="sd">            import numpy as np</span>
 <span class="sd">            import scipy.sparse</span>
+<span class="sd">            from sys import path</span>
+<span class="sd">            path.append(&#39;../..&#39;)</span>
 
 <span class="sd">        .. doctest::</span>
 
@@ -685,7 +836,7 @@ document.write(`
 <span class="sd">            ...                             [1, 0, 1, 1],</span>
 <span class="sd">            ...                             [0, 1, 0, 1],</span>
 <span class="sd">            ...                             [0, 1, 1, 0]])</span>
-<span class="sd">            &gt;&gt;&gt; qw = hpw.Coined(A)</span>
+<span class="sd">            &gt;&gt;&gt; qw = hpw.Coined(hpw.Graph(A))</span>
 <span class="sd">            &gt;&gt;&gt; qw.set_shift(shift=&#39;flipflop&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; S = qw.get_shift().todense()</span>
 <span class="sd">            &gt;&gt;&gt; S</span>
@@ -719,26 +870,31 @@ document.write(`
 <span class="sd">            </span>
 <span class="sd">            Add persistent example.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">shift</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.get_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_shift.html#hiperwalk.Coined.get_shift">[docs]</a>
     <span class="k">def</span> <span class="nf">get_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the shift operator.</span>
+<span class="sd">        Retrieve the shift operator.</span>
 
 <span class="sd">        Shift operator used for constructing the evolution operator.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        scipy.sparse.csr_array</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        set_shift</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coin</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Explicit coin is not a matrix.&#39;</span><span class="p">)</span>
@@ -764,14 +920,14 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a coin operator based on the graph structure.</span>
+<span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
-<span class="sd">        Constructs a coin operator based on the degree of each vertex.</span>
-<span class="sd">        A single type of coin may be applied to</span>
-<span class="sd">        all vertices or a subset thereof.</span>
-<span class="sd">        Once the coin operator is set,</span>
+<span class="sd">        Builds a coin operator considering the degree of each vertex.</span>
+<span class="sd">        The same coin can be applied to all vertices, or multiple </span>
+<span class="sd">        coins can be assigned, each to a specific subset of vertices. </span>
+<span class="sd">        After setting the coin operator,</span>
 <span class="sd">        the evolution operator is updated accordingly.</span>
 
 <span class="sd">        Parameters</span>
@@ -810,35 +966,33 @@ document.write(`
 <span class="sd">            * :class:`scipy.sparse.csr_array`</span>
 <span class="sd">                The explicit coin operator.</span>
 
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
-
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_evolution</span>
 
+<span class="sd">            </span>
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        Owing to the selected computational basis (refer to the</span>
-<span class="sd">        Notes in the :class:`Coined`),</span>
-<span class="sd">        the outcome is a block diagonal operator.</span>
-<span class="sd">        Each block is a :math:`\deg(v)`-dimensional ``coin``.</span>
+<span class="sd">        </span>
+<span class="sd">        The output of this method is a block-diagonal </span>
+<span class="sd">        operator, which results from the specific ordering of arcs </span>
+<span class="sd">        in the computational basis </span>
+<span class="sd">        (refer to the Notes in :class:`Coined` for more details).        </span>
+<span class="sd">        Each block is associated with a :math:`\deg(v)`-dimensional ``coin``.</span>
 <span class="sd">        As a result, there are :math:`|V|` blocks in total.</span>
+<span class="sd">        Note that a loop at a vertex :math:`u` is treated</span>
+<span class="sd">        as the arc :math:`(u,u)`, contributing an additional </span>
+<span class="sd">        one to the degree of :math:`u`.</span>
+<span class="sd">        </span>
 
 <span class="sd">        .. todo::</span>
 
 <span class="sd">            Check if explicit coin is valid.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;evolution&#39;</span><span class="p">]:</span>
-                <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="n">coin</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="n">coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.default_coin">
@@ -977,36 +1131,41 @@ document.write(`
     <span class="k">def</span> <span class="nf">_minus_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_update_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
-        <span class="n">coin_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">_set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">marked</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#throws exception if list</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c1"># list</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">marked</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">marked</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;-I&#39;</span><span class="p">:</span> <span class="n">marked</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">marked</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">marked</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">coin_list</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_to_list</span><span class="p">(</span><span class="n">marked</span><span class="p">)</span>
+        <span class="n">coin_list</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_to_list</span><span class="p">(</span><span class="n">marked</span><span class="p">)</span>
 
-            <span class="n">dict_values</span> <span class="o">=</span> <span class="n">marked</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-            <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">vlist</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vlist</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">vlist</span><span class="p">]</span>
-                        <span class="k">for</span> <span class="n">vlist</span> <span class="ow">in</span> <span class="n">dict_values</span><span class="p">]</span>
-            <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">vlist</span> <span class="ow">in</span> <span class="n">vertices</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vlist</span> <span class="p">]</span>
-            <span class="n">marked</span> <span class="o">=</span> <span class="n">vertices</span>
+        <span class="n">dict_values</span> <span class="o">=</span> <span class="n">marked</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">vlist</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">vlist</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">vlist</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">vlist</span> <span class="ow">in</span> <span class="n">dict_values</span><span class="p">]</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">vlist</span> <span class="ow">in</span> <span class="n">vertices</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vlist</span> <span class="p">]</span>
+        <span class="n">marked</span> <span class="o">=</span> <span class="n">vertices</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span> <span class="o">=</span> <span class="n">coin_list</span>
 
 <div class="viewcode-block" id="Coined.set_marked">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set marked vertices.</span>
+<span class="sd">        Set the marked vertices.</span>
 
-<span class="sd">        If a list of vertices is provided, those vertices are</span>
-<span class="sd">        deemed as marked.</span>
+<span class="sd">        When a set or list of vertices is provided, they </span>
+<span class="sd">        are set as marked.</span>
 <span class="sd">        The evolution operator is updated accordingly.</span>
 
-<span class="sd">        If a dictionary is passed,</span>
-<span class="sd">        the coin of those vertices are substituted</span>
-<span class="sd">        only for generating the evolution operator.</span>
-<span class="sd">        This can only be done if the set coin operator is</span>
-<span class="sd">        not a explicit matrix.</span>
+<span class="sd">        If a dictionary is passed, the coin of those vertices is</span>
+<span class="sd">        replaced solely for the purpose of generating the evolution </span>
+<span class="sd">        operator. This can only be done if the set coin operator is</span>
+<span class="sd">        not an explicit matrix.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1023,18 +1182,14 @@ document.write(`
 <span class="sd">                ``{coin_type : list_of_vertices}``.</span>
 <span class="sd">                Analogous to the one accepted by :meth:`set_coin`.</span>
 
-<span class="sd">        **kwargs:</span>
-<span class="sd">            Additional arguments.</span>
-<span class="sd">            Used for determining the procedure for</span>
-<span class="sd">            updating the evolution operator.</span>
-<span class="sd">            See :meth:`hiperwalk.Coined.set_evolution` for valid options.</span>
-
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_coin</span>
 <span class="sd">        set_evolution</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_marked</span><span class="p">(</span><span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
+                           <span class="n">coin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">,</span>
+                           <span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span></div>
 
 
     <span class="k">def</span> <span class="nf">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin_list</span><span class="p">):</span>
@@ -1049,7 +1204,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_coin.html#hiperwalk.Coined.get_coin">[docs]</a>
     <span class="k">def</span> <span class="nf">get_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return coin used for creating the evolution operator.</span>
+<span class="sd">        Retrieve the coin used in the creation of the evolution operator.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1058,27 +1213,6 @@ document.write(`
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        set_coin</span>
-<span class="sd">        </span>
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        The final coin :math:`C&#39;` is obtained by multiplying the</span>
-<span class="sd">        coin operator :math:`C` and the oracle :math:`R`.</span>
-<span class="sd">        That is,</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">            </span>
-<span class="sd">            C&#39; = CR .</span>
-
-<span class="sd">        The oracle is not explicitly saved.</span>
-<span class="sd">        Instead, the oracle coins are saved -- i.e.</span>
-<span class="sd">        which coin is going to be applied to each marked vertices.</span>
-<span class="sd">        To generate :math:`C&#39;` we simply substitute the original coin</span>
-<span class="sd">        by the oracle coin in all marked vertices.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span><span class="p">):</span>
@@ -1090,14 +1224,19 @@ document.write(`
             <span class="k">def</span> <span class="nf">get_block</span><span class="p">(</span><span class="n">vertex</span><span class="p">):</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
                 <span class="n">neighbors</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-                <span class="n">end</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="c1"># TODO: this technique wont work after the behavior of</span>
+                <span class="c1"># neighbors() change.</span>
+                <span class="n">a1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">a2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">arc_number</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="c1"># arc order may change</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
                 <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">,</span>
                                                          <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
 
-            <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-            <span class="n">degree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span>
+            <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
+            <span class="n">degree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">degree</span>
             <span class="n">oracle_coin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span>
             <span class="n">coin_funcs</span> <span class="o">=</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_coin_funcs</span>
             <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">coin_funcs</span><span class="p">[</span><span class="n">oracle_coin</span><span class="p">[</span><span class="n">v</span><span class="p">]](</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
@@ -1120,16 +1259,16 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="n">coin_list</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_update_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: Check if matrix is sparse in pynelibna interface</span>
+        <span class="c1"># TODO: Check if matrices are deleted from memory and GPU.</span>
         <span class="n">U</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pyneblina_imported</span><span class="p">():</span>
-            <span class="n">hpc</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">()</span>
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">hpc</span><span class="p">:</span>
-
+        <span class="k">if</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># TODO: implement sparse matrix multiplication with hpc</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
             <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
 
@@ -1153,19 +1292,24 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.set_evolution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create evolution operator.</span>
+<span class="sd">        Set the evolution operator.</span>
 
-<span class="sd">        Sets shift, coin and marked vertices.</span>
+<span class="sd">        Establishes the shift operator, coin operator,</span>
+<span class="sd">        and the marked vertices.</span>
 <span class="sd">        They are set using the appropriate ``**kwargs``.</span>
 <span class="sd">        If ``**kwargs`` is empty, the default arguments are used.</span>
 
-<span class="sd">        Then, creates evolution operator by multiplying the</span>
-<span class="sd">        shift operator and coin operator.</span>
-<span class="sd">        If the coin operator is not an explicit matrix,</span>
-<span class="sd">        and the coin for marked vertices was specified,</span>
-<span class="sd">        the coin of each marked vertex is substituted.</span>
+<span class="sd">        Subsequently, the evolution operator is constructed by </span>
+<span class="sd">        multiplying the shift and coin operators. </span>
+<span class="sd">        If the coin operator is given as an explicit matrix, </span>
+<span class="sd">        its definition remains unaltered </span>
+<span class="sd">        even in the presence of marked vertices. However, if the coin </span>
+<span class="sd">        operator is defined using coin names, any marked vertices will </span>
+<span class="sd">        prompt an update to the coin operator. Specifically, the coin names </span>
+<span class="sd">        for each marked vertex will default to a replacement with -I, </span>
+<span class="sd">        unless an alternative substitution is provided.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1173,10 +1317,6 @@ document.write(`
 <span class="sd">            Arguments for setting the evolution operator.</span>
 <span class="sd">            Accepts any valid keywords from</span>
 <span class="sd">            :meth:`set_shift` :meth:`set_coin`, and :meth:`set_marked`.</span>
-
-<span class="sd">        hpc : bool, default=True</span>
-<span class="sd">            Whether or not the evolution operator should be</span>
-<span class="sd">            constructed using nelina&#39;s high-performance computing.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -1190,26 +1330,25 @@ document.write(`
 <span class="sd">        The evolution operator is given by</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">           U = SC&#39;</span>
+<span class="sd">           U = SC</span>
 
-<span class="sd">        where :math`S` is the shift operator, and</span>
-<span class="sd">        :math:`C&#39;` is the coin operator (probably) modified by</span>
-<span class="sd">        the marked vertices [1]_.</span>
+<span class="sd">        where :math:`S` is the shift operator, and</span>
+<span class="sd">        :math:`C` is the coin operator. If there are</span>
+<span class="sd">        any marked vertices, the coin operator is</span>
+<span class="sd">        modified accordingly [1]_.</span>
 
-<span class="sd">        If the coin operator was set as an explicit matrix,</span>
-<span class="sd">        the marked vertices to not alter it.</span>
-<span class="sd">        If the coin operator was not set as an explicit matrix</span>
-<span class="sd">        (e.g. as a list of coins),</span>
-<span class="sd">        the coin of each marked vertex is substituted as specified by</span>
-<span class="sd">        the last :meth:`set_marked` call.</span>
+<span class="sd">        When the coin operator is set as an explicit matrix, it remains </span>
+<span class="sd">        unaltered by marked vertices. However, if it&#39;s not provided in </span>
+<span class="sd">        matrix form (e.g., as a list of coins), the coin for each marked </span>
+<span class="sd">        vertex will be substituted based on the most recent </span>
+<span class="sd">        :meth:`set_marked` invocation.</span>
 
-<span class="sd">        .. todo::</span>
-<span class="sd">            * Sparse matrix multipliation is not supported yet.</span>
-<span class="sd">              Converting all matrices to dense.</span>
-<span class="sd">              Then converting back to sparse.</span>
-<span class="sd">              This uses unnecessary memory and computational time.</span>
-<span class="sd">            * Check if matrix is sparse in pynelibna interface</span>
-<span class="sd">            * Check if matrices are deleted from memory and GPU.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            Sparse matrix multipliation is not supported yet.</span>
+<span class="sd">            Converting all matrices to dense.</span>
+<span class="sd">            Then converting back to sparse.</span>
+<span class="sd">            This uses unnecessary memory and computational time.</span>
 
 
 <span class="sd">        References</span>
@@ -1234,10 +1373,10 @@ document.write(`
                               <span class="n">kwargs</span><span class="p">,</span>
                               <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;marked&#39;</span><span class="p">])</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_shift</span><span class="p">(</span><span class="o">**</span><span class="n">S_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_coin</span><span class="p">(</span><span class="o">**</span><span class="n">C_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_marked</span><span class="p">(</span><span class="o">**</span><span class="n">R_kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_evolution</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">hpc</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_shift</span><span class="p">(</span><span class="o">**</span><span class="n">S_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_coin</span><span class="p">(</span><span class="o">**</span><span class="n">C_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_marked</span><span class="p">(</span><span class="o">**</span><span class="n">R_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_evolution</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Coined.probability_distribution">
@@ -1268,31 +1407,44 @@ document.write(`
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
+<span class="sd">        probability</span>
 <span class="sd">        simulate</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        The probability for a given vertex :math:`u` is the sum of the</span>
-<span class="sd">        absolute square of the amplitudes of the arcs with tail :math:`u`.</span>
-<span class="sd">        That is, for an arbitrary superposition</span>
-
+<span class="sd">        The probability for a given vertex :math:`u` is calculated as the sum of the</span>
+<span class="sd">        absolute squares of the amplitudes of the arcs originating from :math:`u`.</span>
+<span class="sd">        More precisely, if the state of the walker is</span>
+<span class="sd">        </span>
 <span class="sd">        .. math::</span>
-<span class="sd">            \sum_{(u, v) \in A(\vec G)} \alpha_{u,v} \ket{u,v},</span>
-
-<span class="sd">        -- where :math:`\vec G` is the graph :math:`G` with each</span>
-<span class="sd">        edge substituted by two arcs (one for each direction) --</span>
-<span class="sd">        the probability associated with vertex :math:`u` is</span>
-
+<span class="sd">            \sum_{(v, w) \in \mathcal{A}(\vec G)} \alpha_{v,w} \ket{v,w},</span>
+<span class="sd">        </span>
+<span class="sd">        where :math:`\mathcal{A}(\vec G)` is the set of arcs of</span>
+<span class="sd">        the symmetric directed graph formed by</span>
+<span class="sd">        replacing each edge in :math:`G` with two arcs, one for each direction,</span>
+<span class="sd">        then the probability associated with vertex :math:`u` is given by</span>
+<span class="sd">        </span>
 <span class="sd">        .. math::</span>
 <span class="sd">            \sum_{v \in N(u)}|\alpha_{u, v}|^2,</span>
-
-<span class="sd">        where :math:`N(u)` is the set of neighbors of :math:`u`.</span>
+<span class="sd">        </span>
+<span class="sd">        with :math:`N(u)` being the set of out neighbors of :math:`u`.</span>
+<span class="sd">        A loop at :math:`u` is the arc :math:`(u,u)`. </span>
+<span class="sd">        </span>
+<span class="sd">        The probability distribution, which is returned by this</span>
+<span class="sd">        method as a ``numpy.ndarray``, is the collection of these</span>
+<span class="sd">        probabilities for all vertices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">states</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="n">states</span><span class="p">]</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">states</span><span class="p">],</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
 
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
@@ -1306,7 +1458,7 @@ document.write(`
 
 <div class="viewcode-block" id="Coined.state">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.state.html#hiperwalk.Coined.state">[docs]</a>
-    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a valid state.</span>
 
@@ -1317,11 +1469,10 @@ document.write(`
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        *args</span>
+<span class="sd">        entries : list of entry</span>
 <span class="sd">            Each entry is a tuple (or array).</span>
-<span class="sd">            An entry can be specified in three different ways:</span>
-<span class="sd">            ``(amplitude, (tail, head))``,</span>
-<span class="sd">            ``(amplitude, tail, head)``, and</span>
+<span class="sd">            An entry can be specified in two different ways:</span>
+<span class="sd">            ``(amplitude, (tail, head))``, and</span>
 <span class="sd">            ``(amplitude, arc_number)``.</span>
 
 <span class="sd">            amplitude</span>
@@ -1330,10 +1481,10 @@ document.write(`
 <span class="sd">                The vertex corresponding to the position of the walker</span>
 <span class="sd">                in the superposition.</span>
 <span class="sd">                In other words, the tail of the arc.</span>
+<span class="sd">                The tuple ``(tail, head)`` must be a valid arc.</span>
 <span class="sd">            head</span>
 <span class="sd">                The vertex to which the coin is pointing.</span>
-<span class="sd">                That is, the tuple</span>
-<span class="sd">                ``(tail, head)`` must be a valid arc.</span>
+<span class="sd">                The tuple ``(tail, head)`` must be a valid arc.</span>
 <span class="sd">            arc_number</span>
 <span class="sd">                The numerical arc label with respect to the arc ordering</span>
 <span class="sd">                given by the computational basis.</span>
@@ -1358,61 +1509,46 @@ document.write(`
 <span class="sd">            g = hpw.Grid((dim, dim))</span>
 <span class="sd">            qw = hpw.Coined(graph=g)</span>
 
-<span class="sd">        &gt;&gt;&gt; psi = qw.state((1, (0, 1)), [1, 1], (1, 2))</span>
-<span class="sd">        &gt;&gt;&gt; psi1 = qw.state((1, ([0, 0], [1, 0])),</span>
-<span class="sd">        ...                 [[1, (0, dim - 1)],</span>
-<span class="sd">        ...                  (1, [(0, 0), [0, 1]])])</span>
-<span class="sd">        &gt;&gt;&gt; psi2 = qw.state([(1, [0, 0], [1, 0]),</span>
-<span class="sd">        ...                  [1, 0, dim - 1]],</span>
-<span class="sd">        ...                 (1, (0, 0), [0, 1]))</span>
+<span class="sd">        &gt;&gt;&gt; psi = qw.state([(1, (0, 1)), [1, 1], (1, 2)])</span>
+<span class="sd">        &gt;&gt;&gt; psi1 = qw.state([(1, ([0, 0], [0, 1])),</span>
+<span class="sd">        ...                  [1, [(0, 0), (dim - 1, 0)]],</span>
+<span class="sd">        ...                  (1, (0, 1))])</span>
+<span class="sd">        &gt;&gt;&gt; psi2 = qw.state([(1, [[0, 0], [0, 1]]),</span>
+<span class="sd">        ...                  [1, ((0, 0), (dim - 1, 0))],</span>
+<span class="sd">        ...                  (1, [0, 1])])</span>
 <span class="sd">        &gt;&gt;&gt; np.all(psi == psi1)</span>
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; np.all(psi1 == psi2)</span>
 <span class="sd">        True</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
-        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">)</span>
 
-        <span class="k">def</span> <span class="nf">add_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">):</span>
-            <span class="n">ampl</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">arc</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">arc</span> <span class="o">=</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
             <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
 
-        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
-                    <span class="n">add_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">add_entry</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Coined.ket">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket">[docs]</a>
-    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a computational basis state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        *args</span>
+<span class="sd">        arc: int or tuple of int</span>
 <span class="sd">            The ket label.</span>
-<span class="sd">            There are three different labels acceptable.</span>
+<span class="sd">            There are two different labels acceptable.</span>
 
 <span class="sd">            (tail, head)</span>
 <span class="sd">                The arc notation.</span>
-<span class="sd">            tail, head</span>
-<span class="sd">                The arc notation with ``tail`` and ``head`` as</span>
-<span class="sd">                separate arguments.</span>
 <span class="sd">            arc_number</span>
 <span class="sd">                The label of the arc.</span>
-<span class="sd">                Its number according to the computational basis order.</span>
+<span class="sd">                The number according to the computational basis order.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -1420,30 +1556,29 @@ document.write(`
 <span class="sd">            valid examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">ket</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">ket</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">ket</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">S</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">())</span>
             <span class="n">C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
             <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="nb">complex</span> <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="n">C</span><span class="o">.</span><span class="n">is_complex</span>
-                                 <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">initial_state</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+                                 <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
                      <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">dtype</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_simulate_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
@@ -1451,7 +1586,56 @@ document.write(`
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span></div>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Coined.probability">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability.html#hiperwalk.Coined.probability">[docs]</a>
+    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the sum of probabilities for the specified vertices.</span>
+<span class="sd">        </span>
+<span class="sd">        Computes the probability of the walker being located on a</span>
+<span class="sd">        vertex within the set of provided vertices, given that the walk </span>
+<span class="sd">        is on specified states.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        states : :class:`numpy.ndarray`</span>
+<span class="sd">            The state(s) used to compute the probability.</span>
+<span class="sd">            ``states`` can be a single state or a list of states.</span>
+<span class="sd">        </span>
+<span class="sd">        vertices: list of int</span>
+<span class="sd">           The subset of vertices. </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        probabilities : float or :class:`numpy.ndarray`</span>
+<span class="sd">            float:</span>
+<span class="sd">                If ``states`` is a single state.</span>
+<span class="sd">            :class:`numpy.ndarray`:</span>
+<span class="sd">                If ``states`` is a list of states,</span>
+<span class="sd">                ``probabilities[i]`` is the probability</span>
+<span class="sd">                corresponding to the ``i``-th state.</span>
+<span class="sd">        </span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        simulate</span>
+<span class="sd">        </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        </span>
+<span class="sd">        The probability of finding the walker on vertex </span>
+<span class="sd">        :math:`v`, given the state of the walk</span>
+<span class="sd">        :math:`|\psi \rangle`, is calculated as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \, </span>
+<span class="sd">            \left|{\langle a} | {\psi \rangle}\right|^2,</span>
+
+<span class="sd">        where :math:`\mathcal{A}` denotes the set of arcs.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 
@@ -1496,7 +1680,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

@@ -1,0 +1,6 @@
+hiperwalk.WeightedGraph.adjacency\_matrix
+=========================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: WeightedGraph.adjacency_matrix

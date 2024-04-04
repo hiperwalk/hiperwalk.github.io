@@ -183,6 +183,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -292,6 +299,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../documentation/index.html">
                         Documentation
                       </a>
@@ -336,6 +350,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors.html">Graph Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
@@ -414,7 +429,7 @@ merely illustrating the steps.</p>
 <section id="define-a-graph">
 <h2>Define a graph<a class="headerlink" href="#define-a-graph" title="Link to this heading">#</a></h2>
 <p>In this step, we generate a line comprising 11 vertices.
-The output is an object from the <a class="reference internal" href="../documentation/generated/hiperwalk.Line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
+The output is an object from the <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> 
@@ -441,8 +456,8 @@ One way to accomplish this is by using the
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket" title="hiperwalk.Coined.ket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.ket()</span></code></a> method,
 which generates a state of the computational basis.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vertex</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">ket</span><span class="p">((</span><span class="n">vertex</span><span class="p">,</span> <span class="n">vertex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
 <span class="go">array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,</span>
 <span class="go">       0., 0., 0.])</span>
 </pre></div>
@@ -459,7 +474,7 @@ If everything was installed correctly,
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.Coined.simulate.html#hiperwalk.Coined.simulate" title="hiperwalk.Coined.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Coined.simulate()</span></code></a> method will automatically use
 high-performance computing to perform the matrix-vector multiplications.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">final_state</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span>
-<span class="gp">... </span>                          <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">)</span>
+<span class="gp">... </span>                          <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -503,6 +518,7 @@ using a simple command.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_constructors.html">Graph Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantum_walk_models.html">Quantum Walk Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
 </ul>
@@ -599,7 +615,7 @@ using a simple command.</p>
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

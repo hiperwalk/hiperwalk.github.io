@@ -1,6 +1,0 @@
-hiperwalk.Cycle.number\_of\_arcs
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Cycle.number_of_arcs

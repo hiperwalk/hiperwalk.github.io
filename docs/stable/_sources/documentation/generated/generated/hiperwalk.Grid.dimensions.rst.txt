@@ -1,6 +1,0 @@
-hiperwalk.Grid.dimensions
-=========================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Grid.dimensions

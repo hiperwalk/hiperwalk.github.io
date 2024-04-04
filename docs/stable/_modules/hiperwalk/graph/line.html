@@ -180,6 +180,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -287,6 +294,13 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../documentation/index.html">
                         Documentation
                       </a>
@@ -377,14 +391,11 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for hiperwalk.graph.line</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_array</span>
-<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">sys_path</span>
-<span class="kn">from</span> <span class="nn">.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
+<span></span><span class="kn">from</span> <span class="nn">.integer_lattice</span> <span class="kn">import</span> <span class="n">IntegerLattice</span>
 
 <div class="viewcode-block" id="Line">
-<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line">[docs]</a>
-<span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">Lattice</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../documentation/graph_constructors/line.html#hiperwalk.Line">[docs]</a>
+<span class="k">def</span> <span class="nf">Line</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finite line graph (path graph).</span>
 
@@ -393,133 +404,47 @@ document.write(`
 <span class="sd">    num_vert : int</span>
 <span class="sd">        The number of vertices on the line.</span>
 
+<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        See :ref:`graph_constructors` for details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`.</span>
+
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    In the :obj:`Line` class, directions can be assigned to the arcs. </span>
-<span class="sd">    An arc pointing to the right has direction 0 (e.g., (1, 2)), </span>
-<span class="sd">    and an arc pointing to the left has direction 1 (e.g., (2, 1)).</span>
+<span class="sd">    The **order of neighbors** is</span>
+<span class="sd">    the neighbor to the right first,</span>
+<span class="sd">    followed by the neighbor to the left.</span>
+<span class="sd">    In other words, for any vertex :math:`v`,</span>
+<span class="sd">    the neighbors are given in the order :math:`[v + 1, v - 1]`.</span>
 
-<span class="sd">    The order of the arcs is determined by their direction. </span>
-<span class="sd">    Thus, for a vertex :math:`v \in V`, </span>
-<span class="sd">    the arcs :math:`(v, v + 1)` and :math:`(v, v - 1)` </span>
-<span class="sd">    have labels :math:`a_0` and :math:`a_1` respectively, </span>
-<span class="sd">    with :math:`a_0 &lt; a_1`. </span>
-<span class="sd">    The only exceptions to this rule are the extreme vertices 0 </span>
-<span class="sd">    and :math:`|V| - 1`, as they have outdegree 1. </span>
+<span class="sd">    .. testsetup::</span>
 
-<span class="sd">    Apart from these exceptions, </span>
-<span class="sd">    for any two vertices :math:`v_1 &lt; v_2`, </span>
-<span class="sd">    any arc with tail :math:`v_1` will have a label smaller than the </span>
-<span class="sd">    label of any arc with tail :math:`v_2`.</span>
+<span class="sd">        import hiperwalk as hpw</span>
 
-<span class="sd">    For instance, Figure 1 illustrates the labels of the arcs of a path graph with 4 vertices.</span>
-<span class="sd">    </span>
-<span class="sd">    .. graphviz:: ../../graphviz/line-arcs.dot</span>
-<span class="sd">        :align: center</span>
-<span class="sd">        :layout: neato</span>
-<span class="sd">        :caption: Figure 1.</span>
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; g = hpw.Line(10)</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(0)) # 0 and 9 are not adjacent</span>
+<span class="sd">        [1]</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(1))</span>
+<span class="sd">        [2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(8))</span>
+<span class="sd">        [9, 7]</span>
+<span class="sd">        &gt;&gt;&gt; list(g.neighbors(9)) # 0 and 9 are not adjacent</span>
+<span class="sd">        [8]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Line.__init__">
-<a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Line.html#hiperwalk.Line.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">):</span>
-        <span class="c1"># Creating adjacency matrix</span>
-        <span class="c1"># The end vertices are only adjacent to 1 vertex.</span>
-        <span class="c1"># Every other vertex is adjacent to two vertices.</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">num_vert</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-        <span class="c1"># upper diagonal</span>
-        <span class="n">row_ind</span> <span class="o">=</span> <span class="p">[</span><span class="n">lin</span><span class="o">+</span><span class="n">shift</span> <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-                             <span class="k">for</span> <span class="n">lin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="c1"># lower digonal</span>
-        <span class="n">col_ind</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">+</span><span class="n">shift</span> <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-                             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row_ind</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">)))</span>
-    
-        <span class="c1"># initializing</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Line.arc_number">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc_number.html#hiperwalk.Line.arc_number">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="n">arc</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
-
-        <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
-        <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc.&#39;</span><span class="p">)</span>
-
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="k">return</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tail</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">tail</span> <span class="o">!=</span> <span class="mi">0</span>
-                               <span class="ow">or</span> <span class="n">tail</span> <span class="o">==</span> <span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="k">else</span> <span class="n">tail</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Line.arc">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.arc.html#hiperwalk.Line.arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">number</span><span class="o">//</span><span class="mi">2</span>
-        <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">tail</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tail</span> <span class="o">!=</span> <span class="n">num_vert</span> <span class="o">-</span> <span class="mi">1</span>
-                <span class="k">else</span> <span class="n">tail</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Line.next_arc">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.next_arc.html#hiperwalk.Line.next_arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">next_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-            <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
-            <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc&#39;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">head</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">head</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">tail</span><span class="p">)</span>
-            
-            <span class="k">return</span> <span class="p">((</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">1</span>
-                    <span class="k">else</span> <span class="p">(</span><span class="n">tail</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">arc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="mi">1</span>
-            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">arc</span> <span class="o">==</span> <span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">num_arcs</span> <span class="o">-</span> <span class="mi">2</span>
-            <span class="k">return</span> <span class="n">arc</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">arc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">arc</span> <span class="o">-</span> <span class="mi">2</span></div>
-
-
-<div class="viewcode-block" id="Line.previous_arc">
-<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Line.previous_arc.html#hiperwalk.Line.previous_arc">[docs]</a>
-    <span class="k">def</span> <span class="nf">previous_arc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">tail</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">arc</span>
-            <span class="n">diff</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-</span> <span class="n">tail</span>
-            <span class="k">if</span> <span class="n">diff</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc&#39;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">tail</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">tail</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">tail</span><span class="p">)</span>
-            
-            <span class="k">return</span> <span class="p">((</span><span class="n">tail</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">1</span>
-                    <span class="k">else</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">num_arcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_arcs</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">arc</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">arc</span> <span class="o">&gt;=</span> <span class="n">num_arcs</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid arc&#39;</span><span class="p">)</span>
-
-            <span class="n">arc</span> <span class="o">=</span> <span class="n">arc</span> <span class="o">+</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">arc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">arc</span> <span class="o">-</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">arc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">arc</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">elif</span> <span class="n">arc</span> <span class="o">&gt;=</span> <span class="n">num_arcs</span><span class="p">:</span>
-                <span class="n">arc</span> <span class="o">-=</span> <span class="mi">1</span>
-
-            <span class="k">return</span> <span class="n">arc</span></div>
-</div>
+    <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">g</span></div>
 
 </pre></div>
 
@@ -564,7 +489,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>

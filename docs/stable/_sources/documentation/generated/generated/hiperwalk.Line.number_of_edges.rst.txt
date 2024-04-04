@@ -1,6 +1,0 @@
-hiperwalk.Line.number\_of\_edges
-================================
-
-.. currentmodule:: hiperwalk
-
-.. automethod:: Line.number_of_edges

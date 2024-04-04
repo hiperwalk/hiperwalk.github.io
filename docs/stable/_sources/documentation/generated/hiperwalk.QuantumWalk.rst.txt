@@ -20,6 +20,9 @@ hiperwalk.QuantumWalk
    
        
        
+          ~QuantumWalk.fit_sin_squared
+       
+       
           ~QuantumWalk.get_evolution
        
        
@@ -30,6 +33,12 @@ hiperwalk.QuantumWalk
        
        
           ~QuantumWalk.ket
+       
+       
+          ~QuantumWalk.max_success_probability
+       
+       
+          ~QuantumWalk.optimal_runtime
        
        
           ~QuantumWalk.probability

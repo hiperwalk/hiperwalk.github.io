@@ -1,0 +1,6 @@
+hiperwalk.Graph.is\_simple
+==========================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: Graph.is_simple
