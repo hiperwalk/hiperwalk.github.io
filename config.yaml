@@ -23,6 +23,10 @@ params:
     buttontext: GitHub
     buttonlink: https://github.com/hiperwalk/hiperwalk/
     subtitle: Simulations of quantum walks on graphs using HPC
+  shell:
+    intro:
+    - title: Try Hiperwalk
+      text: Use the interactive shell to try Hiperwalk in the browser
   navbar:
     - title: Get started
       url: /docs/stable/
