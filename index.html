@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="./css/theme-css/teams.css.min.fcfb8db7476eab78560aefc0efcec4366740523e08279ec26c568590c69002fc.css" integrity="sha256-/PuNt0duq3hWCu/A787ENmdAUj4IJ57CbFaFkMaQAvw=">
 <link rel="stylesheet" href="./css/theme-css/vars.css.min.aad4d4b106de179c549cb071137b8b97c38926db91edaaff08af8ab9055df90e.css" integrity="sha256-qtTUsQbeF5xUnLBxE3uLl8OJJtuR7ar/CK&#43;KuQVd&#43;Q4=">
 <link rel="stylesheet" href="./css/theme-css/videos.css.min.b305d98ddc47a74381f484299ab14f9483f69d62928c4ed32697a5701355f138.css" integrity="sha256-swXZjdxHp0OB9IQpmrFPlIP2nWKSjE7TJpelcBNV8Tg=">
+<link rel="stylesheet" href="./css/css/shell.css.min.5ee5a6b8d8faedbb5157b1bfb4d9be5b2482bbe4e40af84575a92ae6ab028842.css" integrity="sha256-XuWmuNj67btRV7G/tNm&#43;WySCu&#43;TkCvhFdakq5qsCiEI=">
     
     
     <meta name="twitter:card" content="summary_large_image"/>
@@ -199,6 +200,48 @@
 </section>
 
     
+
+    
+    
+<div class="hero-right">
+    <div class="flex-column shell-title-container">
+            <div class="shell-title">Try Hiperwalk</div>
+            <div class="shell-content-message">
+                <p>Use the interactive shell to try Hiperwalk in the browser</p>
+            </div>
+    </div>
+    <div class="numpy-shell-canvas">
+        <div class="numpy-shell-container">
+            <div class="shell-lesson shell-content">
+                <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hiperwalk</span> <span class="k">as</span> <span class="nn">hpw</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">N</span> <span class="o">=</span> <span class="mi">128</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># adjacency matrix of complete graph with self loops</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;flipflop&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">marked</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;-G&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
+</span></span><span class="line"><span class="cl"><span class="n">t_final</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">states</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">t_final</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                     <span class="n">state</span><span class="o">=</span><span class="n">qw</span><span class="o">.</span><span class="n">uniform_state</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">marked_prob</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">success_probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hpw</span><span class="o">.</span><span class="n">plot_success_probability</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">marked_prob</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                             <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+</span></span></code></pre></div>
+            </div>
+            
+            <iframe
+                class="numpy-shell"
+                src="https://hiperwalk.github.io/xeus-python/repl/?toolbar=1&kernel=xpython&code=import%20hiperwalk%20as%20hpw"
+            >
+            </iframe>
+        </div>
+    </div>
+</div>
 
     
 
