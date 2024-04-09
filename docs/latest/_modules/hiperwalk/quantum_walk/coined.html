@@ -1268,24 +1268,26 @@ document.write(`
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># TODO: implement sparse matrix multiplication with hpc</span>
-            <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+            <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+            <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;HPC sparse matrix multiplication is not implemented. &#39;</span>
+                 <span class="o">+</span> <span class="s1">&#39;Using standard scipy multiplication instead.&#39;</span><span class="p">)</span>
+            <span class="c1"># # TODO: implement sparse matrix multiplication with hpc</span>
+            <span class="c1"># S = S.todense()</span>
+            <span class="c1"># C = C.todense()</span>
 
-            <span class="n">nbl_S</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
-            <span class="k">del</span> <span class="n">S</span>
-            <span class="n">nbl_C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-            <span class="k">del</span> <span class="n">C</span>
-            <span class="n">nbl_C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrices</span><span class="p">(</span><span class="n">nbl_S</span><span class="p">,</span> <span class="n">nbl_C</span><span class="p">)</span>
+            <span class="c1"># nbl_S = nbl.send_matrix(S)</span>
+            <span class="c1"># del S</span>
+            <span class="c1"># nbl_C = nbl.send_matrix(C)</span>
+            <span class="c1"># del C</span>
+            <span class="c1"># nbl_C = nbl.multiply_matrices(nbl_S, nbl_C)</span>
 
-            <span class="k">del</span> <span class="n">nbl_S</span>
+            <span class="c1"># del nbl_S</span>
 
-            <span class="n">U</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">retrieve_matrix</span><span class="p">(</span><span class="n">nbl_C</span><span class="p">)</span>
-            <span class="k">del</span> <span class="n">nbl_C</span>
-            <span class="n">U</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+            <span class="c1"># U = nbl.retrieve_matrix(nbl_C)</span>
+            <span class="c1"># del nbl_C</span>
+            <span class="c1"># U = scipy.sparse.csr_array(U)</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">U</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">C</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">C</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="n">U</span>
         <span class="k">return</span> <span class="n">U</span>
@@ -1524,7 +1526,8 @@ document.write(`
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">)</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">])</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
             <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ampl</span>
@@ -1561,32 +1564,32 @@ document.write(`
         <span class="k">return</span> <span class="n">ket</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">S</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">())</span>
-            <span class="n">C</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">())</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="c1"># def _prepare_engine(self, state, hpc):</span>
+    <span class="c1">#     if hpc is not None:</span>
+    <span class="c1">#         S = nbl.send_matrix(self.get_shift())</span>
+    <span class="c1">#         C = nbl.send_matrix(self.get_coin())</span>
+    <span class="c1">#         self._simul_mat = (C, S)</span>
+    <span class="c1">#         self._simul_vec = nbl.send_vector(state)</span>
 
-            <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="nb">complex</span> <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="n">C</span><span class="o">.</span><span class="n">is_complex</span>
-                                 <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
-                     <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+    <span class="c1">#         dtype = (complex if (S.is_complex or C.is_complex</span>
+    <span class="c1">#                              or np.iscomplex(state.dtype))</span>
+    <span class="c1">#                  else np.double)</span>
 
-            <span class="k">return</span> <span class="n">dtype</span>
+    <span class="c1">#         return dtype</span>
 
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+    <span class="c1">#     return super()._prepare_engine(state, hpc)</span>
 
 
-    <span class="k">def</span> <span class="nf">_simulate_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
+    <span class="c1"># def _simulate_step(self, step, hpc):</span>
+    <span class="c1">#     if hpc is not None:</span>
+    <span class="c1">#         for i in range(step):</span>
+    <span class="c1">#             self._simul_vec = nbl.multiply_matrix_vector(</span>
+    <span class="c1">#                 self._simul_mat[0], self._simul_vec)</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+    <span class="c1">#             self._simul_vec = nbl.multiply_matrix_vector(</span>
+    <span class="c1">#                 self._simul_mat[1], self._simul_vec)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         super()._simulate_step(step, hpc)</span>
 
 <div class="viewcode-block" id="Coined.probability">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability.html#hiperwalk.Coined.probability">[docs]</a>
