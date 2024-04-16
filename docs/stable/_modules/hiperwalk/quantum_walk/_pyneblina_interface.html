@@ -524,13 +524,6 @@ document.write(`
     <span class="c1"># TODO: check if complex automatically?</span>
     <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_complex</span><span class="p">:</span>
-        <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Real multiplication not implemented. &quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;Treating entries as complex.&quot;</span>
-        <span class="p">)</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="kc">True</span>
-
     <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="c1"># TODO: needs better support from pyneblina to</span>
     <span class="c1"># use next instruction (commented).</span>
@@ -668,12 +661,7 @@ document.write(`
     <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
-        <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Real multiplication not implemented. &quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;Treating entries as complex.&quot;</span>
-        <span class="p">)</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
