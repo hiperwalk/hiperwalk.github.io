@@ -929,7 +929,7 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.simulate">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
@@ -959,12 +959,6 @@ document.write(`
 <span class="sd">        state : :class:`numpy.array`, default=None</span>
 <span class="sd">            The starting state onto which the evolution operator</span>
 <span class="sd">            will be applied.</span>
-
-<span class="sd">        initial_state :</span>
-<span class="sd">            .. deprecated: 2.0</span>
-<span class="sd">                ``initial_state`` will be removed in version 2.1,</span>
-<span class="sd">                it is replaced by ``state`` because</span>
-<span class="sd">                the latter is more concise.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1020,13 +1014,6 @@ document.write(`
                 <span class="s2">&quot;``time` not specified`. &quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;Must be an int or tuple of int.&quot;</span>
             <span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">initial_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;``initial_state`` will be removed in version 2.1,&quot;</span>
-                 <span class="o">+</span> <span class="s2">&quot;it is replaced by ``state`` because&quot;</span>
-                 <span class="o">+</span> <span class="s2">&quot;the latter is more concise.&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">state</span> <span class="o">=</span> <span class="n">initial_state</span>
 
         <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>

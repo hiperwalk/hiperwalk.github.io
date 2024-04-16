@@ -441,7 +441,9 @@ object to the Quantum Walk constructor.</p>
 we can pass <code class="docutils literal notranslate"><span class="pre">cycle</span></code> to the quantum walk constructor.</p>
 <section id="coined-model">
 <h3>Coined Model<a class="headerlink" href="#coined-model" title="Link to this heading">#</a></h3>
-<p>To create a coined quantum walk, we execute</p>
+<p>A coined quantum walk can be created by passing an instance of
+<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> or <a class="reference internal" href="../documentation/generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Multigraph</span></code></a>.
+To create a coined quantum walk on the cycle, we execute</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">coined</span> 
 <span class="go">&lt;hiperwalk.quantum_walk.coined_walk.Coined object at 0x7f655b0cd900&gt;</span>
@@ -456,7 +458,9 @@ we can pass <code class="docutils literal notranslate"><span class="pre">cycle</
 </section>
 <section id="continuous-time-model">
 <h3>Continuous-time Model<a class="headerlink" href="#continuous-time-model" title="Link to this heading">#</a></h3>
-<p>To create a continuous-time quantum walk,
+<p>A coined quantum walk can be created by passing an instance of
+<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> or <a class="reference internal" href="../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.WeightedGraph</span></code></a>.
+To create a continuous-time quantum walk on the cycle,
 we execute an analogous command.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">ContinuousTime</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">continuous</span> 

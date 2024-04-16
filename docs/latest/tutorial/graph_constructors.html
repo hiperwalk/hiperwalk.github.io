@@ -413,20 +413,20 @@ document.write(`
                   
   <section id="graph-constructors">
 <h1>Graph Constructors<a class="headerlink" href="#graph-constructors" title="Link to this heading">#</a></h1>
-<p>You can use graph constructors to create instances of
-specific, well-known graphs.</p>
-<section id="specific-graphs">
-<h2>Specific Graphs<a class="headerlink" href="#specific-graphs" title="Link to this heading">#</a></h2>
-<p>Hiperwalk includes classes for well-known specific graphs,
+<p>Hiperwalk has specific commands (graph constructors) to
+generate instances of well-known specific graphs,
 such as Line, Cycle, and Grid.
-For a complete list of specific graphs,
-refer to <a class="reference internal" href="../documentation/graph.html#docs-documentation-graph"><span class="std std-ref">Graphs</span></a>.</p>
+For a complete list of graph constructors,
+refer to <a class="reference internal" href="../documentation/graph.html#docs-documentation-list-of-graph-constructors"><span class="std std-ref">List of Graph Constructors</span></a>.</p>
 <p>The key difference between creating an
-arbitrary graph and a specific graph is
+arbitrary graph and using a graph constructor is
 that for the former, you must explicitly provide the adjacency matrix.
 However, for the latter, the adjacency matrix is automatically generated
-based on the number of vertices.
-Consequently, you can create a line with 10 vertices,
+based on specific graph parameters such as the number of vertices.
+Nevertheless,
+the order of neighbors is automatically embedded in
+the generated adjacency matrix.</p>
+<p>For example, you can create a line with 10 vertices,
 a cycle with 10 vertices,
 and a grid of dimensions <span class="math notranslate nohighlight">\(10 \times 10\)</span> using
 valid commands, respectively.</p>
@@ -440,8 +440,9 @@ valid commands, respectively.</p>
 </div>
 <p>Naturally, you can create specific graphs using NetworkX and
 the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.
-However, this approach is not recommended, especially when dealing with
-coined quantum walks, as it may result in undesirable behavior.</p>
+Just be aware that the order of neighbors may vary,
+which may result in undesirable behavior,
+especially when dealing with coined quantum walks.</p>
 <p>As an example, let’s consider a Line with 10 vertices.
 First, we create the line using the <a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">path_graph</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -449,18 +450,23 @@ First, we create the line using the <a class="reference internal" href="../docum
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arbitrary_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Next, we create the line using the <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a> class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">specific_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<p>Next, we create the line using the <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a>
+graph constructor.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph_constructor_line</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In a simple graph, we associate each edge with two arcs. Suppose we wish
-to know the label of the arc that links vertex 1 to 2. This information
-can be obtained using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.Graph.arc_number()</span></code> method.
-Observe the following results:</p>
-<p>For further details on arc labels for each graph, refer to the Notes
-section of each graph class, in this case,
-<a class="reference internal" href="../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a> and <a class="reference internal" href="../documentation/graph_constructors/line.html#hiperwalk.Line" title="hiperwalk.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Line</span></code></a>.</p>
-</section>
+<p>The order of neighbors os these two instances is different.
+For <code class="docutils literal notranslate"><span class="pre">arbitrary_line</span></code>,
+the neighbors are listed in ascending order,
+while for <code class="docutils literal notranslate"><span class="pre">graph_constructor_line</span></code>,
+the neighbors are listed in descending order
+(righmost neighbor followed by the leftmost neighbor).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arbitrary_line</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([0, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph_constructor_line</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([2, 0], dtype=int32)</span>
+</pre></div>
+</div>
 </section>
 
 
@@ -500,18 +506,6 @@ section of each graph class, in this case,
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specific-graphs">Specific Graphs</a></li>
-</ul>
-  </nav></div>
 
   <div class="sidebar-secondary-item">
 
