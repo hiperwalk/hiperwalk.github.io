@@ -29,7 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -37,7 +37,7 @@
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'install/index';</script>
     <script>
@@ -403,42 +403,18 @@ document.write(`
                   
   <section id="install">
 <h1>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h1>
-<p>You can install Hiperwalk locally or its docker distribution.
-We recommend to use Hiperwalk’s docker distribution.</p>
-<section id="docker-installation">
-<h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h2>
-<p>Using Hiperwalk on its Docker distribution offers
-numerous benefits to users.
-Docker provides a lightweight, portable, and scalable environment,
-ensuring seamless deployment across
-different operating systems and environments.
-With Docker, users can easily manage dependencies,
-streamline updates, and replicate configurations,
-leading to improved consistency and reliability.
-Additionally, Docker enables efficient resource utilization,
-facilitating faster development cycles and easier collaboration
-among team members.
-Overall, opting for Hiperwalk on its Docker distribution
-empowers users with enhanced flexibility, efficiency,
-and agility in their development and deployment processes.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Add installation guidelines</p>
-</div>
-</section>
+<p>You can install Hiperwalk locally (no HPC support) or its docker distribution (with HPC support).</p>
 <section id="local-installation">
 <h2>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h2>
 <p>Hiperwalk relies on a number of Python libraries.
 However, installing these Python libraries alone does not enable
 Hiperwalk to leverage High-Performance Computing (HPC).
 If you desire to install Hiperwalk with HPC support, please refer
-to <a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> before proceeding
-with the Hiperwalk installation.</p>
+to <span class="xref std std-ref">docs_docker_installation:</span> or
+<a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> before proceeding
+with the local installation.</p>
 <p>On this page, we outline the process for installing Hiperwalk on
-a newly installed Ubuntu 20.04 operating system. The steps will
-cover identifying the GPU, installing the GPU drivers,
-hiperblas-core, hiperblas-opencl-bridge, pyhiperblas, and
-all necessary Python libraries.</p>
+a newly installed Ubuntu operating system.</p>
 <section id="hiperwalk">
 <span id="docs-install-hiperwalk"></span><h3>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h3>
 <p>Hiperwalk can be conveniently installed using pip.
@@ -470,6 +446,27 @@ or proceed to the <a class="reference internal" href="../tutorial/index.html#doc
 </pre></div>
 </div>
 </section>
+</section>
+<section id="docker-installation">
+<span id="docs-docker-installation"></span><h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h2>
+<p>Using Hiperwalk on its Docker distribution offers
+numerous benefits to users.
+Docker provides a lightweight, portable, and scalable environment,
+ensuring seamless deployment across
+different operating systems and environments.
+With Docker, users can easily manage dependencies,
+streamline updates, and replicate configurations,
+leading to improved consistency and reliability.
+Additionally, Docker enables efficient resource utilization,
+facilitating faster development cycles and easier collaboration
+among team members.
+Overall, opting for Hiperwalk on its Docker distribution
+empowers users with enhanced flexibility, efficiency,
+and agility in their development and deployment processes.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Add installation guidelines</p>
+</div>
 <section id="hpc-prerequisites">
 <span id="docs-install-hpc-prerequisites"></span><h3>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Link to this heading">#</a></h3>
 <p>Before proceeding, it’s advisable to update and upgrade your
@@ -478,7 +475,11 @@ Ubuntu packages. Execute the following commands:</p>
 sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 </pre></div>
 </div>
-<p>Next, run the following commands to install the prerequisites:</p>
+<p>The steps described here will cover identifying the GPU,
+installing the GPU drivers, hiperblas-core,
+hiperblas-opencl-bridge, pyhiperblas, and
+all necessary Python libraries.
+Next, run the following commands to install the prerequisites:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>g++
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake
@@ -705,9 +706,11 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-prerequisites">HPC Prerequisites</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-driver">GPU Driver</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
@@ -767,7 +770,7 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     <br/>
   </p>
 </div>
