@@ -432,8 +432,8 @@ document.write(`
 <span class="sd">    call :meth:`adjacency_matrix()` after creating the multigraph.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+    <span class="c1"># def _default_dtype(self):</span>
+    <span class="c1">#     return np.int32</span>
 
     <span class="k">def</span> <span class="nf">_count_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
         <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
@@ -441,10 +441,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">()):</span>
-            <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">(),</span>
-                                        <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># if not np.issubdtype(adj_matrix.dtype, self._default_dtype()):</span>
+        <span class="c1">#     adj_matrix.data = adj_matrix.data.astype(</span>
+        <span class="c1">#                                 self._default_dtype(),</span>
+        <span class="c1">#                                 copy=False)</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
