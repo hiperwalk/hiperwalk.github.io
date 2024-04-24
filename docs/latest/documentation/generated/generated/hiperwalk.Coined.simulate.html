@@ -458,6 +458,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -482,9 +483,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </li>
 </ul>
@@ -556,7 +554,7 @@ document.write(`
 <h1>hiperwalk.Coined.simulate<a class="headerlink" href="#hiperwalk-coined-simulate" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.simulate">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.simulate" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.simulate" title="Link to this definition">#</a></dt>
 <dd><p>Simulates the quantum walk.</p>
 <p>The simulation progresses by iteratively applying 
 the evolution operator to the outcome of its prior 
@@ -564,25 +562,40 @@ application, initiating from the specified initial state.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>time</strong><span class="classifier">int, tuple of int, default=None</span></dt><dd><p>Specifies the time instances when the state should be saved.
+<dt><strong>range</strong><span class="classifier">int, tuple of int, default=None</span></dt><dd><p>Specifies the number of applitcations of
+the evolution operator,
+and the corresponding states to be saved.
 It can be defined in three distinct ways:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>end</dt><dd><p>Saves the state at the <code class="docutils literal notranslate"><span class="pre">end</span></code> time.
-Only the final state is retained.</p>
+<dt>end</dt><dd><p>Saves the states from the <code class="docutils literal notranslate"><span class="pre">0</span></code>-th to the <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)</span></code>-th
+application of the evolution operator.
+The corresponding exponents of the evolution operator are
+all integers in the open interval <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">end)</span></code>, i.e.
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">...,</span> <span class="pre">end</span> <span class="pre">-</span> <span class="pre">1]</span></code>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>(end, step)</dt><dd><p>Retains every state from time 0 to <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive)
-that corresponds to a multiple of <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<dt>(start, end)</dt><dd><p>Saves the states from the <code class="docutils literal notranslate"><span class="pre">start</span></code>-th to
+the <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)</span></code>-th application of the evolution operator.
+The corresponding exponents of the evolution operator are
+all integers in the open interval <code class="docutils literal notranslate"><span class="pre">[start,</span> <span class="pre">end)</span></code>, i.e.
+<code class="docutils literal notranslate"><span class="pre">[start,</span> <span class="pre">start</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">...,</span> <span class="pre">end</span> <span class="pre">-</span> <span class="pre">1]</span></code>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>(start, end, step)</dt><dd><p>Stores every state from time <code class="docutils literal notranslate"><span class="pre">start</span></code> (inclusive)
-to <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive)
-that is a multiple of <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<dt>(start, end, step)</dt><dd><p>Saves the states from the <code class="docutils literal notranslate"><span class="pre">start</span></code>-th to
+the <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)</span></code>-th application of the evolution operator
+separated by <code class="docutils literal notranslate"><span class="pre">step</span></code> applications.
+The corresponding exponents of the evolution operator are
+all integers in the open interval <code class="docutils literal notranslate"><span class="pre">[start,</span> <span class="pre">end)</span></code>
+such that the difference between two integers is at least
+<code class="docutils literal notranslate"><span class="pre">step</span></code>, i.e.
+<code class="docutils literal notranslate"><span class="pre">[start,</span> <span class="pre">start</span> <span class="pre">+</span> <span class="pre">step,</span> <span class="pre">...,</span> <span class="pre">start</span> <span class="pre">+</span> <span class="pre">k*step]</span></code>
+where <code class="docutils literal notranslate"><span class="pre">k</span></code> is the smallest integer that satisfies
+<code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">+</span> <span class="pre">(k</span> <span class="pre">+</span> <span class="pre">1)*step</span> <span class="pre">&gt;=</span> <span class="pre">end</span></code>.</p>
 </dd>
 </dl>
 </li>
@@ -602,10 +615,7 @@ will be applied.</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>Triggered if:
-* <code class="docutils literal notranslate"><span class="pre">time=None</span></code>.
-* <code class="docutils literal notranslate"><span class="pre">state=None</span></code>.
-* <code class="docutils literal notranslate"><span class="pre">evolution_operator=None</span></code> and hasn’t been set before.</p>
+<dt>ValueError</dt><dd><p>Triggered if <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">is</span> <span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p>
 </dd>
 </dl>
 </dd>
@@ -619,14 +629,15 @@ will be applied.</p>
 </div>
 <p class="rubric">Notes</p>
 <p>The states computed and saved during the simulation 
-are determined by the parameter <code class="docutils literal notranslate"><span class="pre">time=(start,end,step)</span></code>.</p>
+are determined by the parameter <code class="docutils literal notranslate"><span class="pre">range=(start,end,step)</span></code>.</p>
 <p>The simulation of the walk is based on the expression
-<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(\text{start})\rangle\)</span>, where
-<span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> denotes the initial state.        
+<span class="math notranslate nohighlight">\(|\psi(t)\rangle=U^t|\psi(0)\rangle\)</span>, where
+<span class="math notranslate nohighlight">\(|\psi(0)\rangle\)</span> denotes the initial state.        
 The values for <span class="math notranslate nohighlight">\(t\)</span> progress as 
-<span class="math notranslate nohighlight">\(t=0,\,\text{step},\,2\cdot\text{step},...\)</span>, 
-until reaching the highest multiple of step that is less than or equal to 
-<span class="math notranslate nohighlight">\(\text{end}-\text{start}\)</span>.</p>
+<span class="math notranslate nohighlight">\(t=\text{start}\)</span>, <span class="math notranslate nohighlight">\(\text{start} + \text{step}\)</span>,
+<span class="math notranslate nohighlight">\(\text{start} + 2\cdot\text{step}, \ldots\)</span>,
+until reaching the highest value of <span class="math notranslate nohighlight">\(k\)</span> that satisfy
+<span class="math notranslate nohighlight">\(\text{start} + k\cdot \text{step} &lt; \text{end}\)</span>.</p>
 <p>Specifically, the simulation begins from the state 
 <span class="math notranslate nohighlight">\(|\psi(\text{start})\rangle\)</span> and 
 sequentially calculates and saves states in the form of 
@@ -635,7 +646,7 @@ where <span class="math notranslate nohighlight">\(j=0,1,...\)</span> and the ma
 ensures that 
 <span class="math notranslate nohighlight">\(\text{start}+j\cdot\text{step}\le \text{end}\)</span>.</p>
 <p class="rubric">Examples</p>
-<p>Given <code class="docutils literal notranslate"><span class="pre">time=(0,</span> <span class="pre">13,</span> <span class="pre">3)</span></code>, the saved states would include:
+<p>Given <code class="docutils literal notranslate"><span class="pre">range=(0,</span> <span class="pre">13,</span> <span class="pre">3)</span></code>, the saved states would include:
 the initial state (t=0), intermediate states (t=3, 6, and 9),
 and the concluding state (t=12).</p>
 </dd></dl>

@@ -841,60 +841,69 @@ the <a class="reference internal" href="../documentation/generated/generated/hip
 the <a class="reference internal" href="../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.QuantumWalk.simulate()</span></code></a> method
 needs to be called in order to carry out the simulation.
 This method requires two arguments:
-<code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">state</span></code>.
-The <code class="docutils literal notranslate"><span class="pre">time</span></code> parameter specifies the number of times that
+<code class="docutils literal notranslate"><span class="pre">range</span></code> and <code class="docutils literal notranslate"><span class="pre">state</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">range</span></code> parameter specifies the number of times that
 the evolution operator is going to be applied to the <code class="docutils literal notranslate"><span class="pre">state</span></code>.
-<code class="docutils literal notranslate"><span class="pre">time</span></code> also specifies when the simulation should
+<code class="docutils literal notranslate"><span class="pre">range</span></code> also specifies when the simulation should
 stop and which intermediate states need to be stored.
 The simulation returns a list of states such that
 the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th entry corresponds to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th saved state.</p>
 <section id="id7">
 <h4>Coined Model<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
-<p>In the coined quantum walk model,
-the <code class="docutils literal notranslate"><span class="pre">time</span></code> is discrete.
-Thus, only integer entries are accepted.
-There are three argument types for <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p>
+<p>There are three argument types for <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
 <ul>
-<li><p>integer: <code class="docutils literal notranslate"><span class="pre">stop</span></code>.
-The final simulation time.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<li><p>integer: <code class="docutils literal notranslate"><span class="pre">end</span></code>.
+The simulation saves the states from the <code class="docutils literal notranslate"><span class="pre">0</span></code>-th to the
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">-</span> <span class="pre">1</span></code>-th application of the evolution operator.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="go">1</span>
+<span class="go">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">@</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 </li>
-<li><p>2-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(stop,</span> <span class="pre">step)</span></code>.
-Save every state from time <code class="docutils literal notranslate"><span class="pre">0</span></code> to time <code class="docutils literal notranslate"><span class="pre">stop</span></code>
+<li><p>2-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">end)</span></code>.
+Save every state from the <code class="docutils literal notranslate"><span class="pre">start</span></code>-th to time <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">-</span> <span class="pre">1</span></code>-th
+application of the evolution operator.
+For example,
+if <code class="docutils literal notranslate"><span class="pre">range=(2,</span> <span class="pre">10)</span></code>, returns the states corresponding to
+the application of the evolution operator with exponents
+<code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8,</span> <span class="pre">9]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A 2-tuple of integer is the simplest way to obtain a single state.
+To obtain the state corresponding to the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th application of
+the evolution operator, use <code class="docutils literal notranslate"><span class="pre">range(i,</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1)</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+<span class="gp">... </span>                      <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract the desired state from the list of states</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># check result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">@</span> <span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+<li><p>3-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">end,</span> <span class="pre">step)</span></code>.
+Save every state from time <code class="docutils literal notranslate"><span class="pre">start</span></code> to time <code class="docutils literal notranslate"><span class="pre">end</span></code>
 separated by <code class="docutils literal notranslate"><span class="pre">step</span></code> applications of the evolution operator.
 For example,
-if <code class="docutils literal notranslate"><span class="pre">time=(10,</span> <span class="pre">2)</span></code>, returns the states obtained at times
-<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</li>
-<li><p>3-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code>.
-Save every state from time <code class="docutils literal notranslate"><span class="pre">start</span></code> to time <code class="docutils literal notranslate"><span class="pre">stop</span></code>
-separated by <code class="docutils literal notranslate"><span class="pre">step</span></code> application of the evolution operator.
-For example,
-if <code class="docutils literal notranslate"><span class="pre">time=(1,</span> <span class="pre">10,</span> <span class="pre">2)</span></code>, returns the states at times
+if <code class="docutils literal notranslate"><span class="pre">range=(1,</span> <span class="pre">10,</span> <span class="pre">2)</span></code>, returns the states corresponding to
+the application of the evolution operator with exponents
 <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">9]</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="n">coined</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
 <span class="gp">... </span>                         <span class="n">state</span><span class="o">=</span><span class="n">coined</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
 <span class="go">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">coined</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
@@ -918,67 +927,95 @@ by passing a float value <code class="docutils literal notranslate"><span class=
 <p>For this reason,
 we remove the responsability of dealing with float numbers from
 <a class="reference internal" href="../documentation/generated/generated/hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate" title="hiperwalk.ContinuousTime.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hiperwalk.ContinuousTime.simulate()</span></code></a>.
-And its <code class="docutils literal notranslate"><span class="pre">time</span></code> parameter describes
+And its <code class="docutils literal notranslate"><span class="pre">range</span></code> parameter describes
 the number of times that
 the evolution operator is going to be applied to the <code class="docutils literal notranslate"><span class="pre">state</span></code>
 (analogous to the coined model).
 In this sense,
 <code class="docutils literal notranslate"><span class="pre">t</span></code> is interpreted as a single <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
 <p>Analogous to the coined model,
-there are three argument types for <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p>
+there are three argument types for <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
 <ul>
-<li><p>integer: <code class="docutils literal notranslate"><span class="pre">stop</span></code>.
-The final number of applications of the evolution operator.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<li><p>integer: <code class="docutils literal notranslate"><span class="pre">end</span></code>.
+The simulation saves the states from the <code class="docutils literal notranslate"><span class="pre">0</span></code>-th to the
+<code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">-</span> <span class="pre">1</span></code>-th application of the evolution operator.
+The resulting states correspond to the timestamps
+<code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>, …, <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)*t</span></code>.
+In the following example, the timestamps are
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0.3,</span> <span class="pre">...,</span> <span class="pre">2.7]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>                                  <span class="n">state</span><span class="o">=</span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">)</span>
-<span class="go">1</span>
+<span class="go">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">continuous</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># cont_states correspond to timestamps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">0.3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">array([0. , 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7])</span>
+</pre></div>
+</div>
+</li>
+<li><p>2-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">end)</span></code>.
+Save every state from the initial state to the
+state after the <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)</span></code>-th application of the evolution operator.
+That is, the stored states correspond to timestamps
+<code class="docutils literal notranslate"><span class="pre">start*t</span></code>, <code class="docutils literal notranslate"><span class="pre">(start</span> <span class="pre">+</span> <span class="pre">1)*t</span></code>, …, <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)*t</span></code>.
+In the following example,
+the stored states correspond to timestamps
+<code class="docutils literal notranslate"><span class="pre">[0.6,</span> <span class="pre">0.9,</span> <span class="pre">...,</span> <span class="pre">2.7]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>                                  <span class="n">state</span><span class="o">=</span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">continuous</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># cont_states correspond to timestamps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">0.3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="go">array([0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7])</span>
+</pre></div>
+</div>
+<p>A 2-tuple of integer can be used to obtain a single state
+without updating the evolution operator,
+as long as the timestamp is a multiple of <code class="docutils literal notranslate"><span class="pre">t</span></code>.
+More specifically, to obtain the state at timestamp <code class="docutils literal notranslate"><span class="pre">i*t</span></code>,
+use <code class="docutils literal notranslate"><span class="pre">range=(i,</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1)</span></code>.
+The following example return the state at timestamp <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+<span class="gp">... </span>                          <span class="n">state</span><span class="o">=</span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract the single state from the list of states</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># verify</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">U</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">@</span> <span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">cont_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">@</span> <span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>The resulting state corresponds to the timestamp <code class="docutils literal notranslate"><span class="pre">t*stop</span></code>.
-In the example, <code class="docutils literal notranslate"><span class="pre">t*stop</span> <span class="pre">=</span> <span class="pre">3</span></code>.</p>
 </li>
-<li><p>2-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(stop,</span> <span class="pre">step)</span></code>.
-Save every state from the initial state to the
-state after the <code class="docutils literal notranslate"><span class="pre">stop</span></code>-th application of the evolution operator.
+<li><p>3-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">end,</span> <span class="pre">step)</span></code>.
+Save every state from the <code class="docutils literal notranslate"><span class="pre">start</span></code>-th to
+the <code class="docutils literal notranslate"><span class="pre">(end</span> <span class="pre">-</span> <span class="pre">1)</span></code>-th application of the evolution operator.
 The saved states are separated by <code class="docutils literal notranslate"><span class="pre">step</span></code>
 applications of the evolution operator.
-That is, the stored states correspond to timestamps
-<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">t*step,</span> <span class="pre">...,</span> <span class="pre">t*step*stop]</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>                                  <span class="n">state</span><span class="o">=</span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">continuous</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<p>In the example, the stored states correspond to timestamps
-<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0.6,</span> <span class="pre">1.2,</span> <span class="pre">1.8,</span> <span class="pre">2.4,</span> <span class="pre">3]</span></code>, respectively.</p>
-</li>
-<li><p>3-tuple of integer: <code class="docutils literal notranslate"><span class="pre">(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code>.
-Save every state from the <code class="docutils literal notranslate"><span class="pre">start</span></code>-th to
-the <code class="docutils literal notranslate"><span class="pre">stop</span></code>-th application of the evolution operator.
-The saved states are separated by <code class="docutils literal notranslate"><span class="pre">step</span></code>
-applications of the evolution operator.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+In the following example,
+the stored states correspond to timestamps
+<code class="docutils literal notranslate"><span class="pre">[0.3,</span> <span class="pre">0.9,</span> <span class="pre">1.5,</span> <span class="pre">2.1,</span> <span class="pre">2.7]</span></code>, respectively.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cont_states</span> <span class="o">=</span> <span class="n">continuous</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
 <span class="gp">... </span>                                  <span class="n">state</span><span class="o">=</span><span class="n">continuous</span><span class="o">.</span><span class="n">ket</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># single state returned</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">)</span>
 <span class="go">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cont_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">continuous</span><span class="o">.</span><span class="n">hilbert_space_dimension</span><span class="p">()</span>
 <span class="go">True</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># cont_states correspond to timestamps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">0.3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">array([0.3, 0.9, 1.5, 2.1, 2.7])</span>
 </pre></div>
 </div>
-<p>In the example, the stored states correspond to timestamps
-<code class="docutils literal notranslate"><span class="pre">[0.3,</span> <span class="pre">0.9,</span> <span class="pre">1.5,</span> <span class="pre">2.1,</span> <span class="pre">2.7]</span></code>, respectively.</p>
 </li>
 </ul>
 </section>

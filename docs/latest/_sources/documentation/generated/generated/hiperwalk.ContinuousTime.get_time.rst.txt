@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.get\_time
+==================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.get_time

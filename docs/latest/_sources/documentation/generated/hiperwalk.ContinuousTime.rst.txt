@@ -41,6 +41,9 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.get_terms
        
        
+          ~ContinuousTime.get_time
+       
+       
           ~ContinuousTime.hilbert_space_dimension
        
        

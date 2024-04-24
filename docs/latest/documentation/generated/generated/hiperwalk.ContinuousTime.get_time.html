@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.ContinuousTime.uniform_state &#8212; Hiperwalk latest documentation</title>
+    <title>hiperwalk.ContinuousTime.get_time &#8212; Hiperwalk latest documentation</title>
   
   
   
@@ -39,8 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.ContinuousTime.uniform_state';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.ContinuousTime.get_time';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -49,8 +48,8 @@
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Plotting" href="../../plot.html" />
-    <link rel="prev" title="hiperwalk.ContinuousTime.success_probability" href="hiperwalk.ContinuousTime.success_probability.html" />
+    <link rel="next" title="hiperwalk.ContinuousTime.hilbert_space_dimension" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html" />
+    <link rel="prev" title="hiperwalk.ContinuousTime.get_terms" href="hiperwalk.ContinuousTime.get_terms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -458,7 +457,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -475,7 +474,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.success_probability.html">hiperwalk.ContinuousTime.success_probability</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.ContinuousTime.uniform_state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.uniform_state.html">hiperwalk.ContinuousTime.uniform_state</a></li>
 </ul>
 </li>
 </ul>
@@ -550,32 +549,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hiperwalk-continuoustime-uniform-state">
-<h1>hiperwalk.ContinuousTime.uniform_state<a class="headerlink" href="#hiperwalk-continuoustime-uniform-state" title="Link to this heading">#</a></h1>
+  <section id="hiperwalk-continuoustime-get-time">
+<h1>hiperwalk.ContinuousTime.get_time<a class="headerlink" href="#hiperwalk-continuoustime-get-time" title="Link to this heading">#</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="hiperwalk.ContinuousTime.uniform_state">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">uniform_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.ContinuousTime.uniform_state" title="Link to this definition">#</a></dt>
-<dd><p>Create a uniform state.</p>
-<p>The state is constructed based on the <code class="docutils literal notranslate"><span class="pre">hilb_dim</span></code> attribute.
-The uniform state is a unit vector with entries 
-that have the same real amplitudes.</p>
+<dt class="sig sig-object py" id="hiperwalk.ContinuousTime.get_time">
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.get_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.get_time" title="Link to this definition">#</a></dt>
+<dd><p>Return the time used to construct the evolution operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></dt><dd></dd>
+<dt>float</dt><dd></dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>An example of the uniform state is</p>
-<div class="math notranslate nohighlight">
-\[\ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}\]</div>
-<p>where <span class="math notranslate nohighlight">\(N\)</span> represents the dimension of the Hilbert space, and 
-<span class="math notranslate nohighlight">\(i\)</span> is a label within the graph. 
-In the continuous-time quantum walk model, 
-<span class="math notranslate nohighlight">\(i\)</span> corresponds to the label of a vertex, 
-while in the coined quantum walk model, 
-<span class="math notranslate nohighlight">\(i\)</span> is the label of an arc.</p>
 </dd></dl>
 
 </section>
@@ -591,20 +577,20 @@ while in the coined quantum walk model,
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.ContinuousTime.success_probability.html"
+       href="hiperwalk.ContinuousTime.get_terms.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.ContinuousTime.success_probability</p>
+        <p class="prev-next-title">hiperwalk.ContinuousTime.get_terms</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../plot.html"
+       href="hiperwalk.ContinuousTime.hilbert_space_dimension.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Plotting</p>
+        <p class="prev-next-title">hiperwalk.ContinuousTime.hilbert_space_dimension</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -626,14 +612,14 @@ while in the coined quantum walk model,
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.ContinuousTime.uniform_state"><code class="docutils literal notranslate"><span class="pre">ContinuousTime.uniform_state()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.ContinuousTime.get_time"><code class="docutils literal notranslate"><span class="pre">ContinuousTime.get_time()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../../_sources/documentation/generated/generated/hiperwalk.ContinuousTime.uniform_state.rst.txt">
+    <a href="../../../_sources/documentation/generated/generated/hiperwalk.ContinuousTime.get_time.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

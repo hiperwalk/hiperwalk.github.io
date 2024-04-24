@@ -1,6 +1,0 @@
-﻿hiperwalk.plot\_function
-========================
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: plot_function
