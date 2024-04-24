@@ -1563,32 +1563,66 @@ document.write(`
         <span class="k">return</span> <span class="n">ket</span></div>
 
 
-    <span class="c1"># def _prepare_engine(self, state, hpc):</span>
-    <span class="c1">#     if hpc is not None:</span>
-    <span class="c1">#         S = nbl.send_matrix(self.get_shift())</span>
-    <span class="c1">#         C = nbl.send_matrix(self.get_coin())</span>
-    <span class="c1">#         self._simul_mat = (C, S)</span>
-    <span class="c1">#         self._simul_vec = nbl.send_vector(state)</span>
+<div class="viewcode-block" id="Coined.uniform_state">
+<a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.uniform_state.html#hiperwalk.Coined.uniform_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a uniform state.</span>
 
-    <span class="c1">#         dtype = (complex if (S.is_complex or C.is_complex</span>
-    <span class="c1">#                              or np.iscomplex(state.dtype))</span>
-    <span class="c1">#                  else np.double)</span>
+<span class="sd">        The uniform state is a unit vector with entries </span>
+<span class="sd">        that have the same real amplitudes.</span>
+<span class="sd">        If both ``vertices is None`` and ``arcs is None``,</span>
+<span class="sd">        create the uniform superposition of all arcs.</span>
+<span class="sd">        Otherwise,</span>
+<span class="sd">        create the uniform superposition of all arcs in</span>
+<span class="sd">        ``arcs`` and all the arcs with tail in ``vertices``.</span>
 
-    <span class="c1">#         return dtype</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertices: list of vertices, default=None</span>
+<span class="sd">            If ``vertices is not None``,</span>
+<span class="sd">            every arc with tail in ``vertices`` is added to</span>
+<span class="sd">            the uniform superposition.</span>
 
-    <span class="c1">#     return super()._prepare_engine(state, hpc)</span>
+<span class="sd">        arcs: list of arcs, default=None</span>
+<span class="sd">            If ``arcs is not None``,</span>
+<span class="sd">            every arc in ``arcs`` is added to</span>
+<span class="sd">            the uniform superposition.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :obj:`numpy.ndarray`</span>
 
-    <span class="c1"># def _simulate_step(self, step, hpc):</span>
-    <span class="c1">#     if hpc is not None:</span>
-    <span class="c1">#         for i in range(step):</span>
-    <span class="c1">#             self._simul_vec = nbl.multiply_matrix_vector(</span>
-    <span class="c1">#                 self._simul_mat[0], self._simul_vec)</span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        An example of the uniform state is</span>
 
-    <span class="c1">#             self._simul_vec = nbl.multiply_matrix_vector(</span>
-    <span class="c1">#                 self._simul_mat[1], self._simul_vec)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         super()._simulate_step(step, hpc)</span>
+<span class="sd">        .. math::</span>
+<span class="sd">            \ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}</span>
+
+<span class="sd">        where :math:`N` represents the dimension of the Hilbert space, and </span>
+<span class="sd">        :math:`i` is a label within the graph. </span>
+<span class="sd">        In the continuous-time quantum walk model, </span>
+<span class="sd">        :math:`i` corresponds to the label of a vertex, </span>
+<span class="sd">        while in the coined quantum walk model, </span>
+<span class="sd">        :math:`i` is the label of an arc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">vertices</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">arcs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+                    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span>
+
+        <span class="c1"># uniform superposition of the given arcs</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arcs</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># uniform superposition of the given vertices</span>
+        <span class="k">if</span> <span class="n">vertices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+                <span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">state</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">state</span><span class="p">))</span></div>
+
 
 <div class="viewcode-block" id="Coined.probability">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability.html#hiperwalk.Coined.probability">[docs]</a>
