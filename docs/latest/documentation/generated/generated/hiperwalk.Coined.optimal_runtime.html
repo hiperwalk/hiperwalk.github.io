@@ -349,7 +349,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../graph.html">Graphs</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -553,7 +553,7 @@ document.write(`
 <h1>hiperwalk.Coined.optimal_runtime<a class="headerlink" href="#hiperwalk-coined-optimal-runtime" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.optimal_runtime">
-<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">optimal_runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.optimal_runtime" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">optimal_runtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.optimal_runtime" title="Link to this definition">#</a></dt>
 <dd><p>Find the optimal running time of a quantum-walk-based search.</p>
 <p>This method simulates the use of the <code class="docutils literal notranslate"><span class="pre">set_evolution</span></code> operator,
 taking the <code class="docutils literal notranslate"><span class="pre">state</span></code> as an input for the simulation. It then
@@ -567,9 +567,8 @@ reaches its first peak.</p>
 <dt><strong>state</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, default=None</span></dt><dd><p>The state initial state for the simulation.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the uniform state.</p>
 </dd>
-<dt><strong>delta_time</strong></dt><dd><p>Time difference between two consecutive states
-to be saved by the simulation.
-See <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in <a class="reference internal" href="hiperwalk.Coined.simulate.html#hiperwalk.Coined.simulate" title="hiperwalk.Coined.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
+<dt><strong>step</strong></dt><dd><p>Step of the simulation range.
+See <code class="docutils literal notranslate"><span class="pre">range</span></code> argument in <a class="reference internal" href="hiperwalk.Coined.simulate.html#hiperwalk.Coined.simulate" title="hiperwalk.Coined.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
 </dd>
 </dl>
 </dd>

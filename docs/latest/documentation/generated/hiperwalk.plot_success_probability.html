@@ -349,7 +349,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hpc.html">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../graph.html">Graphs</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Graph.html">hiperwalk.Graph</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -548,22 +548,24 @@ document.write(`
 <h1>hiperwalk.plot_success_probability<a class="headerlink" href="#hiperwalk-plot-success-probability" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.plot_success_probability">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">plot_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probabilities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/plot/_plot.html#plot_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.plot_success_probability" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">plot_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probabilities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/plot/_plot.html#plot_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.plot_success_probability" title="Link to this definition">#</a></dt>
 <dd><p>Plot the success probability over time.</p>
 <p>Assumes that the probabilities have already been calculated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>time:</strong></dt><dd><p>Time used for the quantum walk simulation.
+<dt><strong>range: tuple of int</strong></dt><dd><p>Range used for the quantum walk simulation.
 See <a class="reference internal" href="generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">QuantumWalk.simulate()</span></code></a> for details.</p>
 </dd>
 <dt><strong>probabilities:</strong></dt><dd><p>Success probabilities with respect to <code class="docutils literal notranslate"><span class="pre">time</span></code>,
 such that <code class="docutils literal notranslate"><span class="pre">probabilities[i]</span></code> corresponds to <code class="docutils literal notranslate"><span class="pre">i</span></code>-th
 timestamp described by <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p>
 </dd>
-<dt><strong>figsize</strong><span class="classifier">tuple, default=(10, 5)</span></dt><dd><p>Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</p>
+<dt><strong>figsize</strong><span class="classifier">tuple, default=(10, 6)</span></dt><dd><p>Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</p>
 </dd>
 <dt><strong>dpi</strong><span class="classifier">float, default=100</span></dt><dd><p>Figure resolution in dots-per-inch.</p>
+</dd>
+<dt><strong>time_step: float, default=1</strong></dt><dd><p>Time interval between simulation steps.</p>
 </dd>
 <dt><strong>**kwargs:</strong></dt><dd><p>Additional arguments to customize plot.
 See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.8.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a> for the optional keywords.</p>

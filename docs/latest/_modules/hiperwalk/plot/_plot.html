@@ -409,7 +409,8 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_probability_distribution</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">animate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">repeat_delay</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot the probability distributions of quantum walk states.</span>
 
@@ -425,12 +426,14 @@ document.write(`
 <span class="sd">        found at each vertex during the quantum walk evolution.</span>
 <span class="sd">        Each column corresponds to a vertex, </span>
 <span class="sd">        while each row represents a step in the walk.</span>
+
 <span class="sd">    plot : str, default=None</span>
 <span class="sd">        The plot type.</span>
 <span class="sd">        The valid options are</span>
 <span class="sd">        ``{&#39;bar&#39;, &#39;line&#39;, &#39;graph&#39;, &#39;histogram&#39;, &#39;plane&#39;}``.</span>
 <span class="sd">        If ``None``, uses default plotting. Usually ``bar``,</span>
 <span class="sd">        but default plotting changes according to ``graph``.</span>
+
 <span class="sd">    show : bool, default=True</span>
 <span class="sd">        Whether or not to show plots or animation.</span>
 <span class="sd">        With ``show=True`` we have:</span>
@@ -445,6 +448,7 @@ document.write(`
 <span class="sd">        all the quantum walk steps are shown at once.</span>
 <span class="sd">        If ``animate==True``,</span>
 <span class="sd">        the entire animation is shown as a html video.</span>
+
 <span class="sd">    filename : str, default=None</span>
 <span class="sd">        The filename path (with no format) where</span>
 <span class="sd">        the plot(s) will be saved.</span>
@@ -453,6 +457,7 @@ document.write(`
 <span class="sd">        the j-step is saved in the ``filename-j.png`` file;</span>
 <span class="sd">        if ``animate==True``,</span>
 <span class="sd">        the entire walk is saved in the ``filename.fig`` file.</span>
+
 <span class="sd">    graph : optional</span>
 <span class="sd">        The structure of the graph on which the walk takes place.</span>
 <span class="sd">        The graph labels are used as plotting labels.</span>
@@ -468,6 +473,7 @@ document.write(`
 <span class="sd">            NetworkX Graph</span>
 <span class="sd">        * :class:`scipy.sparse.csr_matrix`</span>
 <span class="sd">            Adjacency matrix.</span>
+
 <span class="sd">    rescale : bool, optional</span>
 <span class="sd">        If ``False`` or omitted, the reference maximum probability</span>
 <span class="sd">        is the global one.</span>
@@ -481,16 +487,28 @@ document.write(`
 <span class="sd">        (halfway betweeen 300 and 3000),</span>
 <span class="sd">        while for ``rescale=True``,</span>
 <span class="sd">        the step maximum node size shown is 3000.</span>
+
 <span class="sd">    animate : bool, default=False</span>
 <span class="sd">        Whether or not to animate multiple plots.</span>
 <span class="sd">        If ``False``, each quantum walk step generates an image.</span>
 <span class="sd">        If ``True``, each quantum walk step is used as an animation frame.</span>
+
 <span class="sd">    interval : int, default=250</span>
 <span class="sd">        Time in milliseconds that each frame is shown if ``animate==True``.</span>
-<span class="sd">    figsize : tuple, default=(10, 5)</span>
+
+<span class="sd">    figsize : tuple, default=(10, 6)</span>
 <span class="sd">        Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</span>
+
 <span class="sd">    dpi : float, default=100</span>
 <span class="sd">        Figure resolution in dots-per-inch.</span>
+
+<span class="sd">    repeat : bool, default: True</span>
+<span class="sd">        Whether or not to repeat the animation.</span>
+<span class="sd">        See :class:`matplotlib.animation.FuncAnimation`</span>
+
+<span class="sd">    repeat_delay : int, default=2500</span>
+<span class="sd">        Delay in milliseconds between animation repetitions.</span>
+<span class="sd">        See :class:`matplotlib.animation.FuncAnimation`</span>
 
 <span class="sd">    **kwargs : dict, optional</span>
 <span class="sd">        Extra arguments to further customize plotting.</span>
@@ -545,12 +563,6 @@ document.write(`
 <span class="sd">        If ``plot`` has an invalid value.</span>
 <span class="sd">    KeyError</span>
 <span class="sd">        If ``plot == &#39;graph&#39; `` and keyword ``graph`` is not set.</span>
-
-<span class="sd">    Warnings</span>
-<span class="sd">    --------</span>
-<span class="sd">    For showing animations,</span>
-<span class="sd">    the current version only supports Jupyter and GTK 3.0.</span>
-<span class="sd">    It must be updated to support GTK 4.0 for Ubuntu 22.04.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -696,7 +708,11 @@ document.write(`
                             <span class="n">surf</span><span class="o">=</span><span class="n">surf</span><span class="p">,</span>
                             <span class="n">cbar</span><span class="o">=</span><span class="n">cbar</span><span class="p">,</span>
                             <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
-                    <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">)</span>
+                    <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
+                    <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
+                    <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
+                    <span class="n">repeat_delay</span><span class="o">=</span><span class="n">repeat_delay</span><span class="p">)</span>
+
         <span class="k">elif</span> <span class="n">plot</span> <span class="o">==</span> <span class="s1">&#39;graph&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
             <span class="n">ax</span><span class="p">,</span> <span class="n">cbar</span> <span class="o">=</span> <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span>
@@ -705,7 +721,10 @@ document.write(`
             <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span>
                     <span class="n">fig</span><span class="p">,</span>
                     <span class="n">partial</span><span class="p">(</span><span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="n">cbar</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
-                    <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">)</span>
+                    <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
+                    <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
+                    <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
+                    <span class="n">repeat_delay</span><span class="o">=</span><span class="n">repeat_delay</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">artists</span> <span class="o">=</span> <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span>
@@ -713,7 +732,10 @@ document.write(`
                     <span class="n">update_animation</span><span class="p">[</span><span class="n">plot</span><span class="p">],</span>
                     <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
                     <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">artists</span><span class="p">,</span>
-                           <span class="n">ax</span> <span class="k">if</span> <span class="s1">&#39;min_prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">))</span>
+                           <span class="n">ax</span> <span class="k">if</span> <span class="s1">&#39;min_prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span>
+                    <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
+                    <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
+                    <span class="n">repeat_delay</span><span class="o">=</span><span class="n">repeat_delay</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -1348,8 +1370,8 @@ document.write(`
 
 <div class="viewcode-block" id="plot_success_probability">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_success_probability.html#hiperwalk.plot_success_probability">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-                             <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_success_probability</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+                             <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot the success probability over time.</span>
 
@@ -1357,18 +1379,23 @@ document.write(`
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    time:</span>
-<span class="sd">        Time used for the quantum walk simulation.</span>
+<span class="sd">    range: tuple of int</span>
+<span class="sd">        Range used for the quantum walk simulation.</span>
 <span class="sd">        See :meth:`QuantumWalk.simulate` for details.</span>
 
 <span class="sd">    probabilities:</span>
 <span class="sd">        Success probabilities with respect to ``time``,</span>
 <span class="sd">        such that ``probabilities[i]`` corresponds to ``i``-th</span>
 <span class="sd">        timestamp described by ``time``.</span>
-<span class="sd">    figsize : tuple, default=(10, 5)</span>
+
+<span class="sd">    figsize : tuple, default=(10, 6)</span>
 <span class="sd">        Figure size in inches. Must be a tuple in the format (WIDTH, HEIGHT).</span>
+
 <span class="sd">    dpi : float, default=100</span>
 <span class="sd">        Figure resolution in dots-per-inch.</span>
+
+<span class="sd">    time_step: float, default=1</span>
+<span class="sd">        Time interval between simulation steps.</span>
 
 <span class="sd">    **kwargs:</span>
 <span class="sd">        Additional arguments to customize plot.</span>
@@ -1392,8 +1419,8 @@ document.write(`
 
     <span class="n">_configure_figure</span><span class="p">(</span><span class="n">fig_width</span><span class="p">,</span> <span class="n">fig_height</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>
 
-    <span class="n">time</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_range_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_range_to_tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="n">time_step</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="nb">range</span><span class="p">)</span>
 
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -1404,7 +1431,7 @@ document.write(`
     <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 </pre></div>
