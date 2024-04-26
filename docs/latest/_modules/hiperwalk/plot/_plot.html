@@ -404,13 +404,16 @@ document.write(`
 <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
+<span class="n">python_range</span> <span class="o">=</span> <span class="nb">range</span>
+
 <span class="c1"># histogram is alias for bar width=1</span>
 <div class="viewcode-block" id="plot_probability_distribution">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.plot_probability_distribution.html#hiperwalk.plot_probability_distribution">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_probability_distribution</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">animate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">repeat_delay</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">repeat_delay</span><span class="o">=</span><span class="mi">2500</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">time_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot the probability distributions of quantum walk states.</span>
 
@@ -430,7 +433,7 @@ document.write(`
 <span class="sd">    plot : str, default=None</span>
 <span class="sd">        The plot type.</span>
 <span class="sd">        The valid options are</span>
-<span class="sd">        ``{&#39;bar&#39;, &#39;line&#39;, &#39;graph&#39;, &#39;histogram&#39;, &#39;plane&#39;}``.</span>
+<span class="sd">        ``{&#39;line&#39;, &#39;bar&#39;, &#39;graph&#39;, &#39;histogram&#39;, &#39;plane&#39;}``.</span>
 <span class="sd">        If ``None``, uses default plotting. Usually ``bar``,</span>
 <span class="sd">        but default plotting changes according to ``graph``.</span>
 
@@ -510,6 +513,17 @@ document.write(`
 <span class="sd">        Delay in milliseconds between animation repetitions.</span>
 <span class="sd">        See :class:`matplotlib.animation.FuncAnimation`</span>
 
+<span class="sd">    range: tuple of int, default=None</span>
+<span class="sd">        Range used for the quantum walk simulation.</span>
+<span class="sd">        See :meth:`QuantumWalk.simulate` for details.</span>
+<span class="sd">        If ``range is not None``,</span>
+<span class="sd">        each figure or frame will have a label with the corresponding time.</span>
+<span class="sd">        The values shown are</span>
+<span class="sd">        ``time_step * np.arange(*range)``.</span>
+
+<span class="sd">    time_step: float, default=1</span>
+<span class="sd">        Time interval between simulation steps.</span>
+
 <span class="sd">    **kwargs : dict, optional</span>
 <span class="sd">        Extra arguments to further customize plotting.</span>
 <span class="sd">        Valid arguments depend on ``plot``.</span>
@@ -517,6 +531,9 @@ document.write(`
 
 <span class="sd">    Other Parameters</span>
 <span class="sd">    ----------------</span>
+<span class="sd">    Line Plots</span>
+<span class="sd">        See :obj:`matplotlib.pyplot.plot` for more optional keywords.</span>
+
 <span class="sd">    Bar Plots</span>
 <span class="sd">        See :obj:`matplotlib.pyplot.bar` for more optional keywords.</span>
 
@@ -548,9 +565,6 @@ document.write(`
 <span class="sd">    Histogram Plots</span>
 <span class="sd">        See :obj:`matplotlib.pyplot.bar` for more optional keywords.</span>
 <span class="sd">        The ``width`` keyword is always overriden.</span>
-
-<span class="sd">    Line Plots</span>
-<span class="sd">        See :obj:`matplotlib.pyplot.plot` for more optional keywords.</span>
 
 <span class="sd">    Plane Plots</span>
 <span class="sd">        dimensions: 2-tuple of int</span>
@@ -656,7 +670,7 @@ document.write(`
     <span class="n">update_animation</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">valid_plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">_update_animation_bars</span><span class="p">,</span>
         <span class="n">valid_plots</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">_update_animation_line</span><span class="p">,</span>
-        <span class="n">valid_plots</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">_update_animation_graph</span><span class="p">,</span>
+        <span class="n">valid_plots</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">valid_plots</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">_update_animation_bars</span><span class="p">,</span>
         <span class="n">valid_plots</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="kc">None</span>
     <span class="p">}</span>
@@ -669,14 +683,19 @@ document.write(`
     <span class="n">preconfigs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">animate</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_range_to_tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">time_step</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">python_range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)):</span>
             <span class="c1"># TODO: set figure size according to graph dimensions</span>
             <span class="c1"># TODO: check for kwargs</span>
             <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">configs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">fig_width</span><span class="o">=</span><span class="n">fig_width</span><span class="p">,</span>
                                     <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">,</span>
                                     <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
 
-            <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
@@ -696,6 +715,14 @@ document.write(`
                                 <span class="n">fig_height</span><span class="o">=</span><span class="n">fig_height</span><span class="p">,</span>
                                 <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
 
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_range_to_tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">time_step</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">plot</span> <span class="o">==</span> <span class="s1">&#39;plane&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
             <span class="n">surf</span><span class="p">,</span> <span class="n">cbar</span> <span class="o">=</span> <span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">](</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span>
@@ -707,6 +734,7 @@ document.write(`
                             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
                             <span class="n">surf</span><span class="o">=</span><span class="n">surf</span><span class="p">,</span>
                             <span class="n">cbar</span><span class="o">=</span><span class="n">cbar</span><span class="p">,</span>
+                            <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
                             <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
                     <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
                     <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
@@ -720,7 +748,8 @@ document.write(`
 
             <span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span>
                     <span class="n">fig</span><span class="p">,</span>
-                    <span class="n">partial</span><span class="p">(</span><span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="n">cbar</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                    <span class="n">partial</span><span class="p">(</span><span class="n">plot_funcs</span><span class="p">[</span><span class="n">plot</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="n">cbar</span><span class="p">,</span>
+                            <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
                     <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
                     <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
                     <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
@@ -732,7 +761,8 @@ document.write(`
                     <span class="n">update_animation</span><span class="p">[</span><span class="n">plot</span><span class="p">],</span>
                     <span class="n">frames</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span>
                     <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">artists</span><span class="p">,</span>
-                           <span class="n">ax</span> <span class="k">if</span> <span class="s1">&#39;min_prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span>
+                           <span class="n">ax</span> <span class="k">if</span> <span class="s1">&#39;min_prob&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">t</span><span class="p">),</span>
                     <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span>
                     <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
                     <span class="n">repeat_delay</span><span class="o">=</span><span class="n">repeat_delay</span><span class="p">)</span>
@@ -774,6 +804,8 @@ document.write(`
         <span class="k">return</span> <span class="n">plot</span>
 
     <span class="c1"># Hiperwalk Hypercube</span>
+    <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;graph&#39;</span> <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">plot</span>
+
     <span class="n">is_hypercube</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">is_hypercube</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">graph</span><span class="o">.</span><span class="n">dimension</span><span class="p">()</span>
@@ -799,7 +831,19 @@ document.write(`
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;max_node_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;edgecolors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">return</span> <span class="s1">&#39;graph&#39;</span> <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">plot</span>
+        <span class="k">return</span> <span class="n">plot</span>
+
+    <span class="c1"># other graphs</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;number_of_vertices&#39;</span><span class="p">):</span>
+        <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;number_of_nodes&#39;</span><span class="p">):</span>
+        <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">graph</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx_graph</span>
+
+    <span class="k">return</span> <span class="n">plot</span>
 
 
 <span class="k">def</span> <span class="nf">_preconfigure_plot</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
@@ -938,7 +982,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">_plot_probability_distribution_on_bars</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot probability distribution using matplotlib bar plot.</span>
@@ -963,16 +1007,19 @@ document.write(`
 
     <span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)),</span> <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">_posconfigure_plot_figure</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="n">labels</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span>
-                             <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="p">)</span>
+                             <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">bars</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">_update_animation_bars</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_update_animation_bars</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
     <span class="n">bars</span> <span class="o">=</span> <span class="n">bars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bars</span><span class="p">):</span>
         <span class="n">bar</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_rescale_axis</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">bars</span><span class="p">]</span>
 
@@ -1003,7 +1050,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">_plot_probability_distribution_on_line</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots probability distribution using matplotlib&#39;s line plot.</span>
@@ -1030,21 +1077,24 @@ document.write(`
                      <span class="n">probabilities</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">_posconfigure_plot_figure</span><span class="p">(</span>
-        <span class="n">ax</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="n">labels</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span>
+        <span class="n">ax</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="n">labels</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="p">,</span> <span class="n">time</span>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">line</span>
 
-<span class="k">def</span> <span class="nf">_update_animation_line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_update_animation_line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_rescale_axis</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">_posconfigure_plot_figure</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">num_vert</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                              <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add final touches to the plotted figure.</span>
 
@@ -1104,11 +1154,15 @@ document.write(`
         <span class="c1"># plt.ylim((min_prob, max_prob*1.02))</span>
         <span class="n">_rescale_axis</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
 <span class="k">def</span> <span class="nf">_rescale_axis</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="n">min_prob</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">*</span><span class="mf">1.02</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">_plot_probability_distribution_on_graph</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_plot_probability_distribution_on_graph</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Draw graph and illustrates the probabilities depending on the</span>
 <span class="sd">    volatile parameters.</span>
@@ -1145,6 +1199,14 @@ document.write(`
         <span class="k">global</span> <span class="n">start</span>
         <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">ax</span><span class="p">,</span> <span class="n">cbar</span><span class="p">]</span>
 
@@ -1277,11 +1339,8 @@ document.write(`
         <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cbar</span><span class="o">.</span><span class="n">update_normal</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">cbar</span>
 
-<span class="k">def</span> <span class="nf">_update_animation_graph</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cax</span><span class="p">):</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">_plot_probability_distribution_on_graph</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cbar</span>
 
 <span class="k">def</span> <span class="nf">_default_plane_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;cmap&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -1304,7 +1363,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">_plot_probability_distribution_on_plane</span><span class="p">(</span>
         <span class="n">probabilities</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">surf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="n">min_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_prob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots probability distribution on the plane.</span>
@@ -1339,6 +1398,14 @@ document.write(`
                            <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span>
                            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 
     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmap</span> <span class="c1"># reinserts into kwargs</span>
     <span class="k">if</span> <span class="n">cbar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
