@@ -815,7 +815,7 @@ document.write(`
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
         <span class="k">pass</span>
 
-    <span class="k">if</span> <span class="n">is_hypercube</span> <span class="ow">and</span> <span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">is_hypercube</span> <span class="ow">and</span> <span class="p">(</span><span class="n">plot</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">plot</span> <span class="o">==</span> <span class="s1">&#39;graph&#39;</span><span class="p">):</span>
         <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;graph&#39;</span>
 
         <span class="n">nx_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_scipy_sparse_array</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">())</span>
