@@ -399,7 +399,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 
 <span class="c1">############################################</span>
 <span class="c1"># used for automatically stopping the engine</span>
@@ -568,10 +567,6 @@ document.write(`
 
     <span class="c1"># if a vector is being retrieved.</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-        <span class="k">global</span> <span class="n">__engine_initiated</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__engine_initiated</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
-
     <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_vector_host</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">)</span>
 
@@ -723,10 +718,6 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a matrix-vector operation is being requested,</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-        <span class="k">global</span> <span class="n">__engine_initiated</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__engine_initiated</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
-
     <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">sparse</span><span class="p">:</span>
         <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matvec_mul</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span>
                                             <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">)</span>
