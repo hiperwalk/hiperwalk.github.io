@@ -524,6 +524,13 @@ document.write(`
 <span class="sd">    time_step: float, default=1</span>
 <span class="sd">        Time interval between simulation steps.</span>
 
+<span class="sd">    labels : dict, optional</span>
+<span class="sd">        Labels to be shown on graph.</span>
+<span class="sd">        If `graph` is `None`, `labels.keys()` must be integers</span>
+<span class="sd">        from 0 to `num_vert` - 1.</span>
+<span class="sd">        If `graph is not None`, `labels.keys()` must be</span>
+<span class="sd">        labels of the corresponding :class:`networkx.Graph`&#39;s nodes.</span>
+
 <span class="sd">    **kwargs : dict, optional</span>
 <span class="sd">        Extra arguments to further customize plotting.</span>
 <span class="sd">        Valid arguments depend on ``plot``.</span>

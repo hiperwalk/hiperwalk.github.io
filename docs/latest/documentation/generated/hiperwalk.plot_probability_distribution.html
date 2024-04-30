@@ -652,6 +652,12 @@ The values shown are
 </dd>
 <dt><strong>time_step: float, default=1</strong></dt><dd><p>Time interval between simulation steps.</p>
 </dd>
+<dt><strong>labels</strong><span class="classifier">dict, optional</span></dt><dd><p>Labels to be shown on graph.
+If <cite>graph</cite> is <cite>None</cite>, <cite>labels.keys()</cite> must be integers
+from 0 to <cite>num_vert</cite> - 1.
+If <cite>graph is not None</cite>, <cite>labels.keys()</cite> must be
+labels of the corresponding <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>’s nodes.</p>
+</dd>
 <dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Extra arguments to further customize plotting.
 Valid arguments depend on <code class="docutils literal notranslate"><span class="pre">plot</span></code>.
 Check Other Parameters Section for details.</p>
