@@ -554,17 +554,31 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.WeightedGraph.neighbors">
 <span class="sig-prename descclassname"><span class="pre">WeightedGraph.</span></span><span class="sig-name descname"><span class="pre">neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.WeightedGraph.neighbors" title="Link to this definition">#</a></dt>
-<dd><p>Return all neighbors of the given vertex.</p>
+<dd><p>Returns all neighbors of the given vertex.</p>
+<p>This method retrieves all vertices adjacent to the 
+specified vertex. If the graph allows loops, 
+the vertex may also be considered its 
+own neighbor if such an edge exists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>list of int:</dt><dd><p>The neighbors of <code class="docutils literal notranslate"><span class="pre">vertex</span></code>.
-The order of the neighbors varies depending on
-the graph.</p>
+<dt><strong>vertex</strong><span class="classifier">int</span></dt><dd><p>The vertex for which neighbors are to be found.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list of int:</dt><dd><p>The neighbors of <code class="docutils literal notranslate"><span class="pre">vertex</span></code>. 
+The order of the neighbors may vary based on 
+the graph’s internal representation.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The specific order of the neighbors in the returned 
+list is not guaranteed and may change if the 
+underlying graph structure is modified.</p>
 </dd></dl>
 
 </section>

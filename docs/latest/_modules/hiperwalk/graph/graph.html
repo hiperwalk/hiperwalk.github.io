@@ -698,14 +698,30 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors">[docs]</a>
     <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return all neighbors of the given vertex.</span>
+<span class="sd">        Returns all neighbors of the given vertex.</span>
+
+<span class="sd">        This method retrieves all vertices adjacent to the </span>
+<span class="sd">        specified vertex. If the graph allows loops, </span>
+<span class="sd">        the vertex may also be considered its </span>
+<span class="sd">        own neighbor if such an edge exists.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertex : int</span>
+<span class="sd">            The vertex for which neighbors are to be found.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        list of int:</span>
-<span class="sd">            The neighbors of ``vertex``.</span>
-<span class="sd">            The order of the neighbors varies depending on</span>
-<span class="sd">            the graph.</span>
+<span class="sd">            The neighbors of ``vertex``. </span>
+<span class="sd">            The order of the neighbors may vary based on </span>
+<span class="sd">            the graph&#39;s internal representation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The specific order of the neighbors in the returned </span>
+<span class="sd">        list is not guaranteed and may change if the </span>
+<span class="sd">        underlying graph structure is modified.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
@@ -889,12 +905,15 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.is_simple.html#hiperwalk.Graph.is_simple">[docs]</a>
     <span class="k">def</span> <span class="nf">is_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return True if instance of simple graph.</span>
+<span class="sd">        Return True if the graph has no multiedges or weights.</span>
+
+<span class="sd">        A simple graph, in this context, does not include multiple </span>
+<span class="sd">        edges between the same pair of vertices or </span>
+<span class="sd">        any weighted edges, although loops are permitted.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            Decide if simple graph implementation accepts loops.</span>
+<span class="sd">        The Graph class allows for loops in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 

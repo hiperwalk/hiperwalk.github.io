@@ -554,12 +554,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Multigraph.is_simple">
 <span class="sig-prename descclassname"><span class="pre">Multigraph.</span></span><span class="sig-name descname"><span class="pre">is_simple</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/multigraph.html#Multigraph.is_simple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph.is_simple" title="Link to this definition">#</a></dt>
-<dd><p>Return True if instance of simple graph.</p>
+<dd><p>Return True if the graph has no multiedges or weights.</p>
+<p>A simple graph, in this context, does not include multiple 
+edges between the same pair of vertices or 
+any weighted edges, although loops are permitted.</p>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Decide if simple graph implementation accepts loops.</p>
-</div>
+<p>The Graph class allows for loops in the graph.</p>
 </dd></dl>
 
 </section>
