@@ -599,10 +599,10 @@ it cannot represent a valid adjacency matrix.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The graph <span class="math notranslate nohighlight">\(G(V,E)\)</span> defined by this class can be 
-used in instances of the ContinuousTime class.
-When <span class="math notranslate nohighlight">\(G(V,E)\)</span> is used to define an instance of the Coined class, 
-the weights of the graph have no effect on the simulation.</p>
+<p>When defining an instance of the Coined class on a weighted graph, 
+the edge weights do not affect the simulation.</p>
+<p>When defining an instance of the ContinuousTime class on a weighted graph, 
+the edge weights do affect the simulation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.WeightedGraph.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/weighted_graph.html#WeightedGraph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.WeightedGraph.__init__" title="Link to this definition">#</a></dt>
