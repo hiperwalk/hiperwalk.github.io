@@ -549,21 +549,30 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.CompleteBipartite">
 <span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">CompleteBipartite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_vert2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/complete_bipartite.html#CompleteBipartite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.CompleteBipartite" title="Link to this definition">#</a></dt>
-<dd><p>Complete bipartite graph.</p>
+<dd><p>Construct a complete bipartite graph.</p>
+<p>A complete bipartite graph is a graph whose vertices can be divided 
+into two disjoint and independent sets such that every vertex of 
+the first set is connected to every vertex of the second set, 
+and no vertex within the same set is connected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>num_vert1: int</strong></dt><dd><p>Number of vertices of the first part.</p>
+<dt><strong>num_vert1</strong><span class="classifier">int</span></dt><dd><p>The number of vertices in the first part of the graph.</p>
 </dd>
-<dt><strong>num_vert2: int</strong></dt><dd><p>Number of vertices of the second part.</p>
+<dt><strong>num_vert2</strong><span class="classifier">int</span></dt><dd><p>The number of vertices in the second part of the graph.</p>
 </dd>
-<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+<dt><strong>multiedges</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Allows multiple edges between the same pair of vertices. 
+Defaults to None.</p>
+</dd>
+<dt><strong>weights</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Assigns weights to the edges of the graph. 
+Defaults to None.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>Returns an instance of a complete bipartite graph. 
+Refer to <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for more details.</p>
 </dd>
 </dl>
 </dd>
@@ -571,14 +580,14 @@ document.write(`
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd><p>More information on various types of graph constructors.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The vertices in the first part are labeled from
-0 to <code class="docutils literal notranslate"><span class="pre">num_vert1</span> <span class="pre">-</span> <span class="pre">1</span></code> and the vertices of the
-second part are labeled from
-<code class="docutils literal notranslate"><span class="pre">num_vert1</span></code> to <code class="docutils literal notranslate"><span class="pre">num_vert1</span> <span class="pre">+</span> <span class="pre">num_vert2</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>The vertices in the first part are labeled from 0 to <cite>num_vert1 - 1</cite>, 
+and the vertices in the second part are labeled from <cite>num_vert1</cite> 
+to <cite>num_vert1 + num_vert2 - 1</cite>.</p>
 </dd></dl>
 
 <section id="methods">

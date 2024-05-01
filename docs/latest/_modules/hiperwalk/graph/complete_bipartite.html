@@ -478,36 +478,43 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/graph_constructors/complete_bipartite.html#hiperwalk.CompleteBipartite">[docs]</a>
 <span class="k">def</span> <span class="nf">CompleteBipartite</span><span class="p">(</span><span class="n">num_vert1</span><span class="p">,</span> <span class="n">num_vert2</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Complete bipartite graph.</span>
+<span class="sd">    Construct a complete bipartite graph.</span>
+
+<span class="sd">    A complete bipartite graph is a graph whose vertices can be divided </span>
+<span class="sd">    into two disjoint and independent sets such that every vertex of </span>
+<span class="sd">    the first set is connected to every vertex of the second set, </span>
+<span class="sd">    and no vertex within the same set is connected.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    num_vert1: int</span>
-<span class="sd">        Number of vertices of the first part.</span>
-
-<span class="sd">    num_vert2: int</span>
-<span class="sd">        Number of vertices of the second part.</span>
-
-<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
-<span class="sd">        See :ref:`graph_constructors`.</span>
+<span class="sd">    num_vert1 : int</span>
+<span class="sd">        The number of vertices in the first part of the graph.</span>
+<span class="sd">    num_vert2 : int</span>
+<span class="sd">        The number of vertices in the second part of the graph.</span>
+<span class="sd">    multiedges : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Allows multiple edges between the same pair of vertices. </span>
+<span class="sd">        Defaults to None.</span>
+<span class="sd">    weights : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Assigns weights to the edges of the graph. </span>
+<span class="sd">        Defaults to None.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    :class:`hiperwalk.Graph`</span>
-<span class="sd">        See :ref:`graph_constructors` for details.</span>
+<span class="sd">        Returns an instance of a complete bipartite graph. </span>
+<span class="sd">        Refer to :ref:`graph_constructors` for more details.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    :ref:`graph_constructors`.</span>
+<span class="sd">    :ref:`graph_constructors`</span>
+<span class="sd">        More information on various types of graph constructors.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The vertices in the first part are labeled from</span>
-<span class="sd">    0 to ``num_vert1 - 1`` and the vertices of the</span>
-<span class="sd">    second part are labeled from</span>
-<span class="sd">    ``num_vert1`` to ``num_vert1 + num_vert2 - 1``.</span>
+<span class="sd">    The vertices in the first part are labeled from 0 to `num_vert1 - 1`, </span>
+<span class="sd">    and the vertices in the second part are labeled from `num_vert1` </span>
+<span class="sd">    to `num_vert1 + num_vert2 - 1`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
