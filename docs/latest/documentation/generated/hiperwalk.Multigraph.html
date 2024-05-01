@@ -550,33 +550,45 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Multigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Multigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/multigraph.html#Multigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph" title="Link to this definition">#</a></dt>
-<dd><p>Constructs an arbitrary multigraph.</p>
-<dl class="field-list simple">
+<dd><p>Construct an arbitrary multigraph.</p>
+<p>This class enables the creation of a multigraph, 
+where multiple edges between the same pair of 
+vertices are permitted. The structure of the 
+graph is defined by a Hermitian adjacency matrix. 
+The entries of this matrix are non-negative integers 
+that represent the number of multiple edges between vertices.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>adj_matrix</strong></dt><dd><p>The adjacency matrix of the graph
-(any integer Hermitian matrix).
-Two input types are accepted:</p>
-<ul class="simple">
+<dd class="field-odd"><dl>
+<dt><strong>adj_matrix</strong><span class="classifier">various types accepted</span></dt><dd><p>The adjacency matrix of the graph, which must be a 
+Hermitian matrix with non-negative integer entries. 
+Acceptable input types include:</p>
+<blockquote>
+<div><ul class="simple">
 <li><dl class="simple">
-<dt>Any matrix – for instance,</dt><dd><ul>
+<dt>Direct matrix types such as:</dt><dd><ul>
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
-<li><p>list of lists.</p></li>
+<li><p>List of lists.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</dt><dd><ul>
-<li><p>The adjacency matrix is extracted from the graph.</p></li>
-</ul>
+<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>:</dt><dd><p>The adjacency matrix is automatically extracted from the specified networkx graph.</p>
 </dd>
 </dl>
 </li>
 </ul>
+</div></blockquote>
 </dd>
-<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a hard copy of <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.</p>
+<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><dl class="simple">
+<dt>Specifies whether to store a hard copy of <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code>:</dt><dd><ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a deep copy of the adjacency matrix is created and stored.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, a reference to the original <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.</p></li>
+</ul>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
@@ -588,11 +600,13 @@ Two input types are accepted:</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">adj_matrix.data</span></code> attribute is changed for
-more efficient manipulation.
-If the original matrix is needed,
-invoke the constructor with <code class="docutils literal notranslate"><span class="pre">copy=True</span></code> or
-call <a class="reference internal" href="generated/hiperwalk.Multigraph.adjacency_matrix.html#hiperwalk.Multigraph.adjacency_matrix" title="hiperwalk.Multigraph.adjacency_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">adjacency_matrix()</span></code></a> after creating the multigraph.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">adj_matrix.data</span></code> attribute may be modified for 
+more efficient manipulation. If the original matrix 
+data is required, it is recommended to initialize the 
+constructor with <code class="docutils literal notranslate"><span class="pre">copy=True</span></code>. Alternatively, 
+the original matrix can be retrieved anytime by 
+calling <a class="reference internal" href="generated/hiperwalk.Multigraph.adjacency_matrix.html#hiperwalk.Multigraph.adjacency_matrix" title="hiperwalk.Multigraph.adjacency_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">adjacency_matrix()</span></code></a> after the 
+multigraph has been created.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Multigraph.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/multigraph.html#Multigraph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph.__init__" title="Link to this definition">#</a></dt>

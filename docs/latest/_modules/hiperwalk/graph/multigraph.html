@@ -399,24 +399,32 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph">[docs]</a>
 <span class="k">class</span> <span class="nc">Multigraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary multigraph.</span>
+<span class="sd">    Construct an arbitrary multigraph.</span>
+
+<span class="sd">    This class enables the creation of a multigraph, </span>
+<span class="sd">    where multiple edges between the same pair of </span>
+<span class="sd">    vertices are permitted. The structure of the </span>
+<span class="sd">    graph is defined by a Hermitian adjacency matrix. </span>
+<span class="sd">    The entries of this matrix are non-negative integers </span>
+<span class="sd">    that represent the number of multiple edges between vertices.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix :</span>
-<span class="sd">        The adjacency matrix of the graph</span>
-<span class="sd">        (any integer Hermitian matrix).</span>
-<span class="sd">        Two input types are accepted:</span>
-
-<span class="sd">        * Any matrix -- for instance,</span>
-<span class="sd">            * :class:`scipy.sparse.csr_array`,</span>
-<span class="sd">            * :class:`numpy.ndarray`,</span>
-<span class="sd">            * list of lists.</span>
-<span class="sd">        * :class:`networkx.Graph`.</span>
-<span class="sd">            * The adjacency matrix is extracted from the graph.</span>
+<span class="sd">    adj_matrix : various types accepted</span>
+<span class="sd">        The adjacency matrix of the graph, which must be a </span>
+<span class="sd">        Hermitian matrix with non-negative integer entries. </span>
+<span class="sd">        Acceptable input types include:</span>
+<span class="sd">            * Direct matrix types such as:</span>
+<span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
+<span class="sd">                * :class:`numpy.ndarray`,</span>
+<span class="sd">                * List of lists.</span>
+<span class="sd">            * :class:`networkx.Graph`:</span>
+<span class="sd">                The adjacency matrix is automatically extracted from the specified networkx graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
-<span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
+<span class="sd">        Specifies whether to store a hard copy of ``adj_matrix``:</span>
+<span class="sd">            * If ``True``, a deep copy of the adjacency matrix is created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -425,13 +433,14 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The ``adj_matrix.data`` attribute is changed for</span>
-<span class="sd">    more efficient manipulation.</span>
-<span class="sd">    If the original matrix is needed,</span>
-<span class="sd">    invoke the constructor with ``copy=True`` or</span>
-<span class="sd">    call :meth:`adjacency_matrix()` after creating the multigraph.</span>
+<span class="sd">    The ``adj_matrix.data`` attribute may be modified for </span>
+<span class="sd">    more efficient manipulation. If the original matrix </span>
+<span class="sd">    data is required, it is recommended to initialize the </span>
+<span class="sd">    constructor with ``copy=True``. Alternatively, </span>
+<span class="sd">    the original matrix can be retrieved anytime by </span>
+<span class="sd">    calling :meth:`adjacency_matrix()` after the </span>
+<span class="sd">    multigraph has been created.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="c1"># def _default_dtype(self):</span>
     <span class="c1">#     return np.int32</span>
 
