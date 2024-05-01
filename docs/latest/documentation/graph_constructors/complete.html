@@ -549,21 +549,28 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Complete">
 <span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/complete.html#Complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Complete" title="Link to this definition">#</a></dt>
-<dd><p>Complete graph.</p>
-<p>The graph on which any vertex is connected to
-every other vertex.</p>
+<dd><p>Constructs a complete graph.</p>
+<p>A complete graph is one in which every vertex is connected 
+to every other vertex. Each pair of distinct vertices is 
+connected by a unique edge 
+unless multiedges are specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>Number of vertices in the complete graph.</p>
+<dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>The number of vertices in the complete graph.</p>
 </dd>
-<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+<dt><strong>multiedges</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Specifies if multiple edges between the same 
+pair of vertices are allowed. Defaults to None.</p>
+</dd>
+<dt><strong>weights</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Assigns weights to the edges of the graph. 
+Defaults to None.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>Returns an instance of a complete graph. 
+See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for more details.</p>
 </dd>
 </dl>
 </dd>
@@ -571,7 +578,8 @@ every other vertex.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd><p>More information on graph constructors and how they are implemented.</p>
+</dd>
 </dl>
 </div>
 </dd></dl>

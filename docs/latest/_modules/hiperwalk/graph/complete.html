@@ -463,27 +463,34 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/graph_constructors/complete.html#hiperwalk.Complete">[docs]</a>
 <span class="k">def</span> <span class="nf">Complete</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Complete graph.</span>
+<span class="sd">    Constructs a complete graph.</span>
 
-<span class="sd">    The graph on which any vertex is connected to</span>
-<span class="sd">    every other vertex.</span>
+<span class="sd">    A complete graph is one in which every vertex is connected </span>
+<span class="sd">    to every other vertex. Each pair of distinct vertices is </span>
+<span class="sd">    connected by a unique edge </span>
+<span class="sd">    unless multiedges are specified.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert : int</span>
-<span class="sd">        Number of vertices in the complete graph.</span>
-
-<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
-<span class="sd">        See :ref:`graph_constructors`.</span>
+<span class="sd">        The number of vertices in the complete graph.</span>
+<span class="sd">    multiedges : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Specifies if multiple edges between the same </span>
+<span class="sd">        pair of vertices are allowed. Defaults to None.</span>
+<span class="sd">    weights : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Assigns weights to the edges of the graph. </span>
+<span class="sd">        Defaults to None.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    :class:`hiperwalk.Graph`</span>
-<span class="sd">        See :ref:`graph_constructors` for details.</span>
+<span class="sd">        Returns an instance of a complete graph. </span>
+<span class="sd">        See :ref:`graph_constructors` for more details.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    :ref:`graph_constructors`.</span>
+<span class="sd">    :ref:`graph_constructors`</span>
+<span class="sd">        More information on graph constructors and how they are implemented.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
