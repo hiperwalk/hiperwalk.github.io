@@ -440,6 +440,12 @@ document.write(`
 <span class="sd">    the original matrix can be retrieved anytime by </span>
 <span class="sd">    calling :meth:`adjacency_matrix()` after the </span>
 <span class="sd">    multigraph has been created.</span>
+
+<span class="sd">    When defining an instance of the Coined class on a multigraph, </span>
+<span class="sd">    the number of multiple edges impacts the dimension of the coin.</span>
+<span class="sd">    </span>
+<span class="sd">    When defining an instance of the ContinuousTime class on a multigraph, </span>
+<span class="sd">    the number of multiple edges is treated as an edge weight.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># def _default_dtype(self):</span>
     <span class="c1">#     return np.int32</span>

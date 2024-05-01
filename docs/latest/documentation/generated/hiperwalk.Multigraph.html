@@ -607,6 +607,10 @@ constructor with <code class="docutils literal notranslate"><span class="pre">co
 the original matrix can be retrieved anytime by 
 calling <a class="reference internal" href="generated/hiperwalk.Multigraph.adjacency_matrix.html#hiperwalk.Multigraph.adjacency_matrix" title="hiperwalk.Multigraph.adjacency_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">adjacency_matrix()</span></code></a> after the 
 multigraph has been created.</p>
+<p>When defining an instance of the Coined class on a multigraph, 
+the number of multiple edges impacts the dimension of the coin.</p>
+<p>When defining an instance of the ContinuousTime class on a multigraph, 
+the number of multiple edges is treated as an edge weight.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Multigraph.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/multigraph.html#Multigraph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph.__init__" title="Link to this definition">#</a></dt>
