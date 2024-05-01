@@ -550,19 +550,28 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Cycle">
 <span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/cycle.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle" title="Link to this definition">#</a></dt>
-<dd><p>Cycle graph.</p>
+<dd><p>Construct a cycle graph.</p>
+<p>A cycle graph is a graph that forms a single closed loop, 
+where each vertex is connected to exactly two other vertices, 
+forming a circular structure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>Number of vertices in the cycle.</p>
+<dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>The number of vertices in the cycle.</p>
 </dd>
-<dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+<dt><strong>multiedges</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Specifies the number of multiple edges between the same 
+pair of vertices. 
+Defaults to None.</p>
+</dd>
+<dt><strong>weights</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Assigns weights to the edges of the graph. 
+Defaults to None.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for details.</p>
+<dt><a class="reference internal" href="../generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">hiperwalk.Graph</span></code></a></dt><dd><p>Returns an instance of a cycle graph. 
+Refer to <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a> for more details.</p>
 </dd>
 </dl>
 </dd>
@@ -570,27 +579,24 @@ document.write(`
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd></dd>
+<dt><a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a></dt><dd><p>Further information on graph constructors.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The cycle can be interpreted as being embedded on the line
-with a cyclic boundary condition.
-In this context,
-the <strong>order of neighbors</strong> is
-the neighbor to the right first,
-followed by the neighbor to the left.
-In other words, for any vertex <span class="math notranslate nohighlight">\(v\)</span>,
-the neighbors are given in the order <span class="math notranslate nohighlight">\([v + 1, v - 1]\)</span>.</p>
+<p>The cycle is conceptually embedded on a line with cyclic 
+boundary conditions. The <strong>order of neighbors</strong> for any 
+vertex <span class="math notranslate nohighlight">\(v\)</span> is <span class="math notranslate nohighlight">\([v + 1, v - 1]\)</span>, where the right 
+neighbor is listed first, followed by the left neighbor.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Cycle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">array([1, 9])</span>
+<span class="go">[1, 9]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">array([2, 0])</span>
+<span class="go">[2, 0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="go">array([9, 7])</span>
+<span class="go">[9, 7]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<span class="go">array([0, 8])</span>
+<span class="go">[0, 8]</span>
 </pre></div>
 </div>
 </dd></dl>

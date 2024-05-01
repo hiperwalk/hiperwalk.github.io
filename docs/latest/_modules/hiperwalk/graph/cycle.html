@@ -393,8 +393,6 @@ document.write(`
   <h1>Source code for hiperwalk.graph.cycle</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">.integer_lattice</span> <span class="kn">import</span> <span class="n">IntegerLattice</span>
 
-<div class="viewcode-block" id="Cycle">
-<a class="viewcode-back" href="../../../documentation/graph_constructors/cycle.html#hiperwalk.Cycle">[docs]</a>
 <span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cycle graph.</span>
@@ -442,6 +440,62 @@ document.write(`
 <span class="sd">        &gt;&gt;&gt; g.neighbors(9)</span>
 <span class="sd">        array([0, 8])</span>
 
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Cycle">
+<a class="viewcode-back" href="../../../documentation/graph_constructors/cycle.html#hiperwalk.Cycle">[docs]</a>
+<span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct a cycle graph.</span>
+
+<span class="sd">    A cycle graph is a graph that forms a single closed loop, </span>
+<span class="sd">    where each vertex is connected to exactly two other vertices, </span>
+<span class="sd">    forming a circular structure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num_vert : int</span>
+<span class="sd">        The number of vertices in the cycle. </span>
+<span class="sd">    multiedges : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Specifies the number of multiple edges between the same </span>
+<span class="sd">        pair of vertices. </span>
+<span class="sd">        Defaults to None.</span>
+<span class="sd">    weights : scipy.sparse.csr_array, optional</span>
+<span class="sd">        Assigns weights to the edges of the graph. </span>
+<span class="sd">        Defaults to None.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`hiperwalk.Graph`</span>
+<span class="sd">        Returns an instance of a cycle graph. </span>
+<span class="sd">        Refer to :ref:`graph_constructors` for more details.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :ref:`graph_constructors`</span>
+<span class="sd">        Further information on graph constructors.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The cycle is conceptually embedded on a line with cyclic </span>
+<span class="sd">    boundary conditions. The **order of neighbors** for any </span>
+<span class="sd">    vertex :math:`v` is :math:`[v + 1, v - 1]`, where the right </span>
+<span class="sd">    neighbor is listed first, followed by the left neighbor.</span>
+
+<span class="sd">    .. testsetup::</span>
+
+<span class="sd">        import hiperwalk as hpw</span>
+
+<span class="sd">    .. doctest::</span>
+
+<span class="sd">        &gt;&gt;&gt; g = hpw.Cycle(10)</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(0)</span>
+<span class="sd">        [1, 9]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(1)</span>
+<span class="sd">        [2, 0]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(8)</span>
+<span class="sd">        [9, 7]</span>
+<span class="sd">        &gt;&gt;&gt; g.neighbors(9)</span>
+<span class="sd">        [0, 8]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
