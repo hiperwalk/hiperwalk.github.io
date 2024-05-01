@@ -552,11 +552,11 @@ document.write(`
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Multigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/multigraph.html#Multigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph" title="Link to this definition">#</a></dt>
 <dd><p>Construct an arbitrary multigraph.</p>
 <p>This class enables the creation of a multigraph, 
-where multiple edges between the same pair of 
-vertices are permitted. The structure of the 
-graph is defined by a Hermitian adjacency matrix. 
+where multiple edges between the same pair of vertices are permitted. 
+The structure of the graph is defined by a Hermitian adjacency matrix. 
 The entries of this matrix are non-negative integers 
-that represent the number of multiple edges between vertices.</p>
+that represent the number of multiple edges between vertices. 
+The multigraph also allows loops, which are treated as arcs.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
