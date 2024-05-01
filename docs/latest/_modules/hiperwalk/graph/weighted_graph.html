@@ -399,38 +399,44 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph">[docs]</a>
 <span class="k">class</span> <span class="nc">WeightedGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary weighted graph.</span>
+<span class="sd">    Construct an arbitrary weighted graph.</span>
+
+<span class="sd">    This class allows for the creation of a graph where edges </span>
+<span class="sd">    can have weights, described by an adjacency matrix. </span>
+<span class="sd">    The matrix must be Hermitian, as it represents the weights </span>
+<span class="sd">    and connections between nodes.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix :</span>
-<span class="sd">        The adjacency matrix of the graph</span>
-<span class="sd">        (any integer Hermitian matrix).</span>
-<span class="sd">        Two input types are accepted:</span>
-
-<span class="sd">        * Any matrix -- for instance,</span>
-<span class="sd">            * :class:`scipy.sparse.csr_array`,</span>
-<span class="sd">            * :class:`numpy.ndarray`,</span>
-<span class="sd">            * list of lists.</span>
-<span class="sd">        * :class:`networkx.Graph`.</span>
-<span class="sd">            * The adjacency matrix is extracted from the graph.</span>
+<span class="sd">    adj_matrix : various types accepted</span>
+<span class="sd">        The adjacency matrix of the graph, </span>
+<span class="sd">        which must be a Hermitian matrix. </span>
+<span class="sd">        Two types of input are accepted:</span>
+<span class="sd">            * Matrix formats such as:</span>
+<span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
+<span class="sd">                * :class:`numpy.ndarray`,</span>
+<span class="sd">                * List of lists.</span>
+<span class="sd">            * :class:`networkx.Graph`:</span>
+<span class="sd">                The adjacency matrix is derived from the provided NetworkX graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
-<span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
-<span class="sd">        If ``False``, the pointer to ``adj_matrix`` is stored.</span>
+<span class="sd">        Determines how the adjacency matrix is stored:</span>
+<span class="sd">            * If ``True``, a deep copy of ``adj_matrix`` is created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    TypeError</span>
-<span class="sd">        If ``adj_matrix`` is not a square matrix.</span>
+<span class="sd">        If ``adj_matrix`` is not a square matrix, indicating </span>
+<span class="sd">        it cannot represent a valid adjacency matrix.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The graph :math:`G(V,E)` on which the quantum walk </span>
-<span class="sd">    takes place is specified by</span>
-<span class="sd">    any real Hermitian matrix :math:`C`.</span>
+<span class="sd">    The graph :math:`G(V,E)` defined by this class can be </span>
+<span class="sd">    used in instances of the ContinuousTime class.</span>
+<span class="sd">    When :math:`G(V,E)` is used to define an instance of the Coined class, </span>
+<span class="sd">    the weights of the graph have no effect on the simulation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="c1"># def _default_dtype(self):</span>
     <span class="c1">#     return np.float32</span>
 
