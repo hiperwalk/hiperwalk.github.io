@@ -698,7 +698,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.neighbors.html#hiperwalk.Graph.neighbors">[docs]</a>
     <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns all neighbors of the given vertex.</span>
+<span class="sd">        Return all neighbors of the given vertex.</span>
 
 <span class="sd">        This method retrieves all vertices adjacent to the </span>
 <span class="sd">        specified vertex. If the graph allows loops, </span>
@@ -733,7 +733,16 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Determine the cardinality of the vertex set.</span>
+<span class="sd">        Return the total number of vertices in the graph.</span>
+
+<span class="sd">        This method calculates and returns the cardinality </span>
+<span class="sd">        of the vertex set, effectively providing the </span>
+<span class="sd">        count of all vertices present in the graph.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The total number of vertices in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
@@ -742,7 +751,16 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Determine the cardinality of the edge set.</span>
+<span class="sd">        Return the total number of edges in the graph.</span>
+
+<span class="sd">        This method calculates and returns the cardinality </span>
+<span class="sd">        of the edge set, indicating the total count of </span>
+<span class="sd">        all edges present in the graph, including loops.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The total number of edges in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">non_loops</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span>
         <span class="n">num_edges</span> <span class="o">=</span> <span class="n">non_loops</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
@@ -754,6 +772,15 @@ document.write(`
     <span class="k">def</span> <span class="nf">number_of_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the number of loops in the graph.</span>
+
+<span class="sd">        This method counts and returns the number of loops </span>
+<span class="sd">        in the graph. A loop is defined as an edge that </span>
+<span class="sd">        connects a vertex to itself.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The number of loops in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
 
@@ -786,37 +813,32 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number">[docs]</a>
     <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the vertex number given any vertex representation.</span>
+<span class="sd">        Returns the numerical label of a vertex based on its representation.</span>
 
-<span class="sd">        This method returns the numerical label of the vertex </span>
-<span class="sd">        regardless of its representation.</span>
-<span class="sd">        There are some graphs in which a vertex may have multiple</span>
-<span class="sd">        representations.</span>
-<span class="sd">        For example, coordinates in a grid.</span>
-<span class="sd">        For arbitrary graphs,</span>
-<span class="sd">        this function returns the argument itself if valid.</span>
+<span class="sd">        This method is designed to handle graphs where vertices might have </span>
+<span class="sd">        multiple representations, such as coordinates in a grid. </span>
+<span class="sd">        In cases of arbitrary graphs, this function will return </span>
+<span class="sd">        the input itself if it is a valid representation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        vertex: int</span>
-<span class="sd">            The vertex in any of its representation.</span>
-<span class="sd">            For general graphs,</span>
-<span class="sd">            only its label is accepted.</span>
+<span class="sd">        vertex : int</span>
+<span class="sd">            The vertex in any valid representation. For arbitrary graphs, only the vertex&#39;s label is accepted.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">            Vertex number.</span>
+<span class="sd">            The numerical label of the vertex.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            If ``vertex`` is not valid.</span>
+<span class="sd">            If the ``vertex`` is not a valid representation.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        It is useful to have this function implemented for general graphs</span>
-<span class="sd">        to simplify the implementation of some quantum walk methods.</span>
+<span class="sd">        Implementing this function is beneficial for arbitrary graphs </span>
+<span class="sd">        as it simplifies the implementation of some quantum walk methods.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
