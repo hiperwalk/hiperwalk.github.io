@@ -403,18 +403,31 @@ document.write(`
                   
   <section id="install">
 <h1>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h1>
-<p>You can install Hiperwalk locally (no HPC support) or its docker distribution (with HPC support).</p>
+<p>Hiperwalk offers multiple installation paths depending on your requirements.
+You can install Hiperwalk locally without High-Performance
+Computing (HPC) support, or opt for a Docker-based installation
+that includes HPC capabilities. Additionally, developers interested
+in enabling HPC features must install several prerequisites.</p>
+<p>Choose your installation method:</p>
+<ul class="simple">
+<li><p>For a local installation without HPC support, proceed to the</p></li>
+</ul>
+<p>“Local Installation” section below.</p>
+<ul class="simple">
+<li><p>For installation with HPC support using Docker, refer to</p></li>
+</ul>
+<p><a class="reference internal" href="#docs-install-docker-installation"><span class="std std-ref">Docker Installation</span></a>.</p>
+<ul class="simple">
+<li><p>For installing prerequisites necessary for HPC support, refer to</p></li>
+</ul>
+<p><a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a>.</p>
 <section id="local-installation">
 <h2>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h2>
-<p>Hiperwalk relies on some Python libraries.
-However, installing these Python libraries alone does not enable
-Hiperwalk to leverage High-Performance Computing (HPC).
-If you desire to install Hiperwalk with HPC support, please refer
-to <a class="reference internal" href="#docs-install-docker-installation"><span class="std std-ref">Docker Installation</span></a> (for users) or
-<a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> (for developers)
-before proceeding with the local installation.</p>
-<section id="hiperwalk">
-<span id="docs-install-hiperwalk"></span><h3>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h3>
+<p>Hiperwalk can be installed locally for environments where HPC support
+is not required. This installation relies on certain Python libraries,
+but note that these alone do not enable HPC capabilities.</p>
+<section id="hiperwalk-installation-steps">
+<span id="docs-install-hiperwalk"></span><h3>Hiperwalk Installation Steps<a class="headerlink" href="#hiperwalk-installation-steps" title="Link to this heading">#</a></h3>
 <p>Hiperwalk can be conveniently installed using pip.
 To begin, ensure that pip is installed on your system.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
@@ -712,7 +725,7 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk-installation-steps">Hiperwalk Installation Steps</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
