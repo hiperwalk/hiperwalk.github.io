@@ -793,7 +793,7 @@ document.write(`
 
 <span class="sd">        The degree of a vertex :math:`u` in a graph </span>
 <span class="sd">        is the number of edges  incident to :math:`u`.</span>
-<span class="sd">        Loops at :math:`u` are counted once.</span>
+<span class="sd">        Each Loop is counted once.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -853,7 +853,7 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the graph&#39;s adjacency matrix.</span>
+<span class="sd">        Return the adjacency matrix representation of the graph.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -865,8 +865,7 @@ document.write(`
 <span class="sd">        In a simple graph :math:`G(V, E)` with :math:`n` vertices</span>
 <span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix </span>
 <span class="sd">        of :math:`G(V, E)` is an </span>
-<span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:</span>
-<span class="sd">        </span>
+<span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:        </span>
 <span class="sd">        .. math::</span>
 <span class="sd">            A_{i,j} = \begin{cases}</span>
 <span class="sd">                1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\</span>
@@ -874,9 +873,9 @@ document.write(`
 <span class="sd">            \end{cases}</span>
 <span class="sd">    </span>
 <span class="sd">        If :math:`G(V, E)` has a loop on vertex :math:`v_i`, </span>
-<span class="sd">        then :math:`A_{i,j}=1`.</span>
+<span class="sd">        then :math:`A_{i,i}=1`.</span>
 <span class="sd">        </span>
-<span class="sd">        In the case of multigraphs, where multiple edges can exist between</span>
+<span class="sd">        In multigraphs, where multiple edges can exist between</span>
 <span class="sd">        the same pair of vertices, the adjacency matrix reflects this</span>
 <span class="sd">        by counting the number of such edges.</span>
 <span class="sd">    </span>

@@ -555,7 +555,7 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Graph.adjacency_matrix">
 <span class="sig-prename descclassname"><span class="pre">Graph.</span></span><span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/graph.html#Graph.adjacency_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph.adjacency_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Return the graph’s adjacency matrix.</p>
+<dd><p>Return the adjacency matrix representation of the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -567,15 +567,17 @@ document.write(`
 <p>In a simple graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> vertices
 <span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span>, the adjacency matrix 
 of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is an 
-<span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>, defined as follows:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}A_{i,j} = \begin{cases}
-    1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\
-    0, &amp; \text{otherwise.}
-\end{cases}\end{split}\]</div>
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>, defined as follows:        
+.. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">}</span> <span class="o">=</span> \<span class="n">begin</span><span class="p">{</span><span class="n">cases</span><span class="p">}</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span> \<span class="n">text</span><span class="p">{</span><span class="k">if</span> <span class="p">}</span> <span class="n">v_i</span> \<span class="n">text</span><span class="p">{</span> <span class="ow">is</span> <span class="n">adjacent</span> <span class="n">to</span> <span class="p">}</span> <span class="n">v_j</span><span class="p">,</span>\\
+    <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span> \<span class="n">text</span><span class="p">{</span><span class="n">otherwise</span><span class="o">.</span><span class="p">}</span>
+\<span class="n">end</span><span class="p">{</span><span class="n">cases</span><span class="p">}</span>
+</pre></div>
+</div>
 <p>If <span class="math notranslate nohighlight">\(G(V, E)\)</span> has a loop on vertex <span class="math notranslate nohighlight">\(v_i\)</span>, 
-then <span class="math notranslate nohighlight">\(A_{i,j}=1\)</span>.</p>
-<p>In the case of multigraphs, where multiple edges can exist between
+then <span class="math notranslate nohighlight">\(A_{i,i}=1\)</span>.</p>
+<p>In multigraphs, where multiple edges can exist between
 the same pair of vertices, the adjacency matrix reflects this
 by counting the number of such edges.</p>
 <p>In weighted graphs, the entries of <span class="math notranslate nohighlight">\(A\)</span> represent 
