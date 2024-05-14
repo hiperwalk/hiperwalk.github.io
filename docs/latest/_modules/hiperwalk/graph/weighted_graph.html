@@ -412,17 +412,22 @@ document.write(`
 <span class="sd">        The adjacency matrix of the graph, </span>
 <span class="sd">        which must be a Hermitian matrix. </span>
 <span class="sd">        Two types of input are accepted:</span>
+
 <span class="sd">            * Matrix formats such as:</span>
 <span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
 <span class="sd">                * :class:`numpy.ndarray`,</span>
 <span class="sd">                * List of lists.</span>
 <span class="sd">            * :class:`networkx.Graph`:</span>
-<span class="sd">                The adjacency matrix is derived from the provided NetworkX graph.</span>
+<span class="sd">                The adjacency matrix is derived from</span>
+<span class="sd">                the provided NetworkX graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
 <span class="sd">        Determines how the adjacency matrix is stored:</span>
-<span class="sd">            * If ``True``, a deep copy of ``adj_matrix`` is created and stored.</span>
-<span class="sd">            * If ``False``, a reference to the original ``adj_matrix`` is stored.</span>
+
+<span class="sd">            * If ``True``, a deep copy of ``adj_matrix`` is</span>
+<span class="sd">              created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original</span>
+<span class="sd">              ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>

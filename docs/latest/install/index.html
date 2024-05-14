@@ -410,12 +410,12 @@ that includes HPC capabilities. Additionally, developers interested
 in enabling HPC features must install several prerequisites.</p>
 <p>Choose your installation method:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#docs-local-installation"><span class="std std-ref">Local Installation</span></a> without HPC support.</p></li>
-<li><p><a class="reference internal" href="#docs-install-docker-installation"><span class="std std-ref">Docker Installation</span></a> with HPC support.</p></li>
-<li><p><a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> for developers.</p></li>
+<li><p><a class="reference internal" href="#docs-nonhpc-installation"><span class="std std-ref">Non-HPC Installation</span></a> without HPC support.</p></li>
+<li><p><a class="reference internal" href="#docs-install-docker-installation"><span class="std std-ref">HPC Installation</span></a> with HPC support.</p></li>
+<li><p><a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">Local Installation</span></a> for developers.</p></li>
 </ul>
-<section id="local-installation">
-<span id="docs-local-installation"></span><h2>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h2>
+<section id="non-hpc-installation">
+<span id="docs-nonhpc-installation"></span><h2>Non-HPC Installation<a class="headerlink" href="#non-hpc-installation" title="Link to this heading">#</a></h2>
 <p>Hiperwalk can be installed locally for environments where HPC support
 is not required. This installation relies on certain Python libraries.</p>
 <section id="installation-steps">
@@ -456,8 +456,49 @@ you can proceed to the <a class="reference internal" href="../tutorial/index.htm
 </div>
 </section>
 </section>
+<section id="hpc-installation">
+<span id="docs-install-docker-installation"></span><h2>HPC Installation<a class="headerlink" href="#hpc-installation" title="Link to this heading">#</a></h2>
+<p>Hiperwalk is capable of using HPC locally or via a docker installation.
+Regardless of the chosen option,
+it is necessary to install the HPC prerequisites.</p>
+<section id="hpc-prerequisites">
+<h3>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Link to this heading">#</a></h3>
+<p>To install the GPU driver, you can follow this
+<a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
+Below, we have outlined the essential steps.</p>
+<p>First, you’ll need to identify your GPU by running the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-e<span class="w"> </span>VGA
+</pre></div>
+</div>
+<p>You can then verify if the outputted
+<a class="reference external" href="https://developer.nvidia.com/cuda-gpus">GPU is CUDA compatible</a>.
+If it is, execute the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ubuntu-drivers<span class="w"> </span>devices
+</pre></div>
+</div>
+<p>This will list the available drivers for your GPU. We recommend
+installing the driver tagged with <code class="docutils literal notranslate"><span class="pre">recommended</span></code> at the end.
+The driver’s name typically follows the format <code class="docutils literal notranslate"><span class="pre">nvidia-driver-XXX</span></code>
+where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is a specific number.
+For the subsequent steps in the installation process, substitute <code class="docutils literal notranslate"><span class="pre">XXX</span></code>
+as required. To install the GPU driver, execute the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-driver-XXX
+</pre></div>
+</div>
+<p>Finally, <strong>reboot you computer</strong>.
+After rebooting, if the installation was successful,
+running the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+</pre></div>
+</div>
+<p>should display GPU information such as the name, driver version,
+CUDA version, and so on. Alternatively, you can verify the
+availability of the <strong>NVIDIA Settings</strong> application by
+pressing the <code class="docutils literal notranslate"><span class="pre">Super</span></code> key on your keyboard and
+typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
+</section>
 <section id="docker-installation">
-<span id="docs-install-docker-installation"></span><h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h2>
+<h3>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h3>
 <p>Using Hiperwalk on its Docker distribution offers
 numerous benefits to users.
 Docker provides a lightweight, portable, and scalable environment,
@@ -547,8 +588,8 @@ sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class=
 <p>Improve the installation guidelines</p>
 </div>
 </section>
-<section id="hpc-prerequisites">
-<span id="docs-install-hpc-prerequisites"></span><h2>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Link to this heading">#</a></h2>
+<section id="local-installation">
+<span id="docs-install-hpc-prerequisites"></span><h3>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h3>
 <p>This section and the ones that follow are intended
 for developers of the Hiperwalk package.
 Before proceeding, it is advisable to update and
@@ -589,39 +630,12 @@ which is used for generating animations.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
 </pre></div>
 </div>
-<p>To install the GPU driver, you can follow this
-<a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
-Below, we have outlined the essential steps.</p>
-<p>First, you’ll need to identify your GPU by running the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-e<span class="w"> </span>VGA
-</pre></div>
+<section id="nvidia-toolkit">
+<h4>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Link to this heading">#</a></h4>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>OTHER INSTRUCTIONS</p>
 </div>
-<p>You can then verify if the outputted
-<a class="reference external" href="https://developer.nvidia.com/cuda-gpus">GPU is CUDA compatible</a>.
-If it is, execute the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ubuntu-drivers<span class="w"> </span>devices
-</pre></div>
-</div>
-<p>This will list the available drivers for your GPU. We recommend
-installing the driver tagged with <code class="docutils literal notranslate"><span class="pre">recommended</span></code> at the end.
-The driver’s name typically follows the format <code class="docutils literal notranslate"><span class="pre">nvidia-driver-XXX</span></code>
-where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is a specific number.
-For the subsequent steps in the installation process, substitute <code class="docutils literal notranslate"><span class="pre">XXX</span></code>
-as required. To install the GPU driver, execute the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-driver-XXX
-</pre></div>
-</div>
-<p>Finally, <strong>reboot you computer</strong>.
-After rebooting, if the installation was successful,
-running the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
-</pre></div>
-</div>
-<p>should display GPU information such as the name, driver version,
-CUDA version, and so on. Alternatively, you can verify the
-availability of the <strong>NVIDIA Settings</strong> application by
-pressing the <code class="docutils literal notranslate"><span class="pre">Super</span></code> key on your keyboard and
-typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
 <p>Once the GPU drivers have been successfully installed, it’s
 necessary to install the NVIDIA Toolkit, allowing hiperblas-core
 to use CUDA. To do this, execute the following command:</p>
@@ -634,8 +648,9 @@ This can be simply done by running the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>--version
 </pre></div>
 </div>
-<section id="installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas">
-<h3>Installing hiperblas-core hiperblas-opencl-bridge and pyhiperblas<a class="headerlink" href="#installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas" title="Link to this heading">#</a></h3>
+</section>
+<section id="hiperblas">
+<h4>Hiperblas<a class="headerlink" href="#hiperblas" title="Link to this heading">#</a></h4>
 <p>For HPC support,
 Hiperwalk uses
 <a class="reference external" href="https://github.com/hiperblas/hiperblas-core">hiperblas-core</a>,
@@ -652,8 +667,8 @@ hiperblas-opencl-bridge, and pyhiperblas
 are installed (i.e. cloned) in the same directory.
 In this guide, we will install both projects into the home directory.
 In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) serves as an alias for the home directory.</p>
-<section id="id2">
-<h4>hiperblas-core<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<section id="id3">
+<h5>hiperblas-core<a class="headerlink" href="#id3" title="Link to this heading">#</a></h5>
 <p>Firstly, clone the repository in the home directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hiperblas/hiperblas-core.git
@@ -685,8 +700,8 @@ execute the <code class="docutils literal notranslate"><span class="pre">vector_
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h4>hiperblas-opencl-bridge<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<section id="id4">
+<h5>hiperblas-opencl-bridge<a class="headerlink" href="#id4" title="Link to this heading">#</a></h5>
 <p>The installation of the hiperblas-opencl-bridge is very similar to
 the installation of hiperblas-core.
 To install hiperblas-opencl-bridge,
@@ -712,8 +727,8 @@ execute the tests</p>
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h4>pyhiperblas<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<section id="id5">
+<h5>pyhiperblas<a class="headerlink" href="#id5" title="Link to this heading">#</a></h5>
 <p>To install pyhiperblas, first clone the repository into
 <strong>the same directory hiperblas-core was cloned</strong>.
 In this guide, we cloned hiperblas-core into the home directory.
@@ -731,6 +746,13 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>test.py
 </pre></div>
 </div>
+</section>
+</section>
+<section id="hiperwalk">
+<h4>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h4>
+<p>To finish the local hiperwalk installation,
+issue the same commands of the
+<a class="reference internal" href="#docs-nonhpc-installation"><span class="std std-ref">Non-HPC Installation</span></a> section.</p>
 </section>
 </section>
 </section>
@@ -782,16 +804,22 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-hpc-installation">Non-HPC Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-steps">Installation Steps</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-prerequisites">HPC Prerequisites</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas">Installing hiperblas-core hiperblas-opencl-bridge and pyhiperblas</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">hiperblas-core</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">hiperblas-opencl-bridge</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">pyhiperblas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-installation">HPC Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-prerequisites">HPC Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperblas">Hiperblas</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">hiperblas-core</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">hiperblas-opencl-bridge</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">pyhiperblas</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
 </ul>
 </li>
 </ul>

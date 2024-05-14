@@ -416,17 +416,22 @@ document.write(`
 <span class="sd">        The adjacency matrix of the graph, which must be a </span>
 <span class="sd">        Hermitian matrix with non-negative integer entries. </span>
 <span class="sd">        Acceptable input types include:</span>
+
 <span class="sd">            * Direct matrix types such as:</span>
 <span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
 <span class="sd">                * :class:`numpy.ndarray`,</span>
 <span class="sd">                * List of lists.</span>
 <span class="sd">            * :class:`networkx.Graph`:</span>
-<span class="sd">                The adjacency matrix is automatically extracted from the specified networkx graph.</span>
+<span class="sd">                The adjacency matrix is automatically extracted</span>
+<span class="sd">                from the specified networkx graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
 <span class="sd">        Specifies whether to store a hard copy of ``adj_matrix``:</span>
-<span class="sd">            * If ``True``, a deep copy of the adjacency matrix is created and stored.</span>
-<span class="sd">            * If ``False``, a reference to the original ``adj_matrix`` is stored.</span>
+
+<span class="sd">            * If ``True``, a deep copy of the adjacency matrix is</span>
+<span class="sd">              created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original</span>
+<span class="sd">              ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
