@@ -517,9 +517,12 @@ and agility in their development and deployment processes.</p>
 <section id="docker-configuration">
 <h4>Docker Configuration<a class="headerlink" href="#docker-configuration" title="Link to this heading">#</a></h4>
 <p>Single time configuration of docker.</p>
-<p>Step 1. Add Docker’s official GPG key:</p>
+<p>Start by updating the package lists:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ca-certificates<span class="w"> </span>curl
+</pre></div>
+</div>
+<p>Step 1. Add Docker’s official GPG key:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ca-certificates<span class="w"> </span>curl
 sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">0755</span><span class="w"> </span>-d<span class="w"> </span>/etc/apt/keyrings
 sudo<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/docker.asc
 sudo<span class="w"> </span>chmod<span class="w"> </span>a+r<span class="w"> </span>/etc/apt/keyrings/docker.asc
