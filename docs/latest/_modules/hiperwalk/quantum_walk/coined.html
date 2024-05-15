@@ -853,10 +853,6 @@ document.write(`
 <span class="sd">            array([0, 0, 0, 0, 1, 0, 0, 0])</span>
 <span class="sd">            &gt;&gt;&gt; S @ np.array([0, 0, 0, 0, 1, 0, 0, 0]) # S|4&gt; = |2&gt;</span>
 <span class="sd">            array([0, 0, 1, 0, 0, 0, 0, 0])</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            </span>
-<span class="sd">            Add persistent example.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="n">shift</span><span class="p">,</span>
                            <span class="n">coin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">,</span>
@@ -968,12 +964,6 @@ document.write(`
 <span class="sd">        Note that a loop at a vertex :math:`u` is treated</span>
 <span class="sd">        as the arc :math:`(u,u)`, contributing an additional </span>
 <span class="sd">        one to the degree of :math:`u`.</span>
-<span class="sd">        </span>
-
-<span class="sd">        .. todo::</span>
-
-<span class="sd">            Check if explicit coin is valid.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
                            <span class="n">coin</span><span class="o">=</span><span class="n">coin</span><span class="p">,</span>
@@ -1342,12 +1332,6 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        .. [1] R. Portugal. &quot;Quantum walks and search algorithms&quot;,</span>
 <span class="sd">            2nd edition, Springer, 2018.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            Valid examples to clear behavior.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">S_kwargs</span> <span class="o">=</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span>
@@ -1533,11 +1517,6 @@ document.write(`
 <span class="sd">            arc_number</span>
 <span class="sd">                The label of the arc.</span>
 <span class="sd">                The number according to the computational basis order.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            valid examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">ket</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">arc_number</span><span class="p">(</span><span class="n">arc</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>

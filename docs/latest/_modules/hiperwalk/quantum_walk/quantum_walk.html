@@ -414,14 +414,6 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    graph: :class:`hiperwalk.graph.Graph`</span>
 <span class="sd">        Graph on which the quantum walk takes place.</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-
-<span class="sd">    .. todo::</span>
-<span class="sd">        * List the that methods must be overwritten.</span>
-<span class="sd">        * Accept other types as ``graph`` such as numpy array</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="QuantumWalk.__init__">
@@ -876,11 +868,6 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        label : int</span>
 <span class="sd">            The ket label.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            valid examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">ket</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1309,14 +1296,6 @@ document.write(`
 <span class="sd">        optimal_runtime</span>
 <span class="sd">        simulate</span>
 <span class="sd">        uniform_state</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            If ``t_opt / step`` is not close to an integer,</span>
-<span class="sd">            the max success probability was not obtained in the simulation.</span>
-<span class="sd">            The simulation must be rerun or interpolated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="n">opt_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span> <span class="o">/</span> <span class="n">step</span><span class="p">)</span>

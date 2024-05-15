@@ -990,13 +990,12 @@ document.write(`
 <span class="sd">            to select a small time interval and perform </span>
 <span class="sd">            multiple matrix multiplications to minimize </span>
 <span class="sd">            rounding errors.</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            Use ``scipy.linalg.expm`` when ``hpc=None`` once the</span>
-<span class="sd">            `scipy issue 18086</span>
-<span class="sd">            &lt;https://github.com/scipy/scipy/issues/18086&gt;`_</span>
-<span class="sd">            is solved.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Use ``scipy.linalg.expm`` when ``hpc=None`` once the</span>
+        <span class="c1">#       `scipy issue 18086</span>
+        <span class="c1">#       &lt;https://github.com/scipy/scipy/issues/18086&gt;`_</span>
+        <span class="c1">#       is solved.</span>
+
         <span class="k">def</span> <span class="nf">filter_and_call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
             <span class="n">valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_kwargs</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
             <span class="n">filtered</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>

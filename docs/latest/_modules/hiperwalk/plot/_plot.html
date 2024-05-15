@@ -597,30 +597,14 @@ document.write(`
 <span class="sd">    ``plot()`` calls the appropriated plotting method with</span>
 <span class="sd">    customization parameters,</span>
 <span class="sd">    i.e. bar, line or graph plot with the respective valid kwargs.</span>
-
-<span class="sd">    .. todo::</span>
-<span class="sd">        - Accept the ``probabilities`` parameter as a list.</span>
-<span class="sd">        - Use Graphviz instead of NetworkX to draw graphs.</span>
-<span class="sd">            As noted by networkx&#39;s documentation:</span>
-<span class="sd">            Proper graph visualization is hard, and we highly recommend</span>
-<span class="sd">            that people visualize their graphs with tools dedicated to</span>
-<span class="sd">            that task. </span>
-<span class="sd">            https://networkx.org/documentation/stable/reference/drawing.html</span>
-<span class="sd">        - Implement ``repeat_delay`` parameter:</span>
-<span class="sd">            An extra time to wait before the animation is repeated.</span>
-<span class="sd">            Pull requests to the</span>
-<span class="sd">            `Matplotlib animation writers</span>
-<span class="sd">            &lt;https://matplotlib.org/stable/api/animation_api.html#writer-classes&gt;`_</span>
-<span class="sd">            are needed.</span>
-<span class="sd">        - Implement ``transparency`` parameter:</span>
-<span class="sd">            change nodes transparency depending on probability.</span>
-<span class="sd">        - Implement GTK 4.0 support.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    .. todo::</span>
-<span class="sd">        probabilities expects numpy array or matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: option to use Graphviz instead of NetworkX to draw graphs.</span>
+    <span class="c1">#      As noted by networkx&#39;s documentation:</span>
+    <span class="c1">#      Proper graph visualization is hard, and we highly recommend</span>
+    <span class="c1">#      that people visualize their graphs with tools dedicated to</span>
+    <span class="c1">#      that task. </span>
+    <span class="c1">#      https://networkx.org/documentation/stable/reference/drawing.html</span>
+
     <span class="c1"># Figure size</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">figsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -929,7 +913,7 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert: int</span>
 <span class="sd">        number of vertices in the graph</span>
-<span class="sd">        .. todo:: set the figure size according to num_vert</span>
+
 <span class="sd">    fig_width, fig_height : float, optional</span>
 <span class="sd">        Custom figure width and height, respectively.</span>
 <span class="sd">        If not set, the default value is used.</span>
