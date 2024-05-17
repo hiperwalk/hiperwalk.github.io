@@ -513,8 +513,8 @@ It provides a lightweight, portable, and scalable environment,
 ensuring seamless deployment across different systems.
 Docker simplifies dependency management, updates, and configuration replication,
 enhancing consistency and reliability.</p>
-<section id="docker-configuration">
-<h4>Docker Configuration<a class="headerlink" href="#docker-configuration" title="Link to this heading">#</a></h4>
+<section id="id1">
+<h4>Installation Steps<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>Single time configuration of docker.</p>
 <p>Start by updating the package lists:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
@@ -541,7 +541,8 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
 </pre></div>
 </div>
-<p>Step 5. Logout and log back in</p>
+<p>Step 5. The following command is used to log out and
+then log back into Docker:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>newgrp<span class="w"> </span>docker
 </pre></div>
 </div>
@@ -552,8 +553,10 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> <
 </section>
 <section id="nvidia-container">
 <h4>NVIDIA Container<a class="headerlink" href="#nvidia-container" title="Link to this heading">#</a></h4>
-<p>Skip this section if the <a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a> are not installed.</p>
-<p>Single time configuration of nvidia container toolkit.</p>
+<p>Skip this section if GPU support is not needed.
+If the prerequisites are not installed, refer to
+<a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a>.</p>
+<p>Single time configuration of NVDIA container toolkit.</p>
 <p>Step 1. Configure respository</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
@@ -687,8 +690,8 @@ hiperblas-opencl-bridge, and pyhiperblas
 are installed (i.e. cloned) in the same directory.
 In this guide, we will install both projects into the home directory.
 In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) serves as an alias for the home directory.</p>
-<section id="id1">
-<h5>hiperblas-core<a class="headerlink" href="#id1" title="Link to this heading">#</a></h5>
+<section id="id2">
+<h5>hiperblas-core<a class="headerlink" href="#id2" title="Link to this heading">#</a></h5>
 <p>Firstly, clone the repository in the home directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hiperblas/hiperblas-core.git
@@ -721,8 +724,8 @@ execute the <code class="docutils literal notranslate"><span class="pre">vector_
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h5>hiperblas-opencl-bridge<a class="headerlink" href="#id2" title="Link to this heading">#</a></h5>
+<section id="id3">
+<h5>hiperblas-opencl-bridge<a class="headerlink" href="#id3" title="Link to this heading">#</a></h5>
 <p>Skip this section if the <a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a> are not installed.</p>
 <p>The installation of the hiperblas-opencl-bridge is very similar to
 the installation of hiperblas-core.
@@ -749,8 +752,8 @@ execute the tests</p>
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h5>pyhiperblas<a class="headerlink" href="#id3" title="Link to this heading">#</a></h5>
+<section id="id4">
+<h5>pyhiperblas<a class="headerlink" href="#id4" title="Link to this heading">#</a></h5>
 <p>To install pyhiperblas, first clone the repository into
 <strong>the same directory hiperblas-core was cloned</strong>.
 In this guide, we cloned hiperblas-core into the home directory.
@@ -838,7 +841,7 @@ issue the same commands of the
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-enabled-installation">HPC-Enabled Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-prerequisites">GPU Prerequisites</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-configuration">Docker Configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Installation Steps</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-container">NVIDIA Container</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-docker">Run Docker</a></li>
 </ul>
@@ -846,9 +849,9 @@ issue the same commands of the
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperblas">Hiperblas</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">hiperblas-core</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">hiperblas-opencl-bridge</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">pyhiperblas</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">hiperblas-core</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">hiperblas-opencl-bridge</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">pyhiperblas</a></li>
 </ul>
 </li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
