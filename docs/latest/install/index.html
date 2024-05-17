@@ -462,12 +462,14 @@ you can proceed to the <a class="reference internal" href="../tutorial/index.htm
 </section>
 <section id="hpc-enabled-installation">
 <span id="docs-hpc-enabled"></span><h2>HPC-Enabled Installation<a class="headerlink" href="#hpc-enabled-installation" title="Link to this heading">#</a></h2>
-<p>Hiperwalk is capable of using HPC locally or via a docker installation.
-The following instructions guide you through CPU-based HPC
-with <em>optional</em> GPU support.</p>
+<p>Hiperwalk supports HPC through either a Docker installation
+or a local installation. HPC capabilities can be leveraged
+using parallelism on multicore CPUs and, optionally, NVIDIA GPUs.</p>
+<p>The following instructions will guide you through setting
+up CPU-based HPC, with optional GPU support.</p>
 <section id="gpu-prerequisites">
 <span id="docs-gpu-prerequisites"></span><h3>GPU Prerequisites<a class="headerlink" href="#gpu-prerequisites" title="Link to this heading">#</a></h3>
-<p>Skip this section if GPU support is not desired.
+<p>Skip this section if GPU support is not needed.
 To install the GPU driver, you can follow this
 <a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
 Below, we have outlined the essential steps.</p>
@@ -504,20 +506,13 @@ typing <code class="docutils literal notranslate"><span class="pre">nvidia</span
 </section>
 <section id="docker-installation">
 <h3>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h3>
-<p>Using Hiperwalk on its Docker distribution offers
-numerous benefits to users.
-Docker provides a lightweight, portable, and scalable environment,
-ensuring seamless deployment across
-different operating systems and environments.
-With Docker, users can easily manage dependencies,
-streamline updates, and replicate configurations,
-leading to improved consistency and reliability.
-Additionally, Docker enables efficient resource utilization,
-facilitating faster development cycles and easier collaboration
-among team members.
-Overall, opting for Hiperwalk on its Docker distribution
-empowers users with enhanced flexibility, efficiency,
-and agility in their development and deployment processes.</p>
+<p>Using Hiperwalk on Docker offers numerous benefits.
+Docker, a form of containerization, automatically includes Hiperwalk,
+its prerequisites, and all HPC-enabling software.
+It provides a lightweight, portable, and scalable environment,
+ensuring seamless deployment across different systems.
+Docker simplifies dependency management, updates, and configuration replication,
+enhancing consistency and reliability.</p>
 <section id="docker-configuration">
 <h4>Docker Configuration<a class="headerlink" href="#docker-configuration" title="Link to this heading">#</a></h4>
 <p>Single time configuration of docker.</p>
