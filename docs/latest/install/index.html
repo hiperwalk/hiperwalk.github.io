@@ -597,24 +597,25 @@ sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class=
 </section>
 <section id="run-docker">
 <h4>Run Docker<a class="headerlink" href="#run-docker" title="Link to this heading">#</a></h4>
-<p>Create a folder where you want to save your notebooks and switch to that folder.</p>
-<p>To run hiperwalk in docker with CPU-only support,
-run the following command.</p>
+<p>Create a folder where you want to save your notebooks.
+This folder will store all the examples you create.</p>
+<p>Open a terminal and navigate to the folder you just created.</p>
+<p>To run Hiperwalk in Docker with CPU-only support,
+execute the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
 </pre></div>
 </div>
-<p>To run Hiperwalk in Docker with GPU and CPU support, use the following command:</p>
+<p>To run Hiperwalk in Docker with GPU and CPU support,
+execute the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
 </pre></div>
 </div>
-<p>Open the page with the url that appears on
-the screen that starts with 127.0.0.1</p>
-<p>Example:
-<a class="reference external" href="http://127.0.0.1:8888/lab?token=05cf67f22ffcab83fce3410368ddc5efe459f3a16e91d1cc">http://127.0.0.1:8888/lab?token=05cf67f22ffcab83fce3410368ddc5efe459f3a16e91d1cc</a></p>
-<p>In the browser,
-access the “work” folder that appears in the environment,
-and the data will be saved there
-(in the folder external to the container).</p>
+<p>Open your web browser and go to the URL that appears on the screen,
+starting with <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Alternatively, you can directly click
+on the hyperlink.</p>
+<p>In the Jupyter environment, access the “work” folder.
+All your data and notebooks will be saved in this folder
+(external to the Docker container).</p>
 </section>
 </section>
 <section id="local-installation">
