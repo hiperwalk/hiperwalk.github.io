@@ -521,7 +521,7 @@ Docker simplifies dependency management, updates, and configuration replication,
 enhancing consistency and reliability.</p>
 <section id="id1">
 <h4>Installation Steps<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
-<p>Single time configuration of docker.</p>
+<p>Single time configuration of Docker.</p>
 <p>Start by updating the package lists:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </pre></div>
@@ -544,11 +544,11 @@ sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/d
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </pre></div>
 </div>
-<p>Step 3. Install docker latest</p>
+<p>Step 3. Install Docker latest</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span>docker-buildx-plugin<span class="w"> </span>docker-compose-plugin
 </pre></div>
 </div>
-<p>Step 4. Add the user to docker group</p>
+<p>Step 4. Add the user to Docker group</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
 </pre></div>
@@ -558,7 +558,7 @@ then log back into Docker:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>newgrp<span class="w"> </span>docker
 </pre></div>
 </div>
-<p>Step 6. Test your docker installation</p>
+<p>Step 6. Test your Docker installation</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
 </pre></div>
 </div>
@@ -569,7 +569,7 @@ then log back into Docker:</p>
 If the prerequisites are not installed, refer to
 <a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a>.</p>
 <p>Single time configuration of NVDIA container toolkit.</p>
-<p>Step 1. Configure respository</p>
+<p>Step 1. Configure repository</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
 curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
@@ -582,7 +582,7 @@ sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/n
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-docker2
 </pre></div>
 </div>
-<p>Step 3. Configure docker to use nvidia in rootless mode</p>
+<p>Step 3. Configure Docker to use NVIDIA in rootless mode</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nvidia-ctk<span class="w"> </span>runtime<span class="w"> </span>configure<span class="w"> </span>--runtime<span class="o">=</span>docker<span class="w"> </span>--config<span class="o">=</span><span class="nv">$HOME</span>/.config/docker/daemon.json
 systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span class="w"> </span>docker
 sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>nvidia-container-cli.no-cgroups<span class="w"> </span>--in-place
@@ -592,11 +592,11 @@ sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class=
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/nvidia-container-runtime/config.toml
 </pre></div>
 </div>
-<p>change the value of no-cgroups to false</p>
+<p>Change the value of no-cgroups to false</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
 </pre></div>
 </div>
-<p>Test the gpu access</p>
+<p>Test the GPU access</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:12.0.0-base-ubuntu20.04<span class="w"> </span>nvidia-smi
 </pre></div>
 </div>
@@ -620,7 +620,8 @@ execute the following command:</p>
 starting with <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Alternatively, you can directly click
 on the hyperlink.</p>
 <p>In the Jupyter environment, access the “work” folder.
-All your data and notebooks will be saved in this folder
+All your data and notebooks will be saved in the folder
+you have created above
 (external to the Docker container).</p>
 </section>
 </section>
