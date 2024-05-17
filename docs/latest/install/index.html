@@ -597,15 +597,14 @@ sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class=
 </section>
 <section id="run-docker">
 <h4>Run Docker<a class="headerlink" href="#run-docker" title="Link to this heading">#</a></h4>
-<p>Create a folder where you want to save notebooks. Go to folder.</p>
-<p>To run hiperwalk in docker with GPU and CPU support,
-run the following command.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
-</pre></div>
-</div>
+<p>Create a folder where you want to save your notebooks and switch to that folder.</p>
 <p>To run hiperwalk in docker with CPU-only support,
 run the following command.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
+</pre></div>
+</div>
+<p>To run Hiperwalk in Docker with GPU and CPU support, use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
 </pre></div>
 </div>
 <p>Open the page with the url that appears on
