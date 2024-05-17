@@ -576,7 +576,7 @@ systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span clas
 sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>nvidia-container-cli.no-cgroups<span class="w"> </span>--in-place
 </pre></div>
 </div>
-<p><strong>It may be necessary</strong></p>
+<p>It may be necessary</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/nvidia-container-runtime/config.toml
 </pre></div>
 </div>
@@ -584,7 +584,7 @@ sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class=
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
 </pre></div>
 </div>
-<p><strong>Test the gpu access</strong></p>
+<p>Test the gpu access</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:12.0.0-base-ubuntu20.04<span class="w"> </span>nvidia-smi
 </pre></div>
 </div>
