@@ -534,15 +534,15 @@ document.write(`
     <span class="c1"># </span>
     <span class="c1"># vec = (neblina.vector_new(n, neblina.COMPLEX)</span>
     <span class="c1">#        if is_complex else neblina.vector_new(n, neblina.FLOAT))</span>
-    <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">vector_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span>
+    <span class="c1"># TODO: check if line below and the previou comment are still needed</span>
+    <span class="c1"># vec = neblina.vector_new(n, neblina.COMPLEX)</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># TODO: Pyneblina needs to accept 3 only arguments</span>
         <span class="c1"># instead of 4?</span>
         <span class="c1"># TODO: check if neblina.vector_set is idetifying</span>
         <span class="c1"># the vector type right (i.e. real and not complex)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">vector_set</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: vector entries must have real and imaginary parts.&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
