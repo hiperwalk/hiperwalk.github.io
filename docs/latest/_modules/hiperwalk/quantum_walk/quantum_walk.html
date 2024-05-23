@@ -1213,7 +1213,7 @@ document.write(`
         <span class="c1"># if search algorithm takes O(N),</span>
         <span class="c1"># it is better to use classical computing.</span>
         <span class="n">final_time</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span>
-        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">final_time</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">final_time</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
                                <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
         <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">states</span>

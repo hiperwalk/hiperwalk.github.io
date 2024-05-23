@@ -591,7 +591,7 @@ and <code class="docutils literal notranslate"><span class="pre">weights</span> 
 and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>.</p></li>
 </ul>
 <p>Both <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> are expected to be
-instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.</p>
+instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.</p>
 <ul>
 <li><p>If they are an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>
 in the <code class="docutils literal notranslate"><span class="pre">{(u,</span> <span class="pre">v):</span> <span class="pre">value}</span></code> format.</p>
@@ -610,7 +610,7 @@ attempting to add an edge by assigning a value to it
 (e.g. <code class="docutils literal notranslate"><span class="pre">weights[(-1,</span> <span class="pre">-1)</span> <span class="pre">=</span> <span class="pre">10])</span></code> raises a
 a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError exception</a>.</p>
 </li>
-<li><p>If they are an instance of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p>
+<li><p>If they are an instance of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">multiedges[u,</span> <span class="pre">v]</span></code> is the number of edges
 incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
