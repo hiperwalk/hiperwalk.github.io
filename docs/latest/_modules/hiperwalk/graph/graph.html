@@ -631,19 +631,18 @@ document.write(`
                                <span class="n">end</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
 
-        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
         <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
-        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">lin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">entry</span> <span class="o">+</span> <span class="n">offset</span>
 
     <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find the corresponding line and columns of the given entry.</span>
+<span class="sd">        Find the corresponding row and column of the given entry.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -851,15 +850,11 @@ document.write(`
 
 <div class="viewcode-block" id="Graph.adjacency_matrix">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix">[docs]</a>
-    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the adjacency matrix representation of the graph.</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        copy : bool, default=True</span>
-<span class="sd">            If ``True``, return a hard copy of the adjacency matrix.</span>
-<span class="sd">            If ``False``, return a pointer to the adjacency matrix.</span>
+<span class="sd">        Return a **hard copy** of the adjacency matrix.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -867,7 +862,6 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">    </span>
 <span class="sd">        In a simple graph :math:`G(V, E)` with :math:`n` vertices</span>
 <span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix </span>
 <span class="sd">        of :math:`G(V, E)` is an </span>
@@ -885,17 +879,12 @@ document.write(`
 <span class="sd">        In multigraphs, where multiple edges can exist between</span>
 <span class="sd">        the same pair of vertices, the adjacency matrix reflects this</span>
 <span class="sd">        by counting the number of such edges.</span>
-<span class="sd">    </span>
-<span class="sd">        In weighted graphs, the entries of :math:`A` represent </span>
-<span class="sd">        the weights of the edges. In general, the weight is a non-zero</span>
-<span class="sd">        real number. In Hiperwalk, :math:`A` can be an arbitrary</span>
-<span class="sd">        Hermitian matrix.        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
 
-        <span class="k">return</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Graph.laplacian_matrix">
@@ -969,7 +958,7 @@ document.write(`
                 <span class="k">if</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                     <span class="c1"># find right position</span>
                     <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
                     <span class="c1"># swap indices</span>
                     <span class="n">temp</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -1006,7 +995,7 @@ document.write(`
         <span class="c1"># the value that corresponds to the given edge</span>
 
         <span class="n">d</span> <span class="o">=</span> <span class="n">dictionary</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                        <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>

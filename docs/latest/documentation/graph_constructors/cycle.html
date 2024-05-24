@@ -549,7 +549,7 @@ document.write(`
 <h1>hiperwalk.Cycle<a class="headerlink" href="#hiperwalk-cycle" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.Cycle">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/cycle.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_vert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/cycle.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Cycle" title="Link to this definition">#</a></dt>
 <dd><p>Cycle graph constructor.</p>
 <p>A cycle graph is a graph that forms a single closed loop, 
 where each vertex is connected to exactly two other vertices, 
@@ -559,12 +559,9 @@ forming a circular structure.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>num_vert</strong><span class="classifier">int</span></dt><dd><p>The number of vertices in the cycle.</p>
 </dd>
-<dt><strong>multiedges</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Specifies the number of multiple edges between the same 
-pair of vertices. 
-Defaults to None.</p>
+<dt><strong>multiedges, weights: matrix or dict, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
 </dd>
-<dt><strong>weights</strong><span class="classifier">scipy.sparse.csr_array, optional</span></dt><dd><p>Assigns weights to the edges of the graph. 
-Defaults to None.</p>
+<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
 </dd>
 </dl>
 </dd>

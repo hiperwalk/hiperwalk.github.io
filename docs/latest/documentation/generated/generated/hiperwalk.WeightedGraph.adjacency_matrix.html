@@ -571,21 +571,8 @@ If <code class="docutils literal notranslate"><span class="pre">False</span></co
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>In a simple graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> vertices
-<span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span>, the adjacency matrix 
-of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is an 
-<span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>, defined as follows:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}A_{i,j} = \begin{cases}
-    1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\
-    0, &amp; \text{otherwise.}
-\end{cases}\end{split}\]</div>
-<p>If <span class="math notranslate nohighlight">\(G(V, E)\)</span> has a loop on vertex <span class="math notranslate nohighlight">\(v_i\)</span>, 
-then <span class="math notranslate nohighlight">\(A_{i,i}=1\)</span>.</p>
-<p>In multigraphs, where multiple edges can exist between
-the same pair of vertices, the adjacency matrix reflects this
-by counting the number of such edges.</p>
-<p>In weighted graphs, the entries of <span class="math notranslate nohighlight">\(A\)</span> represent 
+<p>In weighted graphs,
+the entries of the adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> represent
 the weights of the edges. In general, the weight is a non-zero
 real number. In Hiperwalk, <span class="math notranslate nohighlight">\(A\)</span> can be an arbitrary
 Hermitian matrix.</p>

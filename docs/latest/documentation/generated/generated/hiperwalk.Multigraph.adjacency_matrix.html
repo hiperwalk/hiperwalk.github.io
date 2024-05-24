@@ -554,18 +554,12 @@ document.write(`
 <h1>hiperwalk.Multigraph.adjacency_matrix<a class="headerlink" href="#hiperwalk-multigraph-adjacency-matrix" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Multigraph.adjacency_matrix">
-<span class="sig-prename descclassname"><span class="pre">Multigraph.</span></span><span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/multigraph.html#Multigraph.adjacency_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph.adjacency_matrix" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Multigraph.</span></span><span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/multigraph.html#Multigraph.adjacency_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Multigraph.adjacency_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Return the adjacency matrix representation of the graph.</p>
+<p>Return a <strong>hard copy</strong> of the adjacency matrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>copy</strong><span class="classifier">bool, default=True</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, return a hard copy of the adjacency matrix.
-If <code class="docutils literal notranslate"><span class="pre">False</span></code>, return a pointer to the adjacency matrix.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.</dt><dd></dd>
 </dl>
 </dd>
@@ -585,10 +579,6 @@ then <span class="math notranslate nohighlight">\(A_{i,i}=1\)</span>.</p>
 <p>In multigraphs, where multiple edges can exist between
 the same pair of vertices, the adjacency matrix reflects this
 by counting the number of such edges.</p>
-<p>In weighted graphs, the entries of <span class="math notranslate nohighlight">\(A\)</span> represent 
-the weights of the edges. In general, the weight is a non-zero
-real number. In Hiperwalk, <span class="math notranslate nohighlight">\(A\)</span> can be an arbitrary
-Hermitian matrix.</p>
 </dd></dl>
 
 </section>

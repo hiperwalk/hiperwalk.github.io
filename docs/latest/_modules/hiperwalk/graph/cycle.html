@@ -395,7 +395,7 @@ document.write(`
 
 <div class="viewcode-block" id="Cycle">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/cycle.html#hiperwalk.Cycle">[docs]</a>
-<span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cycle graph constructor.</span>
 
@@ -407,13 +407,12 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert : int</span>
 <span class="sd">        The number of vertices in the cycle. </span>
-<span class="sd">    multiedges : scipy.sparse.csr_array, optional</span>
-<span class="sd">        Specifies the number of multiple edges between the same </span>
-<span class="sd">        pair of vertices. </span>
-<span class="sd">        Defaults to None.</span>
-<span class="sd">    weights : scipy.sparse.csr_array, optional</span>
-<span class="sd">        Assigns weights to the edges of the graph. </span>
-<span class="sd">        Defaults to None.</span>
+
+<span class="sd">    multiedges, weights: matrix or dict, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    copy : bool, default=False</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -450,7 +449,9 @@ document.write(`
 <span class="sd">        array([0, 8])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">multiedges</span><span class="o">=</span><span class="n">multiedges</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
+                       <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">g</span></div>
 
 </pre></div>

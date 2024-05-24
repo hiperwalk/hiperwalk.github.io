@@ -546,7 +546,7 @@ document.write(`
     <span class="n">num_vert</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">dim</span>
     <span class="n">num_arcs</span> <span class="o">=</span> <span class="n">dim</span><span class="o">*</span><span class="n">num_vert</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_arcs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span> <span class="o">^</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)</span>
                                        <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)])</span>
@@ -566,19 +566,22 @@ document.write(`
 
     <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">WeightedGraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
     <span class="k">elif</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">Multigraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
 
-    <span class="c1"># Binding particular attributes and methods</span>
+    <span class="k">if</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># bind specific simple/weighted graph methods</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_edges</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+    <span class="c1"># Binding common attributes and methods</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="n">g</span><span class="o">.</span><span class="n">adjacent</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__adjacent</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_neighbor_index</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__neighbor_index</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">number_of_vertices</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_vertices</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__number_of_edges</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">__degree</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">g</span></div>
