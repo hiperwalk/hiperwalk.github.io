@@ -932,13 +932,16 @@ document.write(`
 
             <span class="c1"># TODO: compare with numpy.linalg.matrix_power</span>
 
-    <span class="k">def</span> <span class="nf">_save_simul_vec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_save_simul_vec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span> <span class="n">continue_simulation</span><span class="p">):</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># TODO: check if vector must be deleted or</span>
             <span class="c1">#       if it can be reused via neblina-core commands.</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">retrieve_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">continue_simulation</span><span class="p">:</span>
+                <span class="c1"># does it need to be a copy?</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span>
 
@@ -1091,7 +1094,8 @@ document.write(`
 
         <span class="k">while</span> <span class="n">state_index</span> <span class="o">&lt;</span> <span class="n">num_states</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
-            <span class="n">saved_states</span><span class="p">[</span><span class="n">state_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_simul_vec</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
+            <span class="n">saved_states</span><span class="p">[</span><span class="n">state_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_simul_vec</span><span class="p">(</span>
+                    <span class="n">hpc</span><span class="p">,</span> <span class="n">state_index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">num_states</span><span class="p">)</span>
             <span class="n">state_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c1"># TODO: free vector from neblina core</span>
