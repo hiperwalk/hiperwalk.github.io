@@ -525,8 +525,11 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># TODO: check if complex automatically?</span>
-    <span class="c1"># the complex type from Python is not the same as numpy complex128</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;complex128&quot;</span>
+    <span class="c1"># # the complex type from Python is not the same as numpy complex128</span>
+    <span class="c1"># is_complex = str(v.dtype) == &quot;complex128&quot;</span>
+    <span class="c1"># more pythonic way of checking if type is complex</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="c1"># TODO: needs better support from pyneblina to</span>
@@ -614,7 +617,8 @@ document.write(`
     <span class="c1">#   In addition, there should be a way to</span>
     <span class="c1">#   return the matrix and automatically</span>
     <span class="c1">#   convert to a matrix of float or of complex numbers accordingly.</span>
-    <span class="n">smat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_complex</span> <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">)</span>
+    <span class="n">smat</span> <span class="o">=</span> <span class="p">(</span><span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_complex</span>
+            <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
     <span class="c1"># smat = neblina.sparse_matrix_new(n, n, neblina.COMPLEX)</span>
     
     <span class="c1"># inserts elements into neblina sparse matrix</span>
@@ -662,7 +666,7 @@ document.write(`
     <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
