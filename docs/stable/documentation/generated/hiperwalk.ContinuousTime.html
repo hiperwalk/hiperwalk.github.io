@@ -354,7 +354,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hpc.html">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../graph.html">Graphs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -462,6 +462,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -486,9 +487,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -673,55 +671,58 @@ matrix in quantum walk search. Quantum Inf Process 15, 4029-4048, 2016.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_terms.html#hiperwalk.ContinuousTime.get_terms" title="hiperwalk.ContinuousTime.get_terms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_terms</span></code></a>()</p></td>
 <td><p>Retrieve the number of terms in the power series used to calculate the evolution operator.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html#hiperwalk.ContinuousTime.hilbert_space_dimension" title="hiperwalk.ContinuousTime.hilbert_space_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hilbert_space_dimension</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_time.html#hiperwalk.ContinuousTime.get_time" title="hiperwalk.ContinuousTime.get_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_time</span></code></a>()</p></td>
+<td><p>Return the time used to construct the evolution operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html#hiperwalk.ContinuousTime.hilbert_space_dimension" title="hiperwalk.ContinuousTime.hilbert_space_dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hilbert_space_dimension</span></code></a>()</p></td>
 <td><p>Returns dimension of the Hilbert space.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html#hiperwalk.ContinuousTime.ket" title="hiperwalk.ContinuousTime.ket"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ket</span></code></a>(label)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html#hiperwalk.ContinuousTime.ket" title="hiperwalk.ContinuousTime.ket"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ket</span></code></a>(label)</p></td>
 <td><p>Creates a state of the computational basis.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html#hiperwalk.ContinuousTime.max_success_probability" title="hiperwalk.ContinuousTime.max_success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_success_probability</span></code></a>([state, delta_time])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html#hiperwalk.ContinuousTime.max_success_probability" title="hiperwalk.ContinuousTime.max_success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_success_probability</span></code></a>([state, step])</p></td>
 <td><p>Find the maximum success probability.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.optimal_runtime.html#hiperwalk.ContinuousTime.optimal_runtime" title="hiperwalk.ContinuousTime.optimal_runtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal_runtime</span></code></a>([state, delta_time])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.optimal_runtime.html#hiperwalk.ContinuousTime.optimal_runtime" title="hiperwalk.ContinuousTime.optimal_runtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal_runtime</span></code></a>([state, step])</p></td>
 <td><p>Find the optimal running time of a quantum-walk-based search.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability.html#hiperwalk.ContinuousTime.probability" title="hiperwalk.ContinuousTime.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states, vertices)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability.html#hiperwalk.ContinuousTime.probability" title="hiperwalk.ContinuousTime.probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability</span></code></a>(states, vertices)</p></td>
 <td><p>Computes the sum of probabilities for the specified vertices.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability_distribution.html#hiperwalk.ContinuousTime.probability_distribution" title="hiperwalk.ContinuousTime.probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability_distribution</span></code></a>(states)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.probability_distribution.html#hiperwalk.ContinuousTime.probability_distribution" title="hiperwalk.ContinuousTime.probability_distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probability_distribution</span></code></a>(states)</p></td>
 <td><p>Compute the probability distribution of the given state(s).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a>(**kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_evolution.html#hiperwalk.ContinuousTime.set_evolution" title="hiperwalk.ContinuousTime.set_evolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_evolution</span></code></a>(**kwargs)</p></td>
 <td><p>Set the evolution operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_gamma.html#hiperwalk.ContinuousTime.set_gamma" title="hiperwalk.ContinuousTime.set_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_gamma</span></code></a>([gamma])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_gamma.html#hiperwalk.ContinuousTime.set_gamma" title="hiperwalk.ContinuousTime.set_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_gamma</span></code></a>([gamma])</p></td>
 <td><p>Set gamma.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_hamiltonian</span></code></a>([gamma, type, marked])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian.html#hiperwalk.ContinuousTime.set_hamiltonian" title="hiperwalk.ContinuousTime.set_hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_hamiltonian</span></code></a>([gamma, type, marked])</p></td>
 <td><p>Set the Hamiltonian.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian_type.html#hiperwalk.ContinuousTime.set_hamiltonian_type" title="hiperwalk.ContinuousTime.set_hamiltonian_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_hamiltonian_type</span></code></a>([type])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_hamiltonian_type.html#hiperwalk.ContinuousTime.set_hamiltonian_type" title="hiperwalk.ContinuousTime.set_hamiltonian_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_hamiltonian_type</span></code></a>([type])</p></td>
 <td><p>Set the type of the Hamiltonian.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_marked.html#hiperwalk.ContinuousTime.set_marked" title="hiperwalk.ContinuousTime.set_marked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_marked</span></code></a>([marked])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_marked.html#hiperwalk.ContinuousTime.set_marked" title="hiperwalk.ContinuousTime.set_marked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_marked</span></code></a>([marked])</p></td>
 <td><p>Set the marked vertices.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_terms.html#hiperwalk.ContinuousTime.set_terms" title="hiperwalk.ContinuousTime.set_terms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_terms</span></code></a>([terms])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_terms.html#hiperwalk.ContinuousTime.set_terms" title="hiperwalk.ContinuousTime.set_terms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_terms</span></code></a>([terms])</p></td>
 <td><p>Set the number of terms used to calculate the evolution operator as a power series.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time" title="hiperwalk.ContinuousTime.set_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_time</span></code></a>([time])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.set_time.html#hiperwalk.ContinuousTime.set_time" title="hiperwalk.ContinuousTime.set_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_time</span></code></a>([time])</p></td>
 <td><p>Set a time instant.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate" title="hiperwalk.ContinuousTime.simulate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate</span></code></a>([time, state])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.simulate.html#hiperwalk.ContinuousTime.simulate" title="hiperwalk.ContinuousTime.simulate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate</span></code></a>([range, state])</p></td>
 <td><p>Simulates the quantum walk.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.state.html#hiperwalk.ContinuousTime.state" title="hiperwalk.ContinuousTime.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a>(entries)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.state.html#hiperwalk.ContinuousTime.state" title="hiperwalk.ContinuousTime.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a>(entries)</p></td>
 <td><p>Generates a state in the Hilbert space.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.success_probability.html#hiperwalk.ContinuousTime.success_probability" title="hiperwalk.ContinuousTime.success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">success_probability</span></code></a>(states)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.success_probability.html#hiperwalk.ContinuousTime.success_probability" title="hiperwalk.ContinuousTime.success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">success_probability</span></code></a>(states)</p></td>
 <td><p>Computes the success probability for the given state(s).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.uniform_state.html#hiperwalk.ContinuousTime.uniform_state" title="hiperwalk.ContinuousTime.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.ContinuousTime.uniform_state.html#hiperwalk.ContinuousTime.uniform_state" title="hiperwalk.ContinuousTime.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a>([vertices])</p></td>
 <td><p>Create a uniform state.</p></td>
 </tr>
 </tbody>

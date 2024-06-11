@@ -354,7 +354,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../graph.html">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">hiperwalk.Graph</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -462,6 +462,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -486,9 +487,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -556,11 +554,12 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
-<dd><p>Constructs an arbitrary simple graph with loops.</p>
+<dd><p>Constructs an arbitrary graph.</p>
 <p>This class defines the graph structure used for implementing a 
 quantum walk. It encapsulates all necessary properties
 and functionalities of the graph 
-required for the quantum walk dynamics.</p>
+required for the quantum walk dynamics.
+This class also supports the creation of graphs with loops.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -661,7 +660,7 @@ the descending order of neighbors.</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix" title="hiperwalk.Graph.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>()</p></td>
-<td><p>Return the graph's adjacency matrix.</p></td>
+<td><p>Return the adjacency matrix representation of the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.adjacent.html#hiperwalk.Graph.adjacent" title="hiperwalk.Graph.adjacent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent</span></code></a>(u, v)</p></td>
 <td><p>Return True if vertex <code class="docutils literal notranslate"><span class="pre">u</span></code> is adjacent to <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></td>
@@ -670,7 +669,7 @@ the descending order of neighbors.</p>
 <td><p>Return the degree of the given vertex.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.is_simple.html#hiperwalk.Graph.is_simple" title="hiperwalk.Graph.is_simple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_simple</span></code></a>()</p></td>
-<td><p>Return True if instance of simple graph.</p></td>
+<td><p>Return True if the graph has no multiedges or weights.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.laplacian_matrix.html#hiperwalk.Graph.laplacian_matrix" title="hiperwalk.Graph.laplacian_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_matrix</span></code></a>()</p></td>
 <td><p>Return the graph's Laplacian matrix.</p></td>
@@ -679,16 +678,16 @@ the descending order of neighbors.</p>
 <td><p>Return all neighbors of the given vertex.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges" title="hiperwalk.Graph.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
-<td><p>Determine the cardinality of the edge set.</p></td>
+<td><p>Return the total number of edges in the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_loops.html#hiperwalk.Graph.number_of_loops" title="hiperwalk.Graph.number_of_loops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_loops</span></code></a>()</p></td>
 <td><p>Return the number of loops in the graph.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices" title="hiperwalk.Graph.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
-<td><p>Determine the cardinality of the vertex set.</p></td>
+<td><p>Return the total number of vertices in the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number" title="hiperwalk.Graph.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
-<td><p>Return the vertex number given any vertex representation.</p></td>
+<td><p>Return the numerical label of a vertex based on its representation.</p></td>
 </tr>
 </tbody>
 </table>

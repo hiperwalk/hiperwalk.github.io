@@ -403,40 +403,52 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph">[docs]</a>
 <span class="k">class</span> <span class="nc">WeightedGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary weighted graph.</span>
+<span class="sd">    Construct an arbitrary weighted graph.</span>
+
+<span class="sd">    This class enables the creation of a weighted graph, </span>
+<span class="sd">    defined by a Hermitian adjacency matrix that </span>
+<span class="sd">    represents the connections between nodes and </span>
+<span class="sd">    edge weights.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix :</span>
-<span class="sd">        The adjacency matrix of the graph</span>
-<span class="sd">        (any integer Hermitian matrix).</span>
-<span class="sd">        Two input types are accepted:</span>
+<span class="sd">    adj_matrix : various types accepted</span>
+<span class="sd">        The adjacency matrix of the graph, </span>
+<span class="sd">        which must be a Hermitian matrix. </span>
+<span class="sd">        Two types of input are accepted:</span>
 
-<span class="sd">        * Any matrix -- for instance,</span>
-<span class="sd">            * :class:`scipy.sparse.csr_array`,</span>
-<span class="sd">            * :class:`numpy.ndarray`,</span>
-<span class="sd">            * list of lists.</span>
-<span class="sd">        * :class:`networkx.Graph`.</span>
-<span class="sd">            * The adjacency matrix is extracted from the graph.</span>
+<span class="sd">            * Matrix formats such as:</span>
+<span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
+<span class="sd">                * :class:`numpy.ndarray`,</span>
+<span class="sd">                * List of lists.</span>
+<span class="sd">            * :class:`networkx.Graph`:</span>
+<span class="sd">                The adjacency matrix is derived from</span>
+<span class="sd">                the provided NetworkX graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
-<span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
-<span class="sd">        If ``False``, the pointer to ``adj_matrix`` is stored.</span>
+<span class="sd">        Determines how the adjacency matrix is stored:</span>
+
+<span class="sd">            * If ``True``, a deep copy of ``adj_matrix`` is</span>
+<span class="sd">              created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original</span>
+<span class="sd">              ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    TypeError</span>
-<span class="sd">        If ``adj_matrix`` is not a square matrix.</span>
+<span class="sd">        If ``adj_matrix`` is not a square matrix, indicating </span>
+<span class="sd">        it cannot represent a valid adjacency matrix.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The graph :math:`G(V,E)` on which the quantum walk </span>
-<span class="sd">    takes place is specified by</span>
-<span class="sd">    any real Hermitian matrix :math:`C`.</span>
+<span class="sd">    When defining an instance of the Coined class on a weighted graph, </span>
+<span class="sd">    the edge weights do not affect the simulation.</span>
+<span class="sd">    </span>
+<span class="sd">    When defining an instance of the ContinuousTime class on a weighted graph, </span>
+<span class="sd">    the edge weights do affect the simulation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+    <span class="c1"># def _default_dtype(self):</span>
+    <span class="c1">#     return np.float32</span>
 
     <span class="k">def</span> <span class="nf">_set_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span> <span class="o">=</span> <span class="n">adj_matrix</span>
@@ -455,8 +467,8 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
         <span class="c1"># this should not be invoked</span>
@@ -464,8 +476,30 @@ document.write(`
 
 <div class="viewcode-block" id="WeightedGraph.adjacency_matrix">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.WeightedGraph.adjacency_matrix.html#hiperwalk.WeightedGraph.adjacency_matrix">[docs]</a>
-    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># TODO: return a copy?</span>
+    <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the adjacency matrix representation of the graph.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        copy : bool, default=True</span>
+<span class="sd">            If ``True``, return a hard copy of the adjacency matrix.</span>
+<span class="sd">            If ``False``, return a pointer to the adjacency matrix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`scipy.sparse.csr_array`.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        In weighted graphs,</span>
+<span class="sd">        the entries of the adjacency matrix :math:`A` represent</span>
+<span class="sd">        the weights of the edges. In general, the weight is a non-zero</span>
+<span class="sd">        real number. In Hiperwalk, :math:`A` can be an arbitrary</span>
+<span class="sd">        Hermitian matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span></div>
 
 
@@ -496,12 +530,10 @@ document.write(`
 <span class="sd">                \sum_{k = 0}^{|V| - 1}A_{ik}, &amp; \text{if } i = j\\</span>
 <span class="sd">                0, &amp; \text{otherwise}.</span>
 <span class="sd">            \end{cases}</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            See</span>
-<span class="sd">            https://people.eecs.berkeley.edu/~satishr/cs270/sp11/rough-notes/Tree-metrics.pdf</span>
-<span class="sd">            as reference</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># See</span>
+        <span class="c1"># https://people.eecs.berkeley.edu/~satishr/cs270/sp11/rough-notes/Tree-metrics.pdf</span>
+        <span class="c1"># as reference</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">laplacian_matrix</span><span class="p">()</span></div>
 
 

@@ -399,36 +399,42 @@ document.write(`
 
 <div class="viewcode-block" id="Cycle">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/cycle.html#hiperwalk.Cycle">[docs]</a>
-<span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Cycle</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cycle graph.</span>
+<span class="sd">    Cycle graph constructor.</span>
+
+<span class="sd">    A cycle graph is a graph that forms a single closed loop, </span>
+<span class="sd">    where each vertex is connected to exactly two other vertices, </span>
+<span class="sd">    forming a circular structure.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    num_vert : int</span>
-<span class="sd">        Number of vertices in the cycle.</span>
-<span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
+<span class="sd">        The number of vertices in the cycle. </span>
+
+<span class="sd">    multiedges, weights: matrix or dict, default=None</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
+<span class="sd">    copy : bool, default=False</span>
 <span class="sd">        See :ref:`graph_constructors`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    :class:`hiperwalk.Graph`</span>
-<span class="sd">        See :ref:`graph_constructors` for details.</span>
+<span class="sd">        Returns an instance of a cycle graph. </span>
+<span class="sd">        Refer to :ref:`graph_constructors` for more details.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    :ref:`graph_constructors`.</span>
+<span class="sd">    :ref:`graph_constructors`</span>
+<span class="sd">        Further information on graph constructors.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The cycle can be interpreted as being embedded on the line</span>
-<span class="sd">    with a cyclic boundary condition.</span>
-<span class="sd">    In this context,</span>
-<span class="sd">    the **order of neighbors** is</span>
-<span class="sd">    the neighbor to the right first,</span>
-<span class="sd">    followed by the neighbor to the left.</span>
-<span class="sd">    In other words, for any vertex :math:`v`,</span>
-<span class="sd">    the neighbors are given in the order :math:`[v + 1, v - 1]`.</span>
+<span class="sd">    The cycle is conceptually embedded on a line with cyclic </span>
+<span class="sd">    boundary conditions. The **order of neighbors** for any </span>
+<span class="sd">    vertex :math:`v` is :math:`[v + 1, v - 1]`, where the right </span>
+<span class="sd">    neighbor is listed first, followed by the left neighbor.</span>
 
 <span class="sd">    .. testsetup::</span>
 
@@ -445,10 +451,11 @@ document.write(`
 <span class="sd">        array([9, 7])</span>
 <span class="sd">        &gt;&gt;&gt; g.neighbors(9)</span>
 <span class="sd">        array([0, 8])</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">multiedges</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">IntegerLattice</span><span class="p">(</span><span class="n">num_vert</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">multiedges</span><span class="o">=</span><span class="n">multiedges</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
+                       <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">g</span></div>
 
 </pre></div>

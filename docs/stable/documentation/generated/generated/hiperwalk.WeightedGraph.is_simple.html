@@ -353,7 +353,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../graph.html">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -461,6 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -485,9 +486,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -560,12 +558,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.WeightedGraph.is_simple">
 <span class="sig-prename descclassname"><span class="pre">WeightedGraph.</span></span><span class="sig-name descname"><span class="pre">is_simple</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/weighted_graph.html#WeightedGraph.is_simple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.WeightedGraph.is_simple" title="Link to this definition">#</a></dt>
-<dd><p>Return True if instance of simple graph.</p>
+<dd><p>Return True if the graph has no multiedges or weights.</p>
+<p>A simple graph, in this context, does not include multiple 
+edges between the same pair of vertices or 
+any weighted edges, although loops are permitted.</p>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Decide if simple graph implementation accepts loops.</p>
-</div>
+<p>The Graph class allows for loops in the graph.</p>
 </dd></dl>
 
 </section>

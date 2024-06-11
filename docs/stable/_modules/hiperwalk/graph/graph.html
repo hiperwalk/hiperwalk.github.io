@@ -397,7 +397,6 @@ document.write(`
   <h1>Source code for hiperwalk.graph.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">issparse</span><span class="p">,</span> <span class="n">csr_array</span><span class="p">,</span> <span class="n">diags</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 
 <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">elem</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -463,12 +462,13 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Graph.html#hiperwalk.Graph">[docs]</a>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary simple graph with loops.</span>
+<span class="sd">    Constructs an arbitrary graph.</span>
 
 <span class="sd">    This class defines the graph structure used for implementing a </span>
 <span class="sd">    quantum walk. It encapsulates all necessary properties</span>
 <span class="sd">    and functionalities of the graph </span>
 <span class="sd">    required for the quantum walk dynamics.</span>
+<span class="sd">    This class also supports the creation of graphs with loops.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -566,8 +566,8 @@ document.write(`
 <span class="sd">        array([3, 2, 1, 0])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span>
+    <span class="c1"># def _default_dtype(self):</span>
+    <span class="c1">#     return np.int8</span>
 
     <span class="k">def</span> <span class="nf">_count_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
         <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
@@ -588,15 +588,17 @@ document.write(`
         <span class="k">try</span><span class="p">:</span>
             <span class="n">adj_matrix</span><span class="o">.</span><span class="n">adj</span> <span class="c1">#throws AttributeError if not networkx graph</span>
             <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span>
-                                             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">())</span>
+            <span class="c1"># adj_matrix = nx.adjacency_matrix(adj_matrix,</span>
+            <span class="c1">#                                  dtype=self._default_dtype())</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">pass</span>
 
         <span class="c1"># TODO: store numpy matrix</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">issparse</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">):</span>
-            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">,</span>
-                                   <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">())</span>
+            <span class="c1"># adj_matrix = csr_array(adj_matrix,</span>
+            <span class="c1">#                        dtype=self._default_dtype())</span>
+            <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">(</span><span class="n">adj_matrix</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Adjacency matrix is not square.&quot;</span><span class="p">)</span>
@@ -633,19 +635,18 @@ document.write(`
                                <span class="n">end</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
 
-        <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
         <span class="k">return</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">A</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span><span class="n">A</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
-        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">lin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">lin</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">entry</span> <span class="o">+</span> <span class="n">offset</span>
 
     <span class="k">def</span> <span class="nf">_find_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Find the corresponding line and columns of the given entry.</span>
+<span class="sd">        Find the corresponding row and column of the given entry.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -673,8 +674,6 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO test this function</span>
         <span class="c1"># TODO write unitary tests</span>
-        <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="n">neigh</span><span class="p">)</span>
 
         <span class="n">adj_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
@@ -704,12 +703,28 @@ document.write(`
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all neighbors of the given vertex.</span>
 
+<span class="sd">        This method retrieves all vertices adjacent to the </span>
+<span class="sd">        specified vertex. If the graph allows loops, </span>
+<span class="sd">        the vertex may also be considered its </span>
+<span class="sd">        own neighbor if such an edge exists.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertex : int</span>
+<span class="sd">            The vertex for which neighbors are to be found.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        list of int:</span>
-<span class="sd">            The neighbors of ``vertex``.</span>
-<span class="sd">            The order of the neighbors varies depending on</span>
-<span class="sd">            the graph.</span>
+<span class="sd">            The neighbors of ``vertex``. </span>
+<span class="sd">            The order of the neighbors may vary based on </span>
+<span class="sd">            the graph&#39;s internal representation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The specific order of the neighbors in the returned </span>
+<span class="sd">        list is not guaranteed and may change if the </span>
+<span class="sd">        underlying graph structure is modified.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span>
@@ -721,7 +736,16 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_vertices.html#hiperwalk.Graph.number_of_vertices">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Determine the cardinality of the vertex set.</span>
+<span class="sd">        Return the total number of vertices in the graph.</span>
+
+<span class="sd">        This method calculates and returns the cardinality </span>
+<span class="sd">        of the vertex set, effectively providing the </span>
+<span class="sd">        count of all vertices present in the graph.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The total number of vertices in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
@@ -730,7 +754,16 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.number_of_edges.html#hiperwalk.Graph.number_of_edges">[docs]</a>
     <span class="k">def</span> <span class="nf">number_of_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Determine the cardinality of the edge set.</span>
+<span class="sd">        Return the total number of edges in the graph.</span>
+
+<span class="sd">        This method calculates and returns the cardinality </span>
+<span class="sd">        of the edge set, indicating the total count of </span>
+<span class="sd">        all edges present in the graph, including loops.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The total number of edges in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">non_loops</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span>
         <span class="n">num_edges</span> <span class="o">=</span> <span class="n">non_loops</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
@@ -742,6 +775,15 @@ document.write(`
     <span class="k">def</span> <span class="nf">number_of_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the number of loops in the graph.</span>
+
+<span class="sd">        This method counts and returns the number of loops </span>
+<span class="sd">        in the graph. A loop is defined as an edge that </span>
+<span class="sd">        connects a vertex to itself.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The number of loops in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span></div>
 
@@ -754,7 +796,7 @@ document.write(`
 
 <span class="sd">        The degree of a vertex :math:`u` in a graph </span>
 <span class="sd">        is the number of edges  incident to :math:`u`.</span>
-<span class="sd">        Loops at :math:`u` are counted once.</span>
+<span class="sd">        Each Loop is counted once.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -763,8 +805,7 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            Will we accept loops in simple graphs?</span>
+<span class="sd">        The Graph class supports graphs with loops.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
@@ -775,37 +816,32 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.vertex_number.html#hiperwalk.Graph.vertex_number">[docs]</a>
     <span class="k">def</span> <span class="nf">vertex_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertex</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the vertex number given any vertex representation.</span>
+<span class="sd">        Return the numerical label of a vertex based on its representation.</span>
 
-<span class="sd">        This method returns the numerical label of the vertex </span>
-<span class="sd">        regardless of its representation.</span>
-<span class="sd">        There are some graphs in which a vertex may have multiple</span>
-<span class="sd">        representations.</span>
-<span class="sd">        For example, coordinates in a grid.</span>
-<span class="sd">        For arbitrary graphs,</span>
-<span class="sd">        this function returns the argument itself if valid.</span>
+<span class="sd">        This method is designed to handle graphs where vertices might have </span>
+<span class="sd">        multiple representations, such as coordinates in a grid. </span>
+<span class="sd">        In cases of arbitrary graphs, this function will return </span>
+<span class="sd">        the input itself if it is a valid representation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        vertex: int</span>
-<span class="sd">            The vertex in any of its representation.</span>
-<span class="sd">            For general graphs,</span>
-<span class="sd">            only its label is accepted.</span>
+<span class="sd">        vertex : int</span>
+<span class="sd">            The vertex in any valid representation. For arbitrary graphs, only the vertex&#39;s label is accepted.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">            Vertex number.</span>
+<span class="sd">            The numerical label of the vertex.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            If ``vertex`` is not valid.</span>
+<span class="sd">            If the ``vertex`` is not a valid representation.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        It is useful to have this function implemented for general graphs</span>
-<span class="sd">        to simplify the implementation of some quantum walk methods.</span>
+<span class="sd">        Implementing this function is beneficial for arbitrary graphs </span>
+<span class="sd">        as it simplifies the implementation of some quantum walk methods.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vertex</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
@@ -820,7 +856,9 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.adjacency_matrix.html#hiperwalk.Graph.adjacency_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">adjacency_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the graph&#39;s adjacency matrix.</span>
+<span class="sd">        Return the adjacency matrix representation of the graph.</span>
+
+<span class="sd">        Return a **hard copy** of the adjacency matrix.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -828,30 +866,29 @@ document.write(`
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">    </span>
-<span class="sd">        In a weightless graph :math:`G(V, E)` with :math:`n` vertices</span>
+<span class="sd">        In a simple graph :math:`G(V, E)` with :math:`n` vertices</span>
 <span class="sd">        :math:`v_0, \ldots, v_{n-1}`, the adjacency matrix </span>
 <span class="sd">        of :math:`G(V, E)` is an </span>
-<span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:</span>
-<span class="sd">        </span>
+<span class="sd">        :math:`n`-dimensional matrix :math:`A`, defined as follows:        </span>
+
 <span class="sd">        .. math::</span>
 <span class="sd">            A_{i,j} = \begin{cases}</span>
 <span class="sd">                1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\</span>
 <span class="sd">                0, &amp; \text{otherwise.}</span>
 <span class="sd">            \end{cases}</span>
 <span class="sd">    </span>
-<span class="sd">        In weighted graphs, the entries of :math:`A` represent </span>
-<span class="sd">        the weights of the edges. The weight is a non-zero</span>
-<span class="sd">        real number.</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            Add other return types depending on the stored matrix type.</span>
+<span class="sd">        If :math:`G(V, E)` has a loop on vertex :math:`v_i`, </span>
+<span class="sd">        then :math:`A_{i,i}=1`.</span>
+<span class="sd">        </span>
+<span class="sd">        In multigraphs, where multiple edges can exist between</span>
+<span class="sd">        the same pair of vertices, the adjacency matrix reflects this</span>
+<span class="sd">        by counting the number of such edges.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
-        <span class="c1"># TODO: copy or not?</span>
-        <span class="k">return</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span></div>
+
+        <span class="k">return</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Graph.laplacian_matrix">
@@ -894,12 +931,15 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Graph.is_simple.html#hiperwalk.Graph.is_simple">[docs]</a>
     <span class="k">def</span> <span class="nf">is_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return True if instance of simple graph.</span>
+<span class="sd">        Return True if the graph has no multiedges or weights.</span>
+
+<span class="sd">        A simple graph, in this context, does not include multiple </span>
+<span class="sd">        edges between the same pair of vertices or </span>
+<span class="sd">        any weighted edges, although loops are permitted.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            Decide if simple graph implementation accepts loops.</span>
+<span class="sd">        The Graph class allows for loops in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -922,7 +962,7 @@ document.write(`
                 <span class="k">if</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                     <span class="c1"># find right position</span>
                     <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">adj_indices</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
                     <span class="c1"># swap indices</span>
                     <span class="n">temp</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -932,7 +972,55 @@ document.write(`
                     <span class="c1"># swap data</span>
                     <span class="n">temp</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                     <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span></div>
+                    <span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+
+    <span class="k">def</span> <span class="nf">_dict_to_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receives a dictionary and returns the</span>
+<span class="sd">        adjacency matrix with values overwritten by the dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dictionary: dict</span>
+<span class="sd">            A dictionary with entries {`(u, v): value`}</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If trying to remove an edge from the graph --</span>
+<span class="sd">            assign a value of 0 to an existing edge --, or</span>
+<span class="sd">            if trying to insert an edge into the graph --</span>
+<span class="sd">            assign a value to a non-existing edge.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># expects a dictionary with non-zero values</span>
+        <span class="c1"># the key corresponds to an edge</span>
+        <span class="c1">#   edge must be a tuple</span>
+        <span class="c1">#   raises an error if the edge does not exist</span>
+        <span class="c1"># the value that corresponds to the given edge</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">dictionary</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                       <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
+        <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
+
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Inexistent edge &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Edge &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                                 <span class="o">+</span> <span class="s1">&#39;cannot be assigned a value of 0.&#39;</span><span class="p">)</span>
+
+            <span class="n">adj_matrix</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">adj_matrix</span></div>
 
 </pre></div>
 

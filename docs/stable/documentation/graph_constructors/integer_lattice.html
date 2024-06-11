@@ -353,7 +353,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../graph.html">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../generated/hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -461,6 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -485,9 +486,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../generated/hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generated/hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generated/hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generated/hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generated/hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -554,7 +552,7 @@ document.write(`
 <h1>hiperwalk.IntegerLattice<a class="headerlink" href="#hiperwalk-integerlattice" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.IntegerLattice">
-<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">IntegerLattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/integer_lattice.html#IntegerLattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.IntegerLattice" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">IntegerLattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiedges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/integer_lattice.html#IntegerLattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.IntegerLattice" title="Link to this definition">#</a></dt>
 <dd><p>Integer lattice graph.</p>
 <p>An integer lattice is a lattice in an euclidean space
 such that every point is a tuple of integers.
@@ -611,6 +609,8 @@ vertex with coordinates <code class="docutils literal notranslate"><span class="
 <code class="docutils literal notranslate"><span class="pre">False</span></code> if it has borders.</p>
 </dd>
 <dt><strong>multiedges, weights: scipy.sparse.csr_array, default=None</strong></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>See <a class="reference internal" href="../graph.html#graph-constructors"><span class="std std-ref">Graph Constructors</span></a>.</p>
 </dd>
 </dl>
 </dd>

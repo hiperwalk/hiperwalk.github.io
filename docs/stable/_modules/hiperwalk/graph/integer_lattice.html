@@ -401,6 +401,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">eye</span> <span class="k">as</span> <span class="n">sparse_eye</span>
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
+<span class="kn">from</span> <span class="nn">.multigraph</span> <span class="kn">import</span> <span class="n">Multigraph</span>
+<span class="kn">from</span> <span class="nn">.weighted_graph</span> <span class="kn">import</span> <span class="n">WeightedGraph</span>
 
 <span class="k">def</span> <span class="nf">__generate_valid_basis</span><span class="p">(</span><span class="n">euc_dim</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">basis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -627,7 +629,7 @@ document.write(`
 <div class="viewcode-block" id="IntegerLattice">
 <a class="viewcode-back" href="../../../documentation/graph_constructors/integer_lattice.html#hiperwalk.graph.integer_lattice.IntegerLattice">[docs]</a>
 <span class="k">def</span> <span class="nf">IntegerLattice</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                  <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                  <span class="n">multiedges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Integer lattice graph.</span>
 
@@ -687,6 +689,9 @@ document.write(`
 <span class="sd">    multiedges, weights: scipy.sparse.csr_array, default=None</span>
 <span class="sd">        See :ref:`graph_constructors`.</span>
 
+<span class="sd">    copy : bool, default=False</span>
+<span class="sd">        See :ref:`graph_constructors`.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    :class:`hiperwalk.Graph`</span>
@@ -735,8 +740,12 @@ document.write(`
 <span class="sd">        [(1, 2), (0, 2), (2, 0), (1, 0)]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">multiedges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Both `weights` and `multiedges` arguments were set. &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;Cannot decide whether to create a weighted graph or &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;a multigraph.&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
         <span class="n">dim</span> <span class="o">=</span> <span class="p">[</span><span class="n">dim</span><span class="p">]</span>
@@ -763,6 +772,34 @@ document.write(`
 
     <span class="c1">#create adjacency matrix</span>
     <span class="n">g</span><span class="o">.</span><span class="n">_set_adj_matrix</span><span class="p">(</span><span class="n">__create_adj_matrix</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+    <span class="c1"># create multigraph or weighted graph</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">weights</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">multiedges</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;keys&#39;</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_dict_to_adj_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">copy</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">_rearrange_matrix_indices</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">g2</span> <span class="o">=</span> <span class="n">WeightedGraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">g2</span> <span class="o">=</span> <span class="n">Multigraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+        <span class="n">g2</span><span class="o">.</span><span class="n">_dim</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_dim</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">_periodic</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_periodic</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">_euc_dim</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_euc_dim</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_num_loops</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">_basis</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">_basis</span>
+
+        <span class="n">g2</span><span class="o">.</span><span class="n">_valid_vertex</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">_valid_vertex</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">vertex_number</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">vertex_number</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">vertex_coordinates</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">vertex_coordinates</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
+        <span class="n">g2</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="n">g2</span>
 
     <span class="k">return</span> <span class="n">g</span></div>
 

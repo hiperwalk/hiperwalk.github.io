@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Configuring HPC &#8212; Hiperwalk stable documentation</title>
+    <title>HPC &#8212; Hiperwalk stable documentation</title>
   
   
   
@@ -353,7 +353,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuring HPC</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="graph.html">Graphs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -461,6 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -485,9 +486,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -530,7 +528,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Documentation</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Configuring HPC</li>
+    <li class="breadcrumb-item active" aria-current="page">HPC</li>
   </ul>
 </nav>
 </div>
@@ -547,18 +545,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="configuring-hpc">
-<h1>Configuring HPC<a class="headerlink" href="#configuring-hpc" title="Link to this heading">#</a></h1>
-<p>To configure which high-performance computing (HPC) platform
-is going to be used, issue the command
-<a class="reference internal" href="#hiperwalk.set_hpc" title="hiperwalk.set_hpc"><code class="xref py py-func docutils literal notranslate"><span class="pre">hiperwalk.set_hpc()</span></code></a>.</p>
+  <section id="hpc">
+<h1>HPC<a class="headerlink" href="#hpc" title="Link to this heading">#</a></h1>
+<p>To configure the high-performance computing (HPC) platform
+that will be used, issue the command
+<a class="reference internal" href="#hiperwalk.set_hpc" title="hiperwalk.set_hpc"><code class="xref py py-func docutils literal notranslate"><span class="pre">hiperwalk.set_hpc()</span></code></a>.
+All commands executed after <a class="reference internal" href="#hiperwalk.set_hpc" title="hiperwalk.set_hpc"><code class="xref py py-func docutils literal notranslate"><span class="pre">hiperwalk.set_hpc()</span></code></a> will
+use the specified platform.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="hiperwalk.set_hpc">
 <span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">set_hpc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hiperwalk/quantum_walk/_pyneblina_interface.html#set_hpc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.set_hpc" title="Link to this definition">#</a></dt>
-<dd><p>Indicates which HPC platform is going to be used.</p>
+<dd><p>Indicate which HPC platform is going to be used.</p>
 <p>After executing the <code class="docutils literal notranslate"><span class="pre">set_hpc</span></code> command,
 all subsequent hiperwalk commands will
-utilize the dsignated HPC platform.</p>
+use the designated HPC platform.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">

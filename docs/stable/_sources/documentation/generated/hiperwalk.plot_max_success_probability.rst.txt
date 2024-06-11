@@ -1,6 +1,0 @@
-﻿hiperwalk.plot\_max\_success\_probability
-=========================================
-
-.. currentmodule:: hiperwalk
-
-.. autofunction:: plot_max_success_probability

@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="hiperwalk.Graph" href="generated/hiperwalk.Graph.html" />
-    <link rel="prev" title="Configuring HPC" href="hpc.html" />
+    <link rel="prev" title="HPC" href="hpc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -354,7 +354,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -462,6 +462,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -486,9 +487,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -556,13 +554,13 @@ document.write(`
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.Graph.html#hiperwalk.Graph" title="hiperwalk.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a></p></td>
-<td><p>Constructs an arbitrary simple graph with loops.</p></td>
+<td><p>Constructs an arbitrary graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph" title="hiperwalk.Multigraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Multigraph</span></code></a></p></td>
-<td><p>Constructs an arbitrary multigraph.</p></td>
+<td><p>Construct an arbitrary multigraph.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.html#hiperwalk.WeightedGraph" title="hiperwalk.WeightedGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightedGraph</span></code></a></p></td>
-<td><p>Constructs an arbitrary weighted graph.</p></td>
+<td><p>Construct an arbitrary weighted graph.</p></td>
 </tr>
 </tbody>
 </table>
@@ -598,12 +596,43 @@ and <code class="docutils literal notranslate"><span class="pre">weights</span> 
 and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>.</p></li>
 </ul>
 <p>Both <code class="docutils literal notranslate"><span class="pre">multiedges</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span></code> are expected to be
-instances of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a> such that</p>
+instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.</p>
+<ul>
+<li><p>If they are an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">{(u,</span> <span class="pre">v):</span> <span class="pre">value}</span></code> format.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiedges[(u,</span> <span class="pre">v)]</span></code> is the number of edges
+incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weights[(u,</span> <span class="pre">v)]</span></code> is the weight of the edge
+incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+</ul>
+<p>If an edge exists in the graph but it is not listed in
+the <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> keys,
+its value defaults to 1.
+Attempting to remove an edge by assigning its value to 0
+(e.g. <code class="docutils literal notranslate"><span class="pre">weights[(u,</span> <span class="pre">v)]</span> <span class="pre">=</span> <span class="pre">0</span></code>) or
+attempting to add an edge by assigning a value to it
+(e.g. <code class="docutils literal notranslate"><span class="pre">weights[(-1,</span> <span class="pre">-1)</span> <span class="pre">=</span> <span class="pre">10])</span></code> raises a
+a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError exception</a>.</p>
+</li>
+<li><p>If they are an instance of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">multiedges[u,</span> <span class="pre">v]</span></code> is the number of edges
 incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">weights[u,</span> <span class="pre">v]</span></code> is the weight of the edge
 incident to both vertices <code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+</ul>
+<p>In this case, all valid edges must have been assigned a
+value different from 0.
+When explicitly specifying the adjacency matrix,
+the <code class="docutils literal notranslate"><span class="pre">copy</span></code> changes the method’s behavior.</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">=</span> <span class="pre">False</span></code> (default), a pointer to the
+adjacency matrix is stored.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">=</span> <span class="pre">True</span></code>, a hard copy of the
+adjacency matrix is stored.</p></li>
+</ul>
+</li>
 </ul>
 <p>If <code class="docutils literal notranslate"><span class="pre">multiedges</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>,
 a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError exception</a>
@@ -654,7 +683,7 @@ it conveys the idea that an instance is going to be returned.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Configuring HPC</p>
+        <p class="prev-next-title">HPC</p>
       </div>
     </a>
     <a class="right-next"

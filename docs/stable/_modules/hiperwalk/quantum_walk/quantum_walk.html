@@ -400,7 +400,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">modules</span> <span class="k">as</span> <span class="n">sys_modules</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="kn">import</span> <span class="nn">scipy.optimize</span>
@@ -419,14 +418,6 @@ document.write(`
 <span class="sd">    ----------</span>
 <span class="sd">    graph: :class:`hiperwalk.graph.Graph`</span>
 <span class="sd">        Graph on which the quantum walk takes place.</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-
-<span class="sd">    .. todo::</span>
-<span class="sd">        * List the that methods must be overwritten.</span>
-<span class="sd">        * Accept other types as ``graph`` such as numpy array</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="QuantumWalk.__init__">
@@ -457,13 +448,20 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.uniform_state">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a uniform state.</span>
 
-<span class="sd">        The state is constructed based on the ``hilb_dim`` attribute.</span>
 <span class="sd">        The uniform state is a unit vector with entries </span>
 <span class="sd">        that have the same real amplitudes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vertices: list of vertices, default=None</span>
+<span class="sd">            If ``vertices is None``,</span>
+<span class="sd">            create the uniform superposition of all vertices.</span>
+<span class="sd">            Otherwise,</span>
+<span class="sd">            create the uniform superposition of the given vertices.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -483,8 +481,15 @@ document.write(`
 <span class="sd">        while in the coined quantum walk model, </span>
 <span class="sd">        :math:`i` is the label of an arc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-                <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span></div>
+        <span class="k">if</span> <span class="n">vertices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+                    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">))</span>
+
+        <span class="c1"># uniform superposition of the given vertices</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">state</span><span class="p">[[</span><span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">vertex_number</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">state</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">state</span><span class="p">))</span></div>
 
 
     <span class="k">def</span> <span class="nf">_set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
@@ -744,47 +749,49 @@ document.write(`
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_time_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_range_to_tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Clean and format ``time`` to ``(start, end, step)`` format.</span>
+<span class="sd">        Clean and format ``range`` to ``(start, end, step)`` format.</span>
 
 <span class="sd">        See :meth:`simulate` for valid input format options.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            If ``time`` is in an invalid input format.</span>
+<span class="sd">            If ``range`` is in an invalid input format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
-            <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
+            <span class="nb">range</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">=</span> <span class="n">step</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">step</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">step</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         
-        <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span>
+        <span class="nb">range</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid &#39;time&#39; value.&quot;</span>
+                <span class="s2">&quot;Invalid &#39;range&#39; value.&quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;&#39;start&#39; and &#39;end&#39; must be non-negative&quot;</span>
                 <span class="o">+</span> <span class="s2">&quot; and &#39;step&#39; must be positive.&quot;</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Invalid `time` value.&quot;</span>
+                <span class="s2">&quot;Invalid `range` value.&quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;`start` cannot be larger than `end`.&quot;</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">time</span>
+        <span class="k">return</span> <span class="nb">range</span>
 
     <span class="k">def</span> <span class="nf">_normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">):</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -812,7 +819,7 @@ document.write(`
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :class:`numpy.array`</span>
+<span class="sd">        :class:`numpy.ndarray`</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -847,6 +854,8 @@ document.write(`
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Entries were not specified.&quot;</span><span class="p">)</span>
 
         <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">])</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="nb">complex</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+                 <span class="k">else</span> <span class="nb">float</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">ampl</span><span class="p">,</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
@@ -865,11 +874,6 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        label : int</span>
 <span class="sd">            The ket label.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        .. todo::</span>
-<span class="sd">            valid examples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ket</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">ket</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -885,6 +889,17 @@ document.write(`
             <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># autocast. hiperblas-core only allows same-time multipl</span>
+            <span class="n">mat_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">,</span>
+                                        <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+            <span class="n">vec_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+                                        <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mat_complex</span> <span class="o">!=</span> <span class="n">vec_complex</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">mat_complex</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
@@ -917,13 +932,16 @@ document.write(`
 
             <span class="c1"># TODO: compare with numpy.linalg.matrix_power</span>
 
-    <span class="k">def</span> <span class="nf">_save_simul_vec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_save_simul_vec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hpc</span><span class="p">,</span> <span class="n">continue_simulation</span><span class="p">):</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># TODO: check if vector must be deleted or</span>
             <span class="c1">#       if it can be reused via neblina-core commands.</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">retrieve_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">continue_simulation</span><span class="p">:</span>
+                <span class="c1"># does it need to be a copy?</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span>
 
@@ -933,32 +951,47 @@ document.write(`
 
 <div class="viewcode-block" id="QuantumWalk.simulate">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate">[docs]</a>
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulates the quantum walk.</span>
 
-<span class="sd">        The simulation progresses by iteratively applying </span>
-<span class="sd">        the evolution operator to the outcome of its prior </span>
-<span class="sd">        application, initiating from the specified initial state.</span>
+<span class="sd">        The simulation propagates the quantum walk state by iteratively </span>
+<span class="sd">        applying the evolution operator to the result of its previous </span>
+<span class="sd">        application, starting from the specified initial state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        time : int, tuple of int, default=None</span>
-<span class="sd">            Specifies the time instances when the state should be saved.</span>
+<span class="sd">        range : int, tuple of int, default=None</span>
+<span class="sd">            Specifies the number of applitcations of</span>
+<span class="sd">            the evolution operator,</span>
+<span class="sd">            and the corresponding states to be saved.</span>
 <span class="sd">            It can be defined in three distinct ways:</span>
 <span class="sd">            </span>
 <span class="sd">            * end</span>
-<span class="sd">                Saves the state at the ``end`` time.</span>
-<span class="sd">                Only the final state is retained.</span>
+<span class="sd">                Saves the states from the ``0``-th to the ``(end - 1)``-th</span>
+<span class="sd">                application of the evolution operator.</span>
+<span class="sd">                The corresponding exponents of the evolution operator are</span>
+<span class="sd">                all integers in the open interval ``[0, end)``, i.e.</span>
+<span class="sd">                ``[0, 1, ..., end - 1]``.</span>
 
-<span class="sd">            * (end, step)</span>
-<span class="sd">                Retains every state from time 0 to ``end`` (inclusive)</span>
-<span class="sd">                that corresponds to a multiple of ``step``.</span>
+<span class="sd">            * (start, end)</span>
+<span class="sd">                Saves the states from the ``start``-th to</span>
+<span class="sd">                the ``(end - 1)``-th application of the evolution operator.</span>
+<span class="sd">                The corresponding exponents of the evolution operator are</span>
+<span class="sd">                all integers in the open interval ``[start, end)``, i.e.</span>
+<span class="sd">                ``[start, start + 1, ..., end - 1]``.</span>
 
 <span class="sd">            * (start, end, step)</span>
-<span class="sd">                Stores every state from time ``start`` (inclusive)</span>
-<span class="sd">                to ``end`` (inclusive)</span>
-<span class="sd">                that is a multiple of ``step``.</span>
+<span class="sd">                Saves the states from the ``start``-th to</span>
+<span class="sd">                the ``(end - 1)``-th application of the evolution operator</span>
+<span class="sd">                separated by ``step`` applications.</span>
+<span class="sd">                The corresponding exponents of the evolution operator are</span>
+<span class="sd">                all integers in the open interval ``[start, end)``</span>
+<span class="sd">                such that the difference between two integers is at least</span>
+<span class="sd">                ``step``, i.e.</span>
+<span class="sd">                ``[start, start + step, ..., start + k*step]``</span>
+<span class="sd">                where ``k`` is the smallest integer that satisfies</span>
+<span class="sd">                ``start + (k + 1)*step &gt;= end``.</span>
 
 <span class="sd">        state : :class:`numpy.array`, default=None</span>
 <span class="sd">            The starting state onto which the evolution operator</span>
@@ -973,10 +1006,7 @@ document.write(`
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            Triggered if:</span>
-<span class="sd">            * ``time=None``.</span>
-<span class="sd">            * ``state=None``.</span>
-<span class="sd">            * ``evolution_operator=None`` and hasn&#39;t been set before.</span>
+<span class="sd">            Triggered if ``range is None`` or ``state is None``.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -986,15 +1016,16 @@ document.write(`
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        The states computed and saved during the simulation </span>
-<span class="sd">        are determined by the parameter ``time=(start,end,step)``.        </span>
+<span class="sd">        are determined by the parameter ``range=(start,end,step)``.        </span>
 <span class="sd">        </span>
 <span class="sd">        The simulation of the walk is based on the expression</span>
-<span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(\text{start})\rangle`, where</span>
-<span class="sd">        :math:`|\psi(\text{start})\rangle` denotes the initial state.        </span>
+<span class="sd">        :math:`|\psi(t)\rangle=U^t|\psi(0)\rangle`, where</span>
+<span class="sd">        :math:`|\psi(0)\rangle` denotes the initial state.        </span>
 <span class="sd">        The values for :math:`t` progress as </span>
-<span class="sd">        :math:`t=0,\,\text{step},\,2\cdot\text{step},...`, </span>
-<span class="sd">        until reaching the highest multiple of step that is less than or equal to </span>
-<span class="sd">        :math:`\text{end}-\text{start}`.</span>
+<span class="sd">        :math:`t=\text{start}`, :math:`\text{start} + \text{step}`,</span>
+<span class="sd">        :math:`\text{start} + 2\cdot\text{step}, \ldots`,</span>
+<span class="sd">        until reaching the highest value of :math:`k` that satisfy</span>
+<span class="sd">        :math:`\text{start} + k\cdot \text{step} &lt; \text{end}`.</span>
 <span class="sd">        </span>
 <span class="sd">        Specifically, the simulation begins from the state </span>
 <span class="sd">        :math:`|\psi(\text{start})\rangle` and </span>
@@ -1002,20 +1033,20 @@ document.write(`
 <span class="sd">        :math:`|\psi(\text{start}+j\cdot\text{step})\rangle`,</span>
 <span class="sd">        where :math:`j=0,1,...` and the maximum value of :math:`j`</span>
 <span class="sd">        ensures that </span>
-<span class="sd">        :math:`\text{start}+j\cdot\text{step}\le \text{end}`.</span>
+<span class="sd">        :math:`\text{start}+j\cdot\text{step} &lt; \text{end}`.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        Given ``time=(0, 13, 3)``, the saved states would include:</span>
+<span class="sd">        Given ``range=(0, 13, 3)``, the saved states would include:</span>
 <span class="sd">        the initial state (t=0), intermediate states (t=3, 6, and 9),</span>
 <span class="sd">        and the concluding state (t=12).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">############################################</span>
         <span class="c1">### Check if simulation was set properly ###</span>
         <span class="c1">############################################</span>
-        <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">range</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;``time` not specified`. &quot;</span>
+                <span class="s2">&quot;``range` not specified`. &quot;</span>
                 <span class="o">+</span> <span class="s2">&quot;Must be an int or tuple of int.&quot;</span>
             <span class="p">)</span>
 
@@ -1035,18 +1066,17 @@ document.write(`
         <span class="c1">### simulate implemantation ###</span>
         <span class="c1">###############################</span>
 
-        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_time_to_tuple</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+        <span class="nb">range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="o">.</span><span class="n">_range_to_tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">time</span><span class="p">]):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`time` has non-int entry.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`range` has non-int entry.&quot;</span><span class="p">)</span>
 
-        <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">time</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="nb">range</span>
         <span class="n">hpc</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
         <span class="c1"># number of states to save</span>
-        <span class="n">num_states</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">end</span><span class="o">/</span><span class="n">step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">num_states</span> <span class="o">-=</span> <span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">num_states</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">//</span> <span class="n">step</span>
 
         <span class="n">saved_states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
             <span class="p">(</span><span class="n">num_states</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span>
@@ -1057,15 +1087,15 @@ document.write(`
         <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">saved_states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">state_index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">num_states</span> <span class="o">-=</span> <span class="mi">1</span>
 
         <span class="c1"># simulate walk / apply evolution operator</span>
         <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_states</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">state_index</span> <span class="o">&lt;</span> <span class="n">num_states</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simulate_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
-            <span class="n">saved_states</span><span class="p">[</span><span class="n">state_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_simul_vec</span><span class="p">(</span><span class="n">hpc</span><span class="p">)</span>
+            <span class="n">saved_states</span><span class="p">[</span><span class="n">state_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_simul_vec</span><span class="p">(</span>
+                    <span class="n">hpc</span><span class="p">,</span> <span class="n">state_index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">num_states</span><span class="p">)</span>
             <span class="n">state_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c1"># TODO: free vector from neblina core</span>
@@ -1123,28 +1153,28 @@ document.write(`
 <span class="sd">            It contains information about the best fit found.</span>
 <span class="sd">            The dictionary keys are</span>
 
-<span class="sd">            ``&quot;fit function&quot;`` :</span>
-<span class="sd">                a pointer to the obtained sine squared</span>
+<span class="sd">            fit function</span>
+<span class="sd">                A pointer to the obtained sine squared</span>
 <span class="sd">                function. Issuing ``d[&quot;fit function&quot;](theta)`` evaluates</span>
 <span class="sd">                the function at point ``theta``.</span>
 
-<span class="sd">            ``&quot;amplitude&quot;``:</span>
-<span class="sd">                amplitude of the obtained fit function.</span>
+<span class="sd">            amplitude:</span>
+<span class="sd">                Amplitude of the obtained fit function.</span>
 
-<span class="sd">            ``&quot;angular frequency&quot;`` :</span>
-<span class="sd">                angular frequency of the obtained fit function.</span>
+<span class="sd">            angular frequency</span>
+<span class="sd">                Angular frequency of the obtained fit function.</span>
 
-<span class="sd">            ``&quot;phase shift&quot;`` :</span>
-<span class="sd">                phase shift of the obtained fit function.</span>
+<span class="sd">            phase shift</span>
+<span class="sd">                Phase shift of the obtained fit function.</span>
 
-<span class="sd">            ``&quot;vertical offset&quot;`` :</span>
-<span class="sd">                vertical offset of the obtained fit function.</span>
+<span class="sd">            vertical offset</span>
+<span class="sd">                Vertical offset of the obtained fit function.</span>
 
-<span class="sd">            ``&quot;frequency&quot;`` :</span>
-<span class="sd">                frequency of the obtained fit function.</span>
+<span class="sd">            frequency</span>
+<span class="sd">                Frequency of the obtained fit function.</span>
 
-<span class="sd">            ``&quot;period&quot;`` :</span>
-<span class="sd">                period of the obtained fit function.</span>
+<span class="sd">            period</span>
+<span class="sd">                Period of the obtained fit function.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
@@ -1190,10 +1220,7 @@ document.write(`
                 <span class="s2">&quot;fit function&quot;</span><span class="p">:</span> <span class="n">fitfunc</span><span class="p">}</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_number_to_valid_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        .. todo::</span>
 <span class="sd">            Returns all arguments.</span>
@@ -1206,23 +1233,23 @@ document.write(`
         <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="c1"># if search algorithm takes O(N),</span>
         <span class="c1"># it is better to use classical computing.</span>
-        <span class="n">final_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_to_valid_time</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">final_time</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">),</span>
+        <span class="n">final_time</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">final_time</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
                                <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
         <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_probability</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">states</span>
 
         <span class="n">d</span> <span class="o">=</span> <span class="n">QuantumWalk</span><span class="o">.</span><span class="n">fit_sin_squared</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">final_time</span> <span class="o">+</span> <span class="n">delta_time</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">final_time</span> <span class="o">+</span> <span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span>
                 <span class="n">p_succ</span>
             <span class="p">)</span>
         <span class="n">t_opt</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;phase shift&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;angular frequency&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_number_to_valid_time</span><span class="p">(</span><span class="n">t_opt</span><span class="p">),</span> <span class="n">p_succ</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span><span class="p">),</span> <span class="n">p_succ</span>
 
 
 <div class="viewcode-block" id="QuantumWalk.optimal_runtime">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.optimal_runtime.html#hiperwalk.QuantumWalk.optimal_runtime">[docs]</a>
-    <span class="k">def</span> <span class="nf">optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">optimal_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the optimal running time of a quantum-walk-based search.</span>
 
@@ -1239,10 +1266,9 @@ document.write(`
 <span class="sd">            The state initial state for the simulation.</span>
 <span class="sd">            If ``None``, uses the uniform state.</span>
 
-<span class="sd">        delta_time :</span>
-<span class="sd">            Time difference between two consecutive states</span>
-<span class="sd">            to be saved by the simulation.</span>
-<span class="sd">            See ``time`` argument in :meth:`simulate` for details.</span>
+<span class="sd">        step :</span>
+<span class="sd">            Step of the simulation range.</span>
+<span class="sd">            See ``range`` argument in :meth:`simulate` for details.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1251,7 +1277,6 @@ document.write(`
 <span class="sd">            fitting the sine-squared function.</span>
 <span class="sd">            The returned type depends on the quantum walk model.</span>
 
-
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
 <span class="sd">        simulate</span>
@@ -1259,13 +1284,13 @@ document.write(`
 <span class="sd">        success_probability</span>
 <span class="sd">        fit_sin_squared</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">t_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">)</span>
+        <span class="n">t_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">t_opt</span></div>
 
 
 <div class="viewcode-block" id="QuantumWalk.max_success_probability">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.QuantumWalk.max_success_probability.html#hiperwalk.QuantumWalk.max_success_probability">[docs]</a>
-    <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delta_time</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">max_success_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the maximum success probability.</span>
 <span class="sd">        </span>
@@ -1278,10 +1303,9 @@ document.write(`
 <span class="sd">            The state initial state for the simulation.</span>
 <span class="sd">            If ``None``, uses the uniform state.</span>
 
-<span class="sd">        delta_time :</span>
-<span class="sd">            Time difference between two consecutive states</span>
-<span class="sd">            to be saved by the simulation.</span>
-<span class="sd">            See ``time`` argument in :meth:`simulate` for details.</span>
+<span class="sd">        step :</span>
+<span class="sd">            Step of the simulation range.</span>
+<span class="sd">            See ``range`` argument in :meth:`simulate` for details.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1293,18 +1317,10 @@ document.write(`
 <span class="sd">        optimal_runtime</span>
 <span class="sd">        simulate</span>
 <span class="sd">        uniform_state</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-
-<span class="sd">        .. todo::</span>
-<span class="sd">            If ``t_opt / delta_time`` is not close to an integer,</span>
-<span class="sd">            the max success probability was not obtained in the simulation.</span>
-<span class="sd">            The simulation must be rerun or interpolated.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">)</span>
-        <span class="n">opt_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span> <span class="o">/</span> <span class="n">delta_time</span><span class="p">)</span>
-        <span class="c1"># TODO: if t_opt / delta_time is not close to an integer,</span>
+        <span class="n">t_opt</span><span class="p">,</span> <span class="n">p_succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimal_runtime</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">opt_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_opt</span> <span class="o">/</span> <span class="n">step</span><span class="p">)</span>
+        <span class="c1"># TODO: if t_opt / step is not close to an integer,</span>
         <span class="c1"># max_sucess_probability is not in p_succ.</span>
         <span class="c1"># simulation must be rerun</span>
         <span class="k">return</span> <span class="n">p_succ</span><span class="p">[</span><span class="n">opt_index</span><span class="p">]</span></div>

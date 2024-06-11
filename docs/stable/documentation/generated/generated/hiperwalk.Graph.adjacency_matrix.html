@@ -354,7 +354,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../graph.html">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -462,6 +462,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -486,9 +487,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -561,7 +559,8 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Graph.adjacency_matrix">
 <span class="sig-prename descclassname"><span class="pre">Graph.</span></span><span class="sig-name descname"><span class="pre">adjacency_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/graph/graph.html#Graph.adjacency_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph.adjacency_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Return the graph’s adjacency matrix.</p>
+<dd><p>Return the adjacency matrix representation of the graph.</p>
+<p>Return a <strong>hard copy</strong> of the adjacency matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -570,7 +569,7 @@ document.write(`
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>In a weightless graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> vertices
+<p>In a simple graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> vertices
 <span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span>, the adjacency matrix 
 of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is an 
 <span class="math notranslate nohighlight">\(n\)</span>-dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>, defined as follows:</p>
@@ -579,13 +578,11 @@ of <span class="math notranslate nohighlight">\(G(V, E)\)</span> is an
     1, &amp; \text{if } v_i \text{ is adjacent to } v_j,\\
     0, &amp; \text{otherwise.}
 \end{cases}\end{split}\]</div>
-<p>In weighted graphs, the entries of <span class="math notranslate nohighlight">\(A\)</span> represent 
-the weights of the edges. The weight is a non-zero
-real number.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Add other return types depending on the stored matrix type.</p>
-</div>
+<p>If <span class="math notranslate nohighlight">\(G(V, E)\)</span> has a loop on vertex <span class="math notranslate nohighlight">\(v_i\)</span>, 
+then <span class="math notranslate nohighlight">\(A_{i,i}=1\)</span>.</p>
+<p>In multigraphs, where multiple edges can exist between
+the same pair of vertices, the adjacency matrix reflects this
+by counting the number of such edges.</p>
 </dd></dl>
 
 </section>

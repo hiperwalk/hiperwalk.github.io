@@ -353,7 +353,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpc.html">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../graph.html">Graphs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -461,6 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -485,9 +486,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -559,7 +557,7 @@ document.write(`
 <h1>hiperwalk.QuantumWalk.max_success_probability<a class="headerlink" href="#hiperwalk-quantumwalk-max-success-probability" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.QuantumWalk.max_success_probability">
-<span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">max_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.max_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.max_success_probability" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">QuantumWalk.</span></span><span class="sig-name descname"><span class="pre">max_success_probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/quantum_walk.html#QuantumWalk.max_success_probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.QuantumWalk.max_success_probability" title="Link to this definition">#</a></dt>
 <dd><p>Find the maximum success probability.</p>
 <p>This method returns the success probability that corresponds 
 to the optimal running time.</p>
@@ -569,9 +567,8 @@ to the optimal running time.</p>
 <dt><strong>state</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, default=None</span></dt><dd><p>The state initial state for the simulation.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses the uniform state.</p>
 </dd>
-<dt><strong>delta_time</strong></dt><dd><p>Time difference between two consecutive states
-to be saved by the simulation.
-See <code class="docutils literal notranslate"><span class="pre">time</span></code> argument in <a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
+<dt><strong>step</strong></dt><dd><p>Step of the simulation range.
+See <code class="docutils literal notranslate"><span class="pre">range</span></code> argument in <a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate()</span></code></a> for details.</p>
 </dd>
 </dl>
 </dd>
@@ -589,13 +586,6 @@ See <code class="docutils literal notranslate"><span class="pre">time</span></co
 <dt><a class="reference internal" href="hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate</span></code></a></dt><dd></dd>
 <dt><a class="reference internal" href="hiperwalk.QuantumWalk.uniform_state.html#hiperwalk.QuantumWalk.uniform_state" title="hiperwalk.QuantumWalk.uniform_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_state</span></code></a></dt><dd></dd>
 </dl>
-</div>
-<p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">t_opt</span> <span class="pre">/</span> <span class="pre">delta_time</span></code> is not close to an integer,
-the max success probability was not obtained in the simulation.
-The simulation must be rerun or interpolated.</p>
 </div>
 </dd></dl>
 

@@ -48,7 +48,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="hiperwalk.plot_max_success_probability" href="../documentation/generated/hiperwalk.plot_max_success_probability.html" />
+    <link rel="prev" title="hiperwalk.plot_success_probability" href="../documentation/generated/hiperwalk.plot_success_probability.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -406,6 +406,20 @@ document.write(`
                   
   <section id="development">
 <span id="docs-development"></span><h1>Development<a class="headerlink" href="#development" title="Link to this heading">#</a></h1>
+<p>This page describes how to download Hiperwalk
+from GitHub, how to test it, and how to generate
+its documentation. Before that, if you wish to
+contribute or extend Hiperwalk’s capabilities by
+implementing new quantum walk models, please contact
+the developers (see the next section).</p>
+<section id="bug-report-and-contact">
+<h2>Bug Report and Contact<a class="headerlink" href="#bug-report-and-contact" title="Link to this heading">#</a></h2>
+<p>To send a bug report or
+contribute to Hiperwalk or contact the developers,
+write an email to <a class="reference external" href="mailto:hiperwalk&#37;&#52;&#48;gmail&#46;com">hiperwalk<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
+</section>
+<section id="downloading">
+<h2>Downloading<a class="headerlink" href="#downloading" title="Link to this heading">#</a></h2>
 <p>HiperWalk is built upon several Python libraries.
 Before developing for HiperWalk, these libraries need to be installed.
 The required libraries include
@@ -426,6 +440,7 @@ To contribute, first clone the repository.</p>
 </pre></div>
 </div>
 <p>Next, make the desired modifications and submit a pull request.</p>
+</section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
 <p>Tests are located in the <code class="docutils literal notranslate"><span class="pre">hiperwalk/tests/</span></code> directory.
@@ -440,12 +455,6 @@ execute:</p>
 </pre></div>
 </div>
 </section>
-<section id="bug-report-and-contact">
-<h2>Bug Report and Contact<a class="headerlink" href="#bug-report-and-contact" title="Link to this heading">#</a></h2>
-<p>To send a bug report or
-contribute to Hiperwalk or contact the developers,
-write an email to <a class="reference external" href="mailto:hiperwalk&#37;&#52;&#48;gmail&#46;com">hiperwalk<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
-</section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
 <p>There are likely to be new features in the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.
@@ -454,7 +463,7 @@ These features are documented online in the  <strong>latest</strong> version.</p
 <h3>Install Requirements<a class="headerlink" href="#install-requirements" title="Link to this heading">#</a></h3>
 <p>To generate the current, under-development documentation locally,
 all HiperWalk requirements must be installed
-(see <a class="reference internal" href="../install/index.html#docs-install-hiperwalk"><span class="std std-ref">HiperWalk section in the installation guide</span></a>).</p>
+(see <a class="reference internal" href="../install/index.html#docs-hpc-enabled"><span class="std std-ref">HiperWalk section in the installation guide</span></a>).</p>
 <p>Assuming that all HiperWalk requirements are installed (see <em>TODO</em>),
 the following commands install the remaining documentation-specific requirements.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-sphinx
@@ -483,11 +492,10 @@ in your preferred browser – for instance, by double-clicking on it.</p>
 <section id="todo">
 <h2>Todo<a class="headerlink" href="#todo" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Releases notes.</p></li>
-<li><p>The current version was tested with Ubuntu 20.04.
-Hiperwalk failed to be configured in Ubuntu 22.04.</p></li>
-<li><p>The current version only works with GTK 3.0.
-Implementation using GTK 4.0 is postponed to the next release.</p></li>
+<li><p>More examples</p></li>
+<li><p>Other quantum walk models</p></li>
+<li><p>Releases notes</p></li>
+<li><p>The current version only works with GTK 3.0. Implementation using GTK 4.0 is postponed to the next release.</p></li>
 </ul>
 </section>
 </section>
@@ -503,12 +511,12 @@ Implementation using GTK 4.0 is postponed to the next release.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../documentation/generated/hiperwalk.plot_max_success_probability.html"
+       href="../documentation/generated/hiperwalk.plot_success_probability.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.plot_max_success_probability</p>
+        <p class="prev-next-title">hiperwalk.plot_success_probability</p>
       </div>
     </a>
 </div>
@@ -529,8 +537,9 @@ Implementation using GTK 4.0 is postponed to the next release.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-report-and-contact">Bug Report and Contact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading">Downloading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-requirements">Install Requirements</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-documentation">Generate Documentation</a></li>

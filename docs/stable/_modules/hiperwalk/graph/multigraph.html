@@ -403,24 +403,39 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Multigraph.html#hiperwalk.Multigraph">[docs]</a>
 <span class="k">class</span> <span class="nc">Multigraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs an arbitrary multigraph.</span>
+<span class="sd">    Construct an arbitrary multigraph.</span>
+
+<span class="sd">    This class facilitates the creation of a multigraph, </span>
+<span class="sd">    in which multiple edges between the same pair of </span>
+<span class="sd">    vertices are allowed. The graph&#39;s structure is </span>
+<span class="sd">    determined by a Hermitian adjacency matrix, </span>
+<span class="sd">    the entries of which are non-negative integers </span>
+<span class="sd">    that represent the number of multiple edges between </span>
+<span class="sd">    vertices. The multigraph also supports loops, </span>
+<span class="sd">    which are considered arcs.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    adj_matrix :</span>
-<span class="sd">        The adjacency matrix of the graph</span>
-<span class="sd">        (any integer Hermitian matrix).</span>
-<span class="sd">        Two input types are accepted:</span>
+<span class="sd">    adj_matrix : various types accepted</span>
+<span class="sd">        The adjacency matrix of the graph, which must be a </span>
+<span class="sd">        Hermitian matrix with non-negative integer entries. </span>
+<span class="sd">        Acceptable input types include:</span>
 
-<span class="sd">        * Any matrix -- for instance,</span>
-<span class="sd">            * :class:`scipy.sparse.csr_array`,</span>
-<span class="sd">            * :class:`numpy.ndarray`,</span>
-<span class="sd">            * list of lists.</span>
-<span class="sd">        * :class:`networkx.Graph`.</span>
-<span class="sd">            * The adjacency matrix is extracted from the graph.</span>
+<span class="sd">            * Direct matrix types such as:</span>
+<span class="sd">                * :class:`scipy.sparse.csr_array`,</span>
+<span class="sd">                * :class:`numpy.ndarray`,</span>
+<span class="sd">                * List of lists.</span>
+<span class="sd">            * :class:`networkx.Graph`:</span>
+<span class="sd">                The adjacency matrix is automatically extracted</span>
+<span class="sd">                from the specified networkx graph.</span>
 
 <span class="sd">    copy : bool, default=False</span>
-<span class="sd">        If ``True``, a hard copy of ``adj_matrix`` is stored.</span>
+<span class="sd">        Specifies whether to store a hard copy of ``adj_matrix``:</span>
+
+<span class="sd">            * If ``True``, a deep copy of the adjacency matrix is</span>
+<span class="sd">              created and stored.</span>
+<span class="sd">            * If ``False``, a reference to the original</span>
+<span class="sd">              ``adj_matrix`` is stored.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -429,15 +444,22 @@ document.write(`
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The ``adj_matrix.data`` attribute is changed for</span>
-<span class="sd">    more efficient manipulation.</span>
-<span class="sd">    If the original matrix is needed,</span>
-<span class="sd">    invoke the constructor with ``copy=True`` or</span>
-<span class="sd">    call :meth:`adjacency_matrix()` after creating the multigraph.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    The ``adj_matrix.data`` attribute may be modified for </span>
+<span class="sd">    more efficient manipulation. If the original matrix </span>
+<span class="sd">    data is required, it is recommended to initialize the </span>
+<span class="sd">    constructor with ``copy=True``. Alternatively, </span>
+<span class="sd">    the original matrix can be retrieved anytime by </span>
+<span class="sd">    calling :meth:`adjacency_matrix()` after the </span>
+<span class="sd">    multigraph has been created.</span>
 
-    <span class="k">def</span> <span class="nf">_default_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="sd">    When defining an instance of the Coined class on a multigraph, </span>
+<span class="sd">    the number of multiple edges impacts the dimension of the coin.</span>
+<span class="sd">    </span>
+<span class="sd">    When defining an instance of the ContinuousTime class on a multigraph, </span>
+<span class="sd">    the number of multiple edges is treated as an edge weight.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># def _default_dtype(self):</span>
+    <span class="c1">#     return np.int32</span>
 
     <span class="k">def</span> <span class="nf">_count_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
         <span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
@@ -445,10 +467,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_loops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">loops</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_adj_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adj_matrix</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">adj_matrix</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">()):</span>
-            <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_default_dtype</span><span class="p">(),</span>
-                                        <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># if not np.issubdtype(adj_matrix.dtype, self._default_dtype()):</span>
+        <span class="c1">#     adj_matrix.data = adj_matrix.data.astype(</span>
+        <span class="c1">#                                 self._default_dtype(),</span>
+        <span class="c1">#                                 copy=False)</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="n">adj_matrix</span><span class="o">.</span><span class="n">data</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
@@ -541,7 +563,7 @@ document.write(`
 
         <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indices</span>
         <span class="n">indptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_adj_matrix</span><span class="o">.</span><span class="n">indptr</span>
-        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">))</span>
+        <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">csr_array</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">adj_matrix</span></div>
 
 
@@ -554,6 +576,9 @@ document.write(`
 <div class="viewcode-block" id="Multigraph.is_simple">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Multigraph.is_simple.html#hiperwalk.Multigraph.is_simple">[docs]</a>
     <span class="k">def</span> <span class="nf">is_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 </div>
 

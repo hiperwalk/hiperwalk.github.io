@@ -354,7 +354,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hpc.html">HPC</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../graph.html">Graphs</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -462,6 +462,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -486,9 +487,6 @@ document.write(`
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plot.html">Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -556,48 +554,62 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.WeightedGraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">WeightedGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/weighted_graph.html#WeightedGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.WeightedGraph" title="Link to this definition">#</a></dt>
-<dd><p>Constructs an arbitrary weighted graph.</p>
-<dl class="field-list simple">
+<dd><p>Construct an arbitrary weighted graph.</p>
+<p>This class enables the creation of a weighted graph, 
+defined by a Hermitian adjacency matrix that 
+represents the connections between nodes and 
+edge weights.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>adj_matrix</strong></dt><dd><p>The adjacency matrix of the graph
-(any integer Hermitian matrix).
-Two input types are accepted:</p>
-<ul class="simple">
+<dd class="field-odd"><dl>
+<dt><strong>adj_matrix</strong><span class="classifier">various types accepted</span></dt><dd><p>The adjacency matrix of the graph, 
+which must be a Hermitian matrix. 
+Two types of input are accepted:</p>
+<blockquote>
+<div><ul class="simple">
 <li><dl class="simple">
-<dt>Any matrix – for instance,</dt><dd><ul>
+<dt>Matrix formats such as:</dt><dd><ul>
 <li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.13.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
-<li><p>list of lists.</p></li>
+<li><p>List of lists.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</dt><dd><ul>
-<li><p>The adjacency matrix is extracted from the graph.</p></li>
-</ul>
+<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>:</dt><dd><p>The adjacency matrix is derived from
+the provided NetworkX graph.</p>
 </dd>
 </dl>
 </li>
 </ul>
+</div></blockquote>
 </dd>
-<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a hard copy of <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.
-If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the pointer to <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.</p>
+<dt><strong>copy</strong><span class="classifier">bool, default=False</span></dt><dd><p>Determines how the adjacency matrix is stored:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a deep copy of <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is
+created and stored.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, a reference to the original
+<code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is stored.</p></li>
+</ul>
+</div></blockquote>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>TypeError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is not a square matrix.</p>
+<dt>TypeError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is not a square matrix, indicating 
+it cannot represent a valid adjacency matrix.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The graph <span class="math notranslate nohighlight">\(G(V,E)\)</span> on which the quantum walk 
-takes place is specified by
-any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>When defining an instance of the Coined class on a weighted graph, 
+the edge weights do not affect the simulation.</p>
+<p>When defining an instance of the ContinuousTime class on a weighted graph, 
+the edge weights do affect the simulation.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.WeightedGraph.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/weighted_graph.html#WeightedGraph.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.WeightedGraph.__init__" title="Link to this definition">#</a></dt>
@@ -606,8 +618,8 @@ any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.adjacency_matrix.html#hiperwalk.WeightedGraph.adjacency_matrix" title="hiperwalk.WeightedGraph.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>()</p></td>
-<td><p>Return the graph's adjacency matrix.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.adjacency_matrix.html#hiperwalk.WeightedGraph.adjacency_matrix" title="hiperwalk.WeightedGraph.adjacency_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacency_matrix</span></code></a>([copy])</p></td>
+<td><p>Return the adjacency matrix representation of the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.adjacent.html#hiperwalk.WeightedGraph.adjacent" title="hiperwalk.WeightedGraph.adjacent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjacent</span></code></a>(u, v)</p></td>
 <td><p>Return True if vertex <code class="docutils literal notranslate"><span class="pre">u</span></code> is adjacent to <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></td>
@@ -616,7 +628,7 @@ any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span
 <td><p>Return the degree of the given vertex.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.is_simple.html#hiperwalk.WeightedGraph.is_simple" title="hiperwalk.WeightedGraph.is_simple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_simple</span></code></a>()</p></td>
-<td><p>Return True if instance of simple graph.</p></td>
+<td><p>Return True if the graph has no multiedges or weights.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.laplacian_matrix.html#hiperwalk.WeightedGraph.laplacian_matrix" title="hiperwalk.WeightedGraph.laplacian_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_matrix</span></code></a>()</p></td>
 <td><p>Return the graph's Laplacian matrix.</p></td>
@@ -625,16 +637,16 @@ any real Hermitian matrix <span class="math notranslate nohighlight">\(C\)</span
 <td><p>Return all neighbors of the given vertex.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.number_of_edges.html#hiperwalk.WeightedGraph.number_of_edges" title="hiperwalk.WeightedGraph.number_of_edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_edges</span></code></a>()</p></td>
-<td><p>Determine the cardinality of the edge set.</p></td>
+<td><p>Return the total number of edges in the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.number_of_loops.html#hiperwalk.WeightedGraph.number_of_loops" title="hiperwalk.WeightedGraph.number_of_loops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_loops</span></code></a>()</p></td>
 <td><p>Return the number of loops in the graph.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.number_of_vertices.html#hiperwalk.WeightedGraph.number_of_vertices" title="hiperwalk.WeightedGraph.number_of_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">number_of_vertices</span></code></a>()</p></td>
-<td><p>Determine the cardinality of the vertex set.</p></td>
+<td><p>Return the total number of vertices in the graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.WeightedGraph.vertex_number.html#hiperwalk.WeightedGraph.vertex_number" title="hiperwalk.WeightedGraph.vertex_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_number</span></code></a>(vertex)</p></td>
-<td><p>Return the vertex number given any vertex representation.</p></td>
+<td><p>Return the numerical label of a vertex based on its representation.</p></td>
 </tr>
 </tbody>
 </table>

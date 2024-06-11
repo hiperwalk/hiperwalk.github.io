@@ -353,7 +353,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="hpc.html">Configuring HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpc.html">HPC</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="graph.html">Graphs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="generated/hiperwalk.Graph.html">hiperwalk.Graph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.Graph.adjacency_matrix.html">hiperwalk.Graph.adjacency_matrix</a></li>
@@ -461,6 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/generated/hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -485,9 +486,6 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_probability_distribution.html">hiperwalk.plot_probability_distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_success_probability.html">hiperwalk.plot_success_probability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_function.html">hiperwalk.plot_function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_optimal_runtime.html">hiperwalk.plot_optimal_runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/hiperwalk.plot_max_success_probability.html">hiperwalk.plot_max_success_probability</a></li>
 </ul>
 </details></li>
 </ul>
@@ -557,20 +555,7 @@ document.write(`
 <td><p>Plot the probability distributions of quantum walk states.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.plot_success_probability.html#hiperwalk.plot_success_probability" title="hiperwalk.plot_success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_success_probability</span></code></a></p></td>
-<td><p>Plot the success probability over time.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.plot_function.html#hiperwalk.plot_function" title="hiperwalk.plot_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_function</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/hiperwalk.plot_optimal_runtime.html#hiperwalk.plot_optimal_runtime" title="hiperwalk.plot_optimal_runtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_optimal_runtime</span></code></a></p></td>
-<td><p><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/hiperwalk.plot_max_success_probability.html#hiperwalk.plot_max_success_probability" title="hiperwalk.plot_max_success_probability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_max_success_probability</span></code></a></p></td>
-<td><p>TODO</p></td>
+<td><p>Plot the success probability as a function of the number of steps.</p></td>
 </tr>
 </tbody>
 </table>

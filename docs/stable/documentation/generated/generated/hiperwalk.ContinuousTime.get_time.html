@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hiperwalk.ContinuousTime.set_gamma &#8212; Hiperwalk stable documentation</title>
+    <title>hiperwalk.ContinuousTime.get_time &#8212; Hiperwalk stable documentation</title>
   
   
   
@@ -39,7 +39,7 @@
     <script src="../../../_static/documentation_options.js?v=ea3bebfc"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.ContinuousTime.set_gamma';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.ContinuousTime.get_time';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.3';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
@@ -48,8 +48,8 @@
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hiperwalk.ContinuousTime.set_hamiltonian" href="hiperwalk.ContinuousTime.set_hamiltonian.html" />
-    <link rel="prev" title="hiperwalk.ContinuousTime.set_evolution" href="hiperwalk.ContinuousTime.set_evolution.html" />
+    <link rel="next" title="hiperwalk.ContinuousTime.hilbert_space_dimension" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html" />
+    <link rel="prev" title="hiperwalk.ContinuousTime.get_terms" href="hiperwalk.ContinuousTime.get_terms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -461,7 +461,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_terms.html">hiperwalk.ContinuousTime.get_terms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.max_success_probability.html">hiperwalk.ContinuousTime.max_success_probability</a></li>
@@ -469,7 +469,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.probability.html">hiperwalk.ContinuousTime.probability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.probability_distribution.html">hiperwalk.ContinuousTime.probability_distribution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_evolution.html">hiperwalk.ContinuousTime.set_evolution</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">hiperwalk.ContinuousTime.set_gamma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_gamma.html">hiperwalk.ContinuousTime.set_gamma</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian_type.html">hiperwalk.ContinuousTime.set_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
@@ -553,29 +553,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hiperwalk-continuoustime-set-gamma">
-<h1>hiperwalk.ContinuousTime.set_gamma<a class="headerlink" href="#hiperwalk-continuoustime-set-gamma" title="Link to this heading">#</a></h1>
+  <section id="hiperwalk-continuoustime-get-time">
+<h1>hiperwalk.ContinuousTime.get_time<a class="headerlink" href="#hiperwalk-continuoustime-get-time" title="Link to this heading">#</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="hiperwalk.ContinuousTime.set_gamma">
-<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">set_gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.set_gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.set_gamma" title="Link to this definition">#</a></dt>
-<dd><p>Set gamma.</p>
-<p>Parameter gamma is used in the definition of the
-Hamiltonian to determine the hopping probability per unit 
-of time. Upon setting gamma, both the Hamiltonian and evolution 
-operators are updated.</p>
+<dt class="sig sig-object py" id="hiperwalk.ContinuousTime.get_time">
+<span class="sig-prename descclassname"><span class="pre">ContinuousTime.</span></span><span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/continuous_time.html#ContinuousTime.get_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.ContinuousTime.get_time" title="Link to this definition">#</a></dt>
+<dd><p>Return the time used to construct the evolution operator.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>gamma</strong><span class="classifier">float, default=0.1</span></dt><dd><p>The value of gamma.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>TypeError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">gamma</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> or complex.</p>
-</dd>
-<dt>ValueError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>.</p>
-</dd>
+<dt>float</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -594,20 +581,20 @@ operators are updated.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hiperwalk.ContinuousTime.set_evolution.html"
+       href="hiperwalk.ContinuousTime.get_terms.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hiperwalk.ContinuousTime.set_evolution</p>
+        <p class="prev-next-title">hiperwalk.ContinuousTime.get_terms</p>
       </div>
     </a>
     <a class="right-next"
-       href="hiperwalk.ContinuousTime.set_hamiltonian.html"
+       href="hiperwalk.ContinuousTime.hilbert_space_dimension.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hiperwalk.ContinuousTime.set_hamiltonian</p>
+        <p class="prev-next-title">hiperwalk.ContinuousTime.hilbert_space_dimension</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -629,14 +616,14 @@ operators are updated.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.ContinuousTime.set_gamma"><code class="docutils literal notranslate"><span class="pre">ContinuousTime.set_gamma()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk.ContinuousTime.get_time"><code class="docutils literal notranslate"><span class="pre">ContinuousTime.get_time()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../../_sources/documentation/generated/generated/hiperwalk.ContinuousTime.set_gamma.rst.txt">
+    <a href="../../../_sources/documentation/generated/generated/hiperwalk.ContinuousTime.get_time.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

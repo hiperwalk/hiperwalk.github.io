@@ -407,51 +407,32 @@ document.write(`
                   
   <section id="install">
 <h1>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h1>
-<p>You can install Hiperwalk locally or its docker distribution.
-We recommend to use Hiperwalk’s docker distribution.</p>
-<section id="docker-installation">
-<h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h2>
-<p>Using Hiperwalk on its Docker distribution offers
-numerous benefits to users.
-Docker provides a lightweight, portable, and scalable environment,
-ensuring seamless deployment across
-different operating systems and environments.
-With Docker, users can easily manage dependencies,
-streamline updates, and replicate configurations,
-leading to improved consistency and reliability.
-Additionally, Docker enables efficient resource utilization,
-facilitating faster development cycles and easier collaboration
-among team members.
-Overall, opting for Hiperwalk on its Docker distribution
-empowers users with enhanced flexibility, efficiency,
-and agility in their development and deployment processes.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Add installation guidelines</p>
-</div>
-</section>
-<section id="local-installation">
-<h2>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h2>
-<p>Hiperwalk relies on a number of Python libraries.
-However, installing these Python libraries alone does not enable
-Hiperwalk to leverage High-Performance Computing (HPC).
-If you desire to install Hiperwalk with HPC support, please refer
-to <a class="reference internal" href="#docs-install-hpc-prerequisites"><span class="std std-ref">HPC Prerequisites</span></a> before proceeding
-with the Hiperwalk installation.</p>
-<p>On this page, we outline the process for installing Hiperwalk on
-a newly installed Ubuntu 20.04 operating system. The steps will
-cover identifying the GPU, installing the GPU drivers,
-hiperblas-core, hiperblas-opencl-bridge, pyhiperblas, and
-all necessary Python libraries.</p>
-<section id="hiperwalk">
-<span id="docs-install-hiperwalk"></span><h3>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h3>
+<p>Hiperwalk offers multiple installation paths depending on your requirements.
+You can install Hiperwalk without High-Performance
+Computing (HPC) support, or opt for a Docker-based installation
+that includes HPC capabilities.</p>
+<p>Choose your installation method:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#docs-basic-installation"><span class="std std-ref">Basic Installation</span></a> without HPC support</p></li>
+<li><p><a class="reference internal" href="#docs-hpc-enabled"><span class="std std-ref">HPC-Enabled Installation</span></a></p>
+<ul>
+<li><p>Docker Installation</p></li>
+<li><p>Local Installation (for advanced users)</p></li>
+</ul>
+</li>
+</ul>
+<section id="basic-installation">
+<span id="docs-basic-installation"></span><h2>Basic Installation<a class="headerlink" href="#basic-installation" title="Link to this heading">#</a></h2>
+<p>Hiperwalk can be installed without HPC support.
+This installation relies on certain Python libraries.</p>
+<section id="installation-steps">
+<h3>Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading">#</a></h3>
 <p>Hiperwalk can be conveniently installed using pip.
 To begin, ensure that pip is installed on your system.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
 </pre></div>
 </div>
-<p>The following command will install Hiperwalk as well as all its
-Python dependencies, which include
+<p>Hiperwalk has several Python dependencies, including
 <a class="reference external" href="https://numpy.org/">numpy</a>,
 <a class="reference external" href="https://scipy.org/">scipy</a>,
 <a class="reference external" href="https://networkx.org/">networkx</a>, and
@@ -462,58 +443,46 @@ Python dependencies, which include
 updated. If you prefer not to have them updated, we recommend
 <a class="reference external" href="https://docs.python.org/3/library/venv.html">creating a virtual environment</a>.</p>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>hiperwalk
+<p>The following command will install Hiperwalk and its
+dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hiperwalk
 </pre></div>
 </div>
 <p>To verify the success of the installation,
-you can execute any code found in the
-<a class="reference external" href="https://github.com/hiperwalk/hiperwalk/tree/master/examples">examples directory of the repository</a>
-or proceed to the <a class="reference internal" href="../tutorial/index.html#docs-tutorial"><span class="std std-ref">Tutorial</span></a>.</p>
+you can execute any example code available in the
+<a class="reference external" href="https://github.com/hiperwalk/hiperwalk/tree/master/examples">GitHub repository</a>
+or any Jupyter notebook in the
+<a class="reference internal" href="../examples/index.html#docs-examples"><span class="std std-ref">Examples</span></a> section. Alternatively,
+you can proceed to the <a class="reference internal" href="../tutorial/index.html#docs-tutorial"><span class="std std-ref">Tutorial</span></a> section.</p>
 <p>To update an older version of the hiperwalk package:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>hiperwalk<span class="w"> </span>--upgrade
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hiperwalk<span class="w"> </span>--upgrade
+</pre></div>
+</div>
+<p>To uninstall the hiperwalk package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>hiperwalk
 </pre></div>
 </div>
 </section>
-<section id="hpc-prerequisites">
-<span id="docs-install-hpc-prerequisites"></span><h3>HPC Prerequisites<a class="headerlink" href="#hpc-prerequisites" title="Link to this heading">#</a></h3>
-<p>Before proceeding, it’s advisable to update and upgrade your
-Ubuntu packages. Execute the following commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
-</pre></div>
-</div>
-<p>Next, run the following commands to install the prerequisites:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>g++
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libgtest-dev
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-distutils
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
-pip3<span class="w"> </span>install<span class="w"> </span>pytest
-</pre></div>
-</div>
-<p>These newly installed programs serve the following purposes:</p>
-<ul class="simple">
-<li><p>git: used to download hiperblas-core, hiperblas-opencl-bridge,
-pyhiperblas, and hiperwalk;</p></li>
-<li><p>g++: used for compiling hiperblas-core, and hiperblas-opencl-bridge;</p></li>
-<li><p>cmake: essential for compiling hiperblas-core, hiperblas-opencl-bridge;</p></li>
-<li><p>libgtest-dev: verifies the successful installation of
-hiperblas-core, and hiperblas-opencl-bridge;</p></li>
-<li><p>python3-distutils: aids in the installation of pyhiperblas;</p></li>
-<li><p>python3-pip: necessary for installing Python libraries;</p></li>
-<li><p>pytest: helps test pyhiperblas.</p></li>
-</ul>
-<p>Although it’s not essential, we <strong>recommend</strong> installing FFmpeg,
-which is used for generating animations.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
-</pre></div>
-</div>
-<section id="gpu-driver">
-<h4>GPU Driver<a class="headerlink" href="#gpu-driver" title="Link to this heading">#</a></h4>
-<p>To install the GPU driver, you can follow this
-<a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>
+</section>
+<section id="hpc-enabled-installation">
+<span id="docs-hpc-enabled"></span><h2>HPC-Enabled Installation<a class="headerlink" href="#hpc-enabled-installation" title="Link to this heading">#</a></h2>
+<p>Hiperwalk supports HPC through either a Docker installation
+or a local installation. HPC capabilities can be leveraged
+using parallelism on multicore CPUs and, optionally, NVIDIA GPUs.</p>
+<p>The following instructions will guide you through setting
+up CPU-based HPC, with optional GPU support.</p>
+<section id="gpu-prerequisites">
+<span id="docs-gpu-prerequisites"></span><h3>GPU Prerequisites<a class="headerlink" href="#gpu-prerequisites" title="Link to this heading">#</a></h3>
+<p>Skip this section if GPU support is not needed.
+To install the GPU driver, you can follow this
+<a class="reference external" href="https://www.linuxcapable.com/install-nvidia-drivers-on-ubuntu-linux/">tutorial for installing NVIDIA drivers</a>.
 Below, we have outlined the essential steps.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have any concerns about the following commands,
+especially for installing the NVIDIA driver,
+please contact your local support team for assistance.</p>
+</div>
 <p>First, you’ll need to identify your GPU by running the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-e<span class="w"> </span>VGA
 </pre></div>
@@ -535,7 +504,7 @@ as required. To install the GPU driver, execute the following command:</p>
 </div>
 <p>Finally, <strong>reboot you computer</strong>.
 After rebooting, if the installation was successful,
-running the following command:</p>
+running the command</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
 </pre></div>
 </div>
@@ -545,14 +514,174 @@ availability of the <strong>NVIDIA Settings</strong> application by
 pressing the <code class="docutils literal notranslate"><span class="pre">Super</span></code> key on your keyboard and
 typing <code class="docutils literal notranslate"><span class="pre">nvidia</span> <span class="pre">settings</span></code>.</p>
 </section>
-<section id="nvidia-toolkit">
-<h4>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Link to this heading">#</a></h4>
-<p>Once the GPU drivers have been successfully installed, it’s
-necessary to install the NVIDIA Toolkit, allowing hiperblas-core
-to use CUDA. To do this, execute the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-cuda-toolkit
+<section id="docker-installation">
+<h3>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">#</a></h3>
+<p>Using Hiperwalk on Docker offers numerous benefits.
+Docker, a form of containerization, automatically includes Hiperwalk,
+its prerequisites, and all HPC-enabling software.
+It provides a lightweight, portable, and scalable environment,
+ensuring seamless deployment across different systems.
+Docker simplifies dependency management, updates, and configuration replication,
+enhancing consistency and reliability.</p>
+<section id="id1">
+<h4>Installation Steps<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Single time configuration of Docker.</p>
+<p>Start by updating the package lists:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </pre></div>
 </div>
+<p>Step 1. Add Docker’s official GPG key:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ca-certificates<span class="w"> </span>curl
+sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">0755</span><span class="w"> </span>-d<span class="w"> </span>/etc/apt/keyrings
+sudo<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/docker.asc
+sudo<span class="w"> </span>chmod<span class="w"> </span>a+r<span class="w"> </span>/etc/apt/keyrings/docker.asc
+</pre></div>
+</div>
+<p>Step 2. Add the repository to Apt sources:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span>
+<span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VERSION_CODENAME</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2"> stable&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/docker.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</pre></div>
+</div>
+<p>Update the package lists again:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+<p>Step 3. Install Docker:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span>docker-buildx-plugin<span class="w"> </span>docker-compose-plugin
+</pre></div>
+</div>
+<p>Step 4. Add the user to Docker group:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>Step 5. Log out of your session and then log back in.</p>
+<p>Step 6. Test your Docker installation:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</pre></div>
+</div>
+</section>
+<section id="nvidia-container">
+<h4>NVIDIA Container<a class="headerlink" href="#nvidia-container" title="Link to this heading">#</a></h4>
+<p>Skip this section if GPU support is not needed.
+If the prerequisites are not installed, refer to
+<a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a>.</p>
+<p>Single time configuration of NVDIA container toolkit.</p>
+<p>Step 1. Configure the repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+sed<span class="w"> </span><span class="s1">&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nvidia-container-toolkit.list
+</pre></div>
+</div>
+<p>Step 2. Update and install:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-docker2
+</pre></div>
+</div>
+<p>Step 3. Configure Docker to use NVIDIA in rootless mode:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nvidia-ctk<span class="w"> </span>runtime<span class="w"> </span>configure<span class="w"> </span>--runtime<span class="o">=</span>docker<span class="w"> </span>--config<span class="o">=</span><span class="nv">$HOME</span>/.config/docker/daemon.json
+systemctl<span class="w"> </span>--user<span class="w"> </span>restart<span class="w"> </span>docker
+sudo<span class="w"> </span>nvidia-ctk<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>nvidia-container-cli.no-cgroups<span class="w"> </span>--in-place
+</pre></div>
+</div>
+<p>It may be necessary to edit the following file and
+change the value of <code class="docutils literal notranslate"><span class="pre">no-cgroups</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/nvidia-container-runtime/config.toml
+</pre></div>
+</div>
+<p>Then, execute:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>Step 4. Test the GPU access:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:12.0.0-base-ubuntu20.04<span class="w"> </span>nvidia-smi
+</pre></div>
+</div>
+</section>
+<section id="run-docker">
+<h4>Run Docker<a class="headerlink" href="#run-docker" title="Link to this heading">#</a></h4>
+<p>Create a folder where you want to save your notebooks.
+This folder will store all the examples you create in
+the browser.</p>
+<p>Open a terminal and navigate to the folder you just created.</p>
+<p>To run Hiperwalk in Docker with CPU-only support,
+execute the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
+</pre></div>
+</div>
+<p>To run Hiperwalk in Docker with GPU and CPU support,
+execute the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/jovyan/work<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span>hiperwalk/hiperwalk:2.0.b0
+</pre></div>
+</div>
+<p>Open your web browser and go to the URL that appears on the screen,
+starting with <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Alternatively, you can directly click
+on the hyperlink.</p>
+<p>In the Jupyter environment, access the <code class="docutils literal notranslate"><span class="pre">work/</span></code> folder.
+All your data and notebooks will be saved in the folder
+you have created above
+(external to the Docker container).</p>
+</section>
+</section>
+<section id="local-installation">
+<h3>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h3>
+<p>This section and the ones that follow are intended
+for developers of the Hiperwalk package.
+Before proceeding, it is advisable to update and
+upgrade your Ubuntu packages.
+Execute the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+</pre></div>
+</div>
+<p>The steps described here will cover identifying the GPU,
+installing the GPU drivers, hiperblas-core,
+hiperblas-opencl-bridge, pyhiperblas, and
+all necessary Python libraries.
+Next, run the following commands to install the prerequisites:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>g++
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libgtest-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-distutils
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
+pip<span class="w"> </span>install<span class="w"> </span>pytest
+</pre></div>
+</div>
+<p>These newly installed programs serve the following purposes:</p>
+<ul class="simple">
+<li><p>git: used to download hiperblas-core, hiperblas-opencl-bridge,
+pyhiperblas, and hiperwalk;</p></li>
+<li><p>g++: used for compiling hiperblas-core, and hiperblas-opencl-bridge;</p></li>
+<li><p>cmake: essential for compiling hiperblas-core, hiperblas-opencl-bridge;</p></li>
+<li><p>libgtest-dev: verifies the successful installation of
+hiperblas-core, and hiperblas-opencl-bridge;</p></li>
+<li><p>python3-distutils: aids in the installation of pyhiperblas;</p></li>
+<li><p>python3-pip: necessary for installing Python libraries;</p></li>
+<li><p>pytest: helps test pyhiperblas.</p></li>
+</ul>
+<p>Although it’s not essential, we <strong>recommend</strong> installing FFmpeg,
+which is used for generating animations.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
+</pre></div>
+</div>
+<section id="nvidia-toolkit">
+<h4>NVIDIA Toolkit<a class="headerlink" href="#nvidia-toolkit" title="Link to this heading">#</a></h4>
+<p>Skip this section if the <a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a> are not installed.</p>
+<p>Once the GPU drivers have been successfully installed, it’s
+necessary to install the NVIDIA Toolkit, allowing hiperblas-core
+to use CUDA.
+To do this, access
+<a class="reference external" href="https://developer.nvidia.com/cuda-downloads">CUDA toolkit Downloads</a>
+and select the options of
+<em>Operating System</em>, <em>Architecture</em>, <em>Distribution</em>, and
+<em>Version</em>,  according to your machine,
+and the desired <em>Installer Type</em>.
+Then, follow the instructions of the <strong>Base Installer</strong> section.</p>
 <p>To verify the correct installation of the NVIDIA Toolkit,
 you can check if the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler has been installed.
 This can be simply done by running the following command:</p>
@@ -560,16 +689,13 @@ This can be simply done by running the following command:</p>
 </pre></div>
 </div>
 </section>
-</section>
-<section id="installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas">
-<h3>Installing hiperblas-core hiperblas-opencl-bridge and pyhiperblas<a class="headerlink" href="#installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas" title="Link to this heading">#</a></h3>
+<section id="hiperblas">
+<h4>Hiperblas<a class="headerlink" href="#hiperblas" title="Link to this heading">#</a></h4>
 <p>For HPC support,
 Hiperwalk uses
 <a class="reference external" href="https://github.com/hiperblas/hiperblas-core">hiperblas-core</a>,
 <a class="reference external" href="https://github.com/hiperblas/hiperblas-opencl-bridge">hiperblas-opencl-bridge</a>,
-and <a class="reference external" href="https://github.com/hiperblas/pyhiperblas">pyhiperblas</a>.
-Note that a computer with a <strong>GPU compatible with CUDA</strong> is required
-for this.</p>
+and <a class="reference external" href="https://github.com/hiperblas/pyhiperblas">pyhiperblas</a>.</p>
 <p>The information in this guide is compiled from
 <a class="reference external" href="https://paulomotta.pro.br/wp/2021/05/01/pyhiperblas-and-hiperblas-core/">Paulo Motta’s blog</a>,
 <a class="reference external" href="https://github.com/hiperblas/hiperblas-core">hiperblas-core github</a>,
@@ -580,7 +706,7 @@ are installed (i.e. cloned) in the same directory.
 In this guide, we will install both projects into the home directory.
 In Linux, the tilde (<code class="docutils literal notranslate"><span class="pre">~</span></code>) serves as an alias for the home directory.</p>
 <section id="id2">
-<h4>hiperblas-core<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<h5>hiperblas-core<a class="headerlink" href="#id2" title="Link to this heading">#</a></h5>
 <p>Firstly, clone the repository in the home directory.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hiperblas/hiperblas-core.git
@@ -588,7 +714,7 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hiper
 </div>
 <p>Next, navigate to the hiperblas-core directory to compile and
 install the code.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>hiperblas-core
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/hiperblas-core
 cmake<span class="w"> </span>.
 make
 sudo<span class="w"> </span>make<span class="w"> </span>install
@@ -607,13 +733,15 @@ a symbolic link to another directory.</p>
 </div>
 <p>To verify the successful installation of hiperblas-core,
 execute the <code class="docutils literal notranslate"><span class="pre">vector_test</span></code> and <code class="docutils literal notranslate"><span class="pre">matrix_test</span></code> tests.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./vector_test
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/hiperblas-core
+./vector_test
 ./matrix_test
 </pre></div>
 </div>
 </section>
 <section id="id3">
-<h4>hiperblas-opencl-bridge<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<h5>hiperblas-opencl-bridge<a class="headerlink" href="#id3" title="Link to this heading">#</a></h5>
+<p>Skip this section if the <a class="reference internal" href="#docs-gpu-prerequisites"><span class="std std-ref">GPU Prerequisites</span></a> are not installed.</p>
 <p>The installation of the hiperblas-opencl-bridge is very similar to
 the installation of hiperblas-core.
 To install hiperblas-opencl-bridge,
@@ -640,13 +768,18 @@ execute the tests</p>
 </div>
 </section>
 <section id="id4">
-<h4>pyhiperblas<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<h5>pyhiperblas<a class="headerlink" href="#id4" title="Link to this heading">#</a></h5>
 <p>To install pyhiperblas, first clone the repository into
 <strong>the same directory hiperblas-core was cloned</strong>.
 In this guide, we cloned hiperblas-core into the home directory.
 Thus, execute:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/hiperblas/pyhiperblas.git
+</pre></div>
+</div>
+<p>Before installing <code class="docutils literal notranslate"><span class="pre">pyhiperblas</span></code>,
+install <code class="docutils literal notranslate"><span class="pre">numpy</span></code> using the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>numpy
 </pre></div>
 </div>
 <p>Next, navigate to the newly created <code class="docutils literal notranslate"><span class="pre">pyhiperblas</span></code> directory to install it.</p>
@@ -658,6 +791,13 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>test.py
 </pre></div>
 </div>
+</section>
+</section>
+<section id="hiperwalk">
+<h4>Hiperwalk<a class="headerlink" href="#hiperwalk" title="Link to this heading">#</a></h4>
+<p>To finish the local hiperwalk installation,
+issue the same commands of the
+<a class="reference internal" href="#docs-basic-installation"><span class="std std-ref">Basic Installation</span></a> section.</p>
 </section>
 </section>
 </section>
@@ -709,18 +849,27 @@ sudo<span class="w"> </span>python3<span class="w"> </span>setup.py<span class="
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-prerequisites">HPC Prerequisites</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-driver">GPU Driver</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-installation">Basic Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-steps">Installation Steps</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-hiperblas-core-hiperblas-opencl-bridge-and-pyhiperblas">Installing hiperblas-core hiperblas-opencl-bridge and pyhiperblas</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">hiperblas-core</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">hiperblas-opencl-bridge</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">pyhiperblas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-enabled-installation">HPC-Enabled Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-prerequisites">GPU Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-installation">Docker Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Installation Steps</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-container">NVIDIA Container</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-docker">Run Docker</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-installation">Local Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-toolkit">NVIDIA Toolkit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperblas">Hiperblas</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">hiperblas-core</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">hiperblas-opencl-bridge</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">pyhiperblas</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperwalk">Hiperwalk</a></li>
 </ul>
 </li>
 </ul>

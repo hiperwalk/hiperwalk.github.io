@@ -403,7 +403,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 <span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="n">__DEBUG__</span>
 
 <span class="c1">############################################</span>
 <span class="c1"># used for automatically stopping the engine</span>
@@ -416,11 +415,11 @@ document.write(`
 <a class="viewcode-back" href="../../../documentation/hpc.html#hiperwalk.set_hpc">[docs]</a>
 <span class="k">def</span> <span class="nf">set_hpc</span><span class="p">(</span><span class="n">hpc</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Indicates which HPC platform is going to be used.</span>
+<span class="sd">    Indicate which HPC platform is going to be used.</span>
 
 <span class="sd">    After executing the ``set_hpc`` command,</span>
 <span class="sd">    all subsequent hiperwalk commands will</span>
-<span class="sd">    utilize the dsignated HPC platform.</span>
+<span class="sd">    use the designated HPC platform.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -526,7 +525,11 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># TODO: check if complex automatically?</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
+    <span class="c1"># # the complex type from Python is not the same as numpy complex128</span>
+    <span class="c1"># is_complex = str(v.dtype) == &quot;complex128&quot;</span>
+    <span class="c1"># more pythonic way of checking if type is complex</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="c1"># TODO: needs better support from pyneblina to</span>
@@ -539,15 +542,15 @@ document.write(`
     <span class="c1"># </span>
     <span class="c1"># vec = (neblina.vector_new(n, neblina.COMPLEX)</span>
     <span class="c1">#        if is_complex else neblina.vector_new(n, neblina.FLOAT))</span>
-    <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">vector_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span>
+    <span class="c1"># TODO: check if line below and the previou comment are still needed</span>
+    <span class="c1"># vec = neblina.vector_new(n, neblina.COMPLEX)</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># TODO: Pyneblina needs to accept 3 only arguments</span>
         <span class="c1"># instead of 4?</span>
         <span class="c1"># TODO: check if neblina.vector_set is idetifying</span>
         <span class="c1"># the vector type right (i.e. real and not complex)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">vector_set</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: vector entries must have real and imaginary parts.&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
@@ -572,20 +575,17 @@ document.write(`
 
     <span class="c1"># if a vector is being retrieved.</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-        <span class="k">global</span> <span class="n">__engine_initiated</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__engine_initiated</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
-
     <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_vector_host</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">)</span>
+    <span class="n">py_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_array</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">pynbl_vec</span><span class="o">.</span><span class="n">is_complex</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Cannot retrieve real-only vectors.&quot;</span><span class="p">)</span>
-    <span class="n">py_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">neblina</span><span class="o">.</span><span class="n">vector_get</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">neblina</span><span class="o">.</span><span class="n">vector_get</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="o">.</span><span class="n">shape</span><span class="p">)]</span>
-            <span class="p">)</span>
+    <span class="c1"># if not pynbl_vec.is_complex:</span>
+    <span class="c1">#     raise NotImplementedError(&quot;Cannot retrieve real-only vectors.&quot;)</span>
+    <span class="c1"># py_vec = np.array(</span>
+    <span class="c1">#             [neblina.vector_get(nbl_vec, 2*i)</span>
+    <span class="c1">#              + 1j*neblina.vector_get(nbl_vec, 2*i + 1)</span>
+    <span class="c1">#              for i in range(pynbl_vec.shape)]</span>
+    <span class="c1">#         )</span>
 
     <span class="c1"># TODO: check if vector is being deleted (or not)</span>
 
@@ -617,9 +617,9 @@ document.write(`
     <span class="c1">#   In addition, there should be a way to</span>
     <span class="c1">#   return the matrix and automatically</span>
     <span class="c1">#   convert to a matrix of float or of complex numbers accordingly.</span>
+    <span class="n">smat</span> <span class="o">=</span> <span class="p">(</span><span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_complex</span>
+            <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
     <span class="c1"># smat = neblina.sparse_matrix_new(n, n, neblina.COMPLEX)</span>
-    <span class="c1">#     if is_complex else neblina.sparse_matrix_new(n, n, neblina.FLOAT)</span>
-    <span class="n">smat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span>
     
     <span class="c1"># inserts elements into neblina sparse matrix</span>
     <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
@@ -647,25 +647,26 @@ document.write(`
     <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">):</span>
-    <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">mat</span> <span class="o">=</span> <span class="p">(</span><span class="n">neblina</span><span class="o">.</span><span class="n">matrix_new</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span>
-           <span class="k">if</span> <span class="n">is_complex</span>
-           <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">matrix_new</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
+    <span class="c1"># num_rows, num_cols = M.shape</span>
+    <span class="c1"># mat = (neblina.matrix_new(num_rows, num_cols, neblina.COMPLEX)</span>
+    <span class="c1">#        if is_complex</span>
+    <span class="c1">#        else neblina.matrix_new(num_rows, num_cols, neblina.FLOAT))</span>
     
     <span class="c1"># inserts elements into neblina matrix</span>
     <span class="c1"># TODO: Check if there really is a difference between real and complex</span>
     <span class="c1"># TODO: Check if default value is zero so we can jump setting element. </span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rows</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">matrix_set</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+    <span class="c1"># for i in range(num_rows):</span>
+    <span class="c1">#     for j in range(num_cols):</span>
+    <span class="c1">#         neblina.matrix_set(mat, i, j, M[i, j].real, M[i, j].imag)</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">)</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
@@ -681,25 +682,26 @@ document.write(`
 
     <span class="n">nbl_mat</span> <span class="o">=</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_host</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
+    <span class="n">py_mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
 
-    <span class="c1"># TODO: Check if using default numpy datatype.</span>
-    <span class="n">py_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pynbl_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">(</span>
-        <span class="nb">complex</span> <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">is_complex</span> <span class="k">else</span> <span class="nb">float</span>
-    <span class="p">))</span>
+    <span class="c1"># # TODO: Check if using default numpy datatype.</span>
+    <span class="c1"># py_mat = np.zeros(pynbl_mat.shape, dtype=(</span>
+    <span class="c1">#     complex if pynbl_mat.is_complex else float</span>
+    <span class="c1"># ))</span>
 
     <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">shape</span>
     <span class="c1"># TODO: Not vectorized. Implement with list comprehension. </span>
     <span class="c1">#       This may require the double memory usage. </span>
     <span class="c1">#       Check memory usage before choosing which method to use.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rows</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">is_complex</span><span class="p">:</span>
-                <span class="n">py_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                      <span class="n">neblina</span><span class="o">.</span><span class="n">matrix_get</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
-                    <span class="o">+</span> <span class="n">neblina</span><span class="o">.</span><span class="n">matrix_get</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">py_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">matrix_get</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="c1"># for i in range(num_rows):</span>
+    <span class="c1">#     for j in range(num_cols):</span>
+    <span class="c1">#         if pynbl_mat.is_complex:</span>
+    <span class="c1">#             py_mat[i,j] = (</span>
+    <span class="c1">#                   neblina.matrix_get(nbl_mat, 2*i, 2*j)</span>
+    <span class="c1">#                 + neblina.matrix_get(nbl_mat, 2*i, 2*j + 1)*1j</span>
+    <span class="c1">#             )</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             py_mat[i,j] = neblina.matrix_get(nbl_mat, i, j)</span>
 
     <span class="k">return</span> <span class="n">py_mat</span>
 
@@ -727,10 +729,6 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a matrix-vector operation is being requested,</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="k">if</span> <span class="n">__DEBUG__</span><span class="p">:</span>
-        <span class="k">global</span> <span class="n">__engine_initiated</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__engine_initiated</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span>
-
     <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">sparse</span><span class="p">:</span>
         <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matvec_mul</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span>
                                             <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">)</span>
