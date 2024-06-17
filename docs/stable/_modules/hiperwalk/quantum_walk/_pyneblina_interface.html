@@ -532,31 +532,8 @@ document.write(`
 
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c1"># TODO: needs better support from pyneblina to</span>
-    <span class="c1"># use next instruction (commented).</span>
-    <span class="c1"># For example: neblina.vector_set works, but in the real case,</span>
-    <span class="c1"># it should not be needed to pass the imaginary part as argument.</span>
-    <span class="c1"># In addition,</span>
-    <span class="c1"># there should be a way to return a vector and automatically</span>
-    <span class="c1"># convert to an array of float or of complex numbers accordingly.</span>
-    <span class="c1"># </span>
-    <span class="c1"># vec = (neblina.vector_new(n, neblina.COMPLEX)</span>
-    <span class="c1">#        if is_complex else neblina.vector_new(n, neblina.FLOAT))</span>
-    <span class="c1"># TODO: check if line below and the previou comment are still needed</span>
-    <span class="c1"># vec = neblina.vector_new(n, neblina.COMPLEX)</span>
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># TODO: Pyneblina needs to accept 3 only arguments</span>
-        <span class="c1"># instead of 4?</span>
-        <span class="c1"># TODO: check if neblina.vector_set is idetifying</span>
-        <span class="c1"># the vector type right (i.e. real and not complex)</span>
-        <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: vector entries must have real and imaginary parts.&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: vector entries must be numbers.&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
     <span class="c1"># suppose that the vector is going to be used</span>
     <span class="c1"># immediately after being transferred</span>
@@ -624,17 +601,15 @@ document.write(`
     <span class="c1"># inserts elements into neblina sparse matrix</span>
     <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">next_row_ind</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">==</span> <span class="n">next_row_ind</span><span class="p">:</span>
             <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">next_row_ind</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">next_row_ind</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
             
         <span class="n">col</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">is_complex</span><span class="p">:</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span>
-                              <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+            <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>
+                                      <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># TODO: Pynebliena needs to accept 4 arguments instead of 5?</span>
             <span class="c1"># TODO: check if smatrix_set_real_value is beign called</span>
@@ -779,22 +754,23 @@ document.write(`
             <span class="o">+</span> <span class="s2">&quot;Converting to dense.&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">pynbl_A</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">pynbl_Term</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
-    <span class="n">pynbl_M</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+    <span class="n">pA</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pA</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">pynbl_Term</span><span class="o">.</span><span class="n">nbl_obj</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span>
-                <span class="n">pynbl_Term</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span> <span class="n">pynbl_A</span><span class="o">.</span><span class="n">nbl_obj</span>
-        <span class="p">)</span>
-        <span class="n">pynbl_Term</span><span class="o">.</span><span class="n">nbl_obj</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">scalar_mat_mul</span><span class="p">(</span>
-                <span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="p">,</span> <span class="n">pynbl_Term</span><span class="o">.</span><span class="n">nbl_obj</span>
-        <span class="p">)</span>
-        <span class="n">pynbl_M</span><span class="o">.</span><span class="n">nbl_obj</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_add</span><span class="p">(</span>
-                <span class="n">pynbl_M</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span> <span class="n">pynbl_Term</span><span class="o">.</span><span class="n">nbl_obj</span>
-        <span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pT</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">pynbl_M</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">pM</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span><span class="n">pT</span><span class="p">,</span> <span class="n">pA</span><span class="p">)</span>
+        <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">scalar_mat_mul</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="p">,</span> <span class="n">pT</span><span class="p">)</span>
+        <span class="n">pM</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_add</span><span class="p">(</span><span class="n">pM</span><span class="p">,</span> <span class="n">pT</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_matrix</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
 </pre></div>
 
                 </article>
