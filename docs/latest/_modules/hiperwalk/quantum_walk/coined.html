@@ -1194,7 +1194,7 @@ document.write(`
 <span class="sd">        set_coin</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marked</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin</span>
 
             <span class="c1"># if coin was explicitly set,</span>
@@ -1227,7 +1227,7 @@ document.write(`
             <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 
         <span class="n">oracle_coin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_oracle_coin</span>
-        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">oracle_coin</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">oracle_coin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">coin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin</span>
             <span class="n">coin_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">oracle_coin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">oracle_coin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span>
                          <span class="k">else</span> <span class="n">coin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -1288,7 +1288,8 @@ document.write(`
 <span class="sd">        its definition remains unaltered </span>
 <span class="sd">        even in the presence of marked vertices. However, if the coin </span>
 <span class="sd">        operator is defined using coin names, any marked vertices will </span>
-<span class="sd">        prompt an update to the coin operator. Specifically, the coin names </span>
+<span class="sd">        prompt an update to the coin operator.</span>
+<span class="sd">        Specifically, the coin names</span>
 <span class="sd">        for each marked vertex will default to a replacement with -I, </span>
 <span class="sd">        unless an alternative substitution is provided.</span>
 
