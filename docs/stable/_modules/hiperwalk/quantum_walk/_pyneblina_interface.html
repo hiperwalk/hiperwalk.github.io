@@ -598,23 +598,39 @@ document.write(`
             <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
     <span class="c1"># smat = neblina.sparse_matrix_new(n, n, neblina.COMPLEX)</span>
     
-    <span class="c1"># inserts elements into neblina sparse matrix</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">next_row_ind</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">==</span> <span class="n">next_row_ind</span><span class="p">:</span>
-            <span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">next_row_ind</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-            
-        <span class="n">col</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">is_complex</span><span class="p">:</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>
-                                      <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># TODO: Pynebliena needs to accept 4 arguments instead of 5?</span>
-            <span class="c1"># TODO: check if smatrix_set_real_value is beign called</span>
-            <span class="c1"># instead of smatrix_set_complex_value</span>
-            <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span> 
+    <span class="c1"># # inserts elements into neblina sparse matrix</span>
+    <span class="c1"># row = 0</span>
+    <span class="c1"># next_row_ind = M.indptr[1]</span>
+    <span class="c1"># for i in range(len(M.data)):</span>
+    <span class="c1">#     while i == next_row_ind:</span>
+    <span class="c1">#         row += 1</span>
+    <span class="c1">#         next_row_ind = M.indptr[row + 1]</span>
+    <span class="c1"># </span>
+    <span class="c1">#     col = M.indices[i]</span>
+    <span class="c1">#     if is_complex:</span>
+    <span class="c1">#         neblina.sparse_matrix_set(smat, row, col,</span>
+    <span class="c1">#                                   M[row, col].real, M[row, col].imag)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         # TODO: Pynebliena needs to accept 4 arguments instead of 5?</span>
+    <span class="c1">#         # TODO: check if smatrix_set_real_value is beign called</span>
+    <span class="c1">#         # instead of smatrix_set_complex_value</span>
+    <span class="c1">#         neblina.sparse_matrix_set(smat, row, col, M[row, col], 0)</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># columns must be added in reverse order</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">is_complex</span><span class="p">:</span>
+                <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>
+                                          <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span>
+                                          <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>
+                                          <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_pack</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span> <span class="c1"># TODO: is this needed?</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_sparse_matrix_device</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span>
