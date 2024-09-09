@@ -571,8 +571,8 @@ Two input types are accepted:</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Any matrix – for instance,</dt><dd><ul>
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.14.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
 <li><p>list of lists.</p></li>
 </ul>
 </dd>
@@ -608,7 +608,7 @@ For visualizations, the default graph representation will be used.
 Specific classes are available for well-known graph types,
 such as hypercubes and lattices.</p>
 <p>The adjacency matrix is always stored as a
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.14.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is sparse and <code class="docutils literal notranslate"><span class="pre">copy=False</span></code>,
 the argument will be changed for more efficient manipulation.</p>
 <p>Each vertex has at most one loop.</p>
@@ -624,7 +624,7 @@ the argument <code class="docutils literal notranslate"><span class="pre">copy</
 <p>The default <strong>order of neighbors</strong> is the ascending order.
 A different order of neighbors can be specified using a
 sparse matrix where
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.14.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.14.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
 In this case,
 the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are given by
 <code class="docutils literal notranslate"><span class="pre">adj_matrix.indices[adj_matrix.indptr[u]:adj_matrix.indptr[u+1]]</span></code>.</p>
@@ -794,7 +794,7 @@ the descending order of neighbors.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>
