@@ -470,24 +470,6 @@ document.write(`
         <span class="n">__engine_initiated</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">exit_handler</span><span class="p">)</span>
-<span class="c1">############################################</span>
-
-<span class="c1"># &quot;abstract&quot;</span>
-<span class="k">class</span> <span class="nc">PyNeblinaObject</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nbl_obj</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nbl_obj</span> <span class="o">=</span> <span class="n">nbl_obj</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_complex</span> <span class="o">=</span> <span class="n">is_complex</span>
-
-<span class="k">class</span> <span class="nc">PyNeblinaMatrix</span><span class="p">(</span><span class="n">PyNeblinaObject</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="n">sparse</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sparse</span> <span class="o">=</span> <span class="n">sparse</span>
-
-<span class="k">class</span> <span class="nc">PyNeblinaVector</span><span class="p">(</span><span class="n">PyNeblinaObject</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
-
 
 <span class="k">def</span> <span class="nf">_init_engine</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -525,25 +507,11 @@ document.write(`
 <span class="sd">    I think an auxiliary vector is beign created,</span>
 <span class="sd">    thus twice the memory needed is being used</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># TODO: check if complex automatically?</span>
-    <span class="c1"># # the complex type from Python is not the same as numpy complex128</span>
-    <span class="c1"># is_complex = str(v.dtype) == &quot;complex128&quot;</span>
-    <span class="c1"># more pythonic way of checking if type is complex</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
-
-
-    <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
     <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-
-    <span class="c1"># suppose that the vector is going to be used</span>
-    <span class="c1"># immediately after being transferred</span>
-    <span class="c1"># TODO: check if this is the case</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_vector_device</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">PyNeblinaVector</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vec</span>
 
-<span class="k">def</span> <span class="nf">retrieve_vector</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">retrieve_vector</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieves vector from the device and converts it to python array.</span>
 <span class="sd">    By default, it is supposed that the vector is not going to be used in</span>
@@ -554,7 +522,6 @@ document.write(`
 
     <span class="c1"># if a vector is being retrieved.</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_vector_host</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">)</span>
     <span class="n">py_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_array</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">)</span>
 
@@ -570,7 +537,7 @@ document.write(`
 
     <span class="k">return</span> <span class="n">py_vec</span>
         
-<span class="k">def</span> <span class="nf">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transfers a sparse Matrix (M) stored in csr format to Neblina-core and</span>
 <span class="sd">    moves it to the device (ready to be used).</span>
@@ -586,6 +553,7 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c1"># TODO: check if complex automatically?</span>
+    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="c1"># creates neblina sparse matrix structure</span>
@@ -598,25 +566,6 @@ document.write(`
     <span class="c1">#   convert to a matrix of float or of complex numbers accordingly.</span>
     <span class="n">smat</span> <span class="o">=</span> <span class="p">(</span><span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">COMPLEX</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_complex</span>
             <span class="k">else</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">neblina</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
-    <span class="c1"># smat = neblina.sparse_matrix_new(n, n, neblina.COMPLEX)</span>
-    
-    <span class="c1"># # inserts elements into neblina sparse matrix</span>
-    <span class="c1"># row = 0</span>
-    <span class="c1"># next_row_ind = M.indptr[1]</span>
-    <span class="c1"># for i in range(len(M.data)):</span>
-    <span class="c1">#     while i == next_row_ind:</span>
-    <span class="c1">#         row += 1</span>
-    <span class="c1">#         next_row_ind = M.indptr[row + 1]</span>
-    <span class="c1"># </span>
-    <span class="c1">#     col = M.indices[i]</span>
-    <span class="c1">#     if is_complex:</span>
-    <span class="c1">#         neblina.sparse_matrix_set(smat, row, col,</span>
-    <span class="c1">#                                   M[row, col].real, M[row, col].imag)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         # TODO: Pynebliena needs to accept 4 arguments instead of 5?</span>
-    <span class="c1">#         # TODO: check if smatrix_set_real_value is beign called</span>
-    <span class="c1">#         # instead of smatrix_set_complex_value</span>
-    <span class="c1">#         neblina.sparse_matrix_set(smat, row, col, M[row, col], 0)</span>
 
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
@@ -634,71 +583,35 @@ document.write(`
                 <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_set</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>
                                           <span class="n">M</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_pack</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span> <span class="c1"># TODO: is this needed?</span>
+    <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matrix_pack</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_sparse_matrix_device</span><span class="p">(</span><span class="n">smat</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">smat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">smat</span>
 
-<span class="k">def</span> <span class="nf">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">):</span>
-    <span class="c1"># num_rows, num_cols = M.shape</span>
-    <span class="c1"># mat = (neblina.matrix_new(num_rows, num_cols, neblina.COMPLEX)</span>
-    <span class="c1">#        if is_complex</span>
-    <span class="c1">#        else neblina.matrix_new(num_rows, num_cols, neblina.FLOAT))</span>
-    
-    <span class="c1"># inserts elements into neblina matrix</span>
-    <span class="c1"># TODO: Check if there really is a difference between real and complex</span>
-    <span class="c1"># TODO: Check if default value is zero so we can jump setting element. </span>
-
-    <span class="c1"># for i in range(num_rows):</span>
-    <span class="c1">#     for j in range(num_cols):</span>
-    <span class="c1">#         neblina.matrix_set(mat, i, j, M[i, j].real, M[i, j].imag)</span>
+<span class="k">def</span> <span class="nf">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="n">mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mat</span>
 
 <span class="k">def</span> <span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="n">is_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">is_complex</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">retrieve_matrix</span><span class="p">(</span><span class="n">pynbl_mat</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">retrieve_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">):</span>
 
-    <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">sparse</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_host</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="s2">&quot;Cannot retrieve sparse matrix.&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">nbl_mat</span> <span class="o">=</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span>
-    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_host</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
-    <span class="n">py_mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mat</span>
 
-    <span class="c1"># # TODO: Check if using default numpy datatype.</span>
-    <span class="c1"># py_mat = np.zeros(pynbl_mat.shape, dtype=(</span>
-    <span class="c1">#     complex if pynbl_mat.is_complex else float</span>
-    <span class="c1"># ))</span>
-
-    <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">shape</span>
-    <span class="c1"># TODO: Not vectorized. Implement with list comprehension. </span>
-    <span class="c1">#       This may require the double memory usage. </span>
-    <span class="c1">#       Check memory usage before choosing which method to use.</span>
-    <span class="c1"># for i in range(num_rows):</span>
-    <span class="c1">#     for j in range(num_cols):</span>
-    <span class="c1">#         if pynbl_mat.is_complex:</span>
-    <span class="c1">#             py_mat[i,j] = (</span>
-    <span class="c1">#                   neblina.matrix_get(nbl_mat, 2*i, 2*j)</span>
-    <span class="c1">#                 + neblina.matrix_get(nbl_mat, 2*i, 2*j + 1)*1j</span>
-    <span class="c1">#             )</span>
-    <span class="c1">#         else:</span>
-    <span class="c1">#             py_mat[i,j] = neblina.matrix_get(nbl_mat, i, j)</span>
-
-    <span class="k">return</span> <span class="n">py_mat</span>
-
-<span class="k">def</span> <span class="nf">multiply_matrix_vector</span><span class="p">(</span><span class="n">pynbl_mat</span><span class="p">,</span> <span class="n">pynbl_vec</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">multiply_matrix_vector</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="n">nbl_vec</span><span class="p">,</span> <span class="n">is_sparse</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Request matrix multiplication to neblina.</span>
 
@@ -722,41 +635,15 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a matrix-vector operation is being requested,</span>
     <span class="c1"># the engine should have been already initiated</span>
-    <span class="k">if</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">sparse</span><span class="p">:</span>
-        <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matvec_mul</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span>
-                                            <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_sparse</span><span class="p">:</span>
+        <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">sparse_matvec_mul</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">,</span> <span class="n">nbl_mat</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">matvec_mul</span><span class="p">(</span><span class="n">pynbl_vec</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">,</span>
-                                     <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">nbl_obj</span><span class="p">)</span>
+        <span class="n">nbl_vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">matvec_mul</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">,</span> <span class="n">nbl_mat</span><span class="p">)</span>
 
-    <span class="n">new_vec</span> <span class="o">=</span> <span class="n">PyNeblinaVector</span><span class="p">(</span>
-        <span class="n">nbl_vec</span><span class="p">,</span> <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="n">pynbl_mat</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="n">pynbl_vec</span><span class="o">.</span><span class="n">is_complex</span>
-    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">nbl_vec</span>
 
-    <span class="k">return</span> <span class="n">new_vec</span>
-
-<span class="k">def</span> <span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">pynbl_A</span><span class="p">,</span> <span class="n">pynbl_B</span><span class="p">):</span>
-
-    <span class="k">if</span> <span class="n">pynbl_A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">pynbl_B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Matrices dimensions do not match.&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">pynbl_A</span><span class="o">.</span><span class="n">sparse</span> <span class="ow">or</span> <span class="n">pynbl_B</span><span class="o">.</span><span class="n">sparse</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="s2">&quot;No sparse matrix multiplication implemented.&quot;</span>
-        <span class="p">)</span>
-
-    <span class="n">A</span> <span class="o">=</span> <span class="n">pynbl_A</span><span class="o">.</span><span class="n">nbl_obj</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="n">pynbl_B</span><span class="o">.</span><span class="n">nbl_obj</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-
-    <span class="n">pynbl_C</span> <span class="o">=</span> <span class="n">PyNeblinaMatrix</span><span class="p">(</span>
-        <span class="n">C</span><span class="p">,</span> <span class="p">(</span><span class="n">pynbl_A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pynbl_B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-        <span class="n">pynbl_A</span><span class="o">.</span><span class="n">is_complex</span> <span class="ow">or</span> <span class="n">pynbl_B</span><span class="o">.</span><span class="n">is_complex</span><span class="p">,</span>
-        <span class="kc">False</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">pynbl_C</span>
+<span class="k">def</span> <span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">nbl_A</span><span class="p">,</span> <span class="n">nbl_B</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span><span class="n">nbl_A</span><span class="p">,</span> <span class="n">nbl_B</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">matrix_power_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -772,23 +659,26 @@ document.write(`
             <span class="o">+</span> <span class="s2">&quot;Converting to dense.&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">pA</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pA</span><span class="p">)</span>
+    <span class="n">pA</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pT</span><span class="p">)</span>
+    <span class="n">pT</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">pM</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
+    <span class="n">pM</span> <span class="o">=</span> <span class="n">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span><span class="n">pT</span><span class="p">,</span> <span class="n">pA</span><span class="p">)</span>
         <span class="n">pT</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">scalar_mat_mul</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="p">,</span> <span class="n">pT</span><span class="p">)</span>
         <span class="n">pM</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_add</span><span class="p">(</span><span class="n">pM</span><span class="p">,</span> <span class="n">pT</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_matrix</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
+    <span class="c1">#return neblina.retrieve_numpy_matrix(pM)</span>
+    <span class="k">return</span> <span class="n">retrieve_matrix</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">copy_vector</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">copy_vector_from_device</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vec</span>
 </pre></div>
 
                 </article>

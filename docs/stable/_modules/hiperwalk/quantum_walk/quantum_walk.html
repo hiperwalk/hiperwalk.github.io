@@ -925,9 +925,10 @@ document.write(`
             <span class="c1"># TODO: request multiple multiplications at once</span>
             <span class="c1">#       to neblina-core</span>
             <span class="c1"># TODO: check if intermediate states are being freed</span>
+            <span class="n">is_sparse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">multiply_matrix_vector</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">,</span> <span class="n">is_sparse</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span>
@@ -938,14 +939,9 @@ document.write(`
         <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># TODO: check if vector must be deleted or</span>
-            <span class="c1">#       if it can be reused via neblina-core commands.</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">retrieve_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">continue_simulation</span><span class="p">:</span>
-                <span class="c1"># does it need to be a copy?</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">copy_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">ret</span>
 
