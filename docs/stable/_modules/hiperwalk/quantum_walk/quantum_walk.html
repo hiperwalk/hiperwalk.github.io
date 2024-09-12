@@ -887,33 +887,14 @@ document.write(`
     <span class="c1">######################################</span>
 
     <span class="k">def</span> <span class="nf">_prepare_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">hpc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># autocast. hiperblas-core only allows same-time multipl</span>
-            <span class="n">mat_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-                                        <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
-            <span class="n">vec_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-                                        <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">mat_complex</span> <span class="o">!=</span> <span class="n">vec_complex</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">mat_complex</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
-
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">send_vector</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_simul_vec</span> <span class="o">=</span> <span class="n">state</span>
-
-        <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span> <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="p">)</span>
-                             <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-                 <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">dtype</span>
 
     <span class="k">def</span> <span class="nf">_simulate_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hpc</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1071,7 +1052,27 @@ document.write(`
 
         <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="nb">range</span>
         <span class="n">hpc</span> <span class="o">=</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span>
-        <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
+
+        <span class="c1">#########################################################</span>
+        <span class="c1"># autoconversion of matrix and vector types</span>
+        <span class="c1"># hiperblas-core only allows same-time multipl</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_evolution</span><span class="p">()</span>
+
+        <span class="n">is_mat_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+                                       <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+        <span class="n">is_vec_complex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+                                       <span class="n">np</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_mat_complex</span> <span class="o">!=</span> <span class="n">is_vec_complex</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_mat_complex</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="c1">#########################################################</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_engine</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">hpc</span><span class="p">)</span>
 
         <span class="c1"># number of states to save</span>
         <span class="n">num_states</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">//</span> <span class="n">step</span>
