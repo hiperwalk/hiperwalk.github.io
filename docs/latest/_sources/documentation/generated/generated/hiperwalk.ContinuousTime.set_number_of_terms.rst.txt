@@ -1,0 +1,6 @@
+hiperwalk.ContinuousTime.set\_number\_of\_terms
+===============================================
+
+.. currentmodule:: hiperwalk
+
+.. automethod:: ContinuousTime.set_number_of_terms

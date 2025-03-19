@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,27 +26,28 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/quantum_walk/_pyneblina_interface';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -319,9 +320,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -369,24 +375,24 @@
                   
   <h1>Source code for hiperwalk.quantum_walk._pyneblina_interface</h1><div class="highlight"><pre>
 <span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">neblina</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">neblina</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
     <span class="k">pass</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse</span>
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
-<span class="kn">from</span> <span class="nn">.._constants</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1">############################################</span>
 <span class="c1"># used for automatically stopping the engine</span>
-<span class="kn">import</span> <span class="nn">atexit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">atexit</span>
 
 <span class="n">__engine_initiated</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">__hpc_type</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="set_hpc">
 <a class="viewcode-back" href="../../../documentation/hpc.html#hiperwalk.set_hpc">[docs]</a>
-<span class="k">def</span> <span class="nf">set_hpc</span><span class="p">(</span><span class="n">hpc</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_hpc</span><span class="p">(</span><span class="n">hpc</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Indicate which HPC platform is going to be used.</span>
 
@@ -424,7 +430,7 @@
         <span class="n">_init_engine</span><span class="p">()</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_hpc</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_hpc</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">__hpc_type</span>
 
     <span class="k">if</span> <span class="n">__hpc_type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -434,7 +440,7 @@
 
     <span class="k">return</span> <span class="kc">None</span>
 
-<span class="k">def</span> <span class="nf">exit_handler</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">exit_handler</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">__engine_initiated</span>
     <span class="k">if</span> <span class="n">__engine_initiated</span><span class="p">:</span>
         <span class="n">neblina</span><span class="o">.</span><span class="n">stop_engine</span><span class="p">()</span>
@@ -442,7 +448,7 @@
 
 <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">exit_handler</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_init_engine</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_init_engine</span><span class="p">():</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Initiates neblina-core engine.</span>
 
@@ -464,7 +470,7 @@
             <span class="p">)</span>
         <span class="n">__engine_initiated</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="k">def</span> <span class="nf">send_vector</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_vector</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transfers a vector (v) to Neblina-core, and moves it</span>
 <span class="sd">    to the device to be used.</span>
@@ -482,7 +488,7 @@
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_vector_device</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">vec</span>
 
-<span class="k">def</span> <span class="nf">retrieve_vector</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">retrieve_vector</span><span class="p">(</span><span class="n">nbl_vec</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieves vector from the device and converts it to python array.</span>
 <span class="sd">    By default, it is supposed that the vector is not going to be used in</span>
@@ -508,7 +514,7 @@
 
     <span class="k">return</span> <span class="n">py_vec</span>
         
-<span class="k">def</span> <span class="nf">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transfers a sparse Matrix (M) stored in csr format to Neblina-core and</span>
 <span class="sd">    moves it to the device (ready to be used).</span>
@@ -559,18 +565,18 @@
 
     <span class="k">return</span> <span class="n">smat</span>
 
-<span class="k">def</span> <span class="nf">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="n">mat</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">load_numpy_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_device</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mat</span>
 
-<span class="k">def</span> <span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">send_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_send_sparse_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_send_dense_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">retrieve_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">retrieve_matrix</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">):</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">neblina</span><span class="o">.</span><span class="n">move_matrix_host</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">)</span>
@@ -582,7 +588,7 @@
 
     <span class="k">return</span> <span class="n">mat</span>
 
-<span class="k">def</span> <span class="nf">multiply_matrix_vector</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="n">nbl_vec</span><span class="p">,</span> <span class="n">is_sparse</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multiply_matrix_vector</span><span class="p">(</span><span class="n">nbl_mat</span><span class="p">,</span> <span class="n">nbl_vec</span><span class="p">,</span> <span class="n">is_sparse</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Request matrix multiplication to neblina.</span>
 
@@ -613,10 +619,10 @@
 
     <span class="k">return</span> <span class="n">nbl_vec</span>
 
-<span class="k">def</span> <span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">nbl_A</span><span class="p">,</span> <span class="n">nbl_B</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multiply_matrices</span><span class="p">(</span><span class="n">nbl_A</span><span class="p">,</span> <span class="n">nbl_B</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">neblina</span><span class="o">.</span><span class="n">mat_mul</span><span class="p">(</span><span class="n">nbl_A</span><span class="p">,</span> <span class="n">nbl_B</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">matrix_power_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">matrix_power_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the following power series.</span>
 <span class="sd">    A must be a dense numpy matrix.</span>
@@ -646,7 +652,7 @@
     <span class="c1">#return neblina.retrieve_numpy_matrix(pM)</span>
     <span class="k">return</span> <span class="n">retrieve_matrix</span><span class="p">(</span><span class="n">pM</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">copy_vector</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_vector</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">copy_vector_from_device</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="n">vec</span> <span class="o">=</span> <span class="n">neblina</span><span class="o">.</span><span class="n">retrieve_numpy_array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">vec</span>
@@ -679,8 +685,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -700,7 +706,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>
@@ -713,7 +719,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

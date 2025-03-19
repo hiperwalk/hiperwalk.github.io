@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,27 +26,28 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hiperwalk/quantum_walk/coined';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://hiperwalk.org/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -319,9 +320,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -368,18 +374,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for hiperwalk.quantum_walk.coined</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">from</span> <span class="nn">.quantum_walk</span> <span class="kn">import</span> <span class="n">QuantumWalk</span>
-<span class="kn">from</span> <span class="nn">..graph</span> <span class="kn">import</span> <span class="n">SDMultigraph</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.quantum_walk</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumWalk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">SDMultigraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
 
 <div class="viewcode-block" id="Coined">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined">[docs]</a>
-<span class="k">class</span> <span class="nc">Coined</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Coined</span><span class="p">(</span><span class="n">QuantumWalk</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manage instances of coined quantum walks on arbitrary graphs.</span>
 
@@ -546,7 +552,7 @@
 
 <div class="viewcode-block" id="Coined.__init__">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="c1"># create symmetric directed multigraph from input</span>
         <span class="n">sdmg</span> <span class="o">=</span> <span class="n">SDMultigraph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
@@ -587,7 +593,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_flipflop_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_flipflop_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the flipflop shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
@@ -621,7 +627,7 @@
 
 <div class="viewcode-block" id="Coined.has_persistent_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.has_persistent_shift.html#hiperwalk.Coined.has_persistent_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">has_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether the persistent shift operator is defined</span>
 <span class="sd">        for the current graph.</span>
@@ -643,7 +649,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">previous_arc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_persistent_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the persistent shift operator (:math:`S`) based on</span>
 <span class="sd">        the ``_graph`` attribute.</span>
@@ -666,7 +672,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span> <span class="o">=</span> <span class="n">S</span>
 
-    <span class="k">def</span> <span class="nf">_set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="n">valid_vals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;flipflop&#39;</span><span class="p">,</span> <span class="s1">&#39;persistent&#39;</span><span class="p">,</span> <span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">]</span>
 
         <span class="c1"># check if string</span>
@@ -720,7 +726,7 @@
 
 <div class="viewcode-block" id="Coined.set_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_shift.html#hiperwalk.Coined.set_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the shift operator.</span>
 
@@ -838,7 +844,7 @@
 
 <div class="viewcode-block" id="Coined.get_shift">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_shift.html#hiperwalk.Coined.get_shift">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve the shift operator.</span>
 
@@ -855,7 +861,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coin</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Explicit coin is not a matrix.&#39;</span><span class="p">)</span>
@@ -878,7 +884,7 @@
 
 <div class="viewcode-block" id="Coined.set_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
@@ -949,7 +955,7 @@
 
 <div class="viewcode-block" id="Coined.default_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.default_coin.html#hiperwalk.Coined.default_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">default_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the default coin name.</span>
 
@@ -984,7 +990,7 @@
         <span class="k">return</span> <span class="s1">&#39;grover&#39;</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_coin_to_valid_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_coin_to_valid_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert a string to its respective valid coin name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1007,7 +1013,7 @@
 
         <span class="k">return</span> <span class="n">s</span>
 
-    <span class="k">def</span> <span class="nf">_coin_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_coin_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert str, list of str or dict to valid coin list.</span>
 
@@ -1052,38 +1058,38 @@
         <span class="k">return</span> <span class="n">coin_list</span><span class="p">,</span> <span class="n">undefined_coin</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_fourier_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fourier_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">dft</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;sqrtn&#39;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_grover_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_grover_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">dim</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_hadamard_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_hadamard_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">hadamard</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_minus_fourier_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_minus_fourier_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">Coined</span><span class="o">.</span><span class="n">_fourier_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_minus_grover_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_minus_grover_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">Coined</span><span class="o">.</span><span class="n">_grover_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_minus_hadamard_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_minus_hadamard_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">Coined</span><span class="o">.</span><span class="n">_hadamard_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_minus_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_minus_identity_coin</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">marked</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#throws exception if list</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -1106,7 +1112,7 @@
 
 <div class="viewcode-block" id="Coined.set_marked">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_marked.html#hiperwalk.Coined.set_marked">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_marked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marked</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the marked vertices.</span>
 
@@ -1144,7 +1150,7 @@
                            <span class="n">marked</span><span class="o">=</span><span class="n">marked</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin_list</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin_list</span><span class="p">):</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
         <span class="n">degree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span><span class="o">.</span><span class="n">degree</span>
         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin_funcs</span><span class="p">[</span><span class="n">coin_list</span><span class="p">[</span><span class="n">v</span><span class="p">]](</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
@@ -1154,7 +1160,7 @@
 
 <div class="viewcode-block" id="Coined.get_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.get_coin.html#hiperwalk.Coined.get_coin">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve the coin used in the creation of the evolution operator.</span>
 
@@ -1173,7 +1179,7 @@
             <span class="c1"># if coin was explicitly set,</span>
             <span class="c1"># and there are different coins for the marked vertices,</span>
             <span class="c1"># change them.</span>
-            <span class="k">def</span> <span class="nf">get_block</span><span class="p">(</span><span class="n">vertex</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_block</span><span class="p">(</span><span class="n">vertex</span><span class="p">):</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
                 <span class="n">neighbors</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
                 <span class="c1"># TODO: this technique wont work after the behavior of</span>
@@ -1211,7 +1217,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coin_list_to_explicit_coin</span><span class="p">(</span><span class="n">coin_list</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># TODO: Check if matrix is sparse in pynelibna interface</span>
         <span class="c1"># TODO: Check if matrices are deleted from memory and GPU.</span>
         <span class="n">U</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1220,7 +1226,7 @@
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
             <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;HPC sparse matrix multiplication is not implemented. &#39;</span>
                  <span class="o">+</span> <span class="s1">&#39;Using standard scipy multiplication instead.&#39;</span><span class="p">)</span>
             <span class="c1"># # TODO: implement sparse matrix multiplication with hpc</span>
@@ -1246,7 +1252,7 @@
 
 <div class="viewcode-block" id="Coined.set_evolution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_evolution.html#hiperwalk.Coined.set_evolution">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the evolution operator.</span>
 
@@ -1330,7 +1336,7 @@
 
 <div class="viewcode-block" id="Coined.probability_distribution">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability_distribution.html#hiperwalk.Coined.probability_distribution">[docs]</a>
-    <span class="k">def</span> <span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">probability_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the probability distribution of given state(s).</span>
 
@@ -1404,7 +1410,7 @@
 
 <div class="viewcode-block" id="Coined.state">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.state.html#hiperwalk.Coined.state">[docs]</a>
-    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a valid state.</span>
 
@@ -1482,7 +1488,7 @@
 
 <div class="viewcode-block" id="Coined.ket">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.ket.html#hiperwalk.Coined.ket">[docs]</a>
-    <span class="k">def</span> <span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arc</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a computational basis state.</span>
 
@@ -1506,7 +1512,7 @@
 
 <div class="viewcode-block" id="Coined.uniform_state">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.uniform_state.html#hiperwalk.Coined.uniform_state">[docs]</a>
-    <span class="k">def</span> <span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">uniform_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a uniform state.</span>
 
@@ -1567,7 +1573,7 @@
 
 <div class="viewcode-block" id="Coined.probability">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.probability.html#hiperwalk.Coined.probability">[docs]</a>
-    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sum of probabilities for the specified vertices.</span>
 <span class="sd">        </span>
@@ -1643,8 +1649,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1664,7 +1670,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     <br/>
   </p>
 </div>
@@ -1677,7 +1683,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
