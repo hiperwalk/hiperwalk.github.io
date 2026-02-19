@@ -40,8 +40,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=ea3bebfc"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.Graph';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
@@ -531,7 +531,7 @@
 <h1>hiperwalk.Graph<a class="headerlink" href="#hiperwalk-graph" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="hiperwalk.Graph">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/graph/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Graph" title="Link to this definition">#</a></dt>
 <dd><p>Constructs an arbitrary graph.</p>
 <p>This class defines the graph structure used for implementing a 
 quantum walk. It encapsulates all necessary properties
@@ -547,15 +547,15 @@ Two input types are accepted:</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Any matrix – for instance,</dt><dd><ul>
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.15.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>,</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>,</p></li>
 <li><p>list of lists.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.4.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</dt><dd><ul>
+<dt><a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.6.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>.</dt><dd><ul>
 <li><p>The adjacency matrix is extracted from the graph.</p></li>
 </ul>
 </dd>
@@ -584,7 +584,7 @@ For visualizations, the default graph representation will be used.
 Specific classes are available for well-known graph types,
 such as hypercubes and lattices.</p>
 <p>The adjacency matrix is always stored as a
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.15.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html#scipy.sparse.csr_array" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_array</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code> is sparse and <code class="docutils literal notranslate"><span class="pre">copy=False</span></code>,
 the argument will be changed for more efficient manipulation.</p>
 <p>Each vertex has at most one loop.</p>
@@ -600,7 +600,7 @@ the argument <code class="docutils literal notranslate"><span class="pre">copy</
 <p>The default <strong>order of neighbors</strong> is the ascending order.
 A different order of neighbors can be specified using a
 sparse matrix where
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.15.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.has_sorted_indices.html#scipy.sparse.csr_array.has_sorted_indices" title="(in SciPy v1.17.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.sparse.csr_array.has_sorted_indices</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
 In this case,
 the neighbors of <code class="docutils literal notranslate"><span class="pre">u</span></code> are given by
 <code class="docutils literal notranslate"><span class="pre">adj_matrix.indices[adj_matrix.indptr[u]:adj_matrix.indptr[u+1]]</span></code>.</p>
@@ -771,7 +771,7 @@ the descending order of neighbors.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

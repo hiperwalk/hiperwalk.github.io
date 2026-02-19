@@ -40,8 +40,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=ea3bebfc"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/hiperwalk.plot_probability_distribution';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
@@ -540,7 +540,7 @@ saved as individual files, or used to create and save animations.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>An array representing the probabilities of the walker being 
+<dt><strong>probabilities</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>An array representing the probabilities of the walker being 
 found at each vertex during the quantum walk evolution.
 Each column corresponds to a vertex, 
 while each row represents a step in the walk.</p>
@@ -591,7 +591,7 @@ User-specified values are not overridden.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.15.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a></dt><dd><p>Adjacency matrix.</p>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code></a></dt><dd><p>Adjacency matrix.</p>
 </dd>
 </dl>
 </li>
@@ -621,10 +621,10 @@ If <code class="docutils literal notranslate"><span class="pre">True</span></cod
 <dt><strong>dpi</strong><span class="classifier">float, default=100</span></dt><dd><p>Figure resolution in dots-per-inch.</p>
 </dd>
 <dt><strong>repeat</strong><span class="classifier">bool, default: True</span></dt><dd><p>Whether or not to repeat the animation.
-See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation" title="(in Matplotlib v3.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code></a></p>
+See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation" title="(in Matplotlib v3.10.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code></a></p>
 </dd>
 <dt><strong>repeat_delay</strong><span class="classifier">int, default=2500</span></dt><dd><p>Delay in milliseconds between animation repetitions.
-See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation" title="(in Matplotlib v3.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code></a></p>
+See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html#matplotlib.animation.FuncAnimation" title="(in Matplotlib v3.10.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code></a></p>
 </dd>
 <dt><strong>range: tuple of int, default=None</strong></dt><dd><p>Range used for the quantum walk simulation.
 See <a class="reference internal" href="generated/hiperwalk.QuantumWalk.simulate.html#hiperwalk.QuantumWalk.simulate" title="hiperwalk.QuantumWalk.simulate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">QuantumWalk.simulate()</span></code></a> for details.
@@ -639,7 +639,7 @@ The values shown are
 If <cite>graph</cite> is <cite>None</cite>, <cite>labels.keys()</cite> must be integers
 from 0 to <cite>num_vert</cite> - 1.
 If <cite>graph is not None</cite>, <cite>labels.keys()</cite> must be
-labels of the corresponding <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.4.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>’s nodes.</p>
+labels of the corresponding <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/graph.html#networkx.Graph" title="(in NetworkX v3.6.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code></a>’s nodes.</p>
 </dd>
 <dt><strong>**kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Extra arguments to further customize plotting.
 Valid arguments depend on <code class="docutils literal notranslate"><span class="pre">plot</span></code>.
@@ -649,11 +649,11 @@ Check Other Parameters Section for details.</p>
 </dd>
 <dt class="field-even">Other Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>Line Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.10.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a> for more optional keywords.</p>
+<dt><strong>Line Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.10.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a> for more optional keywords.</p>
 </dd>
-<dt><strong>Bar Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar" title="(in Matplotlib v3.10.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.bar</span></code></a> for more optional keywords.</p>
+<dt><strong>Bar Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar" title="(in Matplotlib v3.10.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.bar</span></code></a> for more optional keywords.</p>
 </dd>
-<dt><strong>Graph Plots</strong></dt><dd><p>See <a class="reference external" href="https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw.html#networkx.drawing.nx_pylab.draw" title="(in NetworkX v3.4.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">networkx.draw</span></code></a>
+<dt><strong>Graph Plots</strong></dt><dd><p>See <a class="reference external" href="https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw.html#networkx.drawing.nx_pylab.draw" title="(in NetworkX v3.6.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">networkx.draw</span></code></a>
 for more optional keywords.</p>
 <dl class="simple">
 <dt>graph :</dt><dd><p>Graph structure.</p>
@@ -677,7 +677,7 @@ For more colormap options, check
 </dd>
 </dl>
 </dd>
-<dt><strong>Histogram Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar" title="(in Matplotlib v3.10.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.bar</span></code></a> for more optional keywords.
+<dt><strong>Histogram Plots</strong></dt><dd><p>See <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar" title="(in Matplotlib v3.10.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.bar</span></code></a> for more optional keywords.
 The <code class="docutils literal notranslate"><span class="pre">width</span></code> keyword is always overriden.</p>
 </dd>
 <dt><strong>Plane Plots</strong></dt><dd><dl class="simple">
@@ -809,7 +809,7 @@ i.e. bar, line or graph plot with the respective valid kwargs.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

@@ -38,9 +38,6 @@ hiperwalk.ContinuousTime
           ~ContinuousTime.get_marked
        
        
-          ~ContinuousTime.get_number_of_terms
-       
-       
           ~ContinuousTime.get_time
        
        
@@ -75,9 +72,6 @@ hiperwalk.ContinuousTime
        
        
           ~ContinuousTime.set_marked
-       
-       
-          ~ContinuousTime.set_number_of_terms
        
        
           ~ContinuousTime.set_time

@@ -40,8 +40,8 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'documentation/generated/generated/hiperwalk.Coined.fit_sin_squared';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
@@ -436,7 +436,6 @@
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian.html">hiperwalk.ContinuousTime.get_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_hamiltonian_type.html">hiperwalk.ContinuousTime.get_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_marked.html">hiperwalk.ContinuousTime.get_marked</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_number_of_terms.html">hiperwalk.ContinuousTime.get_number_of_terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.get_time.html">hiperwalk.ContinuousTime.get_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.hilbert_space_dimension.html">hiperwalk.ContinuousTime.hilbert_space_dimension</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.ket.html">hiperwalk.ContinuousTime.ket</a></li>
@@ -449,7 +448,6 @@
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian.html">hiperwalk.ContinuousTime.set_hamiltonian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_hamiltonian_type.html">hiperwalk.ContinuousTime.set_hamiltonian_type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_marked.html">hiperwalk.ContinuousTime.set_marked</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_number_of_terms.html">hiperwalk.ContinuousTime.set_number_of_terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.set_time.html">hiperwalk.ContinuousTime.set_time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.simulate.html">hiperwalk.ContinuousTime.simulate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hiperwalk.ContinuousTime.state.html">hiperwalk.ContinuousTime.state</a></li>
@@ -534,17 +532,17 @@
 <h1>hiperwalk.Coined.fit_sin_squared<a class="headerlink" href="#hiperwalk-coined-fit-sin-squared" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="hiperwalk.Coined.fit_sin_squared">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">fit_sin_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.fit_sin_squared" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">fit_sin_squared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hiperwalk.Coined.fit_sin_squared" title="Link to this definition">#</a></dt>
 <dd><p>Fit data to the squared sine function.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>x</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The domain values.
+<dt><strong>x</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The domain values.
 It is assumed that the entries are evenly spaced.
 That is, <code class="docutils literal notranslate"><span class="pre">x[i</span> <span class="pre">+</span> <span class="pre">1]</span> <span class="pre">-</span> <span class="pre">x[i]</span> <span class="pre">==</span> <span class="pre">x[j</span> <span class="pre">+</span> <span class="pre">1]</span> <span class="pre">-</span> <span class="pre">x[j]</span></code> for
 any valid <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>.</p>
 </dd>
-<dt><strong>y</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The image values evaluated at each <code class="docutils literal notranslate"><span class="pre">x[i]</span></code>.
+<dt><strong>y</strong><span class="classifier"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></span></dt><dd><p>The image values evaluated at each <code class="docutils literal notranslate"><span class="pre">x[i]</span></code>.
 It is required that <code class="docutils literal notranslate"><span class="pre">y[i]</span></code> corresponds to
 the evaluation at <code class="docutils literal notranslate"><span class="pre">x[i]</span></code>.</p>
 </dd>
@@ -685,7 +683,7 @@ the function at point <code class="docutils literal notranslate"><span class="pr
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
