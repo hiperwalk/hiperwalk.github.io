@@ -536,7 +536,7 @@
 <span class="sig-prename descclassname"><span class="pre">Coined.</span></span><span class="sig-name descname"><span class="pre">probability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hiperwalk/quantum_walk/coined.html#Coined.probability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined.probability" title="Link to this definition">#</a></dt>
 <dd><p>Computes the sum of probabilities for the specified vertices.</p>
 <p>Computes the probability of the walker being located on a
-vertex within the set of provided vertices, given that the walk 
+vertex within the set of provided vertices, given that the walk
 is on specified states.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -569,11 +569,11 @@ corresponding to the <code class="docutils literal notranslate"><span class="pre
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The probability of finding the walker on vertex 
+<p>The probability of finding the walker on vertex
 <span class="math notranslate nohighlight">\(v\)</span>, given the state of the walk
 <span class="math notranslate nohighlight">\(|\psi \rangle\)</span>, is calculated as</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \, 
+\[\begin{split}\sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \,
 \left|{\langle a} | {\psi \rangle}\right|^2,\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> denotes the set of arcs.</p>
 </dd></dl>

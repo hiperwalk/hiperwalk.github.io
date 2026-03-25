@@ -381,7 +381,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.quantum_walk</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumWalk</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">SDMultigraph</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">hadamard</span><span class="p">,</span> <span class="n">dft</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._pyhiperblas_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_hpc</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">hiperblas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hpb</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">pass</span>
 
 <div class="viewcode-block" id="Coined">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.Coined.html#hiperwalk.Coined">[docs]</a>
@@ -389,8 +393,8 @@
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manage instances of coined quantum walks on arbitrary graphs.</span>
 
-<span class="sd">    The class provides methods to handle and generate operators in the </span>
-<span class="sd">    coined quantum walk model. It also facilitates the simulation of </span>
+<span class="sd">    The class provides methods to handle and generate operators in the</span>
+<span class="sd">    coined quantum walk model. It also facilitates the simulation of</span>
 <span class="sd">    coined quantum walks on graphs.</span>
 <span class="sd">    </span>
 <span class="sd">    For additional details about coined quantum walks,</span>
@@ -426,11 +430,11 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 
-<span class="sd">    The coined quantum walk model is a quantum analog of </span>
-<span class="sd">    classical random walks, incorporating an additional </span>
-<span class="sd">    quantum coin-toss mechanism. It uses an extra quantum </span>
+<span class="sd">    The coined quantum walk model is a quantum analog of</span>
+<span class="sd">    classical random walks, incorporating an additional</span>
+<span class="sd">    quantum coin-toss mechanism. It uses an extra quantum</span>
 <span class="sd">    internal degree of freedom, represented by the coin state,</span>
-<span class="sd">    to determine the direction of the walker&#39;s movement </span>
+<span class="sd">    to determine the direction of the walker&#39;s movement</span>
 <span class="sd">    on a graph.</span>
 
 <span class="sd">    In the coined model, the graph is interpreted</span>
@@ -461,18 +465,18 @@
 <span class="sd">    For simple graphs, the cardinality of the computational</span>
 <span class="sd">    basis is :math:`2|E|`, where :math:`E`</span>
 <span class="sd">    represents the graph&#39;s edge set.</span>
-<span class="sd">    When a loop is added to the graph, the cardinality of the </span>
+<span class="sd">    When a loop is added to the graph, the cardinality of the</span>
 <span class="sd">    computational basis increases by one for each loop.</span>
 <span class="sd">    </span>
-<span class="sd">    The arcs are arranged within the computational basis </span>
-<span class="sd">    to ensure that the coin operator adopts a block-diagonal </span>
+<span class="sd">    The arcs are arranged within the computational basis</span>
+<span class="sd">    to ensure that the coin operator adopts a block-diagonal</span>
 <span class="sd">    matrix form.</span>
 <span class="sd">    For additional information on the arc ordering,</span>
 <span class="sd">    please consult the respective graph descriptions.</span>
 
 <span class="sd">    For a more detailed understanding of coined quantum walks,</span>
 <span class="sd">    refer to Section 7.2: Coined Walks on Arbitrary Graphs,</span>
-<span class="sd">    found in the book  &#39;Quantum Walks and Search Algorithms&#39; [1]_.</span>
+<span class="sd">    found in the book &#39;Quantum Walks and Search Algorithms&#39; [1]_.</span>
 
 <span class="sd">    For example, the graph :math:`G(V, E)` shown in</span>
 <span class="sd">    Figure 1 has an adjacency matrix ``adj_matrix``.</span>
@@ -482,10 +486,10 @@
 <span class="sd">        import numpy as np</span>
 
 <span class="sd">    &gt;&gt;&gt; adj_matrix = np.array([</span>
-<span class="sd">    ...     [0, 1, 0, 0],</span>
-<span class="sd">    ...     [1, 0, 1, 1],</span>
-<span class="sd">    ...     [0, 1, 0, 1],</span>
-<span class="sd">    ...     [0, 1, 1, 0]])</span>
+<span class="sd">    ... [0, 1, 0, 0],</span>
+<span class="sd">    ... [1, 0, 1, 1],</span>
+<span class="sd">    ... [0, 1, 0, 1],</span>
+<span class="sd">    ... [0, 1, 1, 0]])</span>
 <span class="sd">    &gt;&gt;&gt; adj_matrix</span>
 <span class="sd">    array([[0, 1, 0, 0],</span>
 <span class="sd">           [1, 0, 1, 1],</span>
@@ -503,7 +507,7 @@
 <span class="sd">    the arcs of the associated digraph in the arc notation are</span>
 
 <span class="sd">    &gt;&gt;&gt; arcs = [(i, j) for i in range(4)</span>
-<span class="sd">    ...                for j in range(4) if adj_matrix[i,j] == 1]</span>
+<span class="sd">    ... for j in range(4) if adj_matrix[i,j] == 1]</span>
 <span class="sd">    &gt;&gt;&gt; arcs</span>
 <span class="sd">    [(0, 1), (1, 0), (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
 
@@ -525,8 +529,8 @@
 <span class="sd">    we obtain matrix ``adj_labels`` as follows:</span>
 
 <span class="sd">    &gt;&gt;&gt; adj_labels = [[arcs_labels[(i,j)] if (i,j) in arcs_labels</span>
-<span class="sd">    ...                                   else &#39;&#39; for j in range(4)]</span>
-<span class="sd">    ...               for i in range(4)]</span>
+<span class="sd">    ... else &#39;&#39; for j in range(4)]</span>
+<span class="sd">    ... for i in range(4)]</span>
 <span class="sd">    &gt;&gt;&gt; adj_labels = np.matrix(adj_labels)</span>
 <span class="sd">    &gt;&gt;&gt; adj_labels</span>
 <span class="sd">    matrix([[&#39;&#39;, &#39;0&#39;, &#39;&#39;, &#39;&#39;],</span>
@@ -619,7 +623,7 @@
         <span class="c1"># Note that there is only one entry per row and column</span>
         <span class="n">S</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span>
             <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">),</span>
-              <span class="n">S_cols</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_arcs</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">),</span>
+              <span class="n">S_cols</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_arcs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">),</span>
             <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">num_arcs</span><span class="p">)</span>
         <span class="p">)</span>
 
@@ -664,8 +668,9 @@
 
         <span class="c1"># Using csr_array((data, indices, indptr), shape)</span>
         <span class="c1"># Note that there is only one entry per row and column</span>
+        <span class="c1">#TODO: why not np.int8?</span>
         <span class="n">S</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span>
-            <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">),</span>
+            <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
               <span class="n">S_cols</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_arcs</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">),</span>
             <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_arcs</span><span class="p">,</span> <span class="n">num_arcs</span><span class="p">)</span>
         <span class="p">)</span>
@@ -758,19 +763,19 @@
 <span class="sd">            S \ket{v, u} = \ket{u, v},</span>
 
 <span class="sd">        in the context of arc notation, where :math:`(v, u)` and</span>
-<span class="sd">        :math:`(u, v)` represent opposite arcs. This can be equivalently </span>
-<span class="sd">        expressed as :math:`S\ket{i} = \ket{j}`, where :math:`i` is the </span>
-<span class="sd">        label of the arc :math:`(v, u)` and :math:`j` is the label of </span>
-<span class="sd">        the arc :math:`(u, v)`. The flip-flop shift satisfies the </span>
+<span class="sd">        :math:`(u, v)` represent opposite arcs. This can be equivalently</span>
+<span class="sd">        expressed as :math:`S\ket{i} = \ket{j}`, where :math:`i` is the</span>
+<span class="sd">        label of the arc :math:`(v, u)` and :math:`j` is the label of</span>
+<span class="sd">        the arc :math:`(u, v)`. The flip-flop shift satisfies the</span>
 <span class="sd">        property :math:`S^2 = I`.</span>
 
-<span class="sd">        The persistent shift, also known as the *moving shift*, </span>
+<span class="sd">        The persistent shift, also known as the *moving shift*,</span>
 <span class="sd">        is defined for graphs with a clear notion of direction or rotation.</span>
-<span class="sd">        When the shift operator is applied repeatedly, it causes the walker </span>
-<span class="sd">        to continue moving persistently in the same direction. Unlike the </span>
+<span class="sd">        When the shift operator is applied repeatedly, it causes the walker</span>
+<span class="sd">        to continue moving persistently in the same direction. Unlike the</span>
 <span class="sd">        flip-flop shift, the persistent shift does not satisfy :math:`S^2 = I`.</span>
 <span class="sd">        </span>
-<span class="sd">        For a more comprehensive understanding of the </span>
+<span class="sd">        For a more comprehensive understanding of the</span>
 <span class="sd">        shift operator, refer to Section 7.2: Coined Walks on Arbitrary</span>
 <span class="sd">        Graphs in the book &quot;Quantum Walks and Search Algorithms&quot; [1]_.</span>
 <span class="sd">        </span>
@@ -797,9 +802,9 @@
 
 <span class="sd">            &gt;&gt;&gt; import hiperwalk as hpw</span>
 <span class="sd">            &gt;&gt;&gt; A = scipy.sparse.csr_array([[0, 1, 0, 0],</span>
-<span class="sd">            ...                             [1, 0, 1, 1],</span>
-<span class="sd">            ...                             [0, 1, 0, 1],</span>
-<span class="sd">            ...                             [0, 1, 1, 0]])</span>
+<span class="sd">            ... [1, 0, 1, 1],</span>
+<span class="sd">            ... [0, 1, 0, 1],</span>
+<span class="sd">            ... [0, 1, 1, 0]])</span>
 <span class="sd">            &gt;&gt;&gt; qw = hpw.Coined(hpw.Graph(A))</span>
 <span class="sd">            &gt;&gt;&gt; qw.set_shift(shift=&#39;flipflop&#39;)</span>
 <span class="sd">            &gt;&gt;&gt; S = qw.get_shift().todense()</span>
@@ -878,12 +883,12 @@
 <div class="viewcode-block" id="Coined.set_coin">
 <a class="viewcode-back" href="../../../documentation/generated/generated/hiperwalk.Coined.set_coin.html#hiperwalk.Coined.set_coin">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_coin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the coin operator based on the graph&#39;s structure.</span>
 
 <span class="sd">        Builds a coin operator considering the degree of each vertex.</span>
-<span class="sd">        The same coin can be applied to all vertices, or multiple </span>
-<span class="sd">        coins can be assigned, each to a specific subset of vertices. </span>
+<span class="sd">        The same coin can be applied to all vertices, or multiple</span>
+<span class="sd">        coins can be assigned, each to a specific subset of vertices.</span>
 <span class="sd">        After setting the coin operator,</span>
 <span class="sd">        the evolution operator is updated accordingly.</span>
 
@@ -931,14 +936,14 @@
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        </span>
-<span class="sd">        The output of this method is a block-diagonal </span>
-<span class="sd">        operator, which results from the specific ordering of arcs </span>
-<span class="sd">        in the computational basis </span>
-<span class="sd">        (refer to the Notes in :class:`Coined` for more details).        </span>
+<span class="sd">        The output of this method is a block-diagonal</span>
+<span class="sd">        operator, which results from the specific ordering of arcs</span>
+<span class="sd">        in the computational basis</span>
+<span class="sd">        (refer to the Notes in :class:`Coined` for more details).</span>
 <span class="sd">        Each block is associated with a :math:`\deg(v)`-dimensional ``coin``.</span>
 <span class="sd">        As a result, there are :math:`|V|` blocks in total.</span>
 <span class="sd">        Note that a loop at a vertex :math:`u` is treated</span>
-<span class="sd">        as the arc :math:`(u,u)`, contributing an additional </span>
+<span class="sd">        as the arc :math:`(u,u)`, contributing an additional</span>
 <span class="sd">        one to the degree of :math:`u`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_evolution</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">,</span>
@@ -1109,12 +1114,12 @@
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the marked vertices.</span>
 
-<span class="sd">        When a set or list of vertices is provided, they </span>
+<span class="sd">        When a set or list of vertices is provided, they</span>
 <span class="sd">        are set as marked.</span>
 <span class="sd">        The evolution operator is updated accordingly.</span>
 
 <span class="sd">        If a dictionary is passed, the coin of those vertices is</span>
-<span class="sd">        replaced solely for the purpose of generating the evolution </span>
+<span class="sd">        replaced solely for the purpose of generating the evolution</span>
 <span class="sd">        operator. This can only be done if the set coin operator is</span>
 <span class="sd">        not an explicit matrix.</span>
 
@@ -1149,6 +1154,9 @@
         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_coin_funcs</span><span class="p">[</span><span class="n">coin_list</span><span class="p">[</span><span class="n">v</span><span class="p">]](</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
                   <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
         <span class="n">C</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">block_diag</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">.</span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Coined.get_coin">
@@ -1211,34 +1219,39 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_set_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># TODO: Check if matrix is sparse in pynelibna interface</span>
-        <span class="c1"># TODO: Check if matrices are deleted from memory and GPU.</span>
         <span class="n">U</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_shift</span><span class="p">()</span>
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_coin</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">nbl</span><span class="o">.</span><span class="n">get_hpc</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
-            <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;HPC sparse matrix multiplication is not implemented. &#39;</span>
-                 <span class="o">+</span> <span class="s1">&#39;Using standard scipy multiplication instead.&#39;</span><span class="p">)</span>
-            <span class="c1"># # TODO: implement sparse matrix multiplication with hpc</span>
-            <span class="c1"># S = S.todense()</span>
-            <span class="c1"># C = C.todense()</span>
+        <span class="k">if</span> <span class="n">get_hpc</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">U</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">C</span> <span class="c1"># cria novos os arrays</span>
 
-            <span class="c1"># nbl_S = nbl.send_matrix(S)</span>
-            <span class="c1"># del S</span>
-            <span class="c1"># nbl_C = nbl.send_matrix(C)</span>
-            <span class="c1"># del C</span>
-            <span class="c1"># nbl_C = nbl.multiply_matrices(nbl_S, nbl_C)</span>
+            <span class="c1">#TODO: is this necessary? Why U.data is not contiguous?</span>
+            <span class="n">U</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+            <span class="n">U</span><span class="o">.</span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">U</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c1">#TODO: is this necessary? Why U.data is not contiguous?</span>
+            <span class="n">U</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+            <span class="n">U</span><span class="o">.</span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
-            <span class="c1"># del nbl_S</span>
+            <span class="n">hpb_dtype</span> <span class="o">=</span> <span class="n">hpb</span><span class="o">.</span><span class="n">COMPLEX</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplex</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="k">else</span> <span class="n">hpb</span><span class="o">.</span><span class="n">FLOAT</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span>
 
-            <span class="c1"># U = nbl.retrieve_matrix(nbl_C)</span>
-            <span class="c1"># del nbl_C</span>
-            <span class="c1"># U = scipy.sparse.csr_array(U)</span>
+            <span class="n">hpb_S</span> <span class="o">=</span> <span class="n">hpb</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">hpb_dtype</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">smatrix_connect</span><span class="p">(</span><span class="n">hpb_S</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">move_sparse_matrix_device</span><span class="p">(</span><span class="n">hpb_S</span><span class="p">)</span>
 
-        <span class="n">U</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">C</span>
+            <span class="n">hpb_C</span> <span class="o">=</span> <span class="n">hpb</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">hpb_dtype</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">smatrix_connect</span> <span class="p">(</span><span class="n">hpb_C</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">move_sparse_matrix_device</span><span class="p">(</span><span class="n">hpb_C</span><span class="p">)</span>
+
+            <span class="n">hpb_U</span> <span class="o">=</span> <span class="n">hpb</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">hpb_dtype</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">smatrix_connect</span><span class="p">(</span><span class="n">hpb_U</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+            <span class="n">hpb</span><span class="o">.</span><span class="n">move_sparse_matrix_device</span><span class="p">(</span><span class="n">hpb_U</span><span class="p">)</span>
+
+            <span class="n">hpb</span><span class="o">.</span><span class="n">permute_sparse_matrix</span><span class="p">(</span><span class="n">hpb_S</span><span class="p">,</span> <span class="n">hpb_C</span><span class="p">,</span> <span class="n">hpb_U</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_evolution</span> <span class="o">=</span> <span class="n">U</span>
         <span class="k">return</span> <span class="n">U</span>
@@ -1254,15 +1267,15 @@
 <span class="sd">        They are set using the appropriate ``**kwargs``.</span>
 <span class="sd">        If ``**kwargs`` is empty, the default arguments are used.</span>
 
-<span class="sd">        Subsequently, the evolution operator is constructed by </span>
-<span class="sd">        multiplying the shift and coin operators. </span>
-<span class="sd">        If the coin operator is given as an explicit matrix, </span>
-<span class="sd">        its definition remains unaltered </span>
-<span class="sd">        even in the presence of marked vertices. However, if the coin </span>
-<span class="sd">        operator is defined using coin names, any marked vertices will </span>
+<span class="sd">        Subsequently, the evolution operator is constructed by</span>
+<span class="sd">        multiplying the shift and coin operators.</span>
+<span class="sd">        If the coin operator is given as an explicit matrix,</span>
+<span class="sd">        its definition remains unaltered</span>
+<span class="sd">        even in the presence of marked vertices. However, if the coin</span>
+<span class="sd">        operator is defined using coin names, any marked vertices will</span>
 <span class="sd">        prompt an update to the coin operator.</span>
 <span class="sd">        Specifically, the coin names</span>
-<span class="sd">        for each marked vertex will default to a replacement with -I, </span>
+<span class="sd">        for each marked vertex will default to a replacement with -I,</span>
 <span class="sd">        unless an alternative substitution is provided.</span>
 
 <span class="sd">        Parameters</span>
@@ -1291,10 +1304,10 @@
 <span class="sd">        any marked vertices, the coin operator is</span>
 <span class="sd">        modified accordingly [1]_.</span>
 
-<span class="sd">        When the coin operator is set as an explicit matrix, it remains </span>
-<span class="sd">        unaltered by marked vertices. However, if it&#39;s not provided in </span>
-<span class="sd">        matrix form (e.g., as a list of coins), the coin for each marked </span>
-<span class="sd">        vertex will be substituted based on the most recent </span>
+<span class="sd">        When the coin operator is set as an explicit matrix, it remains</span>
+<span class="sd">        unaltered by marked vertices. However, if it&#39;s not provided in</span>
+<span class="sd">        matrix form (e.g., as a list of coins), the coin for each marked</span>
+<span class="sd">        vertex will be substituted based on the most recent</span>
 <span class="sd">        :meth:`set_marked` invocation.</span>
 
 
@@ -1310,7 +1323,6 @@
 <span class="sd">        .. [1] R. Portugal. &quot;Quantum walks and search algorithms&quot;,</span>
 <span class="sd">            2nd edition, Springer, 2018.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="n">S_kwargs</span> <span class="o">=</span> <span class="n">Coined</span><span class="o">.</span><span class="n">_filter_valid_kwargs</span><span class="p">(</span>
                               <span class="n">kwargs</span><span class="p">,</span>
                               <span class="n">Coined</span><span class="o">.</span><span class="n">_valid_kwargs</span><span class="p">[</span><span class="s1">&#39;shift&#39;</span><span class="p">])</span>
@@ -1376,7 +1388,7 @@
 <span class="sd">            \sum_{v \in N(u)}|\alpha_{u, v}|^2,</span>
 <span class="sd">        </span>
 <span class="sd">        with :math:`N(u)` being the set of out neighbors of :math:`u`.</span>
-<span class="sd">        A loop at :math:`u` is the arc :math:`(u,u)`. </span>
+<span class="sd">        A loop at :math:`u` is the arc :math:`(u,u)`.</span>
 <span class="sd">        </span>
 <span class="sd">        The probability distribution, which is returned by this</span>
 <span class="sd">        method as a ``numpy.ndarray``, is the collection of these</span>
@@ -1393,10 +1405,12 @@
 
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_graph</span>
         <span class="n">num_vert</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">()</span>
-        <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">Coined</span><span class="o">.</span><span class="n">_elementwise_probability</span><span class="p">(</span>
-                              <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">v</span><span class="p">)])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-                          <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
-                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))])</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">[</span><span class="n">Coined</span><span class="o">.</span><span class="n">_elementwise_probability</span><span class="p">(</span>
+                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">arcs_with_tail</span><span class="p">(</span><span class="n">v</span><span class="p">)])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_vert</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))])</span>
+
 
         <span class="k">return</span> <span class="n">prob</span></div>
 
@@ -1455,11 +1469,11 @@
 
 <span class="sd">        &gt;&gt;&gt; psi = qw.state([(1, (0, 1)), [1, 1], (1, 2)])</span>
 <span class="sd">        &gt;&gt;&gt; psi1 = qw.state([(1, ([0, 0], [0, 1])),</span>
-<span class="sd">        ...                  [1, [(0, 0), (dim - 1, 0)]],</span>
-<span class="sd">        ...                  (1, (0, 1))])</span>
+<span class="sd">        ... [1, [(0, 0), (dim - 1, 0)]],</span>
+<span class="sd">        ... (1, (0, 1))])</span>
 <span class="sd">        &gt;&gt;&gt; psi2 = qw.state([(1, [[0, 0], [0, 1]]),</span>
-<span class="sd">        ...                  [1, ((0, 0), (dim - 1, 0))],</span>
-<span class="sd">        ...                  (1, [0, 1])])</span>
+<span class="sd">        ... [1, ((0, 0), (dim - 1, 0))],</span>
+<span class="sd">        ... (1, [0, 1])])</span>
 <span class="sd">        &gt;&gt;&gt; np.all(psi == psi1)</span>
 <span class="sd">        np.True_</span>
 <span class="sd">        &gt;&gt;&gt; np.all(psi1 == psi2)</span>
@@ -1509,7 +1523,7 @@
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a uniform state.</span>
 
-<span class="sd">        The uniform state is a unit vector with entries </span>
+<span class="sd">        The uniform state is a unit vector with entries</span>
 <span class="sd">        that have the same real amplitudes.</span>
 <span class="sd">        If both ``vertices is None`` and ``arcs is None``,</span>
 <span class="sd">        create the uniform superposition of all arcs.</span>
@@ -1540,11 +1554,11 @@
 <span class="sd">        .. math::</span>
 <span class="sd">            \ket{d} = \frac{1}{\sqrt{N}} \sum_{i = 0}^{N - 1} \ket{i}</span>
 
-<span class="sd">        where :math:`N` represents the dimension of the Hilbert space, and </span>
-<span class="sd">        :math:`i` is a label within the graph. </span>
-<span class="sd">        In the continuous-time quantum walk model, </span>
-<span class="sd">        :math:`i` corresponds to the label of a vertex, </span>
-<span class="sd">        while in the coined quantum walk model, </span>
+<span class="sd">        where :math:`N` represents the dimension of the Hilbert space, and</span>
+<span class="sd">        :math:`i` is a label within the graph.</span>
+<span class="sd">        In the continuous-time quantum walk model,</span>
+<span class="sd">        :math:`i` corresponds to the label of a vertex,</span>
+<span class="sd">        while in the coined quantum walk model,</span>
 <span class="sd">        :math:`i` is the label of an arc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">vertices</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">arcs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1571,7 +1585,7 @@
 <span class="sd">        Computes the sum of probabilities for the specified vertices.</span>
 <span class="sd">        </span>
 <span class="sd">        Computes the probability of the walker being located on a</span>
-<span class="sd">        vertex within the set of provided vertices, given that the walk </span>
+<span class="sd">        vertex within the set of provided vertices, given that the walk</span>
 <span class="sd">        is on specified states.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -1581,7 +1595,7 @@
 <span class="sd">            ``states`` can be a single state or a list of states.</span>
 <span class="sd">        </span>
 <span class="sd">        vertices: list of int</span>
-<span class="sd">           The subset of vertices. </span>
+<span class="sd">           The subset of vertices.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1600,15 +1614,15 @@
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        </span>
-<span class="sd">        The probability of finding the walker on vertex </span>
+<span class="sd">        The probability of finding the walker on vertex</span>
 <span class="sd">        :math:`v`, given the state of the walk</span>
 <span class="sd">        :math:`|\psi \rangle`, is calculated as</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            \sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \, </span>
+<span class="sd">            \sum_{\substack{a\in{\mathcal{A}}\\ \operatorname{tail}(a)=v}} \,</span>
 <span class="sd">            \left|{\langle a} | {\psi \rangle}\right|^2,</span>
 
-<span class="sd">        where :math:`\mathcal{A}` denotes the set of arcs.        </span>
+<span class="sd">        where :math:`\mathcal{A}` denotes the set of arcs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">vertices</span><span class="p">)</span></div>
 </div>

@@ -573,17 +573,17 @@ about the computational basis.</p>
 <div class="math notranslate nohighlight">
 \[S \ket{v, u} = \ket{u, v},\]</div>
 <p>in the context of arc notation, where <span class="math notranslate nohighlight">\((v, u)\)</span> and
-<span class="math notranslate nohighlight">\((u, v)\)</span> represent opposite arcs. This can be equivalently 
-expressed as <span class="math notranslate nohighlight">\(S\ket{i} = \ket{j}\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> is the 
-label of the arc <span class="math notranslate nohighlight">\((v, u)\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is the label of 
-the arc <span class="math notranslate nohighlight">\((u, v)\)</span>. The flip-flop shift satisfies the 
+<span class="math notranslate nohighlight">\((u, v)\)</span> represent opposite arcs. This can be equivalently
+expressed as <span class="math notranslate nohighlight">\(S\ket{i} = \ket{j}\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> is the
+label of the arc <span class="math notranslate nohighlight">\((v, u)\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is the label of
+the arc <span class="math notranslate nohighlight">\((u, v)\)</span>. The flip-flop shift satisfies the
 property <span class="math notranslate nohighlight">\(S^2 = I\)</span>.</p>
-<p>The persistent shift, also known as the <em>moving shift</em>, 
+<p>The persistent shift, also known as the <em>moving shift</em>,
 is defined for graphs with a clear notion of direction or rotation.
-When the shift operator is applied repeatedly, it causes the walker 
-to continue moving persistently in the same direction. Unlike the 
+When the shift operator is applied repeatedly, it causes the walker
+to continue moving persistently in the same direction. Unlike the
 flip-flop shift, the persistent shift does not satisfy <span class="math notranslate nohighlight">\(S^2 = I\)</span>.</p>
-<p>For a more comprehensive understanding of the 
+<p>For a more comprehensive understanding of the
 shift operator, refer to Section 7.2: Coined Walks on Arbitrary
 Graphs in the book “Quantum Walks and Search Algorithms” <a class="reference internal" href="#r2ec84b08a79d-1" id="id1">[1]</a>.</p>
 <p class="rubric">References</p>
@@ -600,9 +600,9 @@ Graphs in the book “Quantum Walks and Search Algorithms” <a class="reference
 The corresponding flip-flop shift operator is</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">hiperwalk</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hpw</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="gp">... </span>                            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span> <span class="o">=</span> <span class="n">hpw</span><span class="o">.</span><span class="n">Coined</span><span class="p">(</span><span class="n">hpw</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qw</span><span class="o">.</span><span class="n">set_shift</span><span class="p">(</span><span class="n">shift</span><span class="o">=</span><span class="s1">&#39;flipflop&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">get_shift</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>

@@ -378,7 +378,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.quantum_walk</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumWalk</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_pyneblina_interface</span> <span class="k">as</span> <span class="n">nbl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._pyhiperblas_interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_hpc</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">hiperblas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hpb</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">pass</span>
 
 <div class="viewcode-block" id="ContinuousTime">
 <a class="viewcode-back" href="../../../documentation/generated/hiperwalk.ContinuousTime.html#hiperwalk.ContinuousTime">[docs]</a>

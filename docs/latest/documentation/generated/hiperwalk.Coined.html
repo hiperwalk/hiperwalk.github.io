@@ -532,8 +532,8 @@
 <dt class="sig sig-object py" id="hiperwalk.Coined">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hiperwalk.</span></span><span class="sig-name descname"><span class="pre">Coined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hiperwalk/quantum_walk/coined.html#Coined"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hiperwalk.Coined" title="Link to this definition">#</a></dt>
 <dd><p>Manage instances of coined quantum walks on arbitrary graphs.</p>
-<p>The class provides methods to handle and generate operators in the 
-coined quantum walk model. It also facilitates the simulation of 
+<p>The class provides methods to handle and generate operators in the
+coined quantum walk model. It also facilitates the simulation of
 coined quantum walks on graphs.</p>
 <p>For additional details about coined quantum walks,
 refer to the Notes Section.</p>
@@ -570,11 +570,11 @@ See <a class="reference internal" href="generated/hiperwalk.Coined.set_evolution
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>The coined quantum walk model is a quantum analog of 
-classical random walks, incorporating an additional 
-quantum coin-toss mechanism. It uses an extra quantum 
+<p>The coined quantum walk model is a quantum analog of
+classical random walks, incorporating an additional
+quantum coin-toss mechanism. It uses an extra quantum
 internal degree of freedom, represented by the coin state,
-to determine the direction of the walker’s movement 
+to determine the direction of the walker’s movement
 on a graph.</p>
 <p>In the coined model, the graph is interpreted
 as a directed graph as follows:
@@ -602,23 +602,23 @@ In coined quantum walks, the weights of arcs do not influence the dynamics.</p>
 For simple graphs, the cardinality of the computational
 basis is <span class="math notranslate nohighlight">\(2|E|\)</span>, where <span class="math notranslate nohighlight">\(E\)</span>
 represents the graph’s edge set.
-When a loop is added to the graph, the cardinality of the 
+When a loop is added to the graph, the cardinality of the
 computational basis increases by one for each loop.</p>
-<p>The arcs are arranged within the computational basis 
-to ensure that the coin operator adopts a block-diagonal 
+<p>The arcs are arranged within the computational basis
+to ensure that the coin operator adopts a block-diagonal
 matrix form.
 For additional information on the arc ordering,
 please consult the respective graph descriptions.</p>
 <p>For a more detailed understanding of coined quantum walks,
 refer to Section 7.2: Coined Walks on Arbitrary Graphs,
-found in the book  ‘Quantum Walks and Search Algorithms’ <a class="reference internal" href="#r2ed72bb1580a-1" id="id1">[1]</a>.</p>
+found in the book ‘Quantum Walks and Search Algorithms’ <a class="reference internal" href="#r2ed72bb1580a-1" id="id1">[1]</a>.</p>
 <p>For example, the graph <span class="math notranslate nohighlight">\(G(V, E)\)</span> shown in
 Figure 1 has an adjacency matrix <code class="docutils literal notranslate"><span class="pre">adj_matrix</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj_matrix</span>
 <span class="go">array([[0, 1, 0, 0],</span>
 <span class="go">       [1, 0, 1, 1],</span>
@@ -646,7 +646,7 @@ the neighbors are given in ascending order.
 Then,
 the arcs of the associated digraph in the arc notation are</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">... </span>               <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">adj_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arcs</span>
 <span class="go">[(0, 1), (1, 0), (1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
 </pre></div>
@@ -681,8 +681,8 @@ numeric labels are</p>
 <p>If we insert the labels of the arcs into the adjacency matrix,
 we obtain matrix <code class="docutils literal notranslate"><span class="pre">adj_labels</span></code> as follows:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span> <span class="o">=</span> <span class="p">[[</span><span class="n">arcs_labels</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcs_labels</span>
-<span class="gp">... </span>                                  <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-<span class="gp">... </span>              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="gp">... </span><span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">adj_labels</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adj_labels</span>
 <span class="go">matrix([[&#39;&#39;, &#39;0&#39;, &#39;&#39;, &#39;&#39;],</span>
