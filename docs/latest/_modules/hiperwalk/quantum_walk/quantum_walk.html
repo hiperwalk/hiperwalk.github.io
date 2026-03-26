@@ -1055,7 +1055,6 @@
             <span class="n">hpb</span><span class="o">.</span><span class="n">vector_connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sim_aux</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aux</span><span class="p">)</span>
             <span class="n">hpb</span><span class="o">.</span><span class="n">move_vector_device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sim_aux</span><span class="p">)</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TODO: identify if matrix is sparse or dense&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_sim_mat</span> <span class="o">=</span> <span class="n">hpb</span><span class="o">.</span><span class="n">sparse_matrix_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span>
                                                   <span class="bp">self</span><span class="o">.</span><span class="n">hilb_dim</span><span class="p">,</span>
                                                   <span class="n">hpb_dtype</span><span class="p">)</span>
